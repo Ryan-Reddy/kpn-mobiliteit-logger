@@ -1,0 +1,47 @@
+/* LIGHT MODE: */
+.bodyLight {
+    background-color: #7ed5ea;
+    caret-color: #282828;
+    accent-color: #282828;
+    color: #0f2557;
+    font-family: 'Bookman Old Style', serif;
+}
+
+.bodyLight main {
+    border-color: #0f2557;
+}
+
+.bodyLight .header {
+    background: #28559a;
+    color: #63bce5;
+}
+
+.bodyLight #footer {
+    background: #28559a;
+    color: #63bce5;
+}
+
+
+/* unvisited link */
+.bodyLight a:link {
+    color: #150734;
+    text-decoration-color: grey;
+}
+
+/* visited link */
+.bodyLight a:visited {
+    color: #150734;
+    text-decoration-color: grey;
+}
+
+/* mouse over link */
+.bodyLight a:hover {
+    color: #800000;
+    text-decoration-color: grey;
+}
+
+/* selected link */
+.bodyLight a:active {
+    color: #8ebf42;
+    text-decoration-color: grey;
+}

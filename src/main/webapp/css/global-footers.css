@@ -1,0 +1,63 @@
+/** Stijling voor de footer op elke pagina*/
+#footer {
+    position: absolute; /* zet de pagina footer onderaan vast */
+    bottom: 0;
+    width: 100%;
+    height: 20vh; /* Hoogte footer */
+
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /* padding: 1rem; */
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    font-weight: bold;
+    align-items: center;
+    align-content: center;
+
+}
+
+.grid-container {
+    align-content: center;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: #2196F3;
+    padding: 10rem;
+
+
+}
+
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 10rem;
+    font-size: 30px;
+    align-content: center;
+}
+
+.footerDisco {
+    border-color: #ccc;
+    /*position: relative;*/
+    width: 150px;
+    /*margin-left: 5rem;*/
+    /*margin-right: 4rem;*/
+}
+
+.footerCenter {
+    /*position: relative;*/
+    border-color: #ccc;
+    /*align-self: center;*/
+    /*margin-left: 50%;*/
+    /*width: 25%;*/
+}
+
+.footerThemeChoice {
+    border-color: #ccc;
+
+    /*position: relative;*/
+    /*float: right;*/
+    /*margin-right: 5rem;*/
+}
+
+.themeIcon {
+    max-width: 34px; /* Sizing of the descriptor Icon*/
+}
