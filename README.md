@@ -96,6 +96,11 @@ o888o  o888o     .8'     `Y888""8o o888o o888o      o888o  o888o `Y8bod8P' `Y8bo
 
                                 gebruikersnaam: test@mail.com
                                 wachtwoord: password
+                                
+                                set-up:
+                                1. npm install firebase
+                                2. 
+
 
                                ▄▀▀  ▄▀▀█ ▄▀▀▄ ▓  ▄ ▄▀▀█ ▄▀▀▄ ▄▀▀▄ ▓▄▄  ▄▀▀  ▄▀
                   ▀▀▀▀▀▀▀▀▀▀▀▀ █ ▀▓ █▀▓  █  ▓ █  ▓ █▀▀  █  ▓ █  ▓ █  ▄ ▓▀ ▄ ▀▀▀█ ▀▀▀▀▀▀▀▀▀▀▀▀▀
