@@ -2,52 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <css src="home.css" type="text/css"></css>
+
     <title>Homepage</title>
 </head>
+
 <body>
-Welkom bij de KNP medewerkers mobiliteits APP!
+<main>
+    <h1 class="header">Welkom bij de KNP medewerkers mobiliteits APP!</h1>
 <ul>
     <li>
         <label for="loginButton" hidden>Log in</label>
-        <input id="loginButton" onclick="window.open('/src/webapp/login','_self')" type="button" value="Log in">
+        <input id="loginButton" onclick="window.open('src/webapp/login','_self')" type="button" value="Log in">
     </li>
     <li>
         <label for="logoutButton" hidden>Log out</label>
-        <input id="logoutButton" onclick="window.open('/src/webapp/logout','_self')"
+        <input id="logoutButton" onclick="window.open('src/webapp/logout','_self')"
                type="button" value="Log out">
     </li>
     // FOR TEST PURPOSE ONLY:
-    <br>
     <li>
         <label for="registreerReis" hidden>Log out</label>
-        <input id="registreerReis" onclick="window.open('/src/webapp/formulier-reizen','_self')"
+        <input id="registreerReis" onclick="window.open('formulier-reizen','_self')"
                type="button" value="registreerReis">
-    </li>
-
-    <ul>
-        <li>
-            <a href="https://github.com/orgs/HU-SD-SV2FE-studenten-2022/projects/23">Github Project Management</a>
-        </li>
-        <li>
-            <a href="https://github.com/HU-SD-SV2FE-studenten-2022/v2fe-v2a-2">HU repo</a>
-        </li>
-        <li>
-
-            <a href="https://ryan-reddy.github.io/src/main/webapp/wiki/">wiki</a>
-        </li>
-        <li>
-            <a href="https://Ryan-Reddy.github.io">live PAGES</a>
-        </li>
-        <li>
-            <a href="https://ryan-reddy.github.io/src/main/webapp/formulier-reizen">Formulier reizen</a>
-        </li>
-        <li>
-            <a href="https://ryan-reddy.github.io/src/main/webapp/overzicht-reizen/">overzicht reizen</a>
-        </li>
-    </ul>
     </li>
 </ul>
 
+<h2>wiki and info/</h2>
+<ul class="externallinks">
+    <li>
+        <a href="https://github.com/orgs/HU-SD-SV2FE-studenten-2022/projects/23">Github Project Management</a>
+    </li>
+    <li>
+        <a href="https://github.com/HU-SD-SV2FE-studenten-2022/v2fe-v2a-2">HU repo</a>
+    </li>
+    <li>
 
+        <a href="https://ryan-reddy.github.io/src/main/webapp/wiki/">wiki</a>
+    </li>
+</ul>
+<h2>Github.io/</h2>
+<ul class="externallinks">
+    <li>
+        <a href="https://Ryan-Reddy.github.io">live PAGES</a>
+    </li>
+    <li>
+        <a href="https://ryan-reddy.github.io/src/main/webapp/formulier-reizen">Formulier reizen</a>
+    </li>
+    <li>
+        <a href="https://ryan-reddy.github.io/src/main/webapp/overzicht-reizen/">overzicht reizen</a>
+    </li>
+</ul>
+
+</main>
 </body>
+
 </html>
