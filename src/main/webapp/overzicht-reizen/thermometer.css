@@ -1,0 +1,9 @@
+#thermometer-bound-box {
+    width: 100%; height: 350px;
+    background-color: #800000;
+}
+
+.thermometerDiv {
+    width: 100%; height: 600px;
+
+}

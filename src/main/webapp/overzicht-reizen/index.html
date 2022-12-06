@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <!--    <link href="/style-index.css" rel="stylesheet"/>-->
-    <script src="overzichtReizen.js" type="text/javascript"></script>
     <link href="/branding/KPN.F.D.png" rel="icon" sizes="16x16" type="image/png"/>
+    <script src="overzichtReizen.js" type="text/javascript"></script>
+    <css src="overzicht-reizen.css" type="text/css"></css>
 
     <title>Log in</title>
 
@@ -15,29 +16,35 @@
 
 <body>
 <main>
-    <table border="40" cellpadding="40" cellspacing="40">
-        <tbody>
-        <th>
-            Title
-        </th>
-        <tr>
-            <td> part one</td>
-            <td> part one</td>
-        </tr>
-        <tr>
-            <td> part one</td>
-            <td> part one</td>
-        </tr>
-        <tr>
-            <td> part one</td>
-            <td> part one</td>
-        </tr>
-        <tr>
-            <td> part one</td>
-            <td> part one</td>
-        </tr>
-        </tbody>
-    </table>
+    <span class="span">
+    <div class="table" style="float:left; background:gray; margin:10px">
+        <table border="40" cellpadding="40" cellspacing="40">
+            <tbody>
+            <th>
+                Title
+            </th>
+            <tr>
+                <td> part one</td>
+                <td> part one</td>
+            </tr>
+            <tr>
+                <td> part one</td>
+                <td> part one</td>
+            </tr>
+            <tr>
+                <td> part one</td>
+                <td> part one</td>
+            </tr>
+            <tr>
+                <td> part one</td>
+                <td> part one</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</span>
+    <div id="thermometerDiv"></div>
 
     <label for="typeVervoer">typeVervoer:</label>
     <select class="inputfield" id="typeVervoer" name="typeVervoer" required>
