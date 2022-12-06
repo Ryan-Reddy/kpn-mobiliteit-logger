@@ -1,9 +1,15 @@
-#thermometer-bound-box {
-    width: 100%; height: 350px;
-    background-color: #800000;
-}
+/*!*#thermometer-bound-box {*!*/
+/*!*    width: 100%; height: 350px;*!*/
+/*!*    background-color: #800000;*!*/
+/*!*}*!*/
 
-.thermometerDiv {
-    width: 100%; height: 600px;
-
-}
+/*!*.thermometerDiv {*!*/
+/*!*    width: 100%; height: 600px;*!*/
+/*!*}*!*/
+/*.range input {*/
+/*    margin-top:10%;*/
+/*    -webkit-transform:rotate(90deg);*/
+/*    -moz-transform:rotate(90deg);*/
+/*    -o-transform:rotate(90deg);*/
+/*    transform:rotate(270deg);*/
+/*}*/

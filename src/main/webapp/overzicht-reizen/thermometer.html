@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-</head>
+    <script src="thermometer.js" type="text/javascript" defer></script> <!--// https://stackoverflow.com/questions/20180251/when-to-use-window-onload defer-->
 
-// bron: https://bloomerang.co/template/fundraising-thermometer-generator/
+</head>
+<!--    bron: https://bloomerang.co/template/fundraising-thermometer-generator/-->
+
+
+<div class="range">
+    <input id="sliderinput" type="range" min="0" max="236" value="0">
+<!--           oninput="rangeValue.innerText = this.value"-->
+</div>
 
 <div class="thermometer">
     <svg id="thermometer-svg" version="1.1" viewBox="-5 78.2 381.6 412.5" x="0px"
@@ -14,10 +21,10 @@
                                       fill="#00C300"
                                       id="fill-path"></path>
                             </g>
-        <g id="cover"><rect fill="#ffffff" height="118" id="cover-rect" width="40.8" x="167.4" y="105.5"></rect>
+        <g id="cover"><rect fill="#ffffff" height="236" id="mercury" width="40.8" x="167.4" y="105.5"></rect>
                                                                     // thermometer fill range: heigth=(0=full)-(236=empty)
             <polygon fill="#00C300" id="polygon"
-                     points="233.7,291.3 225.8,299.9 233.7,308.5 236.8,308.5 236.8,291.3" transform="translate(0 -78)"
+                     points="233.7,291.3 225.8,299.9 233.7,308.5 236.8,308.5 236.8,291.3" transform="translate(0 41)"
                      xmlns="http://www.w3.org/2000/svg"></polygon> // Transform translate min = (0 41); max = (0 -200)
                             </g>
         <g id="thermometer">
