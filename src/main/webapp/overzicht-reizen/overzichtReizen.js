@@ -36,5 +36,5 @@
 //   });
 
 window.onload = function () {
-  document.getElementById('thermometerDiv').innerHTML = '<object id="thermometer-bound-box" type="text/html" data="thermometer.html" style="height:330px"></object>';
+  document.getElementById('thermometerDiv').innerHTML = '<object id="thermometer-bound-box" type="text/html" data="../../thermometer/thermometer.html" style="height:330px"></object>';
 }
