@@ -7,19 +7,18 @@
 
     <title>Title</title>
     <script src="formulier-reizen.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="formulier.css">
+    <link href="formulier.css" rel="stylesheet">
 </head>
 <body>
 <main>
     <H1>Welkom, vul hieronder zo nauwkeurig mogelijk uw reis in:</H1>
     <hr/>
-    <form  class="reisInvoerFormulier" id="reisInvoerFormulier">
-        <ul>
+    <form class="reisInvoerFormulier" id="reisInvoerFormulier">
+        <ol>
             <li>
                 <label for="vervoerstype">typeVervoer:</label>
-                <br>
                 <select class="inputfield" id="vervoerstype" name="vervoerstype" required>
-                    <option selected disabled hidden value="0">Kies hier uw vervoerstype</option>
+                    <option disabled hidden selected value="0">Kies hier uw vervoerstype</option>
                     <option value="Trein/Metro/Tram">"Trein/Metro/Tram"</option>
                     <option value="Fiets">"Fiets"</option>
                     <option value="OV Fiets">"OV Fiets"</option>
@@ -39,45 +38,40 @@
 
             <li class="alleenzakelijk" required>
                 <label for="vertrekLocatie">Vertrek locatie:</label>
-                <br>
-                <input class="inputfield" id="vertrekLocatie" name="vertrekLocatie" />
+                <input class="inputfield" id="vertrekLocatie" name="vertrekLocatie" placeholder="Vertrek locatie"/>
             </li>
 
             <li class="alleenzakelijk" required>
                 <label for="aankomstLocatie">Aankomst locatie:</label>
-                <br>
-                <input class="inputfield" id="aankomstLocatie" name="aankomstLocatie" />
+                <input class="inputfield" id="aankomstLocatie" name="aankomstLocatie" placeholder="Aankomst locatie"/>
             </li>
 
-            <li >
+            <li>
                 <label for="beginTijd">Begin tijd:</label>
-                <br>
-                <input class="inputfield" id="beginTijd" name="beginTijd" type="datetime-local" required/>
+                <input class="inputfield" id="beginTijd" name="beginTijd" placeholder="Begin tijd" required
+                       type="datetime-local"/>
             </li>
 
-            <li >
+            <li>
                 <label for="eindTijd">Eind tijd:</label>
-                <br>
-                <input class="inputfield" id="eindTijd" min="beginTijd" name="eindTijd"
-                        type="datetime-local" required/>
+                <input class="inputfield" id="eindTijd" min="beginTijd" name="eindTijd" placeholder="Eind tijd" required
+                       type="datetime-local"/>
             </li>
 
             <li required>
                 <label for="km">km:</label>
-                <br>
-                <input class="inputfield" id="km" name="km" required type="text"/>
+                <input class="inputfield" id="km" name="km" placeholder="Gereisde km" required type="text"/>
             </li>
 
             <li class="alleenzakelijk" required>
                 <label for="kosten">kosten:</label>
-                <br>
-                <input class="inputfield" id="kosten" name="kosten" type="text"/>
+                <input class="inputfield" id="kosten" name="kosten" placeholder="Kosten in euro's" type="text"/>
             </li>
 
             <li class="alleenzakelijk" required>
                 <label for="project">Project:</label>
-                <br>
                 <select class="inputfield" id="project" name="project">
+                    <option disabled hidden selected value="0">Kies hier het project waar u voor hebt gereisd.</option>
                     <option value="KPN-glasvezel-aanleg">KPN-glasvezel-aanleg</option>
                     <option value="KPN-modem-installatie">KPN-modem-installatie</option>
                     <option value="KPN-modem-reparatie">KPN-modem-reparatie</option>
@@ -85,43 +79,48 @@
                 </select>
             </li>
 
-        </ul>
+        </ol>
 
         <div id="reisKlasseKeuzeMenu">
-            <ul>
-                <caption><h4>Reisklasse keuze:</h4></caption>
-                <li>
+            <fieldset>
+                <ol>
+                    <legend>Reisklasse keuze:</legend>
+                    <li>
                         <label for="eersteKlas" style="float:left">Eerste klas</label>
                         <input id="eersteKlas" name="klasse"
-                               type="radio" value="true"/>
-                </li>
-                <li>
+                               type="radio" value="true"/> Eerste klas
+                    </li>
+                    <li>
                         <label for="tweedeKlas" style="float:left">Tweede klas</label>
                         <input id="tweedeKlas" name="klasse"
-                               type="radio" value="true"/>
-                </li>
-                <li>
+                               type="radio" value="true"/> Tweede klas
+                    </li>
+                    <li>
                         <label for="highspeed" style="float:left">NS-Highspeed</label>
                         <input id="highspeed" name="klasse"
-                               type="radio" value="true"/>
-                </li>
-            </ul>
+                               type="radio" value="true"/> NS-Highspeed
+                    </li>
+                </ol>
+            </fieldset>
         </div>
 
         <div id="priveZakelijkKeuzeMenu">
-            <ul>
-                <caption><h4>Prive of zakelijke reis:</h4></caption>
-                <li>
+            <fieldset>
+                <ul>
+                    <legend>Prive of zakelijke reis:</legend>
+
+                    <li>
                         <label for="zakelijk" style="float:left">Zakelijk</label>
                         <input id="zakelijk" name="zakelijk-prive"
-                               type="radio" value="true"/>
-                </li>
-                <li>
-                        <label for="prive" style="float:left">Prive</label>
+                               type="radio" value="true"/> Zakelijk
+                    </li>
+                    <li>
+                        <label for="prive" style="float:left"></label>
                         <input id="prive" name="zakelijk-prive"
-                               type="radio" value="true"/>
-                </li>
-            </ul>
+                               type="radio" value="true"/> Prive
+                    </li>
+                </ul>
+            </fieldset>
         </div>
 
         <hr/>
@@ -134,9 +133,7 @@
 
     <div id="div"></div>
 
-    <br>
     <span id="feedbackSpan"></span>
-    <br>
 </main>
 </body>
 </html>

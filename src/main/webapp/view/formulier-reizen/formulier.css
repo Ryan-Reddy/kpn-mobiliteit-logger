@@ -1,4 +1,27 @@
+h1 {
+    font-size: 3em;
+}
+
+label {
+    /*font-size: 2em;*/
+    /*visibility: hidden;*/
+    display: none;
+}
+
+form {
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 2em;
+}
+
 ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+ol {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -9,8 +32,12 @@ li {
     padding: 0.1em;
 }
 
-label {
-    /*visibility: hidden;*/
+fieldset {
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 0.5em;
+    font-color: black
+
 }
 
 .inputfield {
