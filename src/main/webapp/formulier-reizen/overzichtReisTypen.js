@@ -1,5 +1,25 @@
 console.log('loading overzichtReisTypen.js');
 
+
+// Follow this pattern to import other Firebase services
+// import { } from 'firebase/<service>';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { app } from 'firebase/app';
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Get a list of cities from your database
+async function getCities(db) {
+  const citiesCol = collection(db, 'firebase');
+  const citySnapshot = await getDocs(citiesCol);
+  const cityList = citySnapshot.docs.map(doc => doc.data());
+  return cityList;
+}
+
+
+
 let dropdown = document.getElementById('vervoerstype');
 // dropdown.length = 0;
 
