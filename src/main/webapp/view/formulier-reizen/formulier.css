@@ -37,7 +37,9 @@ fieldset {
     padding-right: 1em;
     font-size: 0.5em;
     font-color: black
-
+}
+#vervoerstype {
+    background-color: #00C300;
 }
 
 .inputfield {

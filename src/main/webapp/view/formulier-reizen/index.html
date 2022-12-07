@@ -17,8 +17,8 @@
         <ol>
             <li>
                 <label for="vervoerstype">typeVervoer:</label>
-                <select class="inputfield" id="vervoerstype" name="vervoerstype" required>
-                    <option disabled hidden selected value="0">Kies hier uw vervoerstype</option>
+                <select class="inputfield" id="vervoerstype" name="vervoerstype" required focus>
+                    <option disabled hidden selected value="0">Start: kies hier uw vervoerstype!</option>
                     <option value="Trein/Metro/Tram">"Trein/Metro/Tram"</option>
                     <option value="Fiets">"Fiets"</option>
                     <option value="OV Fiets">"OV Fiets"</option>
@@ -129,6 +129,9 @@
 
         <label for="resetButton" hidden>Herlaad en leeg het formulier.</label>
         <input id="resetButton" type="reset" value="Reset velden">
+
+        <label for="herhalendeReisButton" hidden>Sla op als herhalende reis.</label>
+        <input id="herhalendeReisButton" type="checkbox" value="Reset velden" disabled> Sla op als herhalende reis. [under-construction]
     </form>
 
     <div id="div"></div>
