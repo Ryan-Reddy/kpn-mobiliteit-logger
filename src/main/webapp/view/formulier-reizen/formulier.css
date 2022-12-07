@@ -6,7 +6,7 @@ ul {
 }
 
 li {
-    padding: 0.5em;
+    padding: 0.1em;
 }
 
 label {
@@ -15,7 +15,7 @@ label {
 
 .inputfield {
     width: 100%;
-    padding: 1em 0px;
+    padding: 0.8em 0px;
     border: none;
     border-radius: 4px;
     background-color: #E2E2E2;
@@ -42,4 +42,5 @@ table {
     pointer-events:none;
     color: lightgrey;
     foreground-color: grey;
+    required : invalid;
 }

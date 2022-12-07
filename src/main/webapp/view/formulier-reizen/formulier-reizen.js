@@ -105,8 +105,8 @@ window.onload = function () {
           for(var i = 0; i < alleenZakelijk.length; i++)
           {
             alleenZakelijk[i].classList.add("visibility-hidden");
-            // projectElement.setAttribute("value", "Prive")
-            // projectElement.setAttribute("text", "Prive")
+            alleenZakelijk[i].removeAttribute("required")
+
             projectElement.value = 'prive';
             console.log(alleenZakelijk[i].className);
           }
