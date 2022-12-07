@@ -19,6 +19,17 @@ console.log('loading formulier-reizen.js');
 //   //   },
 // }
 
+function consoleLogFormData(e) {
+  e.preventDefault();
+  const formData = new FormData(this);
+  const object = {};
+  formData.forEach((value, key) => object[key] = value);
+  const json = JSON.stringify(object);
+  const obj = JSON.parse(json);
+  console.log(obj);
+  console.log(obj.vervoerstype + ' over ' + obj.km + 'km');
+}
+
 window.onload = function () {
   let dropdownvervoerstype = document.getElementById('vervoerstype');
 
@@ -116,6 +127,10 @@ window.onload = function () {
       }
     }
   }
+
+  document.querySelector('form.reisInvoerFormulier').addEventListener('submit', function(e) {
+    consoleLogFormData.call(this, e);
+  });
 
 
   // console.log('loading overzichtReisTypen.js');
