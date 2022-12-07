@@ -1,4 +1,21 @@
 console.log('loading login.js');
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
+/** Authenticatie vanuit firebase */
+const auth = getAuth();
+createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+
+
 
 window.onload = function () {
   /** De event listeners */
