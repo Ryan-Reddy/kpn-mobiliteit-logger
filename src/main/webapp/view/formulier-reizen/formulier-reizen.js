@@ -22,37 +22,44 @@ console.log('loading formulier-reizen.js');
 window.onload = function () {
   let dropdownvervoerstype = document.getElementById('vervoerstype');
 
-  const beginTijd = document.getElementById("beginTijd");
-  const eindTijd = document.getElementById("eindTijd");
+  const reisklasseKeuze = document.getElementById("reisKlasseKeuzeMenu")
+  const priveGebruikKeuze = document.getElementById("priveZakelijkKeuzeMenu")
 
-  // check of waarde veranderd
+  // verstop de extra menus:
+  console.log("hiding extra menu's")
+  priveGebruikKeuze.classList.add("visibility-hidden");
+  reisklasseKeuze.classList.add("visibility-hidden");
+
+
+  // reactief formulier
   dropdownvervoerstype.addEventListener("change", () => {
-    // do stuff
-    let reisklasseKeuze = document.getElementById("reisKlasseKeuzeMenu")
-    reisklasseKeuze.setAttribute("hidden", "true");
-
+    const switchvalue = dropdownvervoerstype.value;
     console.log('value: ' + dropdownvervoerstype.value)
 
-    const switchvalue = dropdownvervoerstype.value;
     switch (switchvalue) {
       case "Trein/Metro/Tram":
-        reisklasseKeuze.removeAttribute("hidden");
+        reisklasseKeuze.classList.remove("visibility-hidden"); // toont reisklasse
+        priveGebruikKeuze.classList.add("visibility-hidden"); // verstopt prive/zakelijk
         break;
-
-      case "Fiets":
-      case "OV Fiets":
       case "Scooter":
-      case "bus":
       case "Elektr Scooter (incl deel scooter)":
       case "Elektr Deelauto":
       case "Hybride eigen auto":
       case "Electr eigen auto":
       case "Diesel eigen auto":
       case "Benzine eigen auto":
-      case "Lopen":
       case "eigenAuto":
       case "deelAuto":
-        reisklasseKeuze.setAttribute("hidden", "true");
+        console.log("auto gekozen")
+        reisklasseKeuze.classList.add("visibility-hidden"); // verstopt reisklasseKeuze
+        priveGebruikKeuze.classList.remove("visibility-hidden"); // toont prive/zakelijk
+        break;
+      case "Lopen":
+      case "Fiets":
+      case "OV Fiets":
+      case "bus":
+        reisklasseKeuze.classList.add("visibility-hidden"); // verstopt reisklasseKeuze
+        priveGebruikKeuze.classList.add("visibility-hidden"); // verstopt prive/zakelijk
         break;
 
       default: {
@@ -63,20 +70,55 @@ window.onload = function () {
         break;
     }
   });
-  // check of waarde eindTijd veranderd
+  // check of waarde beginTijd veranderd
   beginTijd.addEventListener("change", () => {
+    let beginTijd = document.getElementById("beginTijd");
+    let eindTijd = document.getElementById("eindTijd");
     // set beginTijd.max op eindTijd
     beginTijd.setAttribute("max", eindTijd.value);
   });
-  // check of waarde veranderd
+  // check of waarde eindTijd veranderd
   eindTijd.addEventListener("change", () => {
+    let beginTijd = document.getElementById("beginTijd");
+    let eindTijd = document.getElementById("eindTijd");
     // set eindTijd.min op beginTijd
     eindTijd.setAttribute("min", beginTijd.value);
   });
 
+  const priveRadio = document.forms["reisInvoerFormulier"].elements["zakelijk-prive"];
 
-  console.log('loading overzichtReisTypen.js');
+  for(radio in priveRadio) {
+    priveRadio[radio].onclick = function() {
+      let alleenZakelijk = document.getElementsByClassName("alleenzakelijk")
+      let projectElement = document.getElementById("project")
 
+      switch (this.id) {
+        case "zakelijk":
+          for(var i = 0; i < alleenZakelijk.length; i++)
+          {
+            alleenZakelijk[i].classList.remove("visibility-hidden");
+            console.log(alleenZakelijk[i].className);
+          }
+
+          break;
+        case "prive":
+          for(var i = 0; i < alleenZakelijk.length; i++)
+          {
+            alleenZakelijk[i].classList.add("visibility-hidden");
+            // projectElement.setAttribute("value", "Prive")
+            // projectElement.setAttribute("text", "Prive")
+            projectElement.value = 'prive';
+            console.log(alleenZakelijk[i].className);
+          }
+          break;
+        default:
+          alert("cannot recognize prive/zakelijk choice")
+      }
+    }
+  }
+
+
+  // console.log('loading overzichtReisTypen.js');
   // dropdownvervoerstype.length = 0;
   //
   // let defaultOption = document.createElement('option');
@@ -125,5 +167,9 @@ window.onload = function () {
     }
   }
 
+  function toggleVisibility(id) {
+    var gottenElement = document.getElementById(id); // get a reference to p and cache it
+    gottenElement.classList.toggle('hideP'); // toggle the hideP class
+  }
 
 }

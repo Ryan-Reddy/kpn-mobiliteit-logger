@@ -32,3 +32,14 @@ input[type=button], input[type=submit], input[type=reset] {
     margin: 4px 2px;
     cursor: pointer;
 }
+
+table {
+    padding: 1em;
+}
+
+.visibility-hidden {
+    /*visibility: hidden;*/
+    pointer-events:none;
+    color: lightgrey;
+    foreground-color: grey;
+}

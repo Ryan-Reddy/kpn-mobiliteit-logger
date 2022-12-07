@@ -37,14 +37,16 @@
                 </select>
             </li>
 
-            <li>
-                <label for="project">Project:</label>
+            <li class="alleenzakelijk">
+                <label for="vertrekLocatie">Vertrek locatie:</label>
                 <br>
-                <select class="inputfield" id="project" name="project">
-                    <option value="KPN-glasvezel-aanleg">KPN-glasvezel-aanleg</option>
-                    <option value="KPN-modem-installatie">KPN-modem-installatie</option>
-                    <option value="KPN-modem-reparatie">KPN-modem-reparatie</option>
-                </select>
+                <input class="inputfield" id="vertrekLocatie" name="vertrekLocatie" required/>
+            </li>
+
+            <li class="alleenzakelijk">
+                <label for="aankomstLocatie">Aankomst locatie:</label>
+                <br>
+                <input class="inputfield" id="aankomstLocatie" name="aankomstLocatie" required/>
             </li>
 
             <li>
@@ -67,48 +69,62 @@
                 <input class="inputfield" id="km" name="km" required type="text"/>
             </li>
 
-            <li>
+            <li class="alleenzakelijk">
                 <label for="kosten">kosten:</label>
                 <br>
                 <input class="inputfield" id="kosten" name="kosten" type="text"/>
             </li>
+
+            <li class="alleenzakelijk">
+                <label for="project">Project:</label>
+                <br>
+                <select class="inputfield" id="project" name="project">
+                    <option value="KPN-glasvezel-aanleg">KPN-glasvezel-aanleg</option>
+                    <option value="KPN-modem-installatie">KPN-modem-installatie</option>
+                    <option value="KPN-modem-reparatie">KPN-modem-reparatie</option>
+                    <option value="Prive">Prive</option>
+                </select>
+            </li>
+
         </ul>
-        <div hidden id="reisKlasseKeuzeMenu">
-            <table style="padding: 1rem">
-                <caption>Reisklasse keuze</caption>
-                <tr>
-                    <th scope="col">label</th>
-                    <th scope="col">invoer</th>
-                </tr>
-                <tr>
-                    <td>
+
+        <div id="reisKlasseKeuzeMenu">
+            <ul>
+                <caption><h4>Reisklasse keuze:</h4></caption>
+                <li>
                         <label for="eersteKlas" style="float:left">Eerste klas</label>
-                    </td>
-                    <td>
-                        <input id="eersteKlas" name="eersteKlas"
-                               type="checkbox" value="true"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                        <input id="eersteKlas" name="klasse"
+                               type="radio" value="true"/>
+                </li>
+                <li>
                         <label for="tweedeKlas" style="float:left">Tweede klas</label>
-                    </td>
-                    <td>
-                        <input id="tweedeKlas" name="tweedeKlas"
-                               type="checkbox" value="true"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                        <input id="tweedeKlas" name="klasse"
+                               type="radio" value="true"/>
+                </li>
+                <li>
                         <label for="highspeed" style="float:left">NS-Highspeed</label>
-                    </td>
-                    <td>
-                        <input id="highspeed" name="highspeed"
-                               type="checkbox" value="true"/>
-                    </td>
-                </tr>
-            </table>
+                        <input id="highspeed" name="klasse"
+                               type="radio" value="true"/>
+                </li>
+            </ul>
         </div>
+
+        <div id="priveZakelijkKeuzeMenu">
+            <ul>
+                <caption><h4>Prive of zakelijke reis:</h4></caption>
+                <li>
+                        <label for="zakelijk" style="float:left">Zakelijk</label>
+                        <input id="zakelijk" name="zakelijk-prive"
+                               type="radio" value="true"/>
+                </li>
+                <li>
+                        <label for="prive" style="float:left">Prive</label>
+                        <input id="prive" name="zakelijk-prive"
+                               type="radio" value="true"/>
+                </li>
+            </ul>
+        </div>
+
         <hr/>
         <label for="verzendReis" hidden>Verzend</label>
         <input class="verzendReis" id="verzendReis" type="submit" value="verzendReis">
@@ -118,7 +134,6 @@
     </form>
 
     <div id="div"></div>
-    <script src="options.js"></script>
 
     <br>
     <span id="feedbackSpan"></span>
