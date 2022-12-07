@@ -1,0 +1,79 @@
+h1 {
+    font-size: 3em;
+}
+
+label {
+    /*font-size: 2em;*/
+    /*visibility: hidden;*/
+    display: none;
+}
+
+form {
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 2em;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+ol {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    padding: 0.1em;
+}
+
+fieldset {
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 0.5em;
+    font-color: black
+}
+#vervoerstype {
+    background-color: #00C300;
+}
+
+.inputfield {
+    width: 100%;
+    padding: 0.8em 0.4px;
+    /*margin: 0.1em;*/
+    border: none;
+    border-radius: 4px;
+    background-color: #E2E2E2;
+    vertical-align: middle;
+    text-indent: 0.7em;
+}
+
+/*Buttons: */
+input[type=button], input[type=submit], input[type=reset] {
+    width: 33%;
+    background-color: #00C300;
+    border: none;
+    color: white;
+    padding: 1em 0px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+
+table {
+    padding: 1em;
+}
+
+.visibility-hidden {
+    /*visibility: hidden;*/
+    pointer-events:none;
+    color: lightgrey;
+    foreground-color: grey;
+    required : invalid;
+}
