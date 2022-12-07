@@ -96,6 +96,16 @@ window.onload = function () {
     eindTijd.setAttribute("min", beginTijd.value);
   });
 
+  // set de datumtijdpickers naar nu
+  var now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  now.setMilliseconds(null)
+  now.setSeconds(null)
+  document.getElementById('beginTijd').value = now.toISOString().slice(0, -1);
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // voegt auto 1 uur toe
+  document.getElementById('eindTijd').value = now.toISOString().slice(0, -1);
+
+
   const priveRadio = document.forms["reisInvoerFormulier"].elements["zakelijk-prive"];
 
   for(radio in priveRadio) {
