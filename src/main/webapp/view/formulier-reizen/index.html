@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <!--    <link href="/style-index.css" rel="stylesheet"/>-->
+    <link href="/branding/KPN.F.D.png" rel="icon" sizes="16x16" type="image/png"/>
+
+    <title>Title</title>
+    <script src="formulier-reizen.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="formulier.css">
+</head>
+<body>
+<main>
+    <H1>Welkom, vul hieronder zo nauwkeurig mogelijk uw reis in:</H1>
+    <hr/>
+    <form id="reisInvoerFormulier">
+        <ul>
+            <li>
+                <label for="vervoerstype">typeVervoer:</label>
+                <br>
+                <select class="inputfield" id="vervoerstype" name="vervoerstype" required>
+                    <option selected disabled hidden value="0">Kies hier uw vervoerstype</option>
+                    <option value="Trein/Metro/Tram">"Trein/Metro/Tram"</option>
+                    <option value="Fiets">"Fiets"</option>
+                    <option value="OV Fiets">"OV Fiets"</option>
+                    <option value="Scooter">"Scooter"</option>
+                    <option value="bus">"bus"</option>
+                    <option value="Elektr Scooter (incl deel scooter)">"Elektr Scooter (incl deel scooter)"</option>
+                    <option value="Elektr Deelauto">"Elektr Deelauto"</option>
+                    <option value="Hybride eigen auto">"Hybride eigen auto"</option>
+                    <option value="Electr eigen auto">"Electr eigen auto"</option>
+                    <option value="Diesel eigen auto">"Diesel eigen auto"</option>
+                    <option value="Benzine eigen auto">"Benzine eigen auto"</option>
+                    <option value="Lopen">"Lopen"</option>
+                    <option value="eigenAuto">"eigenAuto"</option>
+                    <option value="deelAuto">"deelAuto"</option>
+                </select>
+            </li>
+
+            <li>
+                <label for="project">Project:</label>
+                <br>
+                <select class="inputfield" id="project" name="project">
+                    <option value="KPN-glasvezel-aanleg">KPN-glasvezel-aanleg</option>
+                    <option value="KPN-modem-installatie">KPN-modem-installatie</option>
+                    <option value="KPN-modem-reparatie">KPN-modem-reparatie</option>
+                </select>
+            </li>
+
+            <li>
+                <label for="beginTijd">Begin tijd:</label>
+                <br>
+                <input class="inputfield" id="beginTijd" name="beginTijd" required
+                       type="datetime-local"/>
+            </li>
+
+            <li>
+                <label for="eindTijd">Eind tijd:</label>
+                <br>
+                <input class="inputfield" id="eindTijd" min="beginTijd" name="eindTijd"
+                       required type="datetime-local"/>
+            </li>
+
+            <li>
+                <label for="km">km:</label>
+                <br>
+                <input class="inputfield" id="km" name="km" required type="text"/>
+            </li>
+
+            <li>
+                <label for="kosten">kosten:</label>
+                <br>
+                <input class="inputfield" id="kosten" name="kosten" type="text"/>
+            </li>
+        </ul>
+        <div hidden id="reisKlasseKeuzeMenu">
+            <table style="padding: 1rem">
+                <caption>Reisklasse keuze</caption>
+                <tr>
+                    <th scope="col">label</th>
+                    <th scope="col">invoer</th>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="eersteKlas" style="float:left">Eerste klas</label>
+                    </td>
+                    <td>
+                        <input id="eersteKlas" name="eersteKlas"
+                               type="checkbox" value="true"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="tweedeKlas" style="float:left">Tweede klas</label>
+                    </td>
+                    <td>
+                        <input id="tweedeKlas" name="tweedeKlas"
+                               type="checkbox" value="true"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="highspeed" style="float:left">NS-Highspeed</label>
+                    </td>
+                    <td>
+                        <input id="highspeed" name="highspeed"
+                               type="checkbox" value="true"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <hr/>
+        <label for="verzendReis" hidden>Verzend</label>
+        <input class="verzendReis" id="verzendReis" type="submit" value="verzendReis">
+
+        <label for="resetButton" hidden>Herlaad en leeg het formulier.</label>
+        <input id="resetButton" type="reset" value="Reset velden">
+    </form>
+
+    <div id="div"></div>
+    <script src="options.js"></script>
+
+    <br>
+    <span id="feedbackSpan"></span>
+    <br>
+</main>
+</body>
+</html>
