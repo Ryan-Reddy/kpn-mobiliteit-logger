@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-/** Deze pagina refereert de gebruiker door naar de homepage*/
+
 <head>
     <meta charset="UTF-8"/>
     <!--    <link href="/style-index.css" rel="stylesheet"/>-->
@@ -12,13 +12,18 @@
 
 </head>
 <body>
+/** Deze pagina refereert de gebruiker door naar de homepage*/
+
+Als dit niet gebeurt, sta popups op dit domein toe.
+
 <script type="text/javascript">
   console.log('opening webapp/index.html')
   document.addEventListener("open", openFunction());
 
   function openFunction() {
     // window.open(`/v2fe-v2a-2/main/webapp/view/home/`, '_self')
-    window.open(`/v2fe-v2a-2/main/webapp/view/home/`);
+    window.open(`v2fe-v2a-2/main/webapp/view/home/`);
+
     window.open(`https://hu-sd-sv2fe-studenten-2022.github.io/v2fe-v2a-2/main/webapp/view/home/`);
   }
 </script>
