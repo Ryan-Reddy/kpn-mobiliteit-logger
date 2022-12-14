@@ -22,6 +22,9 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+main {
+  background-image: url('assets/achtergrondshapes.webp');
+}
 
 @media (prefers-color-scheme: light) {
   :root {

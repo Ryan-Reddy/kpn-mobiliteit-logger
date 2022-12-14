@@ -23,18 +23,19 @@ export class MyElement extends LitElement {
 
   constructor() {
     super()
-    this.docsHint = 'Click on the Vite and Lit logos to learn more'
+    this.naamIngelogdeGebruiker = 'Hans Fumphried'
     this.count = 0
   }
 
   render() {
-
     return html`
-
         <body id="bodyofmenubar">
-        <span class="ingelogd_als">ingelogd als Hans Fumphried</span>
+        <span class="ingelogd_als">ingelogd als ${this.naamIngelogdeGebruiker}</span>
 
         <div class="entire_menu_bar">
+<!--            <input class="nav-button" type="button" value="Home" onClick="console.log(333)" />-->
+            <input class="nav-button" type="button" value="Home" onClick="_changePage()" />
+<!--            <input class="nav-button" type="button" value="Home" onClick=_onClick(${this.value}) />-->
             <span class="nav-button">Reis Registreren</span>
             <span class="nav-button">Reisgeschiedenis</span>
             <span class="nav-button">Account</span>
@@ -43,11 +44,19 @@ export class MyElement extends LitElement {
             <img href="#" src="./resources/branding/kpn-logo2-jpeg.jpg" alt="kpn-logo-zwart-op-wit" class="nav-logo">
         </div>
         </body>
+        
+        <script>
+            _changePage(){
+                console.log(666)  
+            }
+            
+
+        </script>
     `
   }
 
-  _onClick() {
-    this.count++
+  _changePageres() {
+    console.log(333)
   }
 
   static get styles() {
@@ -93,6 +102,9 @@ export class MyElement extends LitElement {
     }
     
     .nav-button {
+        background: none!important;
+        border: none;
+        padding: 0!important;
         width: 100%;
         // position: absolute;
         top: 24px;

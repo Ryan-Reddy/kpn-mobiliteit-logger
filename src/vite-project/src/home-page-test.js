@@ -35,16 +35,6 @@ export class MyElement extends LitElement {
         <main>
         <h1 class="header">Welkom bij de KNP medewerkers mobiliteits APP!</h1>
         <ul>
-            <li>
-                <label for="loginButton" hidden>Log in</label>
-                <input id="loginButton" onclick="window.open('/v2fe-v2a-2/src/main/webapp/login','_self')" type="button"
-                       value="Log in">
-            </li>
-            <li>
-                <label for="logoutButton" hidden>Log out</label>
-                <input id="logoutButton" onclick="window.open('/v2fe-v2a-2/src/main/webapp/logout','_self')"
-                       type="button" value="Log out">
-            </li>
             // FOR TEST PURPOSE ONLY:
             <li>
                 <label for="registreerReis" hidden>Log out</label>
