@@ -19,6 +19,14 @@ export class MyElement extends LitElement {
        * The number of times the button has been clicked.
        */
       count: { type: Number },
+
+
+      /**
+       * The thermometer polygon pointer
+       */
+      mercury: { type: Number },
+
+      
     }
   }
 
@@ -35,12 +43,30 @@ export class MyElement extends LitElement {
         <html lang="en">
         <head>
             <meta charset="UTF-8">
-<!--            <script src="thermometer.js" type="text/javascript" defer></script> &lt;!&ndash;// https://stackoverflow.com/questions/20180251/when-to-use-window-onload defer&ndash;&gt;-->
+<!--            <script type="text/javascript">-->
+<!--                const sliderInputElement = document.getElementById("sliderinput");-->
+<!--                const thermometerMercury = document.getElementById('mercury');-->
+<!--                const thermometerPolygon = document.getElementById('polygon');-->
+
+
+<!--                sliderInputElement.addEventListener('change', function () {-->
+<!--                            const sliderVal = sliderInputElement.value;-->
+<!--                            const rangeValueThermometerFill = 236 + (sliderInputElement.value * -1);-->
+<!--                            thermometerMercury.setAttribute('height', rangeValueThermometerFill);-->
+<!--                            console.log('thermometerMercury position: ' + JSON.stringify(rangeValueThermometerFill) + ' (range: 236-0)')-->
+
+<!--                            const polygonPosition = "translate(0 "-->
+<!--                                    + (((sliderVal) * -(236/241)) + 41) +-->
+<!--                                    ")";-->
+<!--                            console.log('polygon position: ' + JSON.stringify(polygonPosition))-->
+<!--                            thermometerPolygon.setAttribute('transform', polygonPosition);-->
+<!--                        }-->
+<!--                )-->
+
+<!--            </script>-->
 
 
         </head>
-        <!--    bron: https://bloomerang.co/template/fundraising-thermometer-generator/-->
-
 
         <div class="range">
             <input id="sliderinput" type="range" min="0" max="236" value="0">
