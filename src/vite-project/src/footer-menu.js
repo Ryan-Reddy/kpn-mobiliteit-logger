@@ -24,7 +24,7 @@ export class MyElement extends LitElement {
 
   constructor() {
     super()
-    this.naamIngelogdeGebruiker = 'Hans Fumphried'
+    this.naamGebruiker = 'Hans Fumphried'
     this.count = 0
   }
 

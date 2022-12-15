@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   build: {
     lib: {
-      entry: 'src/variable-page-template.js',
+      entry: 'src/compiled-templates.js',
       formats: ['es'],
     },
     rollupOptions: {

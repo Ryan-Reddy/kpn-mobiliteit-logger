@@ -1,11 +1,8 @@
 import { LitElement, css, html } from 'lit'
-import litLogo from './assets/lit.svg'
 
-import './nav-menu.js';
-// import './header-template.js';
-// import './my-article.js';
 import './footer-menu.js';
 import './home-page-test.js';
+import './nav-menu.js';
 
 /**
  * An example element.
@@ -13,35 +10,43 @@ import './home-page-test.js';
  * @slot - This element has a slot
  * @csspart button - The button
  */
-export class VariablePageTemplate extends LitElement {
+export class CompiledTemplates extends LitElement {
   static get properties() {
     return {
       /**
        * De huidige pagina die getoond wordt
        */
-      _currentPage: {type: String},
+      _sessionstorecurrpage: {type: String}
     }
   }
+  _pageChange = () => {
+    this._sessionstorecurrpage = localStorage.getItem("currentpagesessionstorage") }
 
   constructor() {
     super()
-    this.currentPage = 'empty-current-page'
-  }
+    window.addEventListener('click', this._pageChange)
+      this._sessionstorecurrpage = localStorage.getItem("currentpagesessionstorage")
+    }
 
   render() {
     return html`
     <body>
       ${this.navTemplate()}
-      ${this.currentPage}
+      
+      ${this.homeTemplate()}
+      
+      <p>Curr page bubbler: ${this._sessionstorecurrpage}</p>
+      
       ${this.footerTemplate()}
-    
     </body>
-  `;
+  `
   }
-
 
   navTemplate() {
     return html`<nav-menu></nav-menu>`;
+  }
+  homeTemplate() {
+    return html`<home-page></home-page>`;
   }
   footerTemplate() {
     return html`<footer-menu></footer-menu>`;
@@ -73,4 +78,4 @@ export class VariablePageTemplate extends LitElement {
   }
 }
 
-window.customElements.define('compiled-templates', VariablePageTemplate)
+window.customElements.define('compiled-templates', CompiledTemplates)
