@@ -7,12 +7,15 @@ import {css, html, LitElement} from 'lit'
  * @csspart button - The button
  */
 export class MyElement extends LitElement {
+
+
   constructor() {
     super()
     this.naamGebruiker = "Hans Fumphried";
     this.kpnLogo = "./resources/branding/kpn-logo2-jpeg.jpg"
     this._currentPage = 'no page chosen yet';
     this._reizenRegels = '7';
+
   }
 
   static get properties() {
@@ -26,15 +29,12 @@ export class MyElement extends LitElement {
       _reizenContent: {type: String},
 
       _reizenRegels: {type: String}
+
     }
   }
 
   render() {
     return html`
-
-
-
-
         <html>
         
               <H1>Welkom, vul hieronder zo nauwkeurig mogelijk uw reis in:</H1>

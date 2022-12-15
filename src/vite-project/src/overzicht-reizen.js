@@ -13,6 +13,9 @@ export class MyElement extends LitElement {
     this.kpnLogo = "./resources/branding/kpn-logo2-jpeg.jpg"
     this._currentPage = 'no page chosen yet';
     this._reizenRegels = '7';
+    this._reizenDummyData = fetch('dummydata-reizen.json')
+      .then((response) => response.json())
+      .then((json) => console.log(json));
   }
 
   static get properties() {
@@ -25,7 +28,9 @@ export class MyElement extends LitElement {
 
       _reizenContent: {type: String},
 
-      _reizenRegels: {type: String}
+      _reizenRegels: {type: String},
+
+      _reizenDummyData: {type: String}
     }
   }
 
@@ -97,8 +102,7 @@ export class MyElement extends LitElement {
             
             
         </main>
-
-
+        ${this._reizenDummyData}
         </body>
         </html>
     `
