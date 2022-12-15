@@ -1,6 +1,11 @@
 import { LitElement, css, html } from 'lit'
 import litLogo from './assets/lit.svg'
 
+import './nav-menu.js';
+// import './header-template.js';
+// import './my-article.js';
+import './footer-menu.js';
+
 /**
  * An example element.
  *
@@ -10,14 +15,7 @@ import litLogo from './assets/lit.svg'
 export class VariablePageTemplate extends LitElement {
   static get properties() {
     return {
-      /**
-      //  * Copy for the read the docs hint.
-      //  */
-      docsHint: { type: String },
-
-      /**
-       * The number of times the button has been clicked.
-       */
+      userName: { type: String },
       count: { type: Number },
 
     }
@@ -31,9 +29,28 @@ export class VariablePageTemplate extends LitElement {
 
   render() {
     return html`
-        ${this.docsHint}
-        
-    `
+        <body>
+    ${this.navTemplate()}
+
+    ${this.footerTemplate()}
+    </body>
+  `;
+  }
+  // ${this.headerTemplate()}
+  // ${this.articleTemplate()}
+
+
+  navTemplate() {
+    return html`<nav-menu></nav-menu>`;
+  }
+  // headerTemplate() {
+  //   return html`<header>${this.article.title}</header>`;
+  // }
+  // articleTemplate() {
+  //   return html`<article>${this.article.text}</article>`;
+  // }
+  footerTemplate() {
+    return html`<footer-menu></footer-menu>`;
   }
 
   _onClick() {
@@ -47,7 +64,17 @@ export class VariablePageTemplate extends LitElement {
         margin: 0 auto;
         padding: 2rem;
         text-align: center;
+
       }
+      
+      // body { 
+      //   background-image: url('assets/achtergrondshapes.webp');
+      //   background-repeat: no-repeat;
+      //   right: 0;
+      //   bottom: 0;
+      //   position: static;
+      //   /*background-size: cover;*/
+      // }
 
       .logo {
         height: 6em;
@@ -114,4 +141,4 @@ export class VariablePageTemplate extends LitElement {
   }
 }
 
-window.customElements.define('variable-page-template', VariablePageTemplate)
+window.customElements.define('variable-page', VariablePageTemplate)

@@ -33,29 +33,26 @@ export class MyElement extends LitElement {
         <span class="ingelogd_als">ingelogd als ${this.naamIngelogdeGebruiker}</span>
 
         <div class="entire_menu_bar">
-<!--            <input class="nav-button" type="button" value="Home" onClick="console.log(333)" />-->
-            <input class="nav-button" type="button" value="Home" onClick="_changePage()" />
-<!--            <input class="nav-button" type="button" value="Home" onClick=_onClick(${this.value}) />-->
-            <span class="nav-button">Reis Registreren</span>
-            <span class="nav-button">Reisgeschiedenis</span>
-            <span class="nav-button">Account</span>
-            <span class="nav-button">Support</span>
-            <span class="nav-button">Uitloggen</span>
+
+            
+            <nav>
+                <a class="nav-button" @click="_changePage()" href="#">Home</a> |
+                <a class="nav-button" href="#">Reis Registreren</a> |
+                <a class="nav-button" href="#">Reisgeschiedenis</a> |
+                <a class="nav-button" href="#">Account</a> |
+                <a class="nav-button" href="#">Support</a> |
+                <a class="nav-button" href="#">Uitloggen</a>
+            </nav>
+
             <img href="#" src="./resources/branding/kpn-logo2-jpeg.jpg" alt="kpn-logo-zwart-op-wit" class="nav-logo">
         </div>
         </body>
         
-        <script>
-            _changePage(){
-                console.log(666)  
-            }
-            
 
-        </script>
     `
   }
 
-  _changePageres() {
+  _changePage() {
     console.log(333)
   }
 
@@ -77,8 +74,6 @@ export class MyElement extends LitElement {
         border: 1px solid black;
     
         position: relative;
-        top: 0px;
-        left: 0px;
         overflow: hidden;
         padding: 1rem 1.5rem;
       
@@ -102,13 +97,14 @@ export class MyElement extends LitElement {
     }
     
     .nav-button {
-        background: none!important;
-        border: none;
-        padding: 0!important;
-        width: 100%;
+        // background: none!important;
+        // border: none;
+        // padding: 0!important;
+        //
+        // width: 100%;
         // position: absolute;
-        top: 24px;
-        left: 852px;
+        // top: 24px;
+        // left: 852px;
         font-family: Montserrat;
         font-size: 1em;
         opacity: 1;
@@ -116,18 +112,15 @@ export class MyElement extends LitElement {
     }
     
     .nav-logo {
-        width: 60em;
         object-fit: cover;
         height: 5em;
     
         opacity: 1;
-        position: relative;
+        position: fixed;
         // top: 7px;
-        right: 1px;
+        right: 2em;
         overflow: hidden;
     }
-
-    li {        list-style: none;    }
     `
   }
 }
