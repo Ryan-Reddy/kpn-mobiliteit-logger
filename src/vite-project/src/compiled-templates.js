@@ -4,6 +4,7 @@ import './footer-menu.js';
 import './home-page-test.js';
 import './nav-menu.js';
 import './overzicht-reizen.js';
+import './invoeren-reizen.js';
 
 /**
  * An example element.
@@ -34,7 +35,7 @@ export class CompiledTemplates extends LitElement {
     <body>
       ${this.navTemplate()}
       
-      ${this.overzichtTemplate()}
+      ${this.invoerenTemplate()}
       <br><br><br><br><br>
       {{Curr page bubbler: ${this._sessionstorecurrpage}
       ${this._sessionstorecurrpage.toString()} }}
@@ -55,6 +56,9 @@ export class CompiledTemplates extends LitElement {
   }
   overzichtTemplate() {
     return html`<overzicht-reizen></overzicht-reizen>`;
+  }
+  invoerenTemplate() {
+    return html`<invoeren-reizen></invoeren-reizen>`;
   }
 
   static get styles() {
