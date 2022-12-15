@@ -52,7 +52,6 @@ export class MyElement extends LitElement {
                 <a href="https://github.com/HU-SD-SV2FE-studenten-2022/v2fe-v2a-2">HU repo</a>
             </li>
             <li>
-    
                 <a href="https://ryan-reddy.github.io/src/main/webapp/wiki/">wiki</a>
             </li>
         </ul>

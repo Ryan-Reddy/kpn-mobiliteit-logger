@@ -5,6 +5,7 @@ import './nav-menu.js';
 // import './header-template.js';
 // import './my-article.js';
 import './footer-menu.js';
+import './home-page-test.js';
 
 /**
  * An example element.
@@ -15,46 +16,35 @@ import './footer-menu.js';
 export class VariablePageTemplate extends LitElement {
   static get properties() {
     return {
-      userName: { type: String },
-      count: { type: Number },
-
+      /**
+       * De huidige pagina die getoond wordt
+       */
+      _currentPage: {type: String},
     }
   }
 
   constructor() {
     super()
-    // this.docsHint = 'Click on the Vite and Lit logos to learn more'
-    // this.count = 10
+    this.currentPage = 'empty-current-page'
   }
 
   render() {
     return html`
-        <body>
-    ${this.navTemplate()}
-
-    ${this.footerTemplate()}
+    <body>
+      ${this.navTemplate()}
+      ${this.currentPage}
+      ${this.footerTemplate()}
+    
     </body>
   `;
   }
-  // ${this.headerTemplate()}
-  // ${this.articleTemplate()}
 
 
   navTemplate() {
     return html`<nav-menu></nav-menu>`;
   }
-  // headerTemplate() {
-  //   return html`<header>${this.article.title}</header>`;
-  // }
-  // articleTemplate() {
-  //   return html`<article>${this.article.text}</article>`;
-  // }
   footerTemplate() {
     return html`<footer-menu></footer-menu>`;
-  }
-
-  _onClick() {
-    this.count++
   }
 
   static get styles() {
@@ -64,81 +54,23 @@ export class VariablePageTemplate extends LitElement {
         margin: 0 auto;
         padding: 2rem;
         text-align: center;
-
-      }
-      
-      // body { 
-      //   background-image: url('assets/achtergrondshapes.webp');
-      //   background-repeat: no-repeat;
-      //   right: 0;
-      //   bottom: 0;
-      //   position: static;
-      //   /*background-size: cover;*/
-      // }
-
-      .logo {
-        height: 6em;
-        padding: 1.5em;
-        will-change: filter;
-      }
-      .logo:hover {
-        filter: drop-shadow(0 0 2em #646cffaa);
-      }
-      .logo.lit:hover {
-        filter: drop-shadow(0 0 2em #325cffaa);
       }
 
-      .card {
-        padding: 2em;
-      }
-
-      .read-the-docs {
-        color: #888;
-      }
-
-      a {
-        font-weight: 500;
-        color: #646cff;
-        text-decoration: inherit;
-      }
-      a:hover {
-        color: #535bf2;
-      }
-
-      h1 {
-        font-size: 3.2em;
-        line-height: 1.1;
-      }
-
-      button {
-        border-radius: 8px;
-        border: 1px solid transparent;
-        padding: 0.6em 1.2em;
-        font-size: 1em;
-        font-weight: 500;
-        font-family: inherit;
-        background-color: #1a1a1a;
-        cursor: pointer;
-        transition: border-color 0.25s;
-      }
-      button:hover {
-        border-color: #646cff;
-      }
-      button:focus,
-      button:focus-visible {
-        outline: 4px auto -webkit-focus-ring-color;
-      }
-
-      @media (prefers-color-scheme: light) {
-        a:hover {
-          color: #747bff;
-        }
-        button {
-          background-color: #f9f9f9;
-        }
-      }
     `
+  }
+
+  set currentPage(newPage) {
+    console.log('reached set currentpage')
+    if (this._currentPage === newPage) {
+      // no change, don't do any work
+      console.log(this._currentPage)
+      return;
+    }
+
+    // value changed, trigger an update
+    this._currentPage = newPage;
+    this.requestUpdate();
   }
 }
 
-window.customElements.define('variable-page', VariablePageTemplate)
+window.customElements.define('compiled-templates', VariablePageTemplate)

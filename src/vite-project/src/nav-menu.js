@@ -1,4 +1,5 @@
 import {css, html, LitElement} from 'lit'
+import {VariablePageTemplate} from './variable-page-template.js'
 
 /**
  * An example element.
@@ -12,31 +13,25 @@ export class MyElement extends LitElement {
       /**
        * Copy for the read the docs hint.
        */
-      docsHint: {type: String},
+      naamIngelogdeGebruiker: {type: String},
 
-      /**
-       * The number of times the button has been clicked.
-       */
-      count: {type: Number},
     }
   }
 
   constructor() {
     super()
     this.naamIngelogdeGebruiker = 'Hans Fumphried'
-    this.count = 0
   }
 
   render() {
     return html`
+
         <body id="bodyofmenubar">
         <span class="ingelogd_als">ingelogd als ${this.naamIngelogdeGebruiker}</span>
 
         <div class="entire_menu_bar">
-
-            
             <nav>
-                <a class="nav-button" @click="_changePage()" href="#">Home</a> |
+                <a class="nav-button" onclick="currentPage = 100" href="#">Home</a> |
                 <a class="nav-button" href="#">Reis Registreren</a> |
                 <a class="nav-button" href="#">Reisgeschiedenis</a> |
                 <a class="nav-button" href="#">Account</a> |
@@ -50,10 +45,6 @@ export class MyElement extends LitElement {
         
 
     `
-  }
-
-  _changePage() {
-    console.log(333)
   }
 
   static get styles() {

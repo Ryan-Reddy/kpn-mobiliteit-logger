@@ -7,6 +7,7 @@ import {css, html, LitElement} from 'lit'
  * @csspart button - The button
  */
 export class MyElement extends LitElement {
+
   static get properties() {
     return {
       /**
@@ -36,6 +37,10 @@ export class MyElement extends LitElement {
                 <input id="loginButton" onclick="window.open('/v2fe-v2a-2/src/main/webapp/login','_self')" type="button"
                        value="Log in">
             </li>
+
+
+            <button @click=${e => console.log('clicked')}>Click Me</button>
+            
             <li>
                 <label for="logoutButton" hidden>Log out</label>
                 <input id="logoutButton" onclick="window.open('/v2fe-v2a-2/src/main/webapp/logout','_self')"
@@ -81,7 +86,6 @@ export class MyElement extends LitElement {
     
     input {
         width: 176px;
-        color: contrast;
         position: relative;
         left: 1em;
         font-family: Fira Code;
