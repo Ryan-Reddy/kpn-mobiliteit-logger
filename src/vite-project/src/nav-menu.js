@@ -12,18 +12,14 @@ export class MyElement extends LitElement {
     super()
     this.naamGebruiker = "Hans Fumphried";
     this.kpnLogo = "./resources/branding/kpn-logo2-jpeg.jpg"
-    this._currentPage = 'no page chosen yet';
   }
 
   static get properties() {
     return {
       /** ingelogde gebruiker */
       naamGebruiker: {type: String},
-
       /** logo */
       kpnLogo: {type: String},
-
-      _currentPage: {type: String, reflect: true}
     }
   }
 
@@ -31,16 +27,16 @@ export class MyElement extends LitElement {
         // TODO create response menu with: https://www.codingnepalweb.com/responsive-dropdown-menu-bar-html-css/
     return html`
         <body id="bodyofmenubar">
-        <span class="ingelogd_als">ingelogd als ${this.naamGebruiker}</span>
+        <a href="#" class="ingelogd_als">ingelogd als ${this.naamGebruiker}</a>
         <div class="entire_menu_bar">
             <img href="#" src="${this.kpnLogo}" alt="kpn-logo-zwart-op-wit" class="nav-logo">
             <nav>
                     <ul>
-                         <li> <a class="nav-button" href="#" @click=${this._dispatchPageLink} id='homecoming'>Home</a></li>
+                         <li> <a class="nav-button" href="#" @click=${this._dispatchPageLink} id='<home-page></home-page>'>Home</a></li>
                         |<li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Reis Registreren'>Reis Registreren</a></li>
                         |<li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Reisgeschiedenis'>Reisgeschiedenis</a></li>
                         |<li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Account'>Account</a></li>
-                        |<li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Support'>Support</a></li>
+                        |<li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='footer'>Support</a></li>
                         |<li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Uitloggen'>Uitloggen</a></li>
                     </ul>
             </nav>
@@ -53,13 +49,10 @@ export class MyElement extends LitElement {
   _dispatchPageLink(e) {
     console.log('_dispatchPageLink()')
     console.log('id= ' + e.target.id)
-    console.log('innertext= ' + e.target.innerText)
-    // this._currentPage = e.target.id;
-    this._currentPage = e.target.innerText;
 
+    // TODO; change to proper attribute usage either bubbling or otherwise
     localStorage.setItem('currentpagesessionstorage', e.target.id)
     localStorage.getItem("currentpagesessionstorage")
-
     // const name = this.name;
     // console.log(name)
     // if (name) {

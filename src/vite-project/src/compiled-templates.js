@@ -3,6 +3,7 @@ import { LitElement, css, html } from 'lit'
 import './footer-menu.js';
 import './home-page-test.js';
 import './nav-menu.js';
+import './overzicht-reizen.js';
 
 /**
  * An example element.
@@ -16,7 +17,7 @@ export class CompiledTemplates extends LitElement {
       /**
        * De huidige pagina die getoond wordt
        */
-      _sessionstorecurrpage: {type: String}
+      _sessionstorecurrpage: {type: Element}
     }
   }
   _pageChange = () => {
@@ -33,10 +34,11 @@ export class CompiledTemplates extends LitElement {
     <body>
       ${this.navTemplate()}
       
-      ${this.homeTemplate()}
-      
-      <p>Curr page bubbler: ${this._sessionstorecurrpage}</p>
-      
+      ${this.overzichtTemplate()}
+      <br><br><br><br><br>
+      {{Curr page bubbler: ${this._sessionstorecurrpage}
+      ${this._sessionstorecurrpage.toString()} }}
+      <br><br>
       ${this.footerTemplate()}
     </body>
   `
@@ -50,6 +52,9 @@ export class CompiledTemplates extends LitElement {
   }
   footerTemplate() {
     return html`<footer-menu></footer-menu>`;
+  }
+  overzichtTemplate() {
+    return html`<overzicht-reizen></overzicht-reizen>`;
   }
 
   static get styles() {
