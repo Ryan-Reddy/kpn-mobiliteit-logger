@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit'
+import {LitElement, css, html} from 'lit'
 
 import './footer-menu.js';
 import './home-page-test.js';
@@ -13,6 +13,12 @@ import './invoeren-reizen.js';
  * @csspart button - The button
  */
 export class CompiledTemplates extends LitElement {
+  constructor() {
+    super()
+    window.addEventListener('click', this._pageChange)
+    this._sessionstorecurrpage = localStorage.getItem("currentpagesessionstorage")
+  }
+
   static get properties() {
     return {
       /**
@@ -20,45 +26,6 @@ export class CompiledTemplates extends LitElement {
        */
       _sessionstorecurrpage: {type: Element}
     }
-  }
-  _pageChange = () => {
-    this._sessionstorecurrpage = localStorage.getItem("currentpagesessionstorage") }
-
-  constructor() {
-    super()
-    window.addEventListener('click', this._pageChange)
-      this._sessionstorecurrpage = localStorage.getItem("currentpagesessionstorage")
-    }
-
-  render() {
-    return html`
-    <body>
-      ${this.navTemplate()}
-      
-      ${this.overzichtTemplate()}
-      <br><br><br><br><br>
-      {{Curr page bubbler: ${this._sessionstorecurrpage}
-      ${this._sessionstorecurrpage.toString()} }}
-      <br><br>
-      ${this.footerTemplate()}
-    </body>
-  `
-  }
-
-  navTemplate() {
-    return html`<nav-menu></nav-menu>`;
-  }
-  homeTemplate() {
-    return html`<home-page></home-page>`;
-  }
-  footerTemplate() {
-    return html`<footer-menu></footer-menu>`;
-  }
-  overzichtTemplate() {
-    return html`<overzicht-reizen></overzicht-reizen>`;
-  }
-  invoerenTemplate() {
-    return html`<invoeren-reizen></invoeren-reizen>`;
   }
 
   static get styles() {
@@ -84,6 +51,45 @@ export class CompiledTemplates extends LitElement {
     // value changed, trigger an update
     this._currentPage = newPage;
     this.requestUpdate();
+  }
+
+  _pageChange = () => {
+    this._sessionstorecurrpage = localStorage.getItem("currentpagesessionstorage")
+  }
+
+  render() {
+    return html`
+    <body>
+      ${this.navTemplate()}
+      
+      ${this.overzichtTemplate()}
+      <br><br><br><br><br>
+      {{Curr page bubbler: ${this._sessionstorecurrpage}
+      ${this._sessionstorecurrpage.toString()} }}
+      <br><br>
+      ${this.footerTemplate()}
+    </body>
+  `
+  }
+
+  navTemplate() {
+    return html`<nav-menu></nav-menu>`;
+  }
+
+  homeTemplate() {
+    return html`<home-page></home-page>`;
+  }
+
+  footerTemplate() {
+    return html`<footer-menu></footer-menu>`;
+  }
+
+  overzichtTemplate() {
+    return html`<overzicht-reizen></overzicht-reizen>`;
+  }
+
+  invoerenTemplate() {
+    return html`<invoeren-reizen></invoeren-reizen>`;
   }
 }
 

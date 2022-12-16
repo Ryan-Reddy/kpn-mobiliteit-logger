@@ -108,23 +108,21 @@ window.onload = function () {
 
   const priveRadio = document.forms["reisInvoerFormulier"].elements["zakelijk-prive"];
 
-  for(radio in priveRadio) {
-    priveRadio[radio].onclick = function() {
+  for (radio in priveRadio) {
+    priveRadio[radio].onclick = function () {
       let alleenZakelijk = document.getElementsByClassName("alleenzakelijk")
       let projectElement = document.getElementById("project")
 
       switch (this.id) {
         case "zakelijk":
-          for(var i = 0; i < alleenZakelijk.length; i++)
-          {
+          for (var i = 0; i < alleenZakelijk.length; i++) {
             alleenZakelijk[i].classList.remove("visibility-hidden");
             console.log(alleenZakelijk[i].className);
           }
 
           break;
         case "prive":
-          for(var i = 0; i < alleenZakelijk.length; i++)
-          {
+          for (var i = 0; i < alleenZakelijk.length; i++) {
             alleenZakelijk[i].classList.add("visibility-hidden");
             alleenZakelijk[i].removeAttribute("required")
 
@@ -138,7 +136,7 @@ window.onload = function () {
     }
   }
 
-  document.querySelector('form.reisInvoerFormulier').addEventListener('submit', function(e) {
+  document.querySelector('form.reisInvoerFormulier').addEventListener('submit', function (e) {
     consoleLogFormData.call(this, e);
   });
 

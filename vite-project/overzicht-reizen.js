@@ -1,4 +1,5 @@
 import {css, html, LitElement} from 'lit'
+
 // import * as Rx from 'rx-dom';
 
 /**
@@ -8,40 +9,12 @@ import {css, html, LitElement} from 'lit'
  * @csspart button - The button
  */
 export class MyElement extends LitElement {
-  connectedCallback() {
-    super.connectedCallback();
-    // TODO insert ajax rsjx json file observer
-    //
-    return fetch('/vervoermiddel-CO2.json')
-      .then (response => response.json())
-      .then ((json) => {
-        this._reizenDummyData = Array.from(json)
-        console.log(this._reizenDummyData)
-      });
-  // }
-  }
   constructor() {
     super()
-
     this.rows = [['Napalm Death', 'Barney Greenway', 1981.25, 'Century Media'], ['Carcass', 'Jeff Walker', '1985', 'Earache'], ['Extreme Noise Terror', 'Dean Jones', '1985', 'Candlelight'], ['Discordance Axis', 'Jon Chang', '1992', 'Hydrahead']];
     console.log(this.rows);
-    // TODO: make this work:
-    // this._reizenDummyData = fetch('dummydata-reizen.json')
-    //   .then((response) => response.json())
-    //   .then((json) => json.map(el => Object.values(el)))
-    //   .then((arrayarrays) => {
-    //       const arrayout = []
-    //       for (let i = 0; i < arrayarrays.length; i++) {
-    //         // console.log(arrayarrays[i])
-    //         arrayout.push(arrayarrays[i])
-    //       }
-    //       console.log(arrayarrays)
-    //     // const newArray = Array.isArray(arrayarrays) ? arrayarrays.map(element => element) : [];
-    //     // console.log(newArray);
-    //     // TODO: seems to return an array but no chance of reading it using .map
-    //     })
-    //   .then((newArray) => { return Array.from(newArray) } );
     this._reizenDummyData = [];
+    this._vervoerMiddelDummyData = [];
 
     this.headers = ['Project', 'Type vervoer', 'Begin', 'Einde', 'Km', 'C02', 'Kosten', 'Wijzig'];
     this.titel = 'Overzicht Reizen';
@@ -55,15 +28,11 @@ export class MyElement extends LitElement {
       /** logo */
       kpnLogo: {type: String},
 
-      _reizenContent: {type: String},
-
-      _reizenRegels: {type: String},
+      _vervoerMiddelDummyData: {type: String},
 
       _reizenDummyData: {type: String},
 
-      rows: {type: String},
-      headers: {type: Array},
-      caption: {type: String}
+      rows: {type: String}, headers: {type: Array}, caption: {type: String}
 
     }
   }
@@ -92,6 +61,26 @@ export class MyElement extends LitElement {
     `
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    // TODO insert ajax rsjx json file observer
+    //
+    fetch('/vervoermiddel-CO2.json')
+      .then(response => response.json())
+      .then((json) => {
+        this._vervoerMiddelDummyData = Array.from(json)
+        console.log(this._vervoerMiddelDummyData)
+      });
+    // }
+    fetch('/dummydata-reizen.json')
+      .then(response => response.json())
+      .then((json) => {
+        this._reizenDummyData = Array.from(json)
+        console.log(this._reizenDummyData)
+      });
+    // }
+  }
+
   render() {
     return html`
         <h1 class="header">${this.titel}</h1>
@@ -99,8 +88,7 @@ export class MyElement extends LitElement {
         <body>
         <main>
     <span class="span">
-    
-    
+        
     <table class="full">
     <caption>${this.titel}</caption>
     <thead>
@@ -110,22 +98,26 @@ export class MyElement extends LitElement {
     </tr>
     </thead>
     <tbody>
-    ${this.rows.map((row, index) => html`
-        <tr key=${index}>
-            ${row.map((cell, index) => (html`
-                <td key=${index}>${cell}</td>
-            `))}
+    ${this._reizenDummyData.map((row, index) => html`
+        <tr>
+            <th> 1 ${index.project}</th>
+            <th> 2 ${index.type_vervoer}</th>
+            <th> 3 ${index.begin}</th>
+            <th> 4 ${index.eind}</th>
+            <th> 5 ${index.km}</th>
+            <th> 6 ${index.uitstoot}</th>
+            <th> 7 ${index.kosten}</th>
         </tr>
     `)}
     </tbody>
     </table>
-        
+                
         <h2>Uitstoot uit json: </h2>
         <ul>
-          ${this._reizenDummyData.map(i => html`<li>${i.naam} ${i.uitstoot}</li>`)}
-        </ul>           
-        ${this._reizenDummyData}
-        
+          ${this._reizenDummyData.map(i => html`
+              <li>${i.project} | ${i.type_vervoer} | ${i.begin} | ${i.eind} | ${i.km} | ${i.uitstoot} | ${i.kosten}
+              </li>`)}
+        </ul>
         </span>
             <button>Exporteren als..</button>
             <button>Print...</button>

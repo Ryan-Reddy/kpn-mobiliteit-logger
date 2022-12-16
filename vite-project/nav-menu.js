@@ -8,20 +8,10 @@ import {CompiledTemplates} from './compiled-templates.js'
  * @csspart button - The button
  */
 export class MyElement extends LitElement {
-  script() {
-    let script = document.createElement('script');
-    script.onload = this.onLoad.bind(this);
-    script.src = 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js';
-    return script;
-  }
-  onLoad() {
-    alert('loaded');
-  }
-
   constructor() {
     super()
     this.naamGebruiker = "Hans Fumphried";
-    this.kpnLogo = "./resources/branding/kpn-logo2-jpeg.jpg"
+    this.kpnLogo = "./branding/kpn-logo2-jpeg.jpg"
   }
 
   static get properties() {
@@ -32,55 +22,6 @@ export class MyElement extends LitElement {
       kpnLogo: {type: String},
     }
   }
-
-  render() {
-        // TODO create response menu with: https://www.codingnepalweb.com/responsive-dropdown-menu-bar-html-css/
-    return html`
-        <body id="bodyofmenubar">
-        <a href="#" class="ingelogd_als">ingelogd als ${this.naamGebruiker}</a>
-        <div class="entire_menu_bar">
-            <img href="#" src="${this.kpnLogo}" alt="kpn-logo-zwart-op-wit" class="nav-logo">
-            <nav>
-                <input type="checkbox" id="check">
-                <label for="check">
-                    <i class="fas fa-bars"></i>
-                </label>
-                    <ul>
-                        <li> <a class="nav-button" href="#" @click=${this._dispatchPageLink} id='<home-page></home-page>'>Home</a></li>
-                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Reis Registreren'>Reis Registreren</a></li>
-                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Reisgeschiedenis'>Reisgeschiedenis</a></li>
-                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Account'>Account</a></li>
-                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='footer'>Support</a></li>
-                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Uitloggen'>Uitloggen</a></li>
-                    </ul>
-            </nav>
-        </div>
-                        ${this._currentPage}
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
-        </body>
-    `
-  }
-
-  _dispatchPageLink(e) {
-    console.log('_dispatchPageLink()')
-    console.log('id= ' + e.target.id)
-
-    // TODO; change to proper attribute usage either bubbling or otherwise
-    localStorage.setItem('currentpagesessionstorage', e.target.id)
-    localStorage.getItem("currentpagesessionstorage")
-    }
-
-    // const name = this.name;
-    // console.log(name)
-    // if (name) {
-    //   const options = {
-    //     detail: {name},
-    //     bubbles: true,
-    //     composed: true,
-    //   };
-    //   this.dispatchEvent(new CustomEvent('mydispatchpagelink', options));
-
 
   static get styles() {
     return css`
@@ -209,6 +150,65 @@ export class MyElement extends LitElement {
     left: 0;
     }
     `
+  }
+
+  script() {
+    let script = document.createElement('script');
+    script.onload = this.onLoad.bind(this);
+    script.src = 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js';
+    return script;
+  }
+
+  onLoad() {
+    alert('loaded');
+  }
+
+  render() {
+    // TODO create response menu with: https://www.codingnepalweb.com/responsive-dropdown-menu-bar-html-css/
+    return html`
+        <body id="bodyofmenubar">
+        <a href="#" class="ingelogd_als">ingelogd als ${this.naamGebruiker}</a>
+        <div class="entire_menu_bar">
+            <img href="#" src="${this.kpnLogo}" alt="kpn-logo-zwart-op-wit" class="nav-logo">
+            <nav>
+                <input type="checkbox" id="check">
+                <label for="check">
+                    <i class="fas fa-bars"></i>
+                </label>
+                    <ul>
+                        <li> <a class="nav-button" href="#" @click=${this._dispatchPageLink} id='<home-page></home-page>'>Home</a></li>
+                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Reis Registreren'>Reis Registreren</a></li>
+                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Reisgeschiedenis'>Reisgeschiedenis</a></li>
+                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Account'>Account</a></li>
+                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='footer'>Support</a></li>
+                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Uitloggen'>Uitloggen</a></li>
+                    </ul>
+            </nav>
+        </div>
+                        ${this._currentPage}
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+        </body>
+    `
+  }
+
+  // const name = this.name;
+  // console.log(name)
+  // if (name) {
+  //   const options = {
+  //     detail: {name},
+  //     bubbles: true,
+  //     composed: true,
+  //   };
+  //   this.dispatchEvent(new CustomEvent('mydispatchpagelink', options));
+
+  _dispatchPageLink(e) {
+    console.log('_dispatchPageLink()')
+    console.log('id= ' + e.target.id)
+
+    // TODO; change to proper attribute usage either bubbling or otherwise
+    localStorage.setItem('currentpagesessionstorage', e.target.id)
+    localStorage.getItem("currentpagesessionstorage")
   }
 }
 

@@ -43,7 +43,7 @@ if (ENV === PRODUCTION) {
   // app.use(static(PUBLIC_DIR));
 }
 
-app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.urlencoded({extended: false}));
 app.use(bodyparser.json());
 // const upload = multer();
 

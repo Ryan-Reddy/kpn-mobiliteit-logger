@@ -33,6 +33,30 @@ export class MyElement extends LitElement {
     }
   }
 
+  static get styles() {
+    return css`
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+        }
+        .full { 
+        width: 100%; 
+        }
+
+        table {
+        background: slateblue;
+        }
+
+        form { 
+        margin-top: 5em;
+        }
+
+        
+    `
+  }
+
   render() {
     return html`
         <html>
@@ -171,31 +195,6 @@ export class MyElement extends LitElement {
 
               </body>
               </html>
-    `
-  }
-
-
-  static get styles() {
-    return css`
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        text-decoration: none;
-        }
-        .full { 
-        width: 100%; 
-        }
-
-        table {
-        background: slateblue;
-        }
-
-        form { 
-        margin-top: 5em;
-        }
-
-        
     `
   }
 }

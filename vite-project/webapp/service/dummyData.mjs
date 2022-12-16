@@ -1,6 +1,6 @@
 const initializeDummyData = () => {
   return {
-    'TICT-V1PROG-20' : {
+    'TICT-V1PROG-20': {
       name: 'Programming',
       ECTS: 5,
       year: 1,
@@ -31,7 +31,7 @@ const initializeDummyData = () => {
       </ul>
       `,
     },
-    'TICT-V1MOD-20' : {
+    'TICT-V1MOD-20': {
       name: 'Modelling',
       ECTS: 5,
       year: 1,
@@ -57,7 +57,7 @@ const initializeDummyData = () => {
         modelleren is het belangrijk om de syntax en semantiek van een model goed te kennen en te kunnen toepassen.</p>
       `,
     },
-    'TICT-V1PROJA-20' : {
+    'TICT-V1PROJA-20': {
       name: 'Project blok A',
       ECTS: 5,
       year: 1,
@@ -71,7 +71,7 @@ const initializeDummyData = () => {
         kennis en daar op vaardigheden ontwikkelen.</p>
       `,
     },
-    'TICT-V1OICT-20' : {
+    'TICT-V1OICT-20': {
       name: 'Oriëntatie op ICT',
       ECTS: 10,
       year: 1,
@@ -91,7 +91,7 @@ const initializeDummyData = () => {
         </ul>
       `,
     },
-    'TICT-V1PROJB-20' : {
+    'TICT-V1PROJB-20': {
       name: 'Project blok B',
       ECTS: 5,
       year: 1,
@@ -104,7 +104,7 @@ const initializeDummyData = () => {
         persoonlijke vaardigheden, zoals initiatief en verantwoordelijkheid nemen.</p>
       `,
     },
-    'TCIF-V1OOP-19' : {
+    'TCIF-V1OOP-19': {
       name: 'OO Programming 1',
       ECTS: 5,
       year: 1,
@@ -134,7 +134,7 @@ const initializeDummyData = () => {
       </ul>
       `,
     },
-    'TCIF-V1OOAD1-19' : {
+    'TCIF-V1OOAD1-19': {
       name: 'OO Analysis & Design 1',
       ECTS: 5,
       year: 1,
@@ -159,7 +159,7 @@ const initializeDummyData = () => {
         </ul>
       `,
     },
-    'SD Group Project' : {
+    'SD Group Project': {
       name: 'TCIF-V1GP-19',
       ECTS: 5,
       year: 1,

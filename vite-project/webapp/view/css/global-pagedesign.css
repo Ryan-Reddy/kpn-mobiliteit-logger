@@ -47,7 +47,7 @@ h1 {
 
 @counter-style books {
     system: cyclic;
-    symbols: ' \ 📕 '' \ 📙 '' \ 📘 '' \ 📒 ';
+    symbols: ' \ 📕 ' ' \ 📙 ' ' \ 📘 ' ' \ 📒 ';
     suffix: ' ';
 }
 

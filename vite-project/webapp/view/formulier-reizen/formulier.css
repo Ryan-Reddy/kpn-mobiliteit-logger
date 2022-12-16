@@ -38,6 +38,7 @@ fieldset {
     font-size: 0.5em;
     font-color: black
 }
+
 #vervoerstype {
     background-color: #00C300;
 }
@@ -72,8 +73,8 @@ table {
 
 .visibility-hidden {
     /*visibility: hidden;*/
-    pointer-events:none;
+    pointer-events: none;
     color: lightgrey;
     foreground-color: grey;
-    required : invalid;
+    required: invalid;
 }

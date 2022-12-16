@@ -1,5 +1,5 @@
 console.log('loading login.js');
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
 
 /** Authenticatie vanuit firebase */
 const auth = getAuth();
@@ -14,7 +14,6 @@ createUserWithEmailAndPassword(auth, email, password)
     const errorMessage = error.message;
     // ..
   });
-
 
 
 window.onload = function () {
@@ -34,6 +33,7 @@ window.onload = function () {
     }
   });
 }
+
 /** Login
  * gebruikt informatie van het formulier
  * slaat bij succes de JWToken op in de sessionstorage client side.

@@ -8,6 +8,12 @@ import {css, html, LitElement} from 'lit'
  */
 export class MyElement extends LitElement {
 
+  constructor() {
+    super()
+    this.naamGebruiker = 'Hans Fumphried'
+    this.count = 0
+  }
+
   static get properties() {
     return {
       /**
@@ -20,38 +26,6 @@ export class MyElement extends LitElement {
        */
       count: {type: Number},
     }
-  }
-
-  constructor() {
-    super()
-    this.naamGebruiker = 'Hans Fumphried'
-    this.count = 0
-  }
-
-  render() {
-
-    return html`
-        <footer>
-            <li>
-                <label for="loginButton" hidden>Log in</label>
-                <input id="loginButton" onclick="window.open('/v2fe-v2a-2/src/main/webapp/login','_self')" type="button"
-                       value="Log in">
-            </li>
-
-
-            <button @click=${e => console.log('clicked')}>Click Me</button>
-            
-            <li>
-                <label for="logoutButton" hidden>Log out</label>
-                <input id="logoutButton" onclick="window.open('/v2fe-v2a-2/src/main/webapp/logout','_self')"
-                       type="button" value="Log out">
-            </li>
-        </footer>
-    `
-  }
-
-  _onClick() {
-    this.count++
   }
 
   static get styles() {
@@ -95,6 +69,32 @@ export class MyElement extends LitElement {
     }
     li {        list-style: none;    }
     `
+  }
+
+  render() {
+
+    return html`
+        <footer>
+            <li>
+                <label for="loginButton" hidden>Log in</label>
+                <input id="loginButton" onclick="window.open('/v2fe-v2a-2/src/main/webapp/login','_self')" type="button"
+                       value="Log in">
+            </li>
+
+
+            <button @click=${e => console.log('clicked')}>Click Me</button>
+            
+            <li>
+                <label for="logoutButton" hidden>Log out</label>
+                <input id="logoutButton" onclick="window.open('/v2fe-v2a-2/src/main/webapp/logout','_self')"
+                       type="button" value="Log out">
+            </li>
+        </footer>
+    `
+  }
+
+  _onClick() {
+    this.count++
   }
 }
 
