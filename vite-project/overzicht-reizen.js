@@ -11,6 +11,14 @@ export class MyElement extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     // TODO insert ajax rsjx json file observer
+    //
+    return fetch('/vervoermiddel-CO2.json')
+      .then (response => response.json())
+      .then ((json) => {
+        this._reizenDummyData = Array.from(json)
+        console.log(this._reizenDummyData)
+      });
+  // }
   }
   constructor() {
     super()
@@ -112,10 +120,11 @@ export class MyElement extends LitElement {
     </tbody>
     </table>
         
+        <h2>Uitstoot uit json: </h2>
         <ul>
-          ${this._reizenDummyData.map(i => html`<li>${i}</li>`)}
+          ${this._reizenDummyData.map(i => html`<li>${i.naam} ${i.uitstoot}</li>`)}
         </ul>           
-
+        ${this._reizenDummyData}
         
         </span>
             <button>Exporteren als..</button>
