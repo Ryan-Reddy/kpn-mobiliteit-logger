@@ -83,6 +83,7 @@ export class MyElement extends LitElement {
 
   render() {
     return html`
+        <br>
         <h1 class="header">${this.titel}</h1>
 
         <body>
@@ -100,13 +101,14 @@ export class MyElement extends LitElement {
     <tbody>
     ${this._reizenDummyData.map((row, index) => html`
         <tr>
-            <th> 1 ${index.project}</th>
-            <th> 2 ${index.type_vervoer}</th>
-            <th> 3 ${index.begin}</th>
-            <th> 4 ${index.eind}</th>
-            <th> 5 ${index.km}</th>
-            <th> 6 ${index.uitstoot}</th>
-            <th> 7 ${index.kosten}</th>
+            <th>${row.project}</th>
+            <th>${row.type}</th>
+            <th>${row.begin}</th>
+            <th>${row.eind}</th>
+            <th>${row.km}</th>
+            <th>${row.uitstoot}</th>
+            <th>${row.kosten}</th>
+            <th><a href="#">Wijzig</a></th>
         </tr>
     `)}
     </tbody>

@@ -68,13 +68,15 @@ export class MyElement extends LitElement {
     nav ul {
     float: right;
     margin-right: 8em;
-    
+            padding-right: 0 8em;
+
     }
     
     nav ul li{
     display: inline-block;
     line-height: 8em;
     margin: 0 5px;
+    
     }
     
     nav ul li a{
@@ -101,10 +103,10 @@ export class MyElement extends LitElement {
         object-fit: cover;
         height: 5em;
         opacity: 1;
-        position: fixed;
+        position: absolute;
         right: 2em;
         overflow: hidden;
-        padding: 0 8em;
+        padding: 0 2em;
     }
     
     #check{
@@ -113,7 +115,7 @@ export class MyElement extends LitElement {
     
     @media (max-width: 952px) {
     .nav-logo {
-      height: 30px;
+        height: 3em;
       padding-left: 50px;
       }
       nav ul li a{
