@@ -13,6 +13,21 @@ export class MyElement extends LitElement {
     this.kpnLogo = "./resources/branding/kpn-logo2-jpeg.jpg"
     this._currentPage = 'no page chosen yet';
     this._reizenRegels = '7';
+    // TODO: make this work:
+    this._reizenDummyData = fetch('dummydata-reizen.json')
+      .then((response) => response.json())
+      .then((json) => json.map(el => Object.values(el)))
+      .then((arrayarrays) => console.log(arrayarrays));
+    // this.rows =fetch('dummydata-reizen.json')
+    //   .then((response) => response.json())
+    //   .then((json) => json.map(el=>Object.values(el)))
+    //   .then((arrayarrays) => {return arrayarrays});
+
+    this.rows = [['Napalm Death', 'Barney Greenway', '1981', 'Century Media'], ['Carcass', 'Jeff Walker', '1985', 'Earache'], ['Extreme Noise Terror', 'Dean Jones', '1985', 'Candlelight'], ['Discordance Axis', 'Jon Chang', '1992', 'Hydrahead']];
+
+
+    this.headers = ['Project', 'Type vervoer', 'Begin', 'Einde', 'Km', 'C02', 'Kosten', 'Wijzig'];
+    this.titel = 'Overzicht Reizen';
   }
 
   static get properties() {
@@ -25,77 +40,50 @@ export class MyElement extends LitElement {
 
       _reizenContent: {type: String},
 
-      _reizenRegels: {type: String}
+      _reizenRegels: {type: String},
+
+      _reizenDummyData: {type: String},
+
+      rows: {type: String}, headers: {type: Array}, caption: {type: String}
+
     }
   }
 
   render() {
     return html`
-        <h1 class="header">Overzicht reizen</h1>
+        <h1 class="header">${this.titel}</h1>
 
         <body>
         <main>
     <span class="span">
+    
+    
+    <table class="full">
+    <caption>${this.titel}</caption>
+    <thead>
+    <tr>${this.headers.map((header, index) => html`
+          <th scope="col" key=${index}>${header}</th>
+      `)}
+    </tr>
+    </thead>
+    <tbody>
+    ${this.rows.map((row, index) => html`
+        <tr key=${index}>
+            ${row.map((cell, index) => (html`
+                <td key=${index}>${cell}</td>
+            `))}
+        </tr>
+    `)}
+    </tbody>
+    </table>
         
-        <div style="overflow: auto">
-          <table class="full">
-            <tr>
-              <th>Project</th>
-              <th>Type vervoer</th>
-              <th>Begin</th>
-              <th>Einde</th>
-              <th>Km</th>
-              <th>C02</th>
-              <th>Kosten</th>
-              <th hidden>Wijzig</th>
-            </tr>
-            <tr>
-              <td>null 1</td>
-              <td>null 2</td>
-              <td>null 3</td>
-              <td>null 1</td>
-              <td>null 2</td>
-              <td>null 3</td>
-              <td>null 1</td>
-              <td><a href="#">Wijzig</a></td>
-            </tr>
-            <tr>
-              <td>null 1</td>
-              <td>null 2</td>
-              <td>null 3</td>
-              <td>null 1</td>
-              <td>null 2</td>
-              <td>null 3</td>
-              <td>null 1</td>
-              <td><a href="#">Wijzig</a></td>
-            </tr>
-            <tr>
-              <td>null 1</td>
-              <td>null 2</td>
-              <td>null 3</td>
-              <td>null 1</td>
-              <td>null 2</td>
-              <td>null 3</td>
-              <td>null 1</td>
-              <td><a href="#">Wijzig</a></td>
-            </tr>
-            <tr>
-              <td>null 1</td>
-              <td>null 2</td>
-              <td>null 3</td>
-              <td>null 1</td>
-              <td>null 2</td>
-              <td>null 3</td>
-              <td>null 1</td>
-              <td><a href="#">Wijzig</a></td>
-            </tr>
-          </table>        
-        </div>
+        
+        
         </span>
             <button>Exporteren als..</button>
             <button>Print...</button>
-            
-            
+
+
         </main>
 
 
@@ -115,6 +103,7 @@ export class MyElement extends LitElement {
         }
         .full { 
         width: 100%; 
+        overflow: auto
         }
         
         main { 
