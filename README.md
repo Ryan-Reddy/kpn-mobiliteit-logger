@@ -101,7 +101,8 @@ o888o  o888o     .8'     `Y888""8o o888o o888o      o888o  o888o `Y8bod8P' `Y8bo
                                 1. npm install firebase
                                 2. Initialize your Firebase project. Run the following command from the root of your local app directory:
                                     firebase init
-                                3. XXXXXXXXXX
+                                3.  .1 npm i lit
+                                3   .2 npm run dev
                                 4. XXXXXXXXXX
 
 

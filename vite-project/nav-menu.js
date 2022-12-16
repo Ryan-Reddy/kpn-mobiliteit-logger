@@ -8,6 +8,16 @@ import {CompiledTemplates} from './compiled-templates.js'
  * @csspart button - The button
  */
 export class MyElement extends LitElement {
+  script() {
+    let script = document.createElement('script');
+    script.onload = this.onLoad.bind(this);
+    script.src = 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js';
+    return script;
+  }
+  onLoad() {
+    alert('loaded');
+  }
+
   constructor() {
     super()
     this.naamGebruiker = "Hans Fumphried";
@@ -31,17 +41,23 @@ export class MyElement extends LitElement {
         <div class="entire_menu_bar">
             <img href="#" src="${this.kpnLogo}" alt="kpn-logo-zwart-op-wit" class="nav-logo">
             <nav>
+                <input type="checkbox" id="check">
+                <label for="check">
+                    <i class="fas fa-bars"></i>
+                </label>
                     <ul>
-                         <li> <a class="nav-button" href="#" @click=${this._dispatchPageLink} id='<home-page></home-page>'>Home</a></li>
-                        |<li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Reis Registreren'>Reis Registreren</a></li>
-                        |<li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Reisgeschiedenis'>Reisgeschiedenis</a></li>
-                        |<li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Account'>Account</a></li>
-                        |<li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='footer'>Support</a></li>
-                        |<li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Uitloggen'>Uitloggen</a></li>
+                        <li> <a class="nav-button" href="#" @click=${this._dispatchPageLink} id='<home-page></home-page>'>Home</a></li>
+                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Reis Registreren'>Reis Registreren</a></li>
+                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Reisgeschiedenis'>Reisgeschiedenis</a></li>
+                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Account'>Account</a></li>
+                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='footer'>Support</a></li>
+                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Uitloggen'>Uitloggen</a></li>
                     </ul>
             </nav>
         </div>
                         ${this._currentPage}
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
         </body>
     `
   }
@@ -53,6 +69,8 @@ export class MyElement extends LitElement {
     // TODO; change to proper attribute usage either bubbling or otherwise
     localStorage.setItem('currentpagesessionstorage', e.target.id)
     localStorage.getItem("currentpagesessionstorage")
+    }
+
     // const name = this.name;
     // console.log(name)
     // if (name) {
@@ -62,8 +80,6 @@ export class MyElement extends LitElement {
     //     composed: true,
     //   };
     //   this.dispatchEvent(new CustomEvent('mydispatchpagelink', options));
-    }
-
 
 
   static get styles() {
@@ -73,20 +89,18 @@ export class MyElement extends LitElement {
         padding: 0;
         box-sizing: border-box;
         text-decoration: none;
-        
     }
     
     body {
         font-size: 14px;
         font-family: Montserrat;
-                color: white;
+        color: white;
         font-size: 1em;
         opacity: 1;
 
     }
     
     .entire_menu_bar {
-        // width: 1w;
         height: 8em;
         border: 1px solid black;
         background-color: #151617;
@@ -119,13 +133,15 @@ export class MyElement extends LitElement {
     nav ul li{
     display: inline-block;
     line-height: 8em;
-    margin: 0 1em;
+    margin: 0 5px;
     }
     
     nav ul li a{
     color: white;
-    border-radius: 3px
+    border-radius: 3px;
     text-transform: uppercase;
+    padding: 5px;
+   
     }
     
     a.active, a:hover {
@@ -145,11 +161,11 @@ export class MyElement extends LitElement {
         height: 5em;
         opacity: 1;
         position: fixed;
-        // top: 7px;
         right: 2em;
         overflow: hidden;
         padding: 0 8em;
     }
+    
     #check{
     display: none;
     }
@@ -192,10 +208,6 @@ export class MyElement extends LitElement {
     #check:checked ~ul{
     left: 0;
     }
-    
-    
-    }
-
     `
   }
 }

@@ -1,0 +1,21 @@
+{
+  "name": "vite-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist/my-element.es.js",
+  "exports": {
+    ".": "./dist/my-element.es.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "lit": "^2.5.0",
+    "rx-dom": "^7.0.3",
+    "rxjs": "^7.8.0"
+  },
+  "devDependencies": {
+    "vite": "^4.0.0"
+  }
+}

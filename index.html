@@ -1,28 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
     <meta charset="UTF-8"/>
-    <!--    <link href="/style-index.css" rel="stylesheet"/>-->
-    <link href="/branding/KPN.F.D.png" rel="icon" sizes="16x16" type="image/png"/>
-
-    <title>redirect to html page</title>
-    <!--    <script src="/js/themeManager.js" type="text/javascript"></script>-->
+    <link href="/vite.svg" rel="icon" type="image/svg+xml"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>KPN</title>
+    <link href="src/index.css" rel="stylesheet"/>
+    <script src="src/compiled-templates.js" type="module"></script>
 
 </head>
-<body>
-/** Deze pagina refereert de gebruiker door naar de homepage*/
 
-Als dit niet gebeurt, sta popups op dit domein toe.
+<main>
 
-<script type="text/javascript">
-  console.log('opening webapp/index.html')
-  document.addEventListener("open", openFunction());
+  <compiled-templates>  </compiled-templates>
 
-  function openFunction() {
-    window.open(`src/main/webapp/view/home/`, '_self'); // this one works for github.io PAGES
-  }
-</script>
-</body>
+
+</main>
+
 </html>
