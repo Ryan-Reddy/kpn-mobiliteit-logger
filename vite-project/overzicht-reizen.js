@@ -58,6 +58,13 @@ export class MyElement extends LitElement {
         table {
         background: slateblue;
         }
+        
+    
+    @media (max-width: 858px) {
+    .hiddensmolscreen {
+      display: none;
+    }
+        
     `
   }
 
@@ -93,21 +100,30 @@ export class MyElement extends LitElement {
     <table class="full">
     <caption>${this.titel}</caption>
     <thead>
-    <tr>${this.headers.map((header, index) => html`
-        <th scope="col" key=${index}>${header}</th>
-    `)}
+    <tr>
+        <th class="hiddensmolscreen">${this.headers[0]}</th>
+        <th>${this.headers[1]}</th>
+        <th>${this.headers[2]}</th>
+        <th class="hiddensmolscreen">${this.headers[3]}</th>
+        <th>${this.headers[4]}</th>
+        <th>${this.headers[5]}</th>
+        <th class="hiddensmolscreen">${this.headers[6]}</th>
+        <th>${this.headers[7]}</th>
+        <th class="hiddensmolscreen"></th>
+                
     </tr>
+
     </thead>
     <tbody>
     ${this._reizenDummyData.map((row, index) => html`
         <tr>
-            <th>${row.project}</th>
+            <th class="hiddensmolscreen">${row.project}</th>
             <th>${row.type}</th>
             <th>${row.begin}</th>
-            <th>${row.eind}</th>
+            <th class="hiddensmolscreen">${row.eind}</th>
             <th>${row.km}</th>
             <th>${row.uitstoot}</th>
-            <th>${row.kosten}</th>
+            <th class="hiddensmolscreen">${row.kosten}</th>
             <th><a href="#">Wijzig</a></th>
         </tr>
     `)}
