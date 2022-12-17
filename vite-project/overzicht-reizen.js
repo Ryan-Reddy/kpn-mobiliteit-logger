@@ -44,21 +44,33 @@ export class MyElement extends LitElement {
         padding: 0;
         box-sizing: border-box;
         text-decoration: none;
+        
         }
         .full { 
         width: 100%; 
+        height: 100%; 
         overflow: auto
         }
         
-        main { 
-        margin-top: 10em;
-        margin-bottom: 10em;
+        main {       
+        }
+        .tablecontainer {
+          height: 60vh;
+          overflow: auto
         }
        
         table {
         background: slateblue;
+        max-height: 100%;
         }
-        
+          th {
+          padding: .6em;
+          border-bottom: 1px dotted #ddd;
+          border-collapse: collapse;
+
+        }
+        tr:hover {background-color: coral;}
+
     
     @media (max-width: 858px) {
     .hiddensmolscreen {
@@ -97,6 +109,7 @@ export class MyElement extends LitElement {
         <main>
     <span class="span">
         
+        <div class="tablecontainer">
     <table class="full">
     <caption>${this.titel}</caption>
     <thead>
@@ -106,7 +119,7 @@ export class MyElement extends LitElement {
         <th>${this.headers[2]}</th>
         <th class="hiddensmolscreen">${this.headers[3]}</th>
         <th>${this.headers[4]}</th>
-        <th>${this.headers[5]}</th>
+        <th class="hiddensmolscreen">${this.headers[5]}</th>
         <th class="hiddensmolscreen">${this.headers[6]}</th>
         <th>${this.headers[7]}</th>
         <th class="hiddensmolscreen"></th>
@@ -122,7 +135,7 @@ export class MyElement extends LitElement {
             <th>${row.begin}</th>
             <th class="hiddensmolscreen">${row.eind}</th>
             <th>${row.km}</th>
-            <th>${row.uitstoot}</th>
+            <th class="hiddensmolscreen">${row.uitstoot}</th>
             <th class="hiddensmolscreen">${row.kosten}</th>
             <th><a href="#">Wijzig</a></th>
         </tr>
@@ -130,12 +143,7 @@ export class MyElement extends LitElement {
     </tbody>
     </table>
                 
-        <h2>Uitstoot uit json: </h2>
-        <ul>
-          ${this._reizenDummyData.map(i => html`
-              <li>${i.project} | ${i.type_vervoer} | ${i.begin} | ${i.eind} | ${i.km} | ${i.uitstoot} | ${i.kosten}
-              </li>`)}
-        </ul>
+        </div>
         </span>
             <button>Exporteren als..</button>
             <button>Print...</button>
