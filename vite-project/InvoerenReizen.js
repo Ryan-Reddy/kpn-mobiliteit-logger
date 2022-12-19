@@ -6,7 +6,7 @@ import {css, html, LitElement} from 'lit'
  * @slot - This element has a slot
  * @csspart button - The button
  */
-export class MyElement extends LitElement {
+export class InvoerenReizen extends LitElement {
   constructor() {
     super()
     this.naamGebruiker = "Hans Fumphried";
@@ -35,6 +35,8 @@ export class MyElement extends LitElement {
 
     this.demovalue = "111 - Demowaarde";
     this.demolocatie = "Amsterdam - Demowaarde";
+
+
 
   }
 
@@ -313,7 +315,10 @@ export class MyElement extends LitElement {
                 <div id="buttonsUnderFormDiv">
                 <label for="verzendReis" hidden">Verzend</label>
                 <input class="verzendReis" id="verzendReis" type="submit" value="verzendReis">
-
+                    
+                <label for="zenden" hidden">Zenden(custom)</label>
+                    <button id="zenden" @click=${this.getFormElements}>Zenden(custom)</button>
+                    
                 <label for="resetButton">Herlaad en leeg het formulier.</label>
                 <input id="resetButton" type="reset" value="Reset velden">
 
@@ -372,10 +377,18 @@ export class MyElement extends LitElement {
     }
   };
 
-  get _divs() {
-    return this.renderRoot?.querySelector('.inputfield') ?? null;
+  init() {
+    const el = this.shadowRoot.querySelector('.inputfield');
+    console.log('I hope el is not null:', el)
+  }
+
+  // get
+  getFormElements() {
+    console.log("_divs")
+    // console.log(this.shadowRoot.querySelector('.inputfield') ?? null);
+    return this.InvoerenReizen.querySelector('.inputfield') ?? null;
   }
 
 }
 
-window.customElements.define('invoeren-reizen', MyElement)
+window.customElements.define('invoeren-reizen', InvoerenReizen)

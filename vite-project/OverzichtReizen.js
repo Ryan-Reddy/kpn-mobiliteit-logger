@@ -8,7 +8,7 @@ import {css, html, LitElement} from 'lit'
  * @slot - This element has a slot
  * @csspart button - The button
  */
-export class MyElement extends LitElement {
+export class OverzichtReizen extends LitElement {
   constructor() {
     super()
     this.rows = [['Napalm Death', 'Barney Greenway', 1981.25, 'Century Media'], ['Carcass', 'Jeff Walker', '1985', 'Earache'], ['Extreme Noise Terror', 'Dean Jones', '1985', 'Candlelight'], ['Discordance Axis', 'Jon Chang', '1992', 'Hydrahead']];
@@ -203,4 +203,4 @@ export class MyElement extends LitElement {
   }
 }
 
-window.customElements.define('overzicht-reizen', MyElement)
+window.customElements.define('overzicht-reizen', OverzichtReizen)
