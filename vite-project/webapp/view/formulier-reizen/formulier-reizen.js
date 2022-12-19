@@ -78,7 +78,6 @@ window.onload = function () {
   now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); // voegt auto 1 uur toe
   document.getElementById('eindTijd').value = now.toISOString().slice(0, -1);
 
-
   const priveRadio = document.forms["reisInvoerFormulier"].elements["zakelijk-prive"];
 
   for (radio in priveRadio) {

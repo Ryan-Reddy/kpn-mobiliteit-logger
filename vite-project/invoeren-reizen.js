@@ -22,8 +22,12 @@ export class MyElement extends LitElement {
       nuTijd: {type: Date},
       nuTijdPlus1: {type: Date},
 
+      eindTijdMin: {type: Date},
+      eindTijdMax: {type: Date},
+
     }
   }
+
 
   constructor() {
     super()
@@ -32,18 +36,20 @@ export class MyElement extends LitElement {
     this._currentPage = 'no page chosen yet';
     this._reizenRegels = '7';
 
-    var now = new Date();
+    let now = new Date();
     now.setMinutes(now.getMinutes() -now.getTimezoneOffset());
     now.setMilliseconds(null)
     now.setSeconds(null)
-
     this.nuTijd = now.toISOString().slice(0, -1);
 
-    var now1 = new Date();
+    let now1 = new Date();
     now1.setMinutes(now.getMinutes() -now.getTimezoneOffset()+60);
     now1.setMilliseconds(null)
     now1.setSeconds(null)
     this.nuTijdPlus1 = now1.toISOString().slice(0, -1);
+
+    this.eindTijdMin = this.nuTijd;
+    this.beginTijdMax = this.nuTijd;
 
   }
 
@@ -85,7 +91,8 @@ export class MyElement extends LitElement {
                 <ol>
                     <li>
                         <label for="vervoerstype">typeVervoer:</label>
-                        <select class="inputfield" id="vervoerstype" name="vervoerstype" required focus>
+                        <select class="inputfield" id="vervoerstype" name="vervoerstype" required focus
+                        @click="${this.optionClicked}">
                             <option disabled hidden selected value="0">Start: kies hier uw vervoerstype!</option>
                             <option value="Trein/Metro/Tram">"Trein/Metro/Tram"</option>
                             <option value="Fiets">"Fiets"</option>
@@ -116,12 +123,16 @@ export class MyElement extends LitElement {
                     </li>
                     <li>
                         <label for="beginTijd">Begin tijd:</label>
-                        <input class="inputfield" id="beginTijd" name="beginTijd" required value="${this.nuTijd}"
-                               type="datetime-local"/>
+                        <input @input=inputCallback class="inputfield" id="beginTijd" name="beginTijd" required 
+                               value="${this.nuTijd}"
+                               max="${this.beginTijdMax}"
+                               type="datetime-local"
+                        />
                     </li>
                     <li>
                         <label for="eindTijd">Eind tijd:</label>
-                        <input class="inputfield" id="eindTijd" min="beginTijd" required value="${this.nuTijdPlus1}"
+                        <input class="inputfield" id="eindTijd"  required value="${this.nuTijdPlus1}"
+                               min="${this.eindTijdMin}"
                                type="datetime-local"/>
                     </li>
                     <li required>
@@ -185,7 +196,7 @@ export class MyElement extends LitElement {
                 </div>
                 <hr/>
                 <label for="verzendReis" hidden>Verzend</label>
-                <input class="verzendReis" id="verzendReis" type="submit" value="verzendReis" onclick="${this.consoleLogFormData}">
+                <input class="verzendReis" id="verzendReis" type="submit" value="verzendReis" onselect="${this.consoleLogFormData}">
 
                 <label for="resetButton" hidden>Herlaad en leeg het formulier.</label>
                 <input id="resetButton" type="reset" value="Reset velden">
@@ -194,7 +205,9 @@ export class MyElement extends LitElement {
                 <input id="herhalendeReisButton" type="checkbox" value="Reset velden" disabled> Sla op als herhalende
                 reis. [under-construction]
             </form>
-            <span id="feedbackSpan"></span>
+            <span id="feedbackSpan">
+                  ${this.span_message}
+            </span>
         </main>
         </body>
         </html>
@@ -210,23 +223,18 @@ export class MyElement extends LitElement {
     const obj = JSON.parse(json);
     console.log(obj);
     console.log(obj.vervoerstype + ' over ' + obj.km + 'km');
-  }
+  };
 
   toggleVisibility(id) {
     var gottenElement = document.getElementById(id); // get a reference to p and cache it
     gottenElement.classList.toggle('hideP'); // toggle the hideP class
-  }
+  };
 
-  optionClicked() {
-    let vervoerskeus = document.getElementById("vervoerstype").value;
-    console.log(vervoerskeus)
-
-    var div = document.getElementById("div");
-    switch (vervoerskeus) {
-      default:
-        console.log('oheyaaah')
-    }
-  }
+  optionClicked(value) {
+    console.log('optionClicked')
+    console.log(value.originalTarget.value);
+    console.log(value.originalTarget.naam);
+  };
 }
 
 window.customElements.define('invoeren-reizen', MyElement)
