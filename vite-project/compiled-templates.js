@@ -3,8 +3,8 @@ import {LitElement, css, html} from 'lit'
 import './footer-menu.js';
 import './home-page-test.js';
 import './nav-menu.js';
-import './OverzichtReizen.js';
-import './InvoerenReizen.js';
+import './overzicht-reizen.js';
+import './invoeren-reizen.js';
 
 /**
  * An example element.
@@ -24,8 +24,11 @@ export class CompiledTemplates extends LitElement {
       /**
        * De huidige pagina die getoond wordt
        */
-      _sessionstorecurrpage: {type: Element}
+      _sessionstorecurrpage: {type: Element},
+
+      _currentPage: {type: String},
     }
+
   }
 
   static get styles() {
@@ -53,7 +56,11 @@ export class CompiledTemplates extends LitElement {
     this.requestUpdate();
   }
 
-  _pageChange = () => {
+  _setPageChange = (event) => {
+    console.log('_setPageChange')
+    const target = event.target;// as InvoerenReizen;
+    this._currentPage = target.currentPage;
+
     this._sessionstorecurrpage = localStorage.getItem("currentpagesessionstorage")
   }
 
@@ -65,7 +72,10 @@ export class CompiledTemplates extends LitElement {
       ${this.invoerenTemplate()}
       <br><br><br><br><br>
       {Curr page bubbler: ${this._sessionstorecurrpage}
-      <br><br>
+      <br>
+      {Curr page bubbler: ${this._currentPage}
+      <br>
+      
       ${this.footerTemplate()}
     </body>
   `
@@ -88,7 +98,9 @@ export class CompiledTemplates extends LitElement {
   }
 
   invoerenTemplate() {
-    return html`<invoeren-reizen></invoeren-reizen>`;
+    return html`<invoeren-reizen id='invoeren-reizen'></invoeren-reizen>`;
   }
+
+
 }
 window.customElements.define('compiled-templates', CompiledTemplates)

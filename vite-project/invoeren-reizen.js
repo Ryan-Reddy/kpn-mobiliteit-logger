@@ -9,17 +9,13 @@ import {css, html, LitElement} from 'lit'
 export class InvoerenReizen extends LitElement {
   constructor() {
     super()
-    this.naamGebruiker = "Hans Fumphried";
-    this.kpnLogo = "./resources/branding/kpn-logo2-jpeg.jpg"
-    this._currentPage = 'no page chosen yet';
-    this._reizenRegels = '7';
+    this.currentPage = 'invoeren-reizen';
 
     let now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
     now.setMilliseconds(null)
     now.setSeconds(null)
     this.nuTijd = now.toISOString().slice(0, -1);
-
     let now1 = new Date();
     now1.setMinutes(now.getMinutes() - now.getTimezoneOffset() + 60);
     now1.setMilliseconds(null)
@@ -27,6 +23,7 @@ export class InvoerenReizen extends LitElement {
     this.nuTijdPlus1 = now1.toISOString().slice(0, -1);
     this.eindTijdMin = this.nuTijd;
     this.beginTijdMax = this.nuTijd;
+
     this.hidden = 'true';
     this.span_message = '';
 
@@ -36,12 +33,17 @@ export class InvoerenReizen extends LitElement {
     this.demovalue = "111 - Demowaarde";
     this.demolocatie = "Amsterdam - Demowaarde";
 
+    this.inputfield = "inputfield";
 
 
+
+    this.pageNameBubbler();
   }
 
   static get properties() {
     return {
+      currentPage: {type:String},
+
       /** ingelogde gebruiker */
       naamGebruiker: {type: String},
 
@@ -61,10 +63,13 @@ export class InvoerenReizen extends LitElement {
       hidden: {type: String},
 
       span_message: {type: String},
+
       visibility_hidden_reisklasse: {type: String},
       visibility_hidden_zakelijkprive: {type: String},
+
       demovalue: {type: String},
       demolocatie: {type: String},
+      inputfield: {type: String},
     }
   }
 
@@ -186,11 +191,10 @@ export class InvoerenReizen extends LitElement {
                     <div id="typeVervoerDiv">
                         <li>
                             <label for="vervoerstype">typeVervoer:</label>
-                            <select class="inputfield" id="vervoerstype" name="vervoerstype" required focus
+                            <select class="${this.inputfield}" id="vervoerstype" name="vervoerstype" required focus
                                     @change="${this.optionClicked}">
-                                <option disabled hidden="${this.hidden}" selected value="0">Start: kies hier uw
-                                    vervoerstype!
-                                </option>
+                                <option disabled hidden="${this.hidden}" selected value="0">"kies hier uw
+                                    vervoerstype!" </option>
                                 <option value="Trein/Metro/Tram">"Trein/Metro/Tram"</option>
                                 <option value="Fiets">"Fiets"</option>
                                 <option value="OV Fiets">"OV Fiets"</option>
@@ -212,21 +216,21 @@ export class InvoerenReizen extends LitElement {
                     <div id="vertrekLocatieDiv">
                         <li class="alleenzakelijk" required>
                             <label for="vertrekLocatie">Vertrek locatie:</label>
-                            <input class="inputfield" id="vertrekLocatie" name="vertrekLocatie"
+                            <input class="${this.inputfield}" id="vertrekLocatie" name="vertrekLocatie"
                                    placeholder="Vertrek locatie" value=${this.demolocatie}/>
                         </li>
                     </div>
                     <div id="aankomstLocatieDiv">
                         <li class="alleenzakelijk" required>
                             <label for="aankomstLocatie">Aankomst locatie:</label>
-                            <input class="inputfield" id="aankomstLocatie" name="aankomstLocatie"
+                            <input class="${this.inputfield}" id="aankomstLocatie" name="aankomstLocatie"
                                    placeholder="Aankomst locatie" value=${this.demolocatie}/>
                         </li>
                     </div>
                     <div id="beginTijdDiv">
                         <li>
                             <label for="beginTijd">Begin tijd:</label>
-                            <input @input=inputCallback class="inputfield" id="beginTijd" name="beginTijd" required
+                            <input @input=inputCallback class="${this.inputfield}" id="beginTijd" name="beginTijd" required
                                    value="${this.nuTijd}"
                                    max="${this.beginTijdMax}"
                                    type="datetime-local"
@@ -236,7 +240,7 @@ export class InvoerenReizen extends LitElement {
                     <div id="eindTijdDiv">
                         <li>
                             <label for="eindTijd">Eind tijd:</label>
-                            <input class="inputfield" id="eindTijd" required value="${this.nuTijdPlus1}"
+                            <input class="${this.inputfield}" id="eindTijd" required value="${this.nuTijdPlus1}"
                                    min="${this.eindTijdMin}"
                                    type="datetime-local"/>
                         </li>
@@ -244,21 +248,21 @@ export class InvoerenReizen extends LitElement {
                     <div id="kmDiv">
                         <li required>
                             <label for="km" value="10">km:</label>
-                            <input class="inputfield" id="km" name="km" placeholder="Gereisde km" required type="text"
+                            <input class="${this.inputfield}" id="km" name="km" placeholder="Gereisde km" required type="text"
                                    value="${this.demovalue}"/>
                         </li>
                     </div>
                     <div id="kostenDiv">
                         <li class="alleenzakelijk" required>
                             <label for="kosten">kosten:</label>
-                            <input class="inputfield" id="kosten" name="kosten" placeholder="Kosten in euro's"
+                            <input class="${this.inputfield}" id="kosten" name="kosten" placeholder="Kosten in euro's"
                                    value="${this.demovalue}"/>
                         </li>
                     </div>
                     <div id="projectDiv">
                         <li class="alleenzakelijk" required>
                             <label for="project">Project:</label>
-                            <select class="inputfield" id="project" name="project">
+                            <select class="${this.inputfield}" id="project" name="project">
                                 <option disabled hidden="${this.hidden}" selected value="0">Kies hier het project
                                     waar u
                                     voor hebt gereisd.
@@ -317,7 +321,7 @@ export class InvoerenReizen extends LitElement {
                 <input class="verzendReis" id="verzendReis" type="submit" value="verzendReis">
                     
                 <label for="zenden" hidden">Zenden(custom)</label>
-                    <button id="zenden" @click=${this.getFormElements}>Zenden(custom)</button>
+                    <button id="zenden" @click=${this.formElements}>Zenden(custom)</button>
                     
                 <label for="resetButton">Herlaad en leeg het formulier.</label>
                 <input id="resetButton" type="reset" value="Reset velden">
@@ -377,16 +381,19 @@ export class InvoerenReizen extends LitElement {
     }
   };
 
-  init() {
-    const el = this.shadowRoot.querySelector('.inputfield');
-    console.log('I hope el is not null:', el)
+  pageNameBubbler() {
+    // alert('loaded invoeren-reizen');
+
+    // notify parent:
+
+    this.dispatchEvent(new Event('loaded-page'))
   }
 
   // get
-  getFormElements() {
+  formElements() {
     console.log("_divs")
-    // console.log(this.shadowRoot.querySelector('.inputfield') ?? null);
-    return this.InvoerenReizen.querySelector('.inputfield') ?? null;
+    console.log(document.getElementsByClassName('inputfield') ?? null);
+    return this.querySelector('.inputfield') ?? null;
   }
 
 }

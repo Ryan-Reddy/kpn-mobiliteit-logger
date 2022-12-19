@@ -10,8 +10,9 @@ import {CompiledTemplates} from './compiled-templates.js'
 export class MyElement extends LitElement {
   constructor() {
     super()
-    this.naamGebruiker = "Hans Fumphried";
-    this.kpnLogo = "./branding/kpn-logo2-jpeg.jpg"
+    this.naamGebruiker = "Hans Fumphriehd";
+    this.kpnLogo = "/public/branding/kpn-logo2-jpeg.jpg"
+    this.onLoad();
   }
 
   static get properties() {
@@ -160,9 +161,9 @@ export class MyElement extends LitElement {
     script.src = 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js';
     return script;
   }
-
   onLoad() {
-    alert('loaded');
+    // alert('loaded nav-menu');
+
   }
 
   render() {
