@@ -119,45 +119,6 @@ window.onload = function () {
     consoleLogFormData.call(this, e);
   });
 
-
-  // console.log('loading overzichtReisTypen.js');
-  // dropdownvervoerstype.length = 0;
-  //
-  // let defaultOption = document.createElement('option');
-  // defaultOption.text = 'Kies uw vervoersmiddel';
-  //
-  // dropdownvervoerstype.add(defaultOption);
-  // dropdownvervoerstype.selectedIndex = 0;
-  //
-  // const url = 'http://localhost:63342/oefenrepo-Ryan-Reddy/vervoermiddel-CO2.json\n';
-  //
-  // fetch(url)
-  //   .then(
-  //     function (response) {
-  //       if (response.status !== 200) {
-  //         console.warn('Looks like there was a problem. Status Code: ' +
-  //           response.status);
-  //         return;
-  //       }
-  //
-  //       // Examine the text in the response
-  //       response.json().then(function (data) {
-  //         let option;
-  //
-  //         for (let i = 0; i < data.length; i++) {
-  //           option = document.createElement('option');
-  //           option.text = data[i].naam;
-  //           // option.value = data[i].abbreviation;
-  //           option.value = data[i].naam;
-  //           dropdownvervoerstype.add(option);
-  //         }
-  //       });
-  //     }
-  //   )
-  //   .catch(function (err) {
-  //     console.error('Fetch Error -', err);
-  //   });
-
   function optionClicked() {
     let vervoerskeus = document.getElementById("vervoerstype").value;
     console.log(vervoerskeus)
@@ -168,12 +129,6 @@ window.onload = function () {
         console.log('oheyaaah')
     }
   }
-
-  function toggleVisibility(id) {
-    var gottenElement = document.getElementById(id); // get a reference to p and cache it
-    gottenElement.classList.toggle('hideP'); // toggle the hideP class
-  }
-
 }
 
 /** Deze functie verzend de data

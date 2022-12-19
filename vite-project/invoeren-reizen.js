@@ -27,8 +27,12 @@ export class MyElement extends LitElement {
     this.nuTijdPlus1 = now1.toISOString().slice(0, -1);
     this.eindTijdMin = this.nuTijd;
     this.beginTijdMax = this.nuTijd;
-
     this.hidden = 'true';
+    this.span_message = '';
+
+    this.visibility_hidden_reisklasse = "visibility-hidden";
+    this.visibility_hidden_zakelijkprive = "visibility-hidden";
+
   }
 
   static get properties() {
@@ -47,7 +51,11 @@ export class MyElement extends LitElement {
 
       eindTijdMin: {type: Date}, eindTijdMax: {type: Date},
 
-      hidden: {type: String}
+      hidden: {type: String},
+
+      span_message: {type: String},
+      visibility_hidden_reisklasse: {type: String},
+      visibility_hidden_zakelijkprive: {type: String}
 
     }
   }
@@ -87,7 +95,6 @@ export class MyElement extends LitElement {
             margin-top: 1em;
             padding-left: 1em;
             padding-right: 1em;
-            font-size: 1em;
         }
         
         ul {
@@ -111,7 +118,6 @@ export class MyElement extends LitElement {
         fieldset {
             padding-left: 1em;
             padding-right: 1em;
-            font-size: 0.5em;
             font-color: black
         }
         
@@ -143,10 +149,10 @@ export class MyElement extends LitElement {
         }
         
         .visibility-hidden {
-            /*visibility: hidden;*/
             pointer-events: none;
             color: lightgrey;
             foreground-color: grey;
+            background-color: grey;
             required: invalid;
         }
     `
@@ -170,7 +176,7 @@ export class MyElement extends LitElement {
                     <li>
                         <label for="vervoerstype">typeVervoer:</label>
                         <select class="inputfield" id="vervoerstype" name="vervoerstype" required focus
-                                @click="${this.optionClicked}">
+                                @change="${this.optionClicked}">
                             <option disabled hidden="${this.hidden}" selected value="0">Start: kies hier uw
                                 vervoerstype!
                             </option>
@@ -236,7 +242,7 @@ export class MyElement extends LitElement {
                         </select>
                     </li>
                 </ol>
-                <div id="reisKlasseKeuzeMenu">
+                <div id="reisKlasseKeuzeMenu" class="${this.visibility_hidden_reisklasse}">
                     <fieldset>
                         <ol>
                             <legend>Reisklasse keuze:</legend>
@@ -258,14 +264,16 @@ export class MyElement extends LitElement {
                         </ol>
                     </fieldset>
                 </div>
-                <div id="priveZakelijkKeuzeMenu">
+                <div id="priveZakelijkKeuzeMenu" class="${this.visibility_hidden_zakelijkprive}">
                     <fieldset>
                         <ul>
                             <legend>Prive of zakelijke reis:</legend>
                             <li>
                                 <label for="zakelijk" style="float:left" hidden>Zakelijk</label>
                                 <input id="zakelijk" name="zakelijk-prive"
-                                       type="radio" value="true"/> Zakelijk
+                                       type="radio" value="true"
+                                       @click=""
+                                /> Zakelijk
                             </li>
                             <li>
                                 <label for="prive" style="float:left" hidden></label>
@@ -312,10 +320,45 @@ export class MyElement extends LitElement {
     gottenElement.classList.toggle('hideP'); // toggle the hideP class
   };
 
-  optionClicked(value) {
+  optionClicked(option) {
     console.log('optionClicked')
-    console.log(value.originalTarget.value);
-    console.log(value.originalTarget.naam);
+    const data = option.originalTarget.value;
+    console.log(data);
+    this.span_message = data;
+
+
+    switch (data) {
+      case "Trein/Metro/Tram":
+        this.visibility_hidden_zakelijkprive = "visibility-hidden";
+        this.visibility_hidden_reisklasse = "";
+        break;
+      case "Scooter":
+      case "Elektr Scooter (incl deel scooter)":
+      case "Elektr Deelauto":
+      case "Hybride eigen auto":
+      case "Electr eigen auto":
+      case "Diesel eigen auto":
+      case "Benzine eigen auto":
+      case "eigenAuto":
+      case "deelAuto":
+        console.log("auto gekozen")
+        this.visibility_hidden_zakelijkprive = "";
+        this.visibility_hidden_reisklasse = "visibility-hidden";
+        break;
+      case "Lopen":
+      case "Fiets":
+      case "OV Fiets":
+      case "bus":
+        this.visibility_hidden_zakelijkprive = "visibility-hidden";
+        this.visibility_hidden_reisklasse = "visibility-hidden";
+        break;
+      default: {
+        reisklasseKeuze.setAttribute("hidden", "false")
+        console.log(switchvalue)
+        console.log("Kan de reis type vervoer niet herkennen")
+      }
+        break;
+    }
   };
 }
 
