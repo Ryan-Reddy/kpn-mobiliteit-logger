@@ -93,4 +93,4 @@ export class CompiledTemplates extends LitElement {
   }
 }
 
-window.customElements.define('compiled-templates', CompiledTemplates)
+// window.customElements.define('compiled-templates', CompiledTemplates)

@@ -91,5 +91,4 @@ export class CompiledTemplates extends LitElement {
     return html`<invoeren-reizen></invoeren-reizen>`;
   }
 }
-
 window.customElements.define('compiled-templates', CompiledTemplates)

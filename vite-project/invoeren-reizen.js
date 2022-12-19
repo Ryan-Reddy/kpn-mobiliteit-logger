@@ -33,6 +33,9 @@ export class MyElement extends LitElement {
     this.visibility_hidden_reisklasse = "visibility-hidden";
     this.visibility_hidden_zakelijkprive = "visibility-hidden";
 
+    this.demovalue = "111 - Demowaarde";
+    this.demolocatie = "Amsterdam - Demowaarde";
+
   }
 
   static get properties() {
@@ -47,16 +50,19 @@ export class MyElement extends LitElement {
 
       _reizenRegels: {type: String},
 
-      nuTijd: {type: Date}, nuTijdPlus1: {type: Date},
+      nuTijd: {type: Date},
+      nuTijdPlus1: {type: Date},
 
-      eindTijdMin: {type: Date}, eindTijdMax: {type: Date},
+      eindTijdMin: {type: Date},
+      eindTijdMax: {type: Date},
 
       hidden: {type: String},
 
       span_message: {type: String},
       visibility_hidden_reisklasse: {type: String},
-      visibility_hidden_zakelijkprive: {type: String}
-
+      visibility_hidden_zakelijkprive: {type: String},
+      demovalue: {type: String},
+      demolocatie: {type: String},
     }
   }
 
@@ -159,89 +165,109 @@ export class MyElement extends LitElement {
     `
   }
 
+
   render() {
     return html`
         <html>
         <header>
 
-        <H1>Welkom,</H1>
+            <H1>Welkom,</H1>
             <br>
-        <p>vul hieronder zo nauwkeurig mogelijk uw reis in:</p>
+            <p>vul hieronder zo nauwkeurig mogelijk uw reis in:</p>
         </header>
         <body>
 
         <main>
-            <form class="reisInvoerFormulier" id="reisInvoerFormulier">
+            <form class="formulierReizen" id="formulierReizen">
                 <hr/>
                 <ol>
-                    <li>
-                        <label for="vervoerstype">typeVervoer:</label>
-                        <select class="inputfield" id="vervoerstype" name="vervoerstype" required focus
-                                @change="${this.optionClicked}">
-                            <option disabled hidden="${this.hidden}" selected value="0">Start: kies hier uw
-                                vervoerstype!
-                            </option>
-                            <option value="Trein/Metro/Tram">"Trein/Metro/Tram"</option>
-                            <option value="Fiets">"Fiets"</option>
-                            <option value="OV Fiets">"OV Fiets"</option>
-                            <option value="Scooter">"Scooter"</option>
-                            <option value="bus">"bus"</option>
-                            <option value="Elektr Scooter (incl deel scooter)">"Elektr Scooter (incl deel scooter)"
-                            </option>
-                            <option value="Elektr Deelauto">"Elektr Deelauto"</option>
-                            <option value="Hybride eigen auto">"Hybride eigen auto"</option>
-                            <option value="Electr eigen auto">"Electr eigen auto"</option>
-                            <option value="Diesel eigen auto">"Diesel eigen auto"</option>
-                            <option value="Benzine eigen auto">"Benzine eigen auto"</option>
-                            <option value="Lopen">"Lopen"</option>
-                            <option value="eigenAuto">"eigenAuto"</option>
-                            <option value="deelAuto">"deelAuto"</option>
-                        </select>
-                    </li>
-                    <li class="alleenzakelijk" required>
-                        <label for="vertrekLocatie">Vertrek locatie:</label>
-                        <input class="inputfield" id="vertrekLocatie" name="vertrekLocatie"
-                               placeholder="Vertrek locatie"/>
-                    </li>
-                    <li class="alleenzakelijk" required>
-                        <label for="aankomstLocatie">Aankomst locatie:</label>
-                        <input class="inputfield" id="aankomstLocatie" name="aankomstLocatie"
-                               placeholder="Aankomst locatie"/>
-                    </li>
-                    <li>
-                        <label for="beginTijd">Begin tijd:</label>
-                        <input @input=inputCallback class="inputfield" id="beginTijd" name="beginTijd" required
-                               value="${this.nuTijd}"
-                               max="${this.beginTijdMax}"
-                               type="datetime-local"
-                        />
-                    </li>
-                    <li>
-                        <label for="eindTijd">Eind tijd:</label>
-                        <input class="inputfield" id="eindTijd" required value="${this.nuTijdPlus1}"
-                               min="${this.eindTijdMin}"
-                               type="datetime-local"/>
-                    </li>
-                    <li required>
-                        <label for="km">km:</label>
-                        <input class="inputfield" id="km" name="km" placeholder="Gereisde km" required type="text"/>
-                    </li>
-                    <li class="alleenzakelijk" required>
-                        <label for="kosten">kosten:</label>
-                        <input class="inputfield" id="kosten" name="kosten" placeholder="Kosten in euro's" type="text"/>
-                    </li>
-                    <li class="alleenzakelijk" required>
-                        <label for="project">Project:</label>
-                        <select class="inputfield" id="project" name="project">
-                            <option disabled hidden="${this.hidden}" selected value="0">Kies hier het project waar u
-                                voor hebt gereisd.
-                            </option>
-                            <option value="KPN-glasvezel-aanleg">KPN-glasvezel-aanleg</option>
-                            <option value="KPN-modem-installatie">KPN-modem-installatie</option>
-                            <option value="KPN-modem-reparatie">KPN-modem-reparatie</option>
-                            <option value="Prive">Prive</option>
-                        </select>
-                    </li>
+                    <div id="typeVervoerDiv">
+                        <li>
+                            <label for="vervoerstype">typeVervoer:</label>
+                            <select class="inputfield" id="vervoerstype" name="vervoerstype" required focus
+                                    @change="${this.optionClicked}">
+                                <option disabled hidden="${this.hidden}" selected value="0">Start: kies hier uw
+                                    vervoerstype!
+                                </option>
+                                <option value="Trein/Metro/Tram">"Trein/Metro/Tram"</option>
+                                <option value="Fiets">"Fiets"</option>
+                                <option value="OV Fiets">"OV Fiets"</option>
+                                <option value="Scooter">"Scooter"</option>
+                                <option value="bus">"bus"</option>
+                                <option value="Elektr Scooter (incl deel scooter)">"Elektr Scooter (incl deel scooter)"
+                                </option>
+                                <option value="Elektr Deelauto">"Elektr Deelauto"</option>
+                                <option value="Hybride eigen auto">"Hybride eigen auto"</option>
+                                <option value="Electr eigen auto">"Electr eigen auto"</option>
+                                <option value="Diesel eigen auto">"Diesel eigen auto"</option>
+                                <option value="Benzine eigen auto">"Benzine eigen auto"</option>
+                                <option value="Lopen">"Lopen"</option>
+                                <option value="eigenAuto">"eigenAuto"</option>
+                                <option value="deelAuto">"deelAuto"</option>
+                            </select>
+                        </li>
+                    </div>
+                    <div id="vertrekLocatieDiv">
+                        <li class="alleenzakelijk" required>
+                            <label for="vertrekLocatie">Vertrek locatie:</label>
+                            <input class="inputfield" id="vertrekLocatie" name="vertrekLocatie"
+                                   placeholder="Vertrek locatie" value=${this.demolocatie}/>
+                        </li>
+                    </div>
+                    <div id="aankomstLocatieDiv">
+                        <li class="alleenzakelijk" required>
+                            <label for="aankomstLocatie">Aankomst locatie:</label>
+                            <input class="inputfield" id="aankomstLocatie" name="aankomstLocatie"
+                                   placeholder="Aankomst locatie" value=${this.demolocatie}/>
+                        </li>
+                    </div>
+                    <div id="beginTijdDiv">
+                        <li>
+                            <label for="beginTijd">Begin tijd:</label>
+                            <input @input=inputCallback class="inputfield" id="beginTijd" name="beginTijd" required
+                                   value="${this.nuTijd}"
+                                   max="${this.beginTijdMax}"
+                                   type="datetime-local"
+                            />
+                        </li>
+                    </div>
+                    <div id="eindTijdDiv">
+                        <li>
+                            <label for="eindTijd">Eind tijd:</label>
+                            <input class="inputfield" id="eindTijd" required value="${this.nuTijdPlus1}"
+                                   min="${this.eindTijdMin}"
+                                   type="datetime-local"/>
+                        </li>
+                    </div>
+                    <div id="kmDiv">
+                        <li required>
+                            <label for="km" value="10">km:</label>
+                            <input class="inputfield" id="km" name="km" placeholder="Gereisde km" required type="text"
+                                   value="${this.demovalue}"/>
+                        </li>
+                    </div>
+                    <div id="kostenDiv">
+                        <li class="alleenzakelijk" required>
+                            <label for="kosten">kosten:</label>
+                            <input class="inputfield" id="kosten" name="kosten" placeholder="Kosten in euro's"
+                                   value="${this.demovalue}"/>
+                        </li>
+                    </div>
+                    <div id="projectDiv">
+                        <li class="alleenzakelijk" required>
+                            <label for="project">Project:</label>
+                            <select class="inputfield" id="project" name="project">
+                                <option disabled hidden="${this.hidden}" selected value="0">Kies hier het project
+                                    waar u
+                                    voor hebt gereisd.
+                                </option>
+                                <option value="KPN-glasvezel-aanleg">KPN-glasvezel-aanleg</option>
+                                <option value="KPN-modem-installatie">KPN-modem-installatie</option>
+                                <option value="KPN-modem-reparatie">KPN-modem-reparatie</option>
+                                <option value="Prive">Prive</option>
+                            </select>
+                        </li>
+                    </div>
                 </ol>
                 <div id="reisKlasseKeuzeMenu" class="${this.visibility_hidden_reisklasse}">
                     <fieldset>
@@ -284,17 +310,17 @@ export class MyElement extends LitElement {
                         </ul>
                     </fieldset>
                 </div>
-                <hr/>
-                <label for="verzendReis" hidden="${this.hidden}">Verzend</label>
-                <input class="verzendReis" id="verzendReis" type="submit" value="verzendReis"
-                       onselect="${this.consoleLogFormData}">
+                <div id="buttonsUnderFormDiv">
+                <label for="verzendReis" hidden">Verzend</label>
+                <input class="verzendReis" id="verzendReis" type="submit" value="verzendReis">
 
-                <label for="resetButton" hidden="${this.hidden}">Herlaad en leeg het formulier.</label>
+                <label for="resetButton">Herlaad en leeg het formulier.</label>
                 <input id="resetButton" type="reset" value="Reset velden">
 
-                <label for="herhalendeReisButton" hidden="${this.hidden}">Sla op als herhalende reis.</label>
-                <input id="herhalendeReisButton" type="checkbox" value="Reset velden" disabled> Sla op als herhalende
+                <label for="herhalendeReisButton">Sla op als herhalende reis.</label>
+                <input id="herhalendeReisButton" type="checkbox" value="Reset velden" disabled> Herhalende
                 reis. [under-construction]
+                </div>
             </form>
             <span id="feedbackSpan">
                   ${this.span_message}
@@ -304,22 +330,6 @@ export class MyElement extends LitElement {
         </html>
     `
   }
-
-  consoleLogFormData(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    const object = {};
-    formData.forEach((value, key) => object[key] = value);
-    const json = JSON.stringify(object);
-    const obj = JSON.parse(json);
-    console.log(obj);
-    console.log(obj.vervoerstype + ' over ' + obj.km + 'km');
-  };
-
-  toggleVisibility(id) {
-    var gottenElement = document.getElementById(id); // get a reference to p and cache it
-    gottenElement.classList.toggle('hideP'); // toggle the hideP class
-  };
 
   optionClicked(option) {
     console.log('optionClicked')
@@ -361,6 +371,11 @@ export class MyElement extends LitElement {
         break;
     }
   };
+
+  get _divs() {
+    return this.renderRoot?.querySelector('.inputfield') ?? null;
+  }
+
 }
 
 window.customElements.define('invoeren-reizen', MyElement)
