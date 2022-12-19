@@ -1,38 +1,9 @@
 console.log('loading formulier-reizen.js');
 
-/** Deze functie verzend de data
- */
-// function verzend() {
-//   console.log('advancedSearchButtonClicked()');
-//
-//   const jsonRequestBody = {};
-//   const formData = new FormData(document.querySelector('#reisInvoerFormulier'));
-//   formData.forEach((value, key) => (jsonRequestBody[key] = value));
-//
-//   console.log(jsonRequestBody);
-//
-//   // const fetchOptions = {
-//   //   method: 'POST', body: JSON.stringify(jsonRequestBody), headers: {
-//   //     Authorization: `Bearer ${window.sessionStorage.getItem('JWT')}`,
-//   //     Accept: 'application/json',
-//   //     'Content-Type': 'application/json',
-//   //   },
-// }
 
-function consoleLogFormData(e) {
-  e.preventDefault();
-  const formData = new FormData(this);
-  const object = {};
-  formData.forEach((value, key) => object[key] = value);
-  const json = JSON.stringify(object);
-  const obj = JSON.parse(json);
-  console.log(obj);
-  console.log(obj.vervoerstype + ' over ' + obj.km + 'km');
-}
 
 window.onload = function () {
   let dropdownvervoerstype = document.getElementById('vervoerstype');
-
   const reisklasseKeuze = document.getElementById("reisKlasseKeuzeMenu")
   const priveGebruikKeuze = document.getElementById("priveZakelijkKeuzeMenu")
 
@@ -81,6 +52,7 @@ window.onload = function () {
         break;
     }
   });
+
   // check of waarde beginTijd veranderd
   beginTijd.addEventListener("change", () => {
     let beginTijd = document.getElementById("beginTijd");
@@ -88,6 +60,7 @@ window.onload = function () {
     // set beginTijd.max op eindTijd
     beginTijd.setAttribute("max", eindTijd.value);
   });
+
   // check of waarde eindTijd veranderd
   eindTijd.addEventListener("change", () => {
     let beginTijd = document.getElementById("beginTijd");
@@ -135,6 +108,13 @@ window.onload = function () {
       }
     }
   }
+
+
+  ///////////////////////
+  ///////////////////////
+  /////////////////////// alles hierna is al geimplementeerd in Lit:
+  ///////////////////////
+  ///////////////////////
 
   document.querySelector('form.reisInvoerFormulier').addEventListener('submit', function (e) {
     consoleLogFormData.call(this, e);
@@ -195,4 +175,18 @@ window.onload = function () {
     gottenElement.classList.toggle('hideP'); // toggle the hideP class
   }
 
+}
+
+/** Deze functie verzend de data
+ */
+
+function consoleLogFormData(e) {
+  e.preventDefault();
+  const formData = new FormData(this);
+  const object = {};
+  formData.forEach((value, key) => object[key] = value);
+  const json = JSON.stringify(object);
+  const obj = JSON.parse(json);
+  console.log(obj);
+  console.log(obj.vervoerstype + ' over ' + obj.km + 'km');
 }

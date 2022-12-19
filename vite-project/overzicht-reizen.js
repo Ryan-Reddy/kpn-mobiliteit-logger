@@ -101,6 +101,7 @@ export class MyElement extends LitElement {
   }
 
   //TODO: make tableToCSV work with lit
+  // https://www.geeksforgeeks.org/how-to-export-html-table-to-csv-using-javascript/
   tableToCSV() {
   //   console.log('tableToCSV');
   //   // Variable to store the final csv data
