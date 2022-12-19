@@ -149,6 +149,7 @@ export class MyElement extends LitElement {
         }
         
         .visibility-hidden {
+            display: none;
             pointer-events: none;
             color: lightgrey;
             foreground-color: grey;
