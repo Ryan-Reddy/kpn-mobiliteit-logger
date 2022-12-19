@@ -1,5 +1,10 @@
 import {LitElement, css, html} from 'lit'
-import litLogo from './assets/lit.svg'
+
+import '../footer-menu.js';
+import '../home-page-test.js';
+import '../nav-menu.js';
+import '../overzicht-reizen.js';
+import '../invoeren-reizen.js';
 
 /**
  * An example element.
@@ -7,24 +12,19 @@ import litLogo from './assets/lit.svg'
  * @slot - This element has a slot
  * @csspart button - The button
  */
-export class MyElement extends LitElement {
+export class CompiledTemplates extends LitElement {
   constructor() {
     super()
-    this.docsHint = 'Click on the Vite and Lit logos to learn more'
-    this.count = 0
+    window.addEventListener('click', this._pageChange)
+    this._sessionstorecurrpage = localStorage.getItem("currentpagesessionstorage")
   }
 
   static get properties() {
     return {
       /**
-       * Copy for the read the docs hint.
+       * De huidige pagina die getoond wordt
        */
-      docsHint: {type: String},
-
-      /**
-       * The number of times the button has been clicked.
-       */
-      count: {type: Number},
+      _sessionstorecurrpage: {type: Element}
     }
   }
 
@@ -37,93 +37,60 @@ export class MyElement extends LitElement {
         text-align: center;
       }
 
-      .logo {
-        height: 6em;
-        padding: 1.5em;
-        will-change: filter;
-      }
-      .logo:hover {
-        filter: drop-shadow(0 0 2em #646cffaa);
-      }
-      .logo.lit:hover {
-        filter: drop-shadow(0 0 2em #325cffaa);
-      }
-
-      .card {
-        padding: 2em;
-      }
-
-      .read-the-docs {
-        color: #888;
-      }
-
-      a {
-        font-weight: 500;
-        color: #646cff;
-        text-decoration: inherit;
-      }
-      a:hover {
-        color: #535bf2;
-      }
-
-      h1 {
-        font-size: 3.2em;
-        line-height: 1.1;
-      }
-
-      button {
-        border-radius: 8px;
-        border: 1px solid transparent;
-        padding: 0.6em 1.2em;
-        font-size: 1em;
-        font-weight: 500;
-        font-family: inherit;
-        background-color: #1a1a1a;
-        cursor: pointer;
-        transition: border-color 0.25s;
-      }
-      button:hover {
-        border-color: #646cff;
-      }
-      button:focus,
-      button:focus-visible {
-        outline: 4px auto -webkit-focus-ring-color;
-      }
-
-      @media (prefers-color-scheme: light) {
-        a:hover {
-          color: #747bff;
-        }
-        button {
-          background-color: #f9f9f9;
-        }
-      }
     `
+  }
+
+  set currentPage(newPage) {
+    console.log('reached set currentpage')
+    if (this._currentPage === newPage) {
+      // no change, don't do any work
+      console.log(this._currentPage)
+      return;
+    }
+
+    // value changed, trigger an update
+    this._currentPage = newPage;
+    this.requestUpdate();
+  }
+
+  _pageChange = () => {
+    this._sessionstorecurrpage = localStorage.getItem("currentpagesessionstorage")
   }
 
   render() {
     return html`
-        <div>
-            <a href="https://vitejs.dev" target="_blank">
-                <img src="/vite.svg" class="logo" alt="Vite logo"/>
-            </a>
-            <a href="https://lit.dev" target="_blank">
-                <img src=${litLogo} class="logo lit" alt="Lit logo"/>
-            </a>
-        </div>
-        <slot></slot>
-        <div class="card">
-            <button @click=${this._onClick} part="button">
-                count is ${this.count}
-            </button>
-        </div>
-        <p class="read-the-docs">${this.docsHint}</p>
-    `
+    <body>
+      ${this.navTemplate()}
+      
+      ${this.invoerenTemplate()}
+      <br><br><br><br><br>
+      {{Curr page bubbler: ${this._sessionstorecurrpage}
+      ${this._sessionstorecurrpage.toString()} }}
+      <br><br>
+      ${this.footerTemplate()}
+    </body>
+  `
   }
 
-  _onClick() {
-    this.count++
+  navTemplate() {
+    return html`<nav-menu></nav-menu>`;
+  }
+
+  homeTemplate() {
+    return html`<home-page></home-page>`;
+  }
+
+  footerTemplate() {
+    return html`<footer-menu></footer-menu>`;
+  }
+
+  overzichtTemplate() {
+    return html`<overzicht-reizen></overzicht-reizen>`;
+  }
+
+  invoerenTemplate() {
+    return html`<invoeren-reizen></invoeren-reizen>`;
   }
 }
 
-window.customElements.define('my-element', MyElement)
+window.customElements.define('compiled-templates', CompiledTemplates)

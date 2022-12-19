@@ -62,7 +62,7 @@ export class CompiledTemplates extends LitElement {
     <body>
       ${this.navTemplate()}
       
-      ${this.overzichtTemplate()}
+      ${this.invoerenTemplate()}
       <br><br><br><br><br>
       {{Curr page bubbler: ${this._sessionstorecurrpage}
       ${this._sessionstorecurrpage.toString()} }}
