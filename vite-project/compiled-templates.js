@@ -60,13 +60,13 @@ export class CompiledTemplates extends LitElement {
   render() {
     return html`
     <body>
-      ${this.navTemplate()};
+      ${this.navTemplate()}
       
-      ${this.invoerenTemplate()};
+      ${this.invoerenTemplate()}
       <br><br><br><br><br>
       {Curr page bubbler: ${this._sessionstorecurrpage}
       <br><br>
-      ${this.footerTemplate()};
+      ${this.footerTemplate()}
     </body>
   `
   }
