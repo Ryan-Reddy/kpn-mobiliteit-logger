@@ -2,7 +2,7 @@ import {LitElement, css, html} from 'lit'
 
 import '../footer-menu.js';
 import '../home-page-test.js';
-import '../nav-menu.js';
+import '../nav-menu.ts';
 import '../overzicht-reizen.js';
 import '../invoeren-reizen.js';
 

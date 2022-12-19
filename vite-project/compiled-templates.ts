@@ -2,9 +2,11 @@ import {LitElement, css, html} from 'lit'
 
 import './footer-menu.js';
 import './home-page-test.js';
-import './nav-menu.js';
+import './nav-menu.ts';
 import './overzicht-reizen.js';
 import './invoeren-reizen.js';
+import {property} from "lit-element";
+import {NavMenu} from "./nav-menu";
 
 /**
  * An example element.
@@ -13,10 +15,11 @@ import './invoeren-reizen.js';
  * @csspart button - The button
  */
 export class CompiledTemplates extends LitElement {
+  @property() _sessionstorecurrpage = localStorage.getItem("currentpagesessionstorage")
+  @property() _currentPage : String;
+
   constructor() {
     super()
-    window.addEventListener('click', this._pageChange)
-    this._sessionstorecurrpage = localStorage.getItem("currentpagesessionstorage")
   }
 
   static get properties() {
@@ -43,37 +46,16 @@ export class CompiledTemplates extends LitElement {
     `
   }
 
-  set currentPage(newPage) {
-    console.log('reached set currentpage')
-    if (this._currentPage === newPage) {
-      // no change, don't do any work
-      console.log(this._currentPage)
-      return;
-    }
-
-    // value changed, trigger an update
-    this._currentPage = newPage;
-    this.requestUpdate();
-  }
-
-  _setPageChange = (event) => {
-    console.log('_setPageChange')
-    const target = event.target;// as InvoerenReizen;
-    this._currentPage = target.currentPage;
-
-    this._sessionstorecurrpage = localStorage.getItem("currentpagesessionstorage")
-  }
-
   render() {
     return html`
     <body>
-      ${this.navTemplate()}
       
+      <nav-menu @page-chosen=${this._onCurrentPageChanged}></nav-menu>
+
+
       ${this.invoerenTemplate()}
       <br><br><br><br><br>
-      {Curr page bubbler: ${this._sessionstorecurrpage}
-      <br>
-      {Curr page bubbler: ${this._currentPage}
+      //_currentPage bubbler: ${this._currentPage}
       <br>
       
       ${this.footerTemplate()}
@@ -81,8 +63,13 @@ export class CompiledTemplates extends LitElement {
   `
   }
 
+  _onCurrentPageChanged(event: Event){
+    const target = event.target as NavMenu;
+    this._currentPage = target.currentPage;
+  }
+
   navTemplate() {
-    return html`<nav-menu></nav-menu>`;
+    return html`<nav-menu @page-changed=${this._onCurrentPageChanged()}></nav-menu>`;
   }
 
   homeTemplate() {

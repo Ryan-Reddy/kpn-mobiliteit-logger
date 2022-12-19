@@ -1,5 +1,4 @@
-import {css, html, LitElement} from 'lit'
-import {CompiledTemplates} from './compiled-templates.js'
+import {LitElement, html, customElement, property, css} from 'lit-element';
 
 /**
  * An example element.
@@ -7,21 +6,14 @@ import {CompiledTemplates} from './compiled-templates.js'
  * @slot - This element has a slot
  * @csspart button - The button
  */
-export class MyElement extends LitElement {
+@customElement('nav-menu')
+export class NavMenu extends LitElement {
+  @property() naamGebruiker = 'Hans Fumphriehd';
+  @property() kpnLogo = "/public/branding/kpn-logo2-jpeg.jpg"
+  @property() currentPage: String;
   constructor() {
     super()
-    this.naamGebruiker = "Hans Fumphriehd";
-    this.kpnLogo = "/public/branding/kpn-logo2-jpeg.jpg"
     this.onLoad();
-  }
-
-  static get properties() {
-    return {
-      /** ingelogde gebruiker */
-      naamGebruiker: {type: String},
-      /** logo */
-      kpnLogo: {type: String},
-    }
   }
 
   static get styles() {
@@ -163,7 +155,6 @@ export class MyElement extends LitElement {
   }
   onLoad() {
     // alert('loaded nav-menu');
-
   }
 
   render() {
@@ -178,41 +169,35 @@ export class MyElement extends LitElement {
                 <label for="check">
                     <i class="fas fa-bars"></i>
                 </label>
-                    <ul>
-                        <li> <a class="nav-button" href="#" @click=${this._dispatchPageLink} id='<home-page></home-page>'>Home</a></li>
-                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Reis Registreren'>Reis Registreren</a></li>
-                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Reisgeschiedenis'>Reisgeschiedenis</a></li>
-                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Account'>Account</a></li>
-                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='footer'>Support</a></li>
-                        <li> <a class="nav-button" href="#"  @click=${this._dispatchPageLink} id='Uitloggen'>Uitloggen</a></li>
+                    <ul @click=${this._clickMenu}>
+                        <li> <a class="nav-button" href="#"  id='<home-page></home-page>'>Home</a></li>
+                        <li> <a class="nav-button" href="#"  id='Reis Registreren'>Reis Registreren</a></li>
+                        <li> <a class="nav-button" href="#"  id='Reisgeschiedenis'>Reisgeschiedenis</a></li>
+                        <li> <a class="nav-button" href="#"  id='Account'>Account</a></li>
+                        <li> <a class="nav-button" href="#"  id='footer'>Support</a></li>
+                        <li> <a class="nav-button" href="#"  id='Uitloggen'>Uitloggen</a></li>
                     </ul>
             </nav>
         </div>
-                        ${this._currentPage}
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
         </body>
     `
   }
 
-  // const name = this.name;
-  // console.log(name)
-  // if (name) {
-  //   const options = {
-  //     detail: {name},
-  //     bubbles: true,
-  //     composed: true,
-  //   };
-  //   this.dispatchEvent(new CustomEvent('mydispatchpagelink', options));
-
-  _dispatchPageLink(e) {
+  _clickMenu(e: Event) {
     console.log('_dispatchPageLink()')
-    console.log('id= ' + e.target.id)
+    // @ts-ignore
+    const id = e.target.id;
+    console.log('id= ' + id)
 
-    // TODO; change to proper attribute usage either bubbling or otherwise
-    localStorage.setItem('currentpagesessionstorage', e.target.id)
-    localStorage.getItem("currentpagesessionstorage")
+    const hasChanged = this.currentPage !== id;
+
+    if(hasChanged) {
+      this.currentPage = id;
+
+      //notify parent:
+      this.dispatchEvent(new Event('page-chosen'))
+    }
   }
 }
 
-window.customElements.define('nav-menu', MyElement)
+// window.customElements.define('nav-menu', MyElement)
