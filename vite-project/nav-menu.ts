@@ -11,6 +11,7 @@ export class NavMenu extends LitElement {
   @property() naamGebruiker = 'Hans Fumphriehd';
   @property() kpnLogo = '/public/branding/kpn-logo2-jpeg.jpg';
   @property() currentPage: string;
+  @property() _kpnHomePageUrl = "https://www.kpn.com/";
 
   constructor() {
     super();
@@ -102,6 +103,9 @@ export class NavMenu extends LitElement {
         overflow: hidden;
         padding: 0 2em;
     }
+    .nav-logo:hover {
+        height: 3.5em;
+    }
     
     #check{
     display: none;
@@ -166,6 +170,7 @@ export class NavMenu extends LitElement {
         <a href="#" class="ingelogd_als">ingelogd als ${this.naamGebruiker}</a>
         <div class="entire_menu_bar">
           <img
+              @click=${this.kpnHomePageUrl}
             href="#"
             src="${this.kpnLogo}"
             alt="kpn-logo-zwart-op-wit"
@@ -216,6 +221,10 @@ export class NavMenu extends LitElement {
       //notify parent:
       this.dispatchEvent(new Event('page-chosen'));
     }
+  }
+
+  kpnHomePageUrl() {
+    window.open(this._kpnHomePageUrl)
   }
 }
 

@@ -9,6 +9,8 @@ import './thermometer.js';
 import './login.ts';
 import './account-info.ts';
 import './support.ts';
+import './reset-password.ts';
+import './new-account.ts';
 import {eventOptions, property, customElement} from 'lit-element';
 import {NavMenu} from './nav-menu';
 
@@ -51,6 +53,7 @@ export class CompiledTemplates extends LitElement {
         };
     }
 
+
     static get styles() {
         return css`
       :host {
@@ -83,12 +86,14 @@ export class CompiledTemplates extends LitElement {
             <div class=${this._invoerenTemplateHidden}>${this._invoerenTemplate()}</div>
             <div class=${this._reisGeschiedenisTemplateHidden}>${this._overzichtTemplate()}</div>
             <div class=${this._loginTemplateHidden}>${this._loginTemplate()}
+            <div class=${this._logoutTemplateHidden}>${this._loginTemplate()}
             </div>
             <div class=${this._supportTemplateHidden}>${this._supportTemplate()}</div>
             <div class=${this._thermometerTemplateHidden}>${this._thermometerTemplate()}</div>
             <div class=${this._accountInfoTemplateHidden}>${this._accountInfoTemplate()}</div>
             <div class=${this._passwordResetTemplateHidden}>${this._resetPasswordTemplate()}</div>
             <div class=${this._newAccountTemplateHidden}>${this._newAccountTemplate()}</div
+                
 
             <br/><br/><br/><br/><br/>
             <br/>
@@ -130,13 +135,14 @@ export class CompiledTemplates extends LitElement {
                 break;
             }
             case "Support": {
-                console.log('Support')
                 this.hideRest()
+                console.log('Support')
                 this._supportTemplateHidden = "";
                 break;
             }
+            // TODO: Logout needs work in compiled-templates.ts
             case "Logout": {
-                console.log('Logout')
+                console.log('Logout needs work in compiled-templates.ts')
                 this.hideRest()
                 this._logoutTemplateHidden = "";
                 break;

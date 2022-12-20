@@ -21,19 +21,6 @@ export class HomePage extends LitElement {
         padding: 2rem;
         text-align: center;
       }
-
-      .logo {
-        height: 6em;
-        padding: 1.5em;
-        will-change: filter;
-      }
-      .logo:hover {
-        filter: drop-shadow(0 0 2em #646cffaa);
-      }
-      .logo.lit:hover {
-        filter: drop-shadow(0 0 2em #325cffaa);
-      }
-
       .card {
         padding: 2em;
       }

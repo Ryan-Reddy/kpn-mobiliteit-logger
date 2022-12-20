@@ -41,7 +41,6 @@ export class SupportElement extends LitElement {
     }
 
     render() {
-
         return html`
                     <body>
                         <main>

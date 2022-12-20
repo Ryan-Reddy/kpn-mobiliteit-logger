@@ -9,13 +9,13 @@ import {customElement, property} from "lit-element";
  * @csspart button - The button
  */
 @customElement('reset-password')
-export class SupportElement extends LitElement {
+export class ResetPassword extends LitElement {
     @property() _hiddenElement = "hidden";
     @property() currentPage: string;
     constructor() {
         super()
     }
-
+// TODO: style page reset-password.ts
     static get styles() {
         return css`
     * {
