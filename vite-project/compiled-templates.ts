@@ -20,20 +20,21 @@ import {NavMenu} from './nav-menu';
 export class CompiledTemplates extends LitElement {
     @property() _currentPage: string;
     @property() _invoerenTemplateHidden = "hidden";
-    @property() _reisGeschiedenisTemplateHidden= "hidden";
-    @property() _loginTemplateHidden= "hidden";
-    @property() _accountInfoTemplateHidden= "hidden";
+    @property() _reisGeschiedenisTemplateHidden = "hidden";
+    @property() _loginTemplateHidden = "hidden";
+    @property() _accountInfoTemplateHidden = "hidden";
 
     //TODO: make the rest work
 
-    @property() _overzichtTemplateHidden= "hidden";
-    @property() _thermometerTemplateHidden= "hidden";
+    @property() _overzichtTemplateHidden = "hidden";
+    @property() _thermometerTemplateHidden = "hidden";
 
     constructor() {
         super();
     }
 
-    @eventOptions({capture: true}) _onClick(e: Event) {
+    // @eventOptions({capture: true}) _onClick(e: Event) {
+    @eventOptions({capture: true}) _onClick() {
         console.log('clicked event listener')
     }
 
@@ -74,7 +75,8 @@ export class CompiledTemplates extends LitElement {
 
             <div class=${this._invoerenTemplateHidden}>${this.invoerenTemplate()}</div>
             <div class=${this._reisGeschiedenisTemplateHidden}>${this.overzichtTemplate()}</div>
-            <div class=${this._loginTemplateHidden} @page-chosen=${this._onCurrentPageChanged}>${this.loginTemplate()}</div>
+            <div class=${this._loginTemplateHidden} @page-chosen=${this._onCurrentPageChanged}>${this.loginTemplate()}
+            </div>
             <div class=${this._accountInfoTemplateHidden}>${this.accountInfoTemplate()}</div>
             <br/><br/><br/><br/><br/>
             //_currentPage bubbler: ${this._currentPage}
@@ -90,22 +92,27 @@ export class CompiledTemplates extends LitElement {
         return html`
             <home-page></home-page>`;
     }
+
     overzichtTemplate() {
         return html`
             <overzicht-reizen></overzicht-reizen>`;
     }
+
     invoerenTemplate() {
         return html`
             <invoeren-reizen id="invoeren-reizen"></invoeren-reizen>`;
     }
+
     thermometerTemplate() {
         return html`
             <thermometer></thermometer>`;
     }
+
     loginTemplate() {
         return html`
             <login-element></login-element>`;
     }
+
     accountInfoTemplate() {
         return html`
             <account-element></account-element>`;
@@ -139,33 +146,33 @@ export class CompiledTemplates extends LitElement {
             }
             case "Account": {
                 this.hideRest()
-                this._accountInfoTemplateHidden = "";
                 console.log('Account')
+                this._accountInfoTemplateHidden = "";
                 break;
             }
             case "Support": {
                 console.log('Support')
                 this.hideRest()
                 break;
-        }
+            }
             case "Uitloggen": {
                 console.log('Uitloggen')
                 this.hideRest()
-        break;
-    }
+                break;
+            }
             case "nope":
                 console.log('nope')
                 break;
         }
-
     }
+
     hideRest() {
         this._loginTemplateHidden = "hidden";
         this._invoerenTemplateHidden = "hidden";
         this._invoerenTemplateHidden = "hidden";
         this._reisGeschiedenisTemplateHidden = "hidden";
+        this._accountInfoTemplateHidden = "hidden";
     }
-
 }
 
 window.customElements.define('compiled-templates', CompiledTemplates);

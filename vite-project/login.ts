@@ -161,7 +161,8 @@ export class Login extends LitElement {
 
         `
     }
-    _login(e: Event) {
+    // _login(e: Event) {
+    _login() {
         console.log("login.login()")
         this.currentPage = "Reis Registreren";
 
