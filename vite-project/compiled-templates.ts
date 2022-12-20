@@ -7,6 +7,7 @@ import './overzicht-reizen.js';
 import './invoeren-reizen.js';
 import './thermometer.js';
 import './login.ts';
+import './account-info.ts';
 import {eventOptions, property} from 'lit-element';
 import {NavMenu} from './nav-menu';
 
@@ -21,10 +22,10 @@ export class CompiledTemplates extends LitElement {
     @property() _invoerenTemplateHidden = "hidden";
     @property() _reisGeschiedenisTemplateHidden= "hidden";
     @property() _loginTemplateHidden= "hidden";
+    @property() _accountInfoTemplateHidden= "hidden";
 
     //TODO: make the rest work
-    @property() _navTemplateHidden= "hidden";
-    @property() _footerTemplateHidden= "hidden";
+
     @property() _overzichtTemplateHidden= "hidden";
     @property() _thermometerTemplateHidden= "hidden";
 
@@ -74,6 +75,7 @@ export class CompiledTemplates extends LitElement {
             <div class=${this._invoerenTemplateHidden}>${this.invoerenTemplate()}</div>
             <div class=${this._reisGeschiedenisTemplateHidden}>${this.overzichtTemplate()}</div>
             <div class=${this._loginTemplateHidden} @page-chosen=${this._onCurrentPageChanged}>${this.loginTemplate()}</div>
+            <div class=${this._accountInfoTemplateHidden}>${this.accountInfoTemplate()}</div>
             <br/><br/><br/><br/><br/>
             //_currentPage bubbler: ${this._currentPage}
             <br/>
@@ -104,6 +106,10 @@ export class CompiledTemplates extends LitElement {
         return html`
             <login-element></login-element>`;
     }
+    accountInfoTemplate() {
+        return html`
+            <account-element></account-element>`;
+    }
 
     _onCurrentPageChanged(event: Event) {
         console.log('_onCurrentPageChanged()')
@@ -128,12 +134,12 @@ export class CompiledTemplates extends LitElement {
             case "Reisgeschiedenis": {
                 this.hideRest()
                 console.log('reis registeren case')
-                this._invoerenTemplateHidden = "hidden";
                 this._reisGeschiedenisTemplateHidden = "";
                 break;
             }
             case "Account": {
                 this.hideRest()
+                this._accountInfoTemplateHidden = "";
                 console.log('Account')
                 break;
             }
