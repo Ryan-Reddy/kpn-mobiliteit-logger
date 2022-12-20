@@ -11,6 +11,7 @@ import './account-info.ts';
 import './support.ts';
 import './reset-password.ts';
 import './new-account.ts';
+import './readme.ts';
 import {eventOptions, property, customElement} from 'lit-element';
 import {NavMenu} from './nav-menu';
 
@@ -34,6 +35,7 @@ export class CompiledTemplates extends LitElement {
     @property() _supportTemplateHidden = "hidden";
     @property() _passwordResetTemplateHidden = "hidden";
     @property() _newAccountTemplateHidden = "hidden";
+    @property() _readmeTemplateHidden = "hidden";
 
     constructor() {
         super();
@@ -53,7 +55,6 @@ export class CompiledTemplates extends LitElement {
         };
     }
 
-
     static get styles() {
         return css`
       :host {
@@ -70,7 +71,6 @@ export class CompiledTemplates extends LitElement {
             background-color: grey;
             required: invalid;
         }
-
     `;
     }
 
@@ -78,77 +78,88 @@ export class CompiledTemplates extends LitElement {
         return html`
             <nav-menu @page-chosen=${this._onCurrentPageChanged}></nav-menu>
             ${this.headerTemplate()}
-
             <body>
-            <div class=${this._homePageTemplateHidden}>${this._homePageTemplate()}</div>
-            <div class=${this._invoerenTemplateHidden}>${this._invoerenTemplate()}</div>
-            <div class=${this._reisGeschiedenisTemplateHidden}>${this._overzichtTemplate()}</div>
-            <div class=${this._loginTemplateHidden}>${this._loginTemplate()}</div>
-            <div class=${this._logoutTemplateHidden}>${this._loginTemplate()}</div>
-            <div class=${this._supportTemplateHidden}>${this._supportTemplate()}</div>
-            <div class=${this._thermometerTemplateHidden}>${this._thermometerTemplate()}</div>
-            <div class=${this._accountInfoTemplateHidden}>${this._accountInfoTemplate()}</div>
-            <div class=${this._passwordResetTemplateHidden}>${this._resetPasswordTemplate()}</div>
-            <div class=${this._newAccountTemplateHidden}>${this._newAccountTemplate()}</div
-            
-            <footer-menu></footer-menu>
-            <footer-menu @page-chosen=${this._onCurrentPageChanged}></footer-menu>
+                <div class=${this._homePageTemplateHidden}>           ${this._homePageTemplate()}</div>
+                <div class=${this._invoerenTemplateHidden}>           ${this._invoerenTemplate()}</div>
+                <div class=${this._reisGeschiedenisTemplateHidden}>   ${this._overzichtTemplate()}</div>
+                <div class=${this._loginTemplateHidden}>              ${this._loginTemplate()}</div>
+                <div class=${this._logoutTemplateHidden}>             ${this._loginTemplate()}</div>
+                <div class=${this._supportTemplateHidden}>            ${this._supportTemplate()}</div>
+                <div class=${this._thermometerTemplateHidden}>        ${this._thermometerTemplate()}</div>
+                <div class=${this._accountInfoTemplateHidden}>        ${this._accountInfoTemplate()}</div>
+                <div class=${this._passwordResetTemplateHidden}>      ${this._resetPasswordTemplate()}</div>
+                <div class=${this._readmeTemplateHidden}>             ${this._readmeTemplate()}</div
             </body>
+            <footer-menu @page-chosen=${this._onCurrentPageChanged}></footer-menu>
         `;
     }
+                // <div class=${this._newAccountTemplateHidden}>         ${this._newAccountTemplate()}</div
 
 
     _onCurrentPageChanged(event: Event) {
         console.log('_onCurrentPageChanged()')
         const target = event.target as NavMenu;
-        this.hideRest()
         this._currentPage = target.currentPage;
         switch (this._currentPage) {
             case "home-page": {
+                this.hideRest();
                 console.log('home case')
                 this._homePageTemplateHidden = "";
                 break;
             }
             case "Reis Registreren": {
+                this.hideRest();
                 console.log('reis registeren case')
                 this._invoerenTemplateHidden = "";
-
                 break;
             }
             case "Reisgeschiedenis": {
+                this.hideRest();
                 console.log('reis registeren case')
                 this._reisGeschiedenisTemplateHidden = "";
                 break;
             }
             case "Account": {
+                this.hideRest();
                 console.log('Account')
                 this._accountInfoTemplateHidden = "";
                 break;
             }
             case "Support": {
+                this.hideRest();
                 console.log('Support')
                 this._supportTemplateHidden = "";
                 break;
             }
             // TODO: Logout needs work in compiled-templates.ts
             case "Logout": {
+                this.hideRest();
                 console.log('Logout needs work in compiled-templates.ts')
                 this._logoutTemplateHidden = "";
                 break;
             }
             case "Login": {
+                this.hideRest();
                 console.log('Login')
                 this._loginTemplateHidden = "";
                 break;
             }
             case "password-reset": {
+                this.hideRest();
                 console.log('password-reset')
                 this._passwordResetTemplateHidden = "";
                 break;
             }
             case "new-account": {
+                this.hideRest();
                 console.log('new-account')
                 this._newAccountTemplateHidden = "";
+                break;
+            }
+            case "Readme": {
+                this.hideRest();
+                console.log('new-account')
+                this._readmeTemplateHidden = "";
                 break;
             }
             case "nope":
@@ -210,6 +221,10 @@ export class CompiledTemplates extends LitElement {
             <reset-password></reset-password>`;
     }
 
+    private _readmeTemplate() {
+        return html`
+            <readme-element></readme-element>`;
+    }
     hideRest() {
         this._homePageTemplateHidden = "hidden";
         this._loginTemplateHidden = "hidden";
@@ -221,4 +236,6 @@ export class CompiledTemplates extends LitElement {
         this._passwordResetTemplateHidden = "hidden";
         this._newAccountTemplateHidden = "hidden";
     }
+
+
 }

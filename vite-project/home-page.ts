@@ -21,6 +21,13 @@ export class HomePage extends LitElement {
         padding: 2rem;
         text-align: center;
       }
+      
+      main {
+        background-color: slateblue;
+      }
+      ul {
+        list-style: none;
+      }
       .card {
         padding: 2em;
       }
@@ -31,7 +38,7 @@ export class HomePage extends LitElement {
 
       a {
         font-weight: 500;
-        color: #646cff;
+        color: offwhite;
         text-decoration: inherit;
       }
       a:hover {
@@ -88,7 +95,6 @@ export class HomePage extends LitElement {
                 <input id="registreerReis" onclick="window.open('/v2fe-v2a-2/src/main/webapp/formulier-reizen','_self')"
                        type="button" value="registreerReis">
             </li>
-        </ul>
     
         <h2>wiki and info/</h2>
         <ul class="externallinks">

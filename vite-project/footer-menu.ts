@@ -149,6 +149,9 @@ export class MyElement extends LitElement {
               <a class="nav-button" href="#" id="Support">Support</a>
             </li>
             <li>
+              <a class="nav-button" href="#" id="Readme">Readme</a>
+            </li>
+            <li>
               <a class="nav-button" href="#" id="Logout">Log out</a>
             </li>
           </ul>
