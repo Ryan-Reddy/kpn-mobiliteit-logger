@@ -62,7 +62,6 @@ export class OverzichtReizen extends LitElement {
     .hiddensmolscreen {
       display: none;
     }
-        
     `;
     }
 
@@ -76,14 +75,12 @@ export class OverzichtReizen extends LitElement {
                 this._vervoerMiddelDummyData = Array.from(json);
                 console.log(this._vervoerMiddelDummyData);
             });
-        // }
         fetch('/dummydata-reizen.json')
             .then((response) => response.json())
             .then((json) => {
                 this._reizenDummyData = Array.from(json);
                 console.log(this._reizenDummyData);
             });
-        // }
     }
 
     //TODO: make tableToCSV work with lit
@@ -133,10 +130,6 @@ export class OverzichtReizen extends LitElement {
     }
 
     render() {
-        // @ts-ignore
-        // @ts-ignore
-        // @ts-ignore
-        // @ts-ignore
         return html`
           <header>
           <H1 class="header">${this.titel}</H1>
@@ -185,11 +178,31 @@ export class OverzichtReizen extends LitElement {
         </span>
                 <button>Exporteren als..</button>
                 <button @click="${this.tableToCSV}">download CSV</button>
+                <button @click="${this.sortColumnSimple}">Resort columns</button>
+                <button @click="${this.filterColumnOnTerm('nobis')}">Filter on 'nobis'</button>
                 <button onclick="print()">Print...</button>
             </main>
             </body>
         `;
     }
+
+    // TODO: fix filter and sort:
+    filterColumnOnTerm(filter: string) {
+        console.log('sortColumnSimple')
+        this._reizenDummyData = this._reizenDummyData.filter((Object) => {
+            Object.filter().project === filter
+        });
+
+    }
+    sortColumnSimple() {
+        console.log('sortColumnSimple')
+        console.log(this._reizenDummyData)
+        this._reizenDummyData = this._reizenDummyData.map().sort();
+        console.log(this._reizenDummyData)
+
+
+    }
+
 }
 
 window.customElements.define('overzicht-reizen', OverzichtReizen);
