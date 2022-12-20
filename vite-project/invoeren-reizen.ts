@@ -309,9 +309,8 @@ export class InvoerenReizen extends LitElement {
   optionClicked(option: { originalTarget: { value: any; }; }) {
     console.log('optionClicked')
     const data = option.originalTarget.value;
-    console.log(data);
-    this.span_message = data;
 
+    console.log(data);
 
     switch (data) {
       case "Trein/Metro/Tram":

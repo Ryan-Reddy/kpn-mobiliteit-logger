@@ -10,7 +10,7 @@ import { LitElement, html, customElement, property, css } from 'lit-element';
 export class NavMenu extends LitElement {
   @property() naamGebruiker = 'Hans Fumphriehd';
   @property() kpnLogo = '/public/branding/kpn-logo2-jpeg.jpg';
-  @property() currentPage: String;
+  @property() currentPage: string;
   constructor() {
     super();
     this.onLoad();
@@ -176,7 +176,7 @@ export class NavMenu extends LitElement {
             </label>
             <ul @click=${this._clickMenu}>
               <li>
-                <a class="nav-button" href="#" id="<home-page></home-page>"
+                <a class="nav-button" href="#" id="home-page"
                   >Home</a
                 >
               </li>
@@ -189,7 +189,7 @@ export class NavMenu extends LitElement {
                 <a class="nav-button" href="#" id="Reisgeschiedenis"
                   >Reisgeschiedenis</a
                 >
-              </li>
+              </li>            
               <li><a class="nav-button" href="#" id="Account">Account</a></li>
               <li><a class="nav-button" href="#" id="footer">Support</a></li>
               <li>
