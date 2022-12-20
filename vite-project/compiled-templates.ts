@@ -6,6 +6,7 @@ import './nav-menu.ts';
 import './overzicht-reizen.js';
 import './invoeren-reizen.js';
 import './thermometer.js';
+import './login.ts';
 import {eventOptions, property} from 'lit-element';
 import {NavMenu} from './nav-menu';
 
@@ -18,12 +19,17 @@ import {NavMenu} from './nav-menu';
 export class CompiledTemplates extends LitElement {
     @property() _currentPage: string;
     @property() _invoerenTemplateHidden = "hidden";
-    @property() _lastpage: string;
     @property() _reisGeschiedenisTemplateHidden= "hidden";
+    @property() _loginTemplateHidden= "hidden";
+
+    //TODO: make the rest work
+    @property() _navTemplateHidden= "hidden";
+    @property() _footerTemplateHidden= "hidden";
+    @property() _overzichtTemplateHidden= "hidden";
+    @property() _thermometerTemplateHidden= "hidden";
 
     constructor() {
         super();
-    // @eventlistener('')
     }
 
     @eventOptions({capture: true}) _onClick(e: Event) {
@@ -67,65 +73,20 @@ export class CompiledTemplates extends LitElement {
 
             <div class=${this._invoerenTemplateHidden}>${this.invoerenTemplate()}</div>
             <div class=${this._reisGeschiedenisTemplateHidden}>${this.overzichtTemplate()}</div>
+            <div class=${this._loginTemplateHidden} @page-chosen=${this._onCurrentPageChanged}>${this.loginTemplate()}</div>
             <br/><br/><br/><br/><br/>
             //_currentPage bubbler: ${this._currentPage}
             <br/>
             ${this.thermometerTemplate()}
 
-            ${this.footerTemplate()}
+            <footer-menu></footer-menu>
             </body>
         `;
-    }
-
-    _onCurrentPageChanged(event: Event) {
-        this._lastpage = this._currentPage;
-
-        console.log('_onCurrentPageChanged()')
-        const target = event.target as NavMenu;
-        this._currentPage = target.currentPage;
-
-
-        switch (this._currentPage) {
-            case "home-page": {
-                console.log('home case')
-                this._invoerenTemplateHidden = "hidden";
-                this._reisGeschiedenisTemplateHidden = "hidden";
-                break;
-            }
-            case "Reis Registreren": {
-                console.log('reis registeren case')
-                this._invoerenTemplateHidden = "";
-                this._reisGeschiedenisTemplateHidden = "hidden";
-
-                break;
-            }
-            case "Reisgeschiedenis": {
-                console.log('reis registeren case')
-                this._invoerenTemplateHidden = "hidden";
-                this._reisGeschiedenisTemplateHidden = "";
-                break;
-            }
-        }
-
-    }
-
-    navTemplate() {
-        // @ts-ignore
-        // @ts-ignore
-        // @ts-ignore
-        return html`
-            <nav-menu
-                    @page-changed=${this._onCurrentPageChanged()}
-            ></nav-menu>`;
     }
 
     homeTemplate() {
         return html`
             <home-page></home-page>`;
-    }
-    footerTemplate() {
-        return html`
-            <footer-menu></footer-menu>`;
     }
     overzichtTemplate() {
         return html`
@@ -139,7 +100,65 @@ export class CompiledTemplates extends LitElement {
         return html`
             <thermometer></thermometer>`;
     }
+    loginTemplate() {
+        return html`
+            <login-element></login-element>`;
+    }
 
+    _onCurrentPageChanged(event: Event) {
+        console.log('_onCurrentPageChanged()')
+        const target = event.target as NavMenu;
+        this._currentPage = target.currentPage;
+
+
+        switch (this._currentPage) {
+            case "home-page": {
+                this.hideRest()
+                console.log('home case')
+                this._loginTemplateHidden = "";
+                break;
+            }
+            case "Reis Registreren": {
+                this.hideRest()
+                console.log('reis registeren case')
+                this._invoerenTemplateHidden = "";
+
+                break;
+            }
+            case "Reisgeschiedenis": {
+                this.hideRest()
+                console.log('reis registeren case')
+                this._invoerenTemplateHidden = "hidden";
+                this._reisGeschiedenisTemplateHidden = "";
+                break;
+            }
+            case "Account": {
+                this.hideRest()
+                console.log('Account')
+                break;
+            }
+            case "Support": {
+                console.log('Support')
+                this.hideRest()
+                break;
+        }
+            case "Uitloggen": {
+                console.log('Uitloggen')
+                this.hideRest()
+        break;
+    }
+            case "nope":
+                console.log('nope')
+                break;
+        }
+
+    }
+    hideRest() {
+        this._loginTemplateHidden = "hidden";
+        this._invoerenTemplateHidden = "hidden";
+        this._invoerenTemplateHidden = "hidden";
+        this._reisGeschiedenisTemplateHidden = "hidden";
+    }
 
 }
 

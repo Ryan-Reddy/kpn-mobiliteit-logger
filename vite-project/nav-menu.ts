@@ -11,6 +11,7 @@ export class NavMenu extends LitElement {
   @property() naamGebruiker = 'Hans Fumphriehd';
   @property() kpnLogo = '/public/branding/kpn-logo2-jpeg.jpg';
   @property() currentPage: string;
+
   constructor() {
     super();
     this.onLoad();
@@ -153,6 +154,7 @@ export class NavMenu extends LitElement {
     script.src = 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js';
     return script;
   }
+
   onLoad() {
     // alert('loaded nav-menu');
   }
@@ -174,7 +176,7 @@ export class NavMenu extends LitElement {
             <label for="check">
               <i class="fas fa-bars"></i>
             </label>
-            <ul @click=${this._clickMenu}>
+            <ul @click=${this._clickMenu} id="nope">
               <li>
                 <a class="nav-button" href="#" id="home-page"
                   >Home</a
@@ -191,7 +193,7 @@ export class NavMenu extends LitElement {
                 >
               </li>            
               <li><a class="nav-button" href="#" id="Account">Account</a></li>
-              <li><a class="nav-button" href="#" id="footer">Support</a></li>
+              <li><a class="nav-button" href="#" id="Support">Support</a></li>
               <li>
                 <a class="nav-button" href="#" id="Uitloggen">Uitloggen</a>
               </li>

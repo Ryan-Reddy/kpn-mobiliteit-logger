@@ -138,7 +138,6 @@ export class InvoerenReizen extends LitElement {
     `
   }
 
-
   render() {
     return html`
         <html>
