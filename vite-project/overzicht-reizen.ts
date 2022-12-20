@@ -189,16 +189,17 @@ export class OverzichtReizen extends LitElement {
     // TODO: fix filter and sort:
     filterColumnOnTerm(filter: string) {
         console.log('sortColumnSimple')
-        this._reizenDummyData = this._reizenDummyData.filter((Object) => {
-            Object.filter().project === filter
-        });
+        console.log(filter)
+        // this._reizenDummyData = this._reizenDummyData.filter((Object) => {
+        //     Object.filter().project === filter
+        // });
 
     }
     sortColumnSimple() {
         console.log('sortColumnSimple')
         console.log(this._reizenDummyData)
-        this._reizenDummyData = this._reizenDummyData.map().sort();
-        console.log(this._reizenDummyData)
+        // this._reizenDummyData = this._reizenDummyData.map().sort();
+        // console.log(this._reizenDummyData)
 
 
     }
