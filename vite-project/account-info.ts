@@ -26,22 +26,36 @@ export class Login extends LitElement {
         }
         .full { 
         width: 100%; 
+        height: 100%; 
+        overflow: auto
         }
-
-        header {
+        
+        H1 {
         padding-top: 1em;
         font-size: 2em;
         padding-bottom: 0.5em;
         }
-        
         header p{
-          font-size: 0.5em;
+          font-size: 1em;
         }
-      
+        
+        .tablecontainer {
+          height: 60vh;
+          overflow: auto
+        }
         table {
-            padding: 1em;
-            background: slateblue;
+        background: slateblue;
+        max-height: 100%;
+        padding: 1em;
         }
+          th {
+          padding: .6em;
+          border-bottom: 1px dotted #ddd;
+          border-collapse: collapse;
+        }
+        tr:hover {background-color: none;}
+
+
         label {
             /*font-size: 2em;*/
             /*visibility: hidden;*/
@@ -96,7 +110,7 @@ export class Login extends LitElement {
         /*Buttons: */
         input[type=button], input[type=submit], input[type=reset] {
             width: 33%;
-            background-color: #00C300;
+            background-color: white;
             border: none;
             color: white;
             padding: 1em 0px;
@@ -113,23 +127,29 @@ export class Login extends LitElement {
             background-color: grey;
             required: invalid;
         }
+        
+    @media (max-width: 858px) {
+    .hiddensmolscreen {
+      display: none;
+    }
     `
     }
 
 
     render() {
         return html`
+            <header>
             <h1 class="header">Account info</h1>
+                <p>Breng hieronder wijzigingen in uw gegevens.</p>
+
+            </header>
 
         <body>
-        <div id="page-container">
-        <main>
-            <div id="content-wrap">
-        <div id="discoball" style="display: none;"><img alt="discoBallGif" src="/assets/discoBallGif.gif">
-            </div>
-            <h2>Breng hieronder wijzigingen in uw gegevens.</h2>
+
         <form id="postaccount">
-        <table style="width:100%">
+            <div class="tablecontainer">
+
+            <table style="width:100%">
             <tr>
                 <td></td>
             <td>Huidige accountinfo:</td>
@@ -152,6 +172,7 @@ export class Login extends LitElement {
             <td></td>
             </tr>
             </table>
+            </div>
             <!-- <input id="send_json" onclick="sendJsonData()" type="button" value="send json"/>
           <input id="send_formdata" onclick="sendFormData()" type="button" value="send formdata"/> -->
             <input id="update_account_info" onclick="wijzigAccount()" type="button" value="Update Info" />

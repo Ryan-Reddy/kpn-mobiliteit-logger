@@ -119,15 +119,15 @@ export class Login extends LitElement {
 
     render() {
         return html`
+            <header>
 
             <h1 class="header">Log in</h1>
+                <header>
 
             <body>
             <div id="page-container">
                 <main>
                     <div id="content-wrap">
-                        <!--            <div id="discoball" style="display: none;"><img alt="discoBallGif" src="/assets/discoBallGif.gif">-->
-                        <!--            </div>-->
                         <form id="login_account">
                             <ul>
                                 <li>
@@ -154,8 +154,7 @@ export class Login extends LitElement {
                         </a>
                     </div>
                 </main>
-                <footer id="footer">
-                </footer>
+
             </div>
             </body>
 

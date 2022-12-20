@@ -1,9 +1,9 @@
 import {LitElement, css, html} from 'lit'
 
-import '../footer-menu.js';
-import '../home-page-test.js';
+import '../footer-menu.ts';
+import '../home-page.ts';
 import '../nav-menu.ts';
-import '../overzicht-reizen.js';
+import '../overzicht-reizen.ts';
 import '../invoeren-reizen.ts';
 
 /**

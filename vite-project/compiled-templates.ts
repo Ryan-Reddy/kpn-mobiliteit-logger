@@ -1,13 +1,14 @@
 import {LitElement, css, html} from 'lit';
 
 import './footer-menu.js';
-import './home-page-test.js';
+import './home-page.ts';
 import './nav-menu.ts';
 import './overzicht-reizen.js';
 import './invoeren-reizen.js';
 import './thermometer.js';
 import './login.ts';
 import './account-info.ts';
+import './support.ts';
 import {eventOptions, property} from 'lit-element';
 import {NavMenu} from './nav-menu';
 
@@ -19,15 +20,15 @@ import {NavMenu} from './nav-menu';
  */
 export class CompiledTemplates extends LitElement {
     @property() _currentPage: string;
+    @property() _homePageTemplateHidden= "";
     @property() _invoerenTemplateHidden = "hidden";
     @property() _reisGeschiedenisTemplateHidden = "hidden";
     @property() _loginTemplateHidden = "hidden";
+    @property() _logoutTemplateHidden= "hidden";
     @property() _accountInfoTemplateHidden = "hidden";
-
-    //TODO: make the rest work
-
     @property() _overzichtTemplateHidden = "hidden";
     @property() _thermometerTemplateHidden = "hidden";
+    @property() _supportTemplateHidden = "hidden";
 
     constructor() {
         super();
@@ -55,6 +56,8 @@ export class CompiledTemplates extends LitElement {
         padding: 2rem;
         text-align: center;
       }
+
+      
       .hidden {
             display: none;
             pointer-events: none;
@@ -63,32 +66,37 @@ export class CompiledTemplates extends LitElement {
             background-color: grey;
             required: invalid;
         }
-        .show {
-        }
+
     `;
     }
 
     render() {
         return html`
-            <body>
             <nav-menu @page-chosen=${this._onCurrentPageChanged}></nav-menu>
+            ${this.headerTemplate()}
 
+            <body>
+            <div class=${this._homePageTemplateHidden}>${this.homePageTemplate()}</div>
             <div class=${this._invoerenTemplateHidden}>${this.invoerenTemplate()}</div>
             <div class=${this._reisGeschiedenisTemplateHidden}>${this.overzichtTemplate()}</div>
-            <div class=${this._loginTemplateHidden} @page-chosen=${this._onCurrentPageChanged}>${this.loginTemplate()}
-            </div>
+            <div class=${this._loginTemplateHidden}>${this.loginTemplate()}</div>
+            <div class=${this._supportTemplateHidden}>${this.supportTemplate()}</div>
             <div class=${this._accountInfoTemplateHidden}>${this.accountInfoTemplate()}</div>
             <br/><br/><br/><br/><br/>
-            //_currentPage bubbler: ${this._currentPage}
             <br/>
             ${this.thermometerTemplate()}
 
-            <footer-menu></footer-menu>
+            <footer-menu @page-chosen=${this._onCurrentPageChanged}></footer-menu>
             </body>
         `;
     }
-
-    homeTemplate() {
+    headerTemplate() {
+        return html`            <header>
+            <title>KPN-222</title>
+            <H1>${this._currentPage}</H1>
+        </header>`;
+    }
+    homePageTemplate() {
         return html`
             <home-page></home-page>`;
     }
@@ -112,6 +120,10 @@ export class CompiledTemplates extends LitElement {
         return html`
             <login-element></login-element>`;
     }
+    supportTemplate() {
+        return html`
+            <support-element></support-element>`;
+    }
 
     accountInfoTemplate() {
         return html`
@@ -122,13 +134,11 @@ export class CompiledTemplates extends LitElement {
         console.log('_onCurrentPageChanged()')
         const target = event.target as NavMenu;
         this._currentPage = target.currentPage;
-
-
         switch (this._currentPage) {
             case "home-page": {
                 this.hideRest()
                 console.log('home case')
-                this._loginTemplateHidden = "";
+                this._homePageTemplateHidden = "";
                 break;
             }
             case "Reis Registreren": {
@@ -153,11 +163,19 @@ export class CompiledTemplates extends LitElement {
             case "Support": {
                 console.log('Support')
                 this.hideRest()
+                this._supportTemplateHidden = "";
                 break;
             }
-            case "Uitloggen": {
-                console.log('Uitloggen')
+            case "Logout": {
+                console.log('Logout')
                 this.hideRest()
+                this._logoutTemplateHidden = "";
+                break;
+            }
+            case "Login": {
+                console.log('Login')
+                this.hideRest()
+                this._loginTemplateHidden = "";
                 break;
             }
             case "nope":
@@ -167,11 +185,13 @@ export class CompiledTemplates extends LitElement {
     }
 
     hideRest() {
+        this._homePageTemplateHidden = "hidden";
         this._loginTemplateHidden = "hidden";
         this._invoerenTemplateHidden = "hidden";
         this._invoerenTemplateHidden = "hidden";
         this._reisGeschiedenisTemplateHidden = "hidden";
         this._accountInfoTemplateHidden = "hidden";
+        this._supportTemplateHidden = "hidden";
     }
 }
 

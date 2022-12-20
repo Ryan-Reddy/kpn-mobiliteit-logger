@@ -1,4 +1,5 @@
-import { LitElement, html, customElement, property, css } from 'lit-element';
+import {css, html, LitElement} from 'lit'
+import {property} from "lit-element";
 
 /**
  * An example element.
@@ -6,15 +7,10 @@ import { LitElement, html, customElement, property, css } from 'lit-element';
  * @slot - This element has a slot
  * @csspart button - The button
  */
-@customElement('nav-menu')
-export class NavMenu extends LitElement {
-  @property() naamGebruiker = 'Hans Fumphriehd';
-  @property() kpnLogo = '/public/branding/kpn-logo2-jpeg.jpg';
+export class MyElement extends LitElement {
   @property() currentPage: string;
-
   constructor() {
-    super();
-    this.onLoad();
+    super()
   }
 
   static get styles() {
@@ -35,27 +31,31 @@ export class NavMenu extends LitElement {
 
     }
     
-    .entire_menu_bar {
+    footer {
+        width: 100%;
         height: 8em;
         border: 1px solid black;
-        background-color: #151617;
     
-        position: relative;
+        bottom: 0;
+        position: fixed;
         overflow: hidden;
         padding: 1rem 1.5rem;
       
         display: flex;
         justify-content: space-between;
         align-items: center;
+        background-color: #151617;
+        color: white;
+        opacity: 1;
     }
     
-    .ingelogd_als {
+    input {
         width: 176px;
-        color: yellow;
         position: relative;
         left: 1em;
         font-family: Fira Code;
         font-size: 12px;
+        opacity: 1;
         text-align: left;
     }
     
@@ -63,14 +63,12 @@ export class NavMenu extends LitElement {
     float: right;
     margin-right: 8em;
             padding-right: 0 8em;
-
     }
     
     nav ul li{
     display: inline-block;
     line-height: 8em;
     margin: 0 5px;
-    
     }
     
     nav ul li a{
@@ -78,29 +76,17 @@ export class NavMenu extends LitElement {
     border-radius: 3px;
     text-transform: uppercase;
     padding: 5px;
-   
     }
-    
     a.active, a:hover {
       background: red;
       transition: .5s;
-      
     }  
-     
-    
     .nav-button {
         opacity: 1;
         text-align: center;
     }
-    
-    .nav-logo {
-        object-fit: cover;
-        height: 5em;
-        opacity: 1;
-        position: absolute;
-        right: 2em;
-        overflow: hidden;
-        padding: 0 2em;
+    li {        
+        list-style: none;    
     }
     
     #check{
@@ -145,61 +131,27 @@ export class NavMenu extends LitElement {
     #check:checked ~ul{
     left: 0;
     }
-    `;
-  }
-
-  script() {
-    let script = document.createElement('script');
-    script.onload = this.onLoad.bind(this);
-    script.src = 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js';
-    return script;
-  }
-
-  onLoad() {
-    // alert('loaded nav-menu');
+    `
   }
 
   render() {
-    // TODO create response menu with: https://www.codingnepalweb.com/responsive-dropdown-menu-bar-html-css/
+
     return html`
-      <body id="bodyofmenubar">
-        <a href="#" class="ingelogd_als">ingelogd als ${this.naamGebruiker}</a>
-        <div class="entire_menu_bar">
-          <img
-            href="#"
-            src="${this.kpnLogo}"
-            alt="kpn-logo-zwart-op-wit"
-            class="nav-logo"
-          />
+        <footer>
           <nav>
-            <input type="checkbox" id="check" />
-            <label for="check">
-              <i class="fas fa-bars"></i>
-            </label>
-            <ul @click=${this._clickMenu} id="nope">
-              <li>
-                <a class="nav-button" href="#" id="home-page">Home</a>
-              </li>
-              <li>
-                <a class="nav-button" href="#" id="Reis Registreren"
-                  >Reis Registreren</a
-                >
-              </li>
-              <li>
-                <a class="nav-button" href="#" id="Reisgeschiedenis"
-                  >Reisgeschiedenis</a
-                >
-              </li>            
-              <li><a class="nav-button" href="#" id="Account">Account</a></li>
-              <li><a class="nav-button" href="#" id="Support">Support</a></li>
-              <li>
-                <a class="nav-button" href="#" id="Uitloggen">Uitloggen</a>
-              </li>
-            </ul>
+
+          <ul @click=${this._clickMenu} id="nope">
+            <li>
+              <a class="nav-button" href="#" id="Login">Log in</a>
+            </li>
+            <li><a class="nav-button" href="#" id="Support">Support</a></li>
+            <li>
+              <a class="nav-button" href="#" id="Logout">Log out</a>
+            </li>
+          </ul>
           </nav>
-        </div>
-      </body>
-    `;
+        </footer>
+    `
   }
 
   _clickMenu(e: Event) {
@@ -219,4 +171,4 @@ export class NavMenu extends LitElement {
   }
 }
 
-// window.customElements.define('nav-menu', MyElement)
+window.customElements.define('footer-menu', MyElement)

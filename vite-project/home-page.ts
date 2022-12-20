@@ -1,4 +1,5 @@
 import {LitElement, css, html} from 'lit'
+import {customElement} from 'lit-element';
 
 /**
  * An example element.
@@ -6,16 +7,10 @@ import {LitElement, css, html} from 'lit'
  * @slot - This element has a slot
  * @csspart button - The button
  */
-export class MyElement extends LitElement {
+@customElement('home-page')
+export class HomePage extends LitElement {
   constructor() {
     super()
-  }
-
-  static get properties() {
-    return {
-      // docsHint: { type: String },
-      // count: { type: Number },
-    }
   }
 
   static get styles() {
@@ -94,9 +89,11 @@ export class MyElement extends LitElement {
   render() {
 
     return html`
+      <header>
+        <h1 class="header">Welkom bij de KNP medewerkers mobiliteits APP!</h1>
+      </header>
         <body>
         <main>
-        <h1 class="header">Welkom bij de KNP medewerkers mobiliteits APP!</h1>
         <ul>
             // FOR TEST PURPOSE ONLY:
             <li>
@@ -138,10 +135,4 @@ export class MyElement extends LitElement {
       </body>
     `
   }
-
-  _onClick() {
-    this.count++
-  }
 }
-
-window.customElements.define('home-page', MyElement)

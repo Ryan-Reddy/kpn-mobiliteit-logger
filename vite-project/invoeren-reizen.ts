@@ -49,17 +49,19 @@ export class InvoerenReizen extends LitElement {
         }
         .full { 
         width: 100%; 
+        height: 100%; 
+        overflow: auto
         }
-
-        header {
+        
+        H1 {
         padding-top: 1em;
         font-size: 2em;
         padding-bottom: 0.5em;
         }
         header p{
-          font-size: 0.5em;
+          font-size: 1em;
         }
-      
+        
         table {
             padding: 1em;
             background: slateblue;
@@ -140,9 +142,7 @@ export class InvoerenReizen extends LitElement {
 
   render() {
     return html`
-        <html>
         <header>
-
             <H1>Welkom,</H1>
             <br>
             <p>vul hieronder zo nauwkeurig mogelijk uw reis in:</p>
@@ -301,7 +301,6 @@ export class InvoerenReizen extends LitElement {
             </span>
         </main>
         </body>
-        </html>
     `
   }
 
