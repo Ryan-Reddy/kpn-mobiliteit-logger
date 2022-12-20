@@ -62,8 +62,6 @@ export class CompiledTemplates extends LitElement {
         padding: 2rem;
         text-align: center;
       }
-
-      
       .hidden {
             display: none;
             pointer-events: none;
@@ -85,19 +83,15 @@ export class CompiledTemplates extends LitElement {
             <div class=${this._homePageTemplateHidden}>${this._homePageTemplate()}</div>
             <div class=${this._invoerenTemplateHidden}>${this._invoerenTemplate()}</div>
             <div class=${this._reisGeschiedenisTemplateHidden}>${this._overzichtTemplate()}</div>
-            <div class=${this._loginTemplateHidden}>${this._loginTemplate()}
-            <div class=${this._logoutTemplateHidden}>${this._loginTemplate()}
-            </div>
+            <div class=${this._loginTemplateHidden}>${this._loginTemplate()}</div>
+            <div class=${this._logoutTemplateHidden}>${this._loginTemplate()}</div>
             <div class=${this._supportTemplateHidden}>${this._supportTemplate()}</div>
             <div class=${this._thermometerTemplateHidden}>${this._thermometerTemplate()}</div>
             <div class=${this._accountInfoTemplateHidden}>${this._accountInfoTemplate()}</div>
             <div class=${this._passwordResetTemplateHidden}>${this._resetPasswordTemplate()}</div>
             <div class=${this._newAccountTemplateHidden}>${this._newAccountTemplate()}</div
-                
-
-            <br/><br/><br/><br/><br/>
-            <br/>
-
+            
+            <footer-menu></footer-menu>
             <footer-menu @page-chosen=${this._onCurrentPageChanged}></footer-menu>
             </body>
         `;

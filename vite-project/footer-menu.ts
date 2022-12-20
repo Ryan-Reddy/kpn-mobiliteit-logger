@@ -30,7 +30,6 @@ export class MyElement extends LitElement {
         color: white;
         font-size: 1em;
         opacity: 1;
-
     }
     
     footer {
@@ -139,14 +138,16 @@ export class MyElement extends LitElement {
   render() {
 
     return html`
+      
         <footer>
           <nav>
-
           <ul @click=${this._clickMenu} id="nope">
             <li>
               <a class="nav-button" href="#" id="Login">Log in</a>
             </li>
-            <li><a class="nav-button" href="#" id="Support">Support</a></li>
+            <li>
+              <a class="nav-button" href="#" id="Support">Support</a>
+            </li>
             <li>
               <a class="nav-button" href="#" id="Logout">Log out</a>
             </li>
