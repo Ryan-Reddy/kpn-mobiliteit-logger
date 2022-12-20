@@ -101,35 +101,31 @@ export class CompiledTemplates extends LitElement {
     _onCurrentPageChanged(event: Event) {
         console.log('_onCurrentPageChanged()')
         const target = event.target as NavMenu;
+        this.hideRest()
         this._currentPage = target.currentPage;
         switch (this._currentPage) {
             case "home-page": {
-                this.hideRest()
                 console.log('home case')
                 this._homePageTemplateHidden = "";
                 break;
             }
             case "Reis Registreren": {
-                this.hideRest()
                 console.log('reis registeren case')
                 this._invoerenTemplateHidden = "";
 
                 break;
             }
             case "Reisgeschiedenis": {
-                this.hideRest()
                 console.log('reis registeren case')
                 this._reisGeschiedenisTemplateHidden = "";
                 break;
             }
             case "Account": {
-                this.hideRest()
                 console.log('Account')
                 this._accountInfoTemplateHidden = "";
                 break;
             }
             case "Support": {
-                this.hideRest()
                 console.log('Support')
                 this._supportTemplateHidden = "";
                 break;
@@ -137,25 +133,21 @@ export class CompiledTemplates extends LitElement {
             // TODO: Logout needs work in compiled-templates.ts
             case "Logout": {
                 console.log('Logout needs work in compiled-templates.ts')
-                this.hideRest()
                 this._logoutTemplateHidden = "";
                 break;
             }
             case "Login": {
                 console.log('Login')
-                this.hideRest()
                 this._loginTemplateHidden = "";
                 break;
             }
             case "password-reset": {
                 console.log('password-reset')
-                this.hideRest()
                 this._passwordResetTemplateHidden = "";
                 break;
             }
             case "new-account": {
                 console.log('new-account')
-                this.hideRest()
                 this._newAccountTemplateHidden = "";
                 break;
             }
