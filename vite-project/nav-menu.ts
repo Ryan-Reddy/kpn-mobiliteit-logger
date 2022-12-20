@@ -1,4 +1,4 @@
-import {LitElement, html, customElement, property, css} from 'lit-element';
+import { LitElement, html, customElement, property, css } from 'lit-element';
 
 /**
  * An example element.
@@ -9,10 +9,10 @@ import {LitElement, html, customElement, property, css} from 'lit-element';
 @customElement('nav-menu')
 export class NavMenu extends LitElement {
   @property() naamGebruiker = 'Hans Fumphriehd';
-  @property() kpnLogo = "/public/branding/kpn-logo2-jpeg.jpg"
+  @property() kpnLogo = '/public/branding/kpn-logo2-jpeg.jpg';
   @property() currentPage: String;
   constructor() {
-    super()
+    super();
     this.onLoad();
   }
 
@@ -144,7 +144,7 @@ export class NavMenu extends LitElement {
     #check:checked ~ul{
     left: 0;
     }
-    `
+    `;
   }
 
   script() {
@@ -160,42 +160,61 @@ export class NavMenu extends LitElement {
   render() {
     // TODO create response menu with: https://www.codingnepalweb.com/responsive-dropdown-menu-bar-html-css/
     return html`
-        <body id="bodyofmenubar">
+      <body id="bodyofmenubar">
         <a href="#" class="ingelogd_als">ingelogd als ${this.naamGebruiker}</a>
         <div class="entire_menu_bar">
-            <img href="#" src="${this.kpnLogo}" alt="kpn-logo-zwart-op-wit" class="nav-logo">
-            <nav>
-                <input type="checkbox" id="check">
-                <label for="check">
-                    <i class="fas fa-bars"></i>
-                </label>
-                    <ul @click=${this._clickMenu}>
-                        <li> <a class="nav-button" href="#"  id='<home-page></home-page>'>Home</a></li>
-                        <li> <a class="nav-button" href="#"  id='Reis Registreren'>Reis Registreren</a></li>
-                        <li> <a class="nav-button" href="#"  id='Reisgeschiedenis'>Reisgeschiedenis</a></li>
-                        <li> <a class="nav-button" href="#"  id='Account'>Account</a></li>
-                        <li> <a class="nav-button" href="#"  id='footer'>Support</a></li>
-                        <li> <a class="nav-button" href="#"  id='Uitloggen'>Uitloggen</a></li>
-                    </ul>
-            </nav>
+          <img
+            href="#"
+            src="${this.kpnLogo}"
+            alt="kpn-logo-zwart-op-wit"
+            class="nav-logo"
+          />
+          <nav>
+            <input type="checkbox" id="check" />
+            <label for="check">
+              <i class="fas fa-bars"></i>
+            </label>
+            <ul @click=${this._clickMenu}>
+              <li>
+                <a class="nav-button" href="#" id="<home-page></home-page>"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a class="nav-button" href="#" id="Reis Registreren"
+                  >Reis Registreren</a
+                >
+              </li>
+              <li>
+                <a class="nav-button" href="#" id="Reisgeschiedenis"
+                  >Reisgeschiedenis</a
+                >
+              </li>
+              <li><a class="nav-button" href="#" id="Account">Account</a></li>
+              <li><a class="nav-button" href="#" id="footer">Support</a></li>
+              <li>
+                <a class="nav-button" href="#" id="Uitloggen">Uitloggen</a>
+              </li>
+            </ul>
+          </nav>
         </div>
-        </body>
-    `
+      </body>
+    `;
   }
 
   _clickMenu(e: Event) {
-    console.log('_dispatchPageLink()')
+    console.log('_dispatchPageLink()');
     // @ts-ignore
     const id = e.target.id;
-    console.log('id= ' + id)
+    console.log('id= ' + id);
 
     const hasChanged = this.currentPage !== id;
 
-    if(hasChanged) {
+    if (hasChanged) {
       this.currentPage = id;
 
       //notify parent:
-      this.dispatchEvent(new Event('page-chosen'))
+      this.dispatchEvent(new Event('page-chosen'));
     }
   }
 }

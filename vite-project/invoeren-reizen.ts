@@ -1,4 +1,5 @@
 import {css, html, LitElement} from 'lit'
+import {property} from "lit-element";
 
 /**
  * An example element.
@@ -7,70 +8,35 @@ import {css, html, LitElement} from 'lit'
  * @csspart button - The button
  */
 export class InvoerenReizen extends LitElement {
+  @property() currentPage = 'invoeren-reizen';
+  @property() nuTijd = '';
+  @property() nuTijdPlus1 = '';
+  @property() eindTijdMin = '';
+  @property() beginTijdMax = '';
+  @property() _hidden = 'true';
+  @property() span_message = '';
+  @property() visibility_hidden_reisklasse = "visibility-hidden";
+  @property() visibility_hidden_zakelijkprive = "visibility-hidden";
+  @property() demovalue = "111 - Demowaarde";
+  @property() demolocatie = "Amsterdam - Demowaarde";
+
+  @property() inputfield = "inputfield";
+
   constructor() {
     super()
-    this.currentPage = 'invoeren-reizen';
 
     let now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    now.setMilliseconds(null)
-    now.setSeconds(null)
+    now.setMilliseconds(0)
+    now.setSeconds(0)
     this.nuTijd = now.toISOString().slice(0, -1);
     let now1 = new Date();
     now1.setMinutes(now.getMinutes() - now.getTimezoneOffset() + 60);
-    now1.setMilliseconds(null)
-    now1.setSeconds(null)
+    now1.setMilliseconds(0)
+    now1.setSeconds(0)
     this.nuTijdPlus1 = now1.toISOString().slice(0, -1);
     this.eindTijdMin = this.nuTijd;
     this.beginTijdMax = this.nuTijd;
-
-    this.hidden = 'true';
-    this.span_message = '';
-
-    this.visibility_hidden_reisklasse = "visibility-hidden";
-    this.visibility_hidden_zakelijkprive = "visibility-hidden";
-
-    this.demovalue = "111 - Demowaarde";
-    this.demolocatie = "Amsterdam - Demowaarde";
-
-    this.inputfield = "inputfield";
-
-
-
-    this.pageNameBubbler();
-  }
-
-  static get properties() {
-    return {
-      currentPage: {type:String},
-
-      /** ingelogde gebruiker */
-      naamGebruiker: {type: String},
-
-      /** logo */
-      kpnLogo: {type: String},
-
-      _reizenContent: {type: String},
-
-      _reizenRegels: {type: String},
-
-      nuTijd: {type: Date},
-      nuTijdPlus1: {type: Date},
-
-      eindTijdMin: {type: Date},
-      eindTijdMax: {type: Date},
-
-      hidden: {type: String},
-
-      span_message: {type: String},
-
-      visibility_hidden_reisklasse: {type: String},
-      visibility_hidden_zakelijkprive: {type: String},
-
-      demovalue: {type: String},
-      demolocatie: {type: String},
-      inputfield: {type: String},
-    }
   }
 
   static get styles() {
@@ -193,7 +159,7 @@ export class InvoerenReizen extends LitElement {
                             <label for="vervoerstype">typeVervoer:</label>
                             <select class="${this.inputfield}" id="vervoerstype" name="vervoerstype" required focus
                                     @change="${this.optionClicked}">
-                                <option disabled hidden="${this.hidden}" selected value="0">"kies hier uw
+                                <option disabled hidden="${this._hidden}" selected value="0">"kies hier uw
                                     vervoerstype!" </option>
                                 <option value="Trein/Metro/Tram">"Trein/Metro/Tram"</option>
                                 <option value="Fiets">"Fiets"</option>
@@ -263,7 +229,7 @@ export class InvoerenReizen extends LitElement {
                         <li class="alleenzakelijk" required>
                             <label for="project">Project:</label>
                             <select class="${this.inputfield}" id="project" name="project">
-                                <option disabled hidden="${this.hidden}" selected value="0">Kies hier het project
+                                <option disabled hidden selected value="0">Kies hier het project
                                     waar u
                                     voor hebt gereisd.
                                 </option>
@@ -325,7 +291,7 @@ export class InvoerenReizen extends LitElement {
                     
                 <label for="resetButton">Herlaad en leeg het formulier.</label>
                 <input id="resetButton" type="reset" value="Reset velden">
-
+                <br>
                 <label for="herhalendeReisButton">Sla op als herhalende reis.</label>
                 <input id="herhalendeReisButton" type="checkbox" value="Reset velden" disabled> Herhalende
                 reis. [under-construction]
@@ -340,7 +306,7 @@ export class InvoerenReizen extends LitElement {
     `
   }
 
-  optionClicked(option) {
+  optionClicked(option: { originalTarget: { value: any; }; }) {
     console.log('optionClicked')
     const data = option.originalTarget.value;
     console.log(data);
@@ -373,21 +339,12 @@ export class InvoerenReizen extends LitElement {
         this.visibility_hidden_reisklasse = "visibility-hidden";
         break;
       default: {
-        reisklasseKeuze.setAttribute("hidden", "false")
-        console.log(switchvalue)
         console.log("Kan de reis type vervoer niet herkennen")
       }
         break;
     }
   };
 
-  pageNameBubbler() {
-    // alert('loaded invoeren-reizen');
-
-    // notify parent:
-
-    this.dispatchEvent(new Event('loaded-page'))
-  }
 
   // get
   formElements() {

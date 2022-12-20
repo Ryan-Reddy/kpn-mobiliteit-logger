@@ -1,4 +1,4 @@
-import {css, html, LitElement} from 'lit'
+import { css, html, LitElement } from 'lit';
 
 // import * as Rx from 'rx-dom';
 
@@ -10,31 +10,46 @@ import {css, html, LitElement} from 'lit'
  */
 export class OverzichtReizen extends LitElement {
   constructor() {
-    super()
-    this.rows = [['Napalm Death', 'Barney Greenway', 1981.25, 'Century Media'], ['Carcass', 'Jeff Walker', '1985', 'Earache'], ['Extreme Noise Terror', 'Dean Jones', '1985', 'Candlelight'], ['Discordance Axis', 'Jon Chang', '1992', 'Hydrahead']];
+    super();
+    this.rows = [
+      ['Napalm Death', 'Barney Greenway', 1981.25, 'Century Media'],
+      ['Carcass', 'Jeff Walker', '1985', 'Earache'],
+      ['Extreme Noise Terror', 'Dean Jones', '1985', 'Candlelight'],
+      ['Discordance Axis', 'Jon Chang', '1992', 'Hydrahead'],
+    ];
     console.log(this.rows);
     this._reizenDummyData = [];
     this._vervoerMiddelDummyData = [];
 
-    this.headers = ['Project', 'Type vervoer', 'Begin', 'Einde', 'Km', 'C02', 'Kosten', 'Wijzig'];
+    this.headers = [
+      'Project',
+      'Type vervoer',
+      'Begin',
+      'Einde',
+      'Km',
+      'C02',
+      'Kosten',
+      'Wijzig',
+    ];
     this.titel = 'Overzicht Reizen';
   }
 
   static get properties() {
     return {
       /** ingelogde gebruiker */
-      naamGebruiker: {type: String},
+      naamGebruiker: { type: String },
 
       /** logo */
-      kpnLogo: {type: String},
+      kpnLogo: { type: String },
 
-      _vervoerMiddelDummyData: {type: String},
+      _vervoerMiddelDummyData: { type: String },
 
-      _reizenDummyData: {type: String},
+      _reizenDummyData: { type: String },
 
-      rows: {type: String}, headers: {type: Array}, caption: {type: String}
-
-    }
+      rows: { type: String },
+      headers: { type: Array },
+      caption: { type: String },
+    };
   }
 
   static get styles() {
@@ -77,7 +92,7 @@ export class OverzichtReizen extends LitElement {
       display: none;
     }
         
-    `
+    `;
   }
 
   connectedCallback() {
@@ -85,17 +100,17 @@ export class OverzichtReizen extends LitElement {
     // TODO insert ajax rsjx json file observer
     //
     fetch('/vervoermiddel-CO2.json')
-      .then(response => response.json())
+      .then((response) => response.json())
       .then((json) => {
-        this._vervoerMiddelDummyData = Array.from(json)
-        console.log(this._vervoerMiddelDummyData)
+        this._vervoerMiddelDummyData = Array.from(json);
+        console.log(this._vervoerMiddelDummyData);
       });
     // }
     fetch('/dummydata-reizen.json')
-      .then(response => response.json())
+      .then((response) => response.json())
       .then((json) => {
-        this._reizenDummyData = Array.from(json)
-        console.log(this._reizenDummyData)
+        this._reizenDummyData = Array.from(json);
+        console.log(this._reizenDummyData);
       });
     // }
   }
@@ -103,47 +118,47 @@ export class OverzichtReizen extends LitElement {
   //TODO: make tableToCSV work with lit
   // https://www.geeksforgeeks.org/how-to-export-html-table-to-csv-using-javascript/
   tableToCSV() {
-  //   console.log('tableToCSV');
-  //   // Variable to store the final csv data
-  //   var csv_data = [];
-  //   // Get each row data
-  //   var rows = document.getElementsByTagName('tr');
-  //   for (var i = 0; i < rows.length; i++) {
-  //     // Get each column data
-  //     var cols = rows[i].querySelectorAll('td,th');
-  //     // Stores each csv row data
-  //     var csvrow = [];
-  //     for (var j = 0; j < cols.length; j++) {
-  //       // Get the text data of each cell of a row and push it to csvrow
-  //       csvrow.push(cols[j].innerHTML);
-  //     }
-  //     csv_data.push(csvrow.join(","));
-  //   }
-  //   csv_data = csv_data.join('\n');
-  // }
-  //
-  // downloadCSVFile(csv_data) {
-  //
-  //   // Create CSV file object and feed our
-  //   // csv_data into it
-  //   let CSVFile = new Blob([csv_data], { type: "text/csv" });
-  //
-  //   // Create to temporary link to initiate
-  //   // download process
-  //   var temp_link = document.createElement('a');
-  //
-  //   // Download csv file
-  //   temp_link.download = "GfG.csv";
-  //   var url = window.URL.createObjectURL(CSVFile);
-  //   temp_link.href = url;
-  //
-  //   // This link should not be displayed
-  //   temp_link.style.display = "none";
-  //   document.body.appendChild(temp_link);
-  //
-  //   // Automatically click the link to trigger download
-  //   temp_link.click();
-  //   document.body.removeChild(temp_link);
+    //   console.log('tableToCSV');
+    //   // Variable to store the final csv data
+    //   var csv_data = [];
+    //   // Get each row data
+    //   var rows = document.getElementsByTagName('tr');
+    //   for (var i = 0; i < rows.length; i++) {
+    //     // Get each column data
+    //     var cols = rows[i].querySelectorAll('td,th');
+    //     // Stores each csv row data
+    //     var csvrow = [];
+    //     for (var j = 0; j < cols.length; j++) {
+    //       // Get the text data of each cell of a row and push it to csvrow
+    //       csvrow.push(cols[j].innerHTML);
+    //     }
+    //     csv_data.push(csvrow.join(","));
+    //   }
+    //   csv_data = csv_data.join('\n');
+    // }
+    //
+    // downloadCSVFile(csv_data) {
+    //
+    //   // Create CSV file object and feed our
+    //   // csv_data into it
+    //   let CSVFile = new Blob([csv_data], { type: "text/csv" });
+    //
+    //   // Create to temporary link to initiate
+    //   // download process
+    //   var temp_link = document.createElement('a');
+    //
+    //   // Download csv file
+    //   temp_link.download = "GfG.csv";
+    //   var url = window.URL.createObjectURL(CSVFile);
+    //   temp_link.href = url;
+    //
+    //   // This link should not be displayed
+    //   temp_link.style.display = "none";
+    //   document.body.appendChild(temp_link);
+    //
+    //   // Automatically click the link to trigger download
+    //   temp_link.click();
+    //   document.body.removeChild(temp_link);
   }
 
   render() {
@@ -174,18 +189,20 @@ export class OverzichtReizen extends LitElement {
 
     </thead>
     <tbody>
-    ${this._reizenDummyData.map((row, index) => html`
+    ${this._reizenDummyData.map(
+      (row, index) => html`
         <tr>
-            <th class="hiddensmolscreen">${row.project}</th>
-            <th>${row.type}</th>
-            <th>${row.begin}</th>
-            <th class="hiddensmolscreen">${row.eind}</th>
-            <th>${row.km}</th>
-            <th class="hiddensmolscreen">${row.uitstoot}</th>
-            <th class="hiddensmolscreen">${row.kosten}</th>
-            <th><a href="#">Wijzig</a></th>
+          <th class="hiddensmolscreen">${row.project}</th>
+          <th>${row.type}</th>
+          <th>${row.begin}</th>
+          <th class="hiddensmolscreen">${row.eind}</th>
+          <th>${row.km}</th>
+          <th class="hiddensmolscreen">${row.uitstoot}</th>
+          <th class="hiddensmolscreen">${row.kosten}</th>
+          <th><a href="#">Wijzig</a></th>
         </tr>
-    `)}
+      `
+    )}
     </tbody>
     </table>
                 
@@ -199,8 +216,8 @@ export class OverzichtReizen extends LitElement {
 
         </body>
         </html>
-    `
+    `;
   }
 }
 
-window.customElements.define('overzicht-reizen', OverzichtReizen)
+window.customElements.define('overzicht-reizen', OverzichtReizen);

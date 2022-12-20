@@ -4,7 +4,7 @@ import '../footer-menu.js';
 import '../home-page-test.js';
 import '../nav-menu.ts';
 import '../overzicht-reizen.js';
-import '../invoeren-reizen.js';
+import '../invoeren-reizen.ts';
 
 /**
  * An example element.
