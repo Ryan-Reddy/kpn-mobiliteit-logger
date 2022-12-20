@@ -33,6 +33,10 @@ export class SupportElement extends LitElement {
     background-color: grey;
     required: invalid;
     }
+    button {
+    width: 66%;
+    height: 2em;
+    }
     `
     }
 

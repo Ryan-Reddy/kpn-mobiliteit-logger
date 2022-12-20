@@ -9,7 +9,7 @@ import './thermometer.js';
 import './login.ts';
 import './account-info.ts';
 import './support.ts';
-import {eventOptions, property} from 'lit-element';
+import {eventOptions, property, customElement} from 'lit-element';
 import {NavMenu} from './nav-menu';
 
 /**
@@ -18,17 +18,20 @@ import {NavMenu} from './nav-menu';
  * @slot - This element has a slot
  * @csspart button - The button
  */
+@customElement('compiled-templates')
 export class CompiledTemplates extends LitElement {
     @property() _currentPage: string;
-    @property() _homePageTemplateHidden= "";
+    @property() _homePageTemplateHidden = "";
     @property() _invoerenTemplateHidden = "hidden";
     @property() _reisGeschiedenisTemplateHidden = "hidden";
     @property() _loginTemplateHidden = "hidden";
-    @property() _logoutTemplateHidden= "hidden";
+    @property() _logoutTemplateHidden = "hidden";
     @property() _accountInfoTemplateHidden = "hidden";
     @property() _overzichtTemplateHidden = "hidden";
     @property() _thermometerTemplateHidden = "hidden";
     @property() _supportTemplateHidden = "hidden";
+    @property() _passwordResetTemplateHidden = "hidden";
+    @property() _newAccountTemplateHidden = "hidden";
 
     constructor() {
         super();
@@ -76,59 +79,25 @@ export class CompiledTemplates extends LitElement {
             ${this.headerTemplate()}
 
             <body>
-            <div class=${this._homePageTemplateHidden}>${this.homePageTemplate()}</div>
-            <div class=${this._invoerenTemplateHidden}>${this.invoerenTemplate()}</div>
-            <div class=${this._reisGeschiedenisTemplateHidden}>${this.overzichtTemplate()}</div>
-            <div class=${this._loginTemplateHidden}>${this.loginTemplate()}</div>
-            <div class=${this._supportTemplateHidden}>${this.supportTemplate()}</div>
-            <div class=${this._accountInfoTemplateHidden}>${this.accountInfoTemplate()}</div>
+            <div class=${this._homePageTemplateHidden}>${this._homePageTemplate()}</div>
+            <div class=${this._invoerenTemplateHidden}>${this._invoerenTemplate()}</div>
+            <div class=${this._reisGeschiedenisTemplateHidden}>${this._overzichtTemplate()}</div>
+            <div class=${this._loginTemplateHidden}>${this._loginTemplate()}
+            </div>
+            <div class=${this._supportTemplateHidden}>${this._supportTemplate()}</div>
+            <div class=${this._thermometerTemplateHidden}>${this._thermometerTemplate()}</div>
+            <div class=${this._accountInfoTemplateHidden}>${this._accountInfoTemplate()}</div>
+            <div class=${this._passwordResetTemplateHidden}>${this._resetPasswordTemplate()}</div>
+            <div class=${this._newAccountTemplateHidden}>${this._newAccountTemplate()}</div
+
             <br/><br/><br/><br/><br/>
             <br/>
-            ${this.thermometerTemplate()}
 
             <footer-menu @page-chosen=${this._onCurrentPageChanged}></footer-menu>
             </body>
         `;
     }
-    headerTemplate() {
-        return html`            <header>
-            <title>KPN-222</title>
-            <H1>${this._currentPage}</H1>
-        </header>`;
-    }
-    homePageTemplate() {
-        return html`
-            <home-page></home-page>`;
-    }
 
-    overzichtTemplate() {
-        return html`
-            <overzicht-reizen></overzicht-reizen>`;
-    }
-
-    invoerenTemplate() {
-        return html`
-            <invoeren-reizen id="invoeren-reizen"></invoeren-reizen>`;
-    }
-
-    thermometerTemplate() {
-        return html`
-            <thermometer></thermometer>`;
-    }
-
-    loginTemplate() {
-        return html`
-            <login-element></login-element>`;
-    }
-    supportTemplate() {
-        return html`
-            <support-element></support-element>`;
-    }
-
-    accountInfoTemplate() {
-        return html`
-            <account-element></account-element>`;
-    }
 
     _onCurrentPageChanged(event: Event) {
         console.log('_onCurrentPageChanged()')
@@ -178,10 +147,75 @@ export class CompiledTemplates extends LitElement {
                 this._loginTemplateHidden = "";
                 break;
             }
+            case "password-reset": {
+                console.log('password-reset')
+                this.hideRest()
+                this._passwordResetTemplateHidden = "";
+                break;
+            }
+            case "new-account": {
+                console.log('new-account')
+                this.hideRest()
+                this._newAccountTemplateHidden = "";
+                break;
+            }
             case "nope":
                 console.log('nope')
                 break;
         }
+    }
+
+    headerTemplate() {
+        return html`
+            <header>
+                <title>KPN-222</title>
+                <H1>${this._currentPage}</H1>
+            </header>`;
+    }
+
+    _homePageTemplate() {
+        return html`
+            <home-page></home-page>`;
+    }
+
+    _overzichtTemplate() {
+        return html`
+            <overzicht-reizen></overzicht-reizen>`;
+    }
+
+    _invoerenTemplate() {
+        return html`
+            <invoeren-reizen id="invoeren-reizen"></invoeren-reizen>`;
+    }
+
+    _thermometerTemplate() {
+        return html`
+            <thermometer></thermometer>`;
+    }
+
+    _loginTemplate() {
+        return html`
+            <login-element @page-chosen=${this._onCurrentPageChanged}></login-element>`;
+    }
+
+    _supportTemplate() {
+        return html`
+            <support-element></support-element>`;
+    }
+
+    _accountInfoTemplate() {
+        return html`
+            <account-element></account-element>`;
+    }
+
+    _newAccountTemplate() {
+        return html`
+            <new-account></new-account>`;
+    }
+
+    _resetPasswordTemplate() {
+        return html`
+            <reset-password></reset-password>`;
     }
 
     hideRest() {
@@ -192,7 +226,7 @@ export class CompiledTemplates extends LitElement {
         this._reisGeschiedenisTemplateHidden = "hidden";
         this._accountInfoTemplateHidden = "hidden";
         this._supportTemplateHidden = "hidden";
+        this._passwordResetTemplateHidden = "hidden";
+        this._newAccountTemplateHidden = "hidden";
     }
 }
-
-window.customElements.define('compiled-templates', CompiledTemplates);

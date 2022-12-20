@@ -1,5 +1,5 @@
 import {css, html, LitElement} from 'lit'
-import {property} from "lit-element";
+import {customElement, property} from "lit-element";
 
 /**
  * An example element.
@@ -7,8 +7,10 @@ import {property} from "lit-element";
  * @slot - This element has a slot
  * @csspart button - The button
  */
+@customElement('footer-menu')
 export class MyElement extends LitElement {
   @property() currentPage: string;
+
   constructor() {
     super()
   }
@@ -171,4 +173,3 @@ export class MyElement extends LitElement {
   }
 }
 
-window.customElements.define('footer-menu', MyElement)

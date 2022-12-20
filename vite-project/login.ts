@@ -10,7 +10,7 @@ import {customElement, property} from "lit-element";
 
 @customElement('login-element')
 export class Login extends LitElement {
-    @property() currentPage = 'Reis Registreren';
+    @property() currentPage: string;
 
     constructor() {
         super()
@@ -116,59 +116,71 @@ export class Login extends LitElement {
     `
     }
 
-
     render() {
         return html`
-            <header>
+                    <body>
+                    <div id="page-container">
+                        <main>
+                            <div id="content-wrap">
+                                <form id="login_account">
+                                    <ul>
+                                        <li>
+                                            <label for="email">Email:</label>
+                                            <input autocomplete="email" class="inputfield" id="email" name="email"
+                                                   required type="email"
+                                                   width="50%"/><br>
+                                        </li>
+                                        <li>
+                                            <label for="password">Wachtwoord:</label>
+                                            <input autocomplete="password" class="inputfield" id="password"
+                                                   name="password" required
+                                                   type="password"/><br><br>
+                                        </li>
+                                        <li>
 
-            <h1 class="header">Log in</h1>
-                <header>
+                                            <input id="login()_button" @click=${this._login} type="button"
+                                                   value="login()_button"/>
+                                        </li>
+                                    </ul>
 
-            <body>
-            <div id="page-container">
-                <main>
-                    <div id="content-wrap">
-                        <form id="login_account">
-                            <ul>
-                                <li>
-                                    <label for="email">Email:</label>
-                                    <input autocomplete="email" class="inputfield" id="email" name="email" required type="email"
-                                           width="50%"/><br>
-                                </li>
-                                <li>
-                                    <label for="password">Wachtwoord:</label>
-                                    <input autocomplete="password" class="inputfield" id="password" name="password" required
-                                           type="password"/><br><br>
-                                </li>
-                            </ul>
-                            <input id="login()_button" @click=${this._login} type="button" value="login()_button"/>
-                            <span id="postresponse"></span>
-                            <br><br>
-                            <a href="/reset-account/index.html">Wachtwoord vergeten</a>
+                                </form>
+                                <span id="postresponse"></span>
 
-                            <hr>
-                        </form>
+                                <br><br>
+                                <div @click=${this._clickMenu} id="nope">
+                                        <a class="nav-button" href="#" id="password-reset">Wachtwoord vergeten</a>
+                                    ||
+                                        <a class="nav-button" href="#" id="new-account">Nieuw account creëren</a>
+                                </div>
 
-                        <a href="../new-account/index.html">
-                            <button>Nieuw account creëren</button>
-                        </a>
+                            </div>
+                        </main>
                     </div>
-                </main>
-
-            </div>
-            </body>
+                    </body>
 
         `
     }
+
     // _login(e: Event) {
     _login() {
-        console.log("login.login()")
-        this.currentPage = "Reis Registreren";
-
-        //notify parent:
-        this.dispatchEvent(new Event('page-chosen'));
+        console.log("login.login() neeeeds work")
     }
 
+    _clickMenu(e: Event) {
+        // @ts-ignore
+        const id = e.target.id;
+        console.log('id= ' + id);
+        this.currentPage = id;
+
+        // const hasChanged = this.currentPage !== id;
+        // if (hasChanged) {
+            this.currentPage = id;
+            console.log('currentPage now: ' + this.currentPage);
+
+            //notify parent:
+            this.dispatchEvent(new Event('page-chosen'));
+        // }
+    }
 
 
 }

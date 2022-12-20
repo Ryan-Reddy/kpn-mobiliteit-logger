@@ -117,14 +117,7 @@ async function sendNewAccount(event) {
  */
 function switchIncompleteNormaleStijl(id) {
   const fromIdElement = document.getElementById('id');
-
   fromIdElement.classList.toggle('inputfield');
-  // // const typeAttribute = fromIdElement.getAttribute('class');
-  // fromIdElement.classList.replace("formIncomplete",'inputfield');
-
-  // // if(typeAttribute==="formIncomplete") {
-  //     fromIdElement.setAttribute('class','inputfield');
-  // // }
 }
 
 /** Deze functie togglet de zichtbaarheid van het wachtwoord heen en weer
