@@ -93,12 +93,16 @@ export class OverzichtReizen extends LitElement {
          color: var(--kpn-zwart);
          background-color: var(--kpn-wit);
     }
+
      table {
-         color: var(--kpn-zwart);
-    }
-     .columnHeads {
-         background-color: var(--kpn-wit);
-    }
+     background: var(--kpn-wit);
+     border: 1px solid var(--kpn-zwart);
+     border-color: var(--kpn-wit);
+
+     }
+      th {
+     border-bottom: 1px dotted var(--kpn-zwart);
+}
 }
 
                         

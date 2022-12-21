@@ -33,17 +33,17 @@ export class MyElement extends LitElement {
     }
     
     footer {
-        // width: 100%;
-        // height: 8em;
-        // bottom: 0;
-        // position: fixed;
+    / / width: 100 %;
+    / / height: 8 em;
+    / / bottom: 0;
+    / / position: fixed;
         padding: 1rem 1.5rem;
     
         overflow: hidden;
         display: flex;
         justify-content: space-between;
         align-items: center;
-      
+    
         border: 1px solid var(--kpn-zwart);
         background-color: var(--kpn-zwart);
         color: var(--kpn-wit);
@@ -61,75 +61,94 @@ export class MyElement extends LitElement {
     }
     
     nav ul {
-    float: right;
-    margin-right: 8em;
-            padding-right: 0 8em;
+        float: right;
+        margin-right: 8em;
+        padding-right: 0 8em;
     }
     
-    nav ul li{
-    display: inline-block;
-    line-height: 8em;
-    margin: 0 5px;
+    nav ul li {
+        display: inline-block;
+        line-height: 8em;
+        margin: 0 5px;
     }
     
-    nav ul li a{
-    color: var(--kpn-wit);
-    border-radius: 3px;
-    text-transform: uppercase;
-    padding: 5px;
+    nav ul li a {
+        color: var(--kpn-wit);
+        border-radius: 3px;
+        text-transform: uppercase;
+        padding: 5px;
     }
+    
     a.active, a:hover {
-      background: var(--kpn-groen);
-      transition: .5s;
-    }  
+        background: var(--kpn-groen);
+        transition: .5s;
+    }
+    
     .nav-button {
         opacity: 1;
         text-align: center;
     }
-    li {        
-        list-style: none;    
+    
+    li {
+        list-style: none;
     }
     
-    #check{
-    display: none;
+    #check {
+        display: none;
     }
     
     @media (max-width: 952px) {
-    .nav-logo {
-        height: 3em;
-      padding-left: 50px;
-      }
-      nav ul li a{
-        font-size: 10px;
-        display: inline-block;
-        line-height: 8em;
-        margin: 0 1em;
+        .nav-logo {
+            height: 3em;
+            padding-left: 50px;
+        }
+    
+        nav ul li a {
+            font-size: 10px;
+            display: inline-block;
+            line-height: 8em;
+            margin: 0 1em;
+        }
     }
     
     @media (max-width: 858px) {
-      .checkbtn {
-      display: block;
-      }
-      u: {
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      top: 80px;
-      left: -100%;
-      text-align: center;
-      transition: all .5s;
-      }
-      nav ul li {
-        display: block;
-      }
-      nav ul li a {
-        font-size: 20px;
-     }
-     a:hover, a.active {
-      background: none;
+        .checkbtn {
+            display: block;
+        }
+    
+        u: {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            top: 80px;
+            left: -100%;
+            text-align: center;
+            transition: all .5s;
+        }
+    
+        nav ul li {
+            display: block;
+        }
+    
+        nav ul li a {
+            font-size: 20px;
+        }
+    
+        a:hover, a.active {
+            background: none;
+        }
+    
+        #check:checked ~ ul {
+            left: 0;
+        }
     }
-    #check:checked ~ul{
-    left: 0;
+    
+    @media (prefers-color-scheme: light) {
+        footer, nav ul li a {
+            color: var(--kpn-zwart);
+            background-color: var(--kpn-wit);
+            border-color: var(--kpn-wit);
+        }
     }
     `
   }

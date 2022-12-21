@@ -40,5 +40,15 @@ body {
     :root {
         color: var(--kpn-zwart);
         background-color: var(--kpn-wit);
+
     }
+    table {
+        color: var(--kpn-wit);
+        background: var(--kpn-wit);
+    }
+    :root .entire_menu_bar {
+        color: var(--kpn-wit);
+        background-color: var(--kpn-wit);
+    }
+
 }
