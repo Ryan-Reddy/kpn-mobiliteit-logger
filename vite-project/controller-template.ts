@@ -66,10 +66,14 @@ export class ControllerTemplate extends LitElement {
         margin: 0 auto;
         padding: 2rem;
       }
+      
+      body {
+        padding: 10em;
+      }
 
-      page-container {
-        position: relative;
+      #page-container {
         min-height: 100%;
+        padding: 2em;        
       }
 
       footer-menu {
@@ -87,6 +91,7 @@ export class ControllerTemplate extends LitElement {
         background-color: grey;
         required: invalid;
       }
+      
     `;
   }
 

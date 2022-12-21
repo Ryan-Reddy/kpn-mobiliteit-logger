@@ -199,45 +199,45 @@ export class OverzichtReizen extends LitElement {
                   ${this.titel}
                 </caption>
                 <thead>
-                  <tr @click=${this.headerClicked}>
+                  <tr @click=${this.headerClicked} class="columnHeads"
+                  >
                     <th
-                            class="columnHeads"
                             id=${this.headers[0]}
                             class="hiddensmolscreen"
                     >
                       ${this.headers[0]} &#5167;&#5169;
                     </th>
-                    <th class="columnHeads" id=${this.headers[1]}>
+                    <th id=${this.headers[1]}>
                       ${this.headers[1]} &#5167;&#5169;
                     </th>
-                    <th class="columnHeads" id=${this.headers[2]}>
+                    <th id=${this.headers[2]}>
                       ${this.headers[2]} &#5167;&#5169;
                     </th>
                     <th
-                            class="columnHeads"
+                           
                             id=${this.headers[3]}
                             class="hiddensmolscreen"
                     >
                       ${this.headers[3]} &#5167;&#5169;
                     </th>
-                    <th class="columnHeads" id=${this.headers[4]}>
+                    <th id=${this.headers[4]}>
                       ${this.headers[4]} &#5167;&#5169;
                     </th>
                     <th
-                            class="columnHeads"
+                           
                             id=${this.headers[5]}
                             class="hiddensmolscreen"
                     >
                       ${this.headers[5]} &#5167;&#5169;
                     </th>
                     <th
-                            class="columnHeads"
+                           
                             id=${this.headers[6]}
                             class="hiddensmolscreen"
                     >
                       ${this.headers[6]} &#5167;&#5169;
                     </th>
-                    <th class="columnHeads" id=${this.headers[7]}>
+                    <th id=${this.headers[7]}>
                       ${this.headers[7]} &#5167;&#5169;
                     </th>
                   </tr>
