@@ -23,7 +23,7 @@ export class HomePage extends LitElement {
       }
       
       main {
-        background-color: slateblue;
+        background-color: var(--kpn-zwart);
       }
       ul {
         list-style: none;
@@ -32,17 +32,13 @@ export class HomePage extends LitElement {
         padding: 2em;
       }
 
-      .read-the-docs {
-        color: #888;
-      }
-
       a {
         font-weight: 500;
-        color: offwhite;
-        text-decoration: inherit;
+        color: var(--kpn-grijs);
       }
+      
       a:hover {
-        color: #535bf2;
+        color: var(--kpn-groen);
       }
 
       h1 {
@@ -57,12 +53,13 @@ export class HomePage extends LitElement {
         font-size: 1em;
         font-weight: 500;
         font-family: inherit;
-        background-color: #1a1a1a;
+        background-color: color: var(--kpn-zwart);
+        
         cursor: pointer;
         transition: border-color 0.25s;
       }
       button:hover {
-        border-color: #646cff;
+        border-color: var(--kpn-groen);
       }
       button:focus,
       button:focus-visible {

@@ -44,7 +44,7 @@ export class Login extends LitElement {
           overflow: auto
         }
         table {
-        background: slateblue;
+        background: var(--kpn-blauw);
         max-height: 100%;
         padding: 1em;
         }
@@ -89,11 +89,7 @@ export class Login extends LitElement {
         fieldset {
             padding-left: 1em;
             padding-right: 1em;
-            font-color: black
-        }
-        
-        #vervoerstype {
-            background-color: #00C300;
+            font-color: var(--kpn-zwart);
         }
         
         .inputfield {
@@ -102,7 +98,7 @@ export class Login extends LitElement {
             /*margin: 0.1em;*/
             border: none;
             border-radius: 4px;
-            background-color: slateblue;
+            background-color: var(--kpn-blauw);
             vertical-align: middle;
             text-indent: 0.7em;
         }
@@ -110,9 +106,9 @@ export class Login extends LitElement {
         /*Buttons: */
         input[type=button], input[type=submit], input[type=reset] {
             width: 33%;
-            background-color: white;
+            background-color: var(--kpn-wit);
             border: none;
-            color: white;
+            color: var(--kpn-wit);
             padding: 1em 0px;
             text-decoration: none;
             margin: 4px 2px;
@@ -123,8 +119,8 @@ export class Login extends LitElement {
             display: none;
             pointer-events: none;
             color: lightgrey;
-            foreground-color: grey;
-            background-color: grey;
+            foreground-color: var(--kpn-grijs);
+            background-color: var(--kpn-grijs);
             required: invalid;
         }
         

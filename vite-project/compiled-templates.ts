@@ -64,20 +64,14 @@ export class CompiledTemplates extends LitElement {
         margin: 0 auto;
         padding: 2rem;
       }
-
       
       page-container {
           position: relative;
-            min-height: 100vh;
+            min-height: 100%;
+      }
 
-      }
-      #content-wrap {
-         // text-align: center;
-          // padding-bottom: 8em;    /* Footer height */
-      }
       footer-menu {
-              width: 100vw;
-
+        width: 100vw;
         position: absolute;
         bottom: 0;
         height: 2.5rem;            /* Footer height */
@@ -100,26 +94,22 @@ export class CompiledTemplates extends LitElement {
             ${this.headerTemplate()}
             <body>
             <div id="page-container">
-                <div id="content-wrap">
-                    <div class=${this._homePageTemplateHidden}> ${this._homePageTemplate()}</div>
-                    <div class=${this._invoerenTemplateHidden}> ${this._invoerenTemplate()}</div>
-                    <div class=${this._reisGeschiedenisTemplateHidden}> ${this._overzichtTemplate()}</div>
-                    <div class=${this._loginTemplateHidden}> ${this._loginTemplate()}</div>
-                    <div class=${this._logoutTemplateHidden}> ${this._loginTemplate()}</div>
-                    <div class=${this._supportTemplateHidden}> ${this._supportTemplate()}</div>
-                    <div class=${this._thermometerTemplateHidden}> ${this._thermometerTemplate()}</div>
-                    <div class=${this._accountInfoTemplateHidden}> ${this._accountInfoTemplate()}</div>
-                    <div class=${this._passwordResetTemplateHidden}> ${this._resetPasswordTemplate()}</div>
-                    <div class=${this._readmeTemplateHidden}> ${this._readmeTemplate()}</div
-                </div>
-                <footer-menu @page-chosen=${this._onCurrentPageChanged}></footer-menu>
+                    <div class=${this._homePageTemplateHidden}>${this._homePageTemplate()}</div>
+                    <div class=${this._invoerenTemplateHidden}>${this._invoerenTemplate()}</div>
+                    <div class=${this._reisGeschiedenisTemplateHidden}>${this._overzichtTemplate()}</div>
+                    <div class=${this._loginTemplateHidden}>${this._loginTemplate()}</div>
+                    <div class=${this._logoutTemplateHidden}>${this._loginTemplate()}</div>
+                    <div class=${this._supportTemplateHidden}>${this._supportTemplate()}</div>
+                    <div class=${this._thermometerTemplateHidden}>${this._thermometerTemplate()}</div>
+                    <div class=${this._accountInfoTemplateHidden}>${this._accountInfoTemplate()}</div>
+                    <div class=${this._passwordResetTemplateHidden}>${this._resetPasswordTemplate()}</div>
+                    <div class=${this._readmeTemplateHidden}>${this._readmeTemplate()}</div>
+                    <div class=${this._newAccountTemplateHidden}>${this._newAccountTemplate()}</div
             </div>
             </body>
+                <footer-menu @page-chosen=${this._onCurrentPageChanged}></footer-menu>
         `;
     }
-
-    // <div class=${this._newAccountTemplateHidden}>         ${this._newAccountTemplate()}</div
-
 
     _onCurrentPageChanged(event: Event) {
         console.log('_onCurrentPageChanged()')
@@ -246,7 +236,7 @@ export class CompiledTemplates extends LitElement {
             <reset-password></reset-password>`;
     }
 
-    private _readmeTemplate() {
+    _readmeTemplate() {
         return html`
             <readme-element></readme-element>`;
     }

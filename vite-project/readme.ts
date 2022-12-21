@@ -29,7 +29,7 @@ export class ReadmeElement extends LitElement {
     pointer-events: none;
     color: lightgrey;
     foreground-color: grey;
-    background-color: grey;
+    background-color: var(--kpn-grijs);
     required: invalid;
     }
     button {

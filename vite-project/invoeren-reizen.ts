@@ -22,8 +22,8 @@ export class InvoerenReizen extends LitElement {
 
     @property() inputfield = "inputfield";
     @property() _vervoerMiddelDummyData = [];
-    @property() _gekozenC02 : string;
-    @property() _gekozenVoertuig : string;
+    @property() _gekozenC02: string;
+    @property() _gekozenVoertuig: string;
 
     constructor() {
         super()
@@ -79,11 +79,9 @@ export class InvoerenReizen extends LitElement {
         
         table {
             padding: 1em;
-            background: slateblue;
+            background: var(--kpn-blauw);
         }
         label {
-            /*font-size: 2em;*/
-            /*visibility: hidden;*/
             display: none;
         }
         
@@ -92,6 +90,7 @@ export class InvoerenReizen extends LitElement {
             padding-left: 1em;
             padding-right: 1em;
         }
+
         
         ul {
             list-style-type: none;
@@ -114,11 +113,11 @@ export class InvoerenReizen extends LitElement {
         fieldset {
             padding-left: 1em;
             padding-right: 1em;
-            font-color: black
+            font-color: var(--kpn-zwart);
         }
         
         #vervoerstype {
-            background-color: #00C300;
+            background-color: var(--kpn-groen);
         }
         
         .inputfield {
@@ -127,33 +126,36 @@ export class InvoerenReizen extends LitElement {
             /*margin: 0.1em;*/
             border: none;
             border-radius: 4px;
-            background-color: slateblue;
+            background-color: var(--kpn-blauw);
             vertical-align: middle;
             text-indent: 0.7em;
         }
-        
+                  
         /*Buttons: */
         input[type=button], input[type=submit], input[type=reset] {
             width: 33%;
-            background-color: #00C300;
+            background-color: var(--kpn-zwart);
             border: none;
-            color: white;
+            color: var(--kpn-wit);
             padding: 1em 0px;
             text-decoration: none;
             margin: 4px 2px;
             cursor: pointer;
         }
+
         
         .visibility-hidden {
             display: none;
             pointer-events: none;
             color: lightgrey;
-            foreground-color: grey;
-            background-color: grey;
+            foreground-color: var(--kpn-grijs);
+            background-color: var(--kpn-grijs);
             required: invalid;
         }
         #feedbackSpan {
-          background-color: slateblue;
+          background-color: var(--kpn-blauw);
+          place-items: center;
+            text-align: center;
         }
     `
     }
@@ -174,15 +176,16 @@ export class InvoerenReizen extends LitElement {
                         <div id="typeVervoerDiv2">
                             <li>
                                 <label for="vervoerstype">typeVervoer:</label>
-                                    <select class="${this.inputfield}" required focus >
-                                ${this._vervoerMiddelDummyData.map(({naam, uitstoot}) => html`
-                                            <option disabled hidden="${this._hidden}" selected value="0">"kies hier uw
-                                                vervoerstype!"
-                                            </option>
-                                            <option @click="${this.optionClicked}" id=${naam} value=${uitstoot}>${naam}</option>
-                                `)}
-                                    </select>
-                        <div id="vertrekLocatieDiv">
+                                <select id="vervoerstype" class="${this.inputfield}" required focus>
+                                    ${this._vervoerMiddelDummyData.map(({naam, uitstoot}) => html`
+                                        <option disabled hidden="${this._hidden}" selected value="0">"kies hier uw
+                                            vervoerstype!"
+                                        </option>
+                                        <option @click="${this.optionClicked}" id=${naam} value=${uitstoot}>${naam}
+                                        </option>
+                                    `)}
+                                </select>
+                                <div id="vertrekLocatieDiv">
                             <li class="alleenzakelijk" required>
                                 <label for="vertrekLocatie">Vertrek locatie:</label>
                                 <input class="${this.inputfield}" id="vertrekLocatie" name="vertrekLocatie"
@@ -304,22 +307,24 @@ export class InvoerenReizen extends LitElement {
                     </div>
                 </form>
                 <div id="feedbackSpan">
-                  ${this.span_message}
-                  <br>
-                  U heeft gekozen voor voertuig:
-                  ${this._gekozenVoertuig}
-                  <br>
-                  met gemiddelde uitstoot:
-                  ${this._gekozenC02}
-            </div>
+                    ${this.span_message}
+                    <br>
+                    U heeft gekozen voor voertuig:
+                    ${this._gekozenVoertuig}
+                    <br>
+                    met gemiddelde uitstoot:
+                    ${this._gekozenC02}
+                    C02/km
+                </div>
             </main>
             </body>
         `
     }
 
-    optionClicked(option: { originalTarget: {
-        value: string;
-        id: string; };
+    optionClicked(option: {
+        originalTarget: {
+            value: string; id: string;
+        };
     }) {
         console.log('optionClicked')
         const data = option.originalTarget.id;

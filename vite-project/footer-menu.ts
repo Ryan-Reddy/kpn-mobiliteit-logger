@@ -44,9 +44,9 @@ export class MyElement extends LitElement {
         justify-content: space-between;
         align-items: center;
       
-        border: 1px solid black;
-        background-color: #151617;
-        color: white;
+        border: 1px solid var(--kpn-zwart);
+        background-color: var(--kpn-zwart);
+        color: var(--kpn-wit);
         opacity: 1;
     }
     
@@ -73,13 +73,13 @@ export class MyElement extends LitElement {
     }
     
     nav ul li a{
-    color: white;
+    color: var(--kpn-wit);
     border-radius: 3px;
     text-transform: uppercase;
     padding: 5px;
     }
     a.active, a:hover {
-      background: red;
+      background: var(--kpn-groen);
       transition: .5s;
     }  
     .nav-button {
@@ -127,7 +127,6 @@ export class MyElement extends LitElement {
      }
      a:hover, a.active {
       background: none;
-      color: #333;   
     }
     #check:checked ~ul{
     left: 0;

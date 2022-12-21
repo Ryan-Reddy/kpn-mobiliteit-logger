@@ -20,6 +20,7 @@ export class NavMenu extends LitElement {
 
   static get styles() {
     return css`
+
     * {
         margin: 0;
         padding: 0;
@@ -30,7 +31,7 @@ export class NavMenu extends LitElement {
     body {
         font-size: 14px;
         font-family: Montserrat;
-        color: white;
+        color: var(--kpn-wit);
         font-size: 1em;
         opacity: 1;
 
@@ -38,7 +39,7 @@ export class NavMenu extends LitElement {
     
     .entire_menu_bar {
         height: 8em;
-        border: 1px solid black;
+        border: 1px solid var(--kpn-zwart);
         background-color: #151617;
     
         position: relative;
@@ -75,17 +76,19 @@ export class NavMenu extends LitElement {
     }
     
     nav ul li a{
-    color: white;
+    color: var(--kpn-wit);
     border-radius: 3px;
     text-transform: uppercase;
     padding: 5px;
-   
     }
     
+    a:visited { text-decoration: none; }
+    
+    a:link { text-decoration: none; }
+    
     a.active, a:hover {
-      background: red;
+      background: var(--kpn-groen);
       transition: .5s;
-      
     }  
      
     
@@ -102,6 +105,11 @@ export class NavMenu extends LitElement {
         right: 2em;
         overflow: hidden;
         padding: 0 2em;
+    }
+    
+    img {
+    -webkit-filter: invert(1);
+    filter: invert(1);
     }
     .nav-logo:hover {
         height: 3.5em;
@@ -227,5 +235,3 @@ export class NavMenu extends LitElement {
     window.open(this._kpnHomePageUrl)
   }
 }
-
-// window.customElements.define('nav-menu', MyElement)

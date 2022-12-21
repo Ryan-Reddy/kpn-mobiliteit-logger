@@ -28,9 +28,9 @@ export class SupportElement extends LitElement {
     .hidden {
     display: none;
     pointer-events: none;
-    color: lightgrey;
-    foreground-color: grey;
-    background-color: grey;
+    color: lightgray;
+    foreground-color: var(--kpn-grijs);
+    background-color: var(--kpn-grijs);
     required: invalid;
     }
     button {
@@ -50,7 +50,7 @@ export class SupportElement extends LitElement {
                             <img src="public/Have-you-tried-turning-it-off-and-on-again.jpg">
                                 <br>
                                 <br>
-                                <p>if so, call us on 69-420-420-69</p>
+                                <button>if so, call us on 69-420-420-69</button>
                             </div>
                         </main>
                     </body>

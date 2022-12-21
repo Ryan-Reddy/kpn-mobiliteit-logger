@@ -29,14 +29,15 @@ export class NewAccount extends LitElement {
     display: none;
     pointer-events: none;
     color: lightgrey;
-    foreground-color: grey;
-    background-color: grey;
+    foreground-color: var(--kpn-grijs);
+    background-color: var(--kpn-grijs);
     required: invalid;
     }
     button {
     width: 66%;
     height: 2em;
     }
+
     `
     }
 

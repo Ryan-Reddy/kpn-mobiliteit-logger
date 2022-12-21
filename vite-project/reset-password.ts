@@ -29,8 +29,8 @@ export class ResetPassword extends LitElement {
     display: none;
     pointer-events: none;
     color: lightgrey;
-    foreground-color: grey;
-    background-color: grey;
+    foreground-color: var(--kpn-grijs);
+    background-color: var(--kpn-grijs);
     required: invalid;
     }
     button {

@@ -24,8 +24,8 @@ export class OverzichtReizen extends LitElement {
     @property() _sorted5 = false;
     @property() _sorted6 = false;
     @property() _sorted7 = false;
-    @property()  sortsymboldown = '&#5167;';
-    @property()  sortsymbolUP = '&#11016;';
+    @property() sortsymboldown = '&#5167;';
+    @property() sortsymbolUP = '&#11016;';
 
     constructor() {
         super();
@@ -45,52 +45,63 @@ export class OverzichtReizen extends LitElement {
 
     static get styles() {
         return css`
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        text-decoration: none;
-        }
-        .full { 
-        width: 100%; 
-        height: 100%; 
-        overflow: auto
-        }
-        
-        H1 {
-        padding-top: 1em;
-        font-size: 2em;
-        padding-bottom: 0.5em;
-        }
-        header p{
-          font-size: 1em;
-        }
-        main {       
-        }
-        .tablecontainer {
-          height: 60vh;
-          overflow: auto
-        }
-        table {
-        background: slateblue;
-        max-height: 100%;
-        }
-          th {
-          padding: .6em;
-          border-bottom: 1px dotted #ddd;
-          border-collapse: collapse;
-        }
-
-        .columnHeads {
-        background: green;
-
-        cursor: pointer;
-                }
-
-    @media (max-width: 858px) {
-    .hiddensmolscreen {
-      display: none;
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     text-decoration: none;
+}
+ .full {
+     width: 100%;
+     height: 100%;
+     overflow: auto 
+}
+ H1 {
+     padding-top: 1em;
+     font-size: 2em;
+     padding-bottom: 0.5em;
+}
+ header p{
+     font-size: 1em;
+}
+ main {
+}
+ .tablecontainer {
+     height: 60vh;
+     overflow: auto 
+}
+ table {
+     background: var(--kpn-zwart);
+     max-height: 100%;
+}
+ th {
+     padding: .6em;
+     border-bottom: 1px dotted #ddd;
+     border-collapse: collapse;
+}
+ .columnHeads {
+     background: var(--kpn-groen);
+     cursor: pointer;
+}
+ @media (max-width: 858px) {
+     .hiddensmolscreen {
+         display: none;
     }
+}
+ @media (prefers-color-scheme: light) {
+     :root {
+         color: var(--kpn-zwart);
+         background-color: var(--kpn-wit);
+    }
+     table {
+         color: var(--kpn-zwart);
+    }
+     .columnHeads {
+         background-color: var(--kpn-wit);
+    }
+}
+
+                        
     `;
     }
 
@@ -172,13 +183,17 @@ export class OverzichtReizen extends LitElement {
     <caption hidden>${this.titel}</caption>
     <thead>
             <tr @click=${this.headerClicked}>
-                <th class="columnHeads" id=${this.headers[0]} class="hiddensmolscreen">${this.headers[0]} &#5167;&#5169;</th>
+                <th class="columnHeads" id=${this.headers[0]}
+                    class="hiddensmolscreen">${this.headers[0]} &#5167;&#5169;</th>
                 <th class="columnHeads" id=${this.headers[1]}>${this.headers[1]} &#5167;&#5169;</th>
                 <th class="columnHeads" id=${this.headers[2]}>${this.headers[2]} &#5167;&#5169;</th>
-                <th class="columnHeads" id=${this.headers[3]} class="hiddensmolscreen">${this.headers[3]} &#5167;&#5169;</th>
+                <th class="columnHeads" id=${this.headers[3]}
+                    class="hiddensmolscreen">${this.headers[3]} &#5167;&#5169;</th>
                 <th class="columnHeads" id=${this.headers[4]}>${this.headers[4]} &#5167;&#5169;</th>
-                <th class="columnHeads" id=${this.headers[5]} class="hiddensmolscreen">${this.headers[5]} &#5167;&#5169;</th>
-                <th class="columnHeads" id=${this.headers[6]} class="hiddensmolscreen">${this.headers[6]} &#5167;&#5169;</th>
+                <th class="columnHeads" id=${this.headers[5]}
+                    class="hiddensmolscreen">${this.headers[5]} &#5167;&#5169;</th>
+                <th class="columnHeads" id=${this.headers[6]}
+                    class="hiddensmolscreen">${this.headers[6]} &#5167;&#5169;</th>
                 <th class="columnHeads" id=${this.headers[7]}>${this.headers[7]} &#5167;&#5169;</th>         
             </tr>
     </thead>

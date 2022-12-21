@@ -40,7 +40,7 @@ export class Login extends LitElement {
       
         table {
             padding: 1em;
-            background: slateblue;
+            background: var(--kpn-blauw);
         }
         label {
             /*font-size: 2em;*/
@@ -75,7 +75,7 @@ export class Login extends LitElement {
         fieldset {
             padding-left: 1em;
             padding-right: 1em;
-            font-color: black
+            font-color: var(--kpn-zwart);
         }
         
         #vervoerstype {
@@ -88,7 +88,9 @@ export class Login extends LitElement {
             /*margin: 0.1em;*/
             border: none;
             border-radius: 4px;
-            background-color: slateblue;
+            background-color: var(--kpn-wit);
+            color: var(--kpn-zwart);
+            background-color: var(--kpn-grijs);
             vertical-align: middle;
             text-indent: 0.7em;
         }
@@ -109,8 +111,8 @@ export class Login extends LitElement {
             display: none;
             pointer-events: none;
             color: lightgrey;
-            foreground-color: grey;
-            background-color: grey;
+            foreground-color: var(--kpn-grijs);
+            background-color: var(--kpn-grijs);     
             required: invalid;
         }
     `

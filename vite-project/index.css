@@ -13,6 +13,13 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
+
+    --kpn-groen: #00C300;
+    --kpn-blauw: #00AAFF;
+    --kpn-wit: #ffffff;
+    --kpn-grijs: #E2E2E2;
+    --kpn-zwart: #1E1E1E;
+    --fullwidth: 100%;
 }
 
 body {
@@ -20,11 +27,9 @@ body {
     /*display: flex;*/
     place-items: center;
     min-width: 320px;
-    min-height: 100vh;
-
+    min-height: 100%;
 
     background-image: url('/achtergrondshapes.webp');
-
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
@@ -33,7 +38,7 @@ body {
 
 @media (prefers-color-scheme: light) {
     :root {
-        color: #213547;
-        background-color: #ffffff;
+        color: var(--kpn-zwart);
+        background-color: var(--kpn-wit);
     }
 }
