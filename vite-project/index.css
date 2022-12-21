@@ -35,8 +35,35 @@ body {
   background-position: center;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: var(--kpn-wit);
+    background-color: var(--kpn-zwart);
+  }
+  main {
+    color: var(--kpn-wit);
+    background-color: var(--kpn-zwart);
+  }
+  table {
+    color: var(--kpn-wit);
+    background: var(--kpn-zwart);
+  }
+  :root .entire_menu_bar {
+    color: var(--kpn-wit);
+    background-color: var(--kpn-zwart);
+  }
+  nav ul li a {
+    color: var(--kpn-wit);
+    background-color: var(--kpn-zwart);
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
+    color: var(--kpn-zwart);
+    background-color: var(--kpn-wit);
+  }
+  main {
     color: var(--kpn-zwart);
     background-color: var(--kpn-wit);
   }

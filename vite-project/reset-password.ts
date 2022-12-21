@@ -43,12 +43,9 @@ export class ResetPassword extends LitElement {
     return html`
       <h1 class="header">Account zoeken.</h1>
 
-      <body class="bodyDark" id="body">
+      <body>
         <div id="page-container">
           <div id="content-wrap">
-            <div id="discoball" style="display: none;">
-              <img alt="discoBallGif" src="/assets/discoBallGif.gif" />
-            </div>
             <main>
               <p>
                 Voer je e-mailadres in om je account wachtwoord te resetten.

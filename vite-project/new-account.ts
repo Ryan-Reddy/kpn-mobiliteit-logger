@@ -45,31 +45,18 @@ export class NewAccount extends LitElement {
       <html lang="en">
         <head>
           <meta charset="UTF-8" />
-          <link href="/style-index.css" rel="stylesheet" />
-          <link
-            href="/assets/icons/favicon-16x16.png"
-            rel="icon"
-            sizes="16x16"
-            type="image/png"
-          />
+
           <title>New Account</title>
-          <script src="/js/themeManager.js" type="text/javascript"></script>
           <!-- must be uppermost imported script due to const localhost global usage -->
-          <script
-            src="/new-account/new-account-utils.js"
-            type="text/javascript"
-          ></script>
+
           <script src="https://smtpjs.com/v3/smtp.js"></script>
         </head>
 
         <h1 class="header">Maak een nieuw account.</h1>
 
-        <body class="bodyDark" id="body">
+        <body>
           <div id="page-container">
             <div id="content-wrap">
-              <div id="discoball" style="display: none">
-                <img alt="discoBallGif" src="/assets/discoBallGif.gif" />
-              </div>
               <main>
                 <form autocomplete="on" id="newaccount-form">
                   <ol>
