@@ -1,4 +1,4 @@
-import {css, html, LitElement} from 'lit';
+import {css, html, LitElement, PropertyValueMap} from 'lit';
 import {customElement, property} from 'lit-element';
 import {InvoerenReizen} from "./invoeren-reizen";
 
@@ -89,6 +89,9 @@ export class OverzichtReizen extends LitElement {
           display: none;
         }
       }
+      #errorKM {
+        background: var(--kpn-warning-red);
+      }
       @media (prefers-color-scheme: light) {
         :root {
           color: var(--kpn-zwart);
@@ -123,6 +126,16 @@ export class OverzichtReizen extends LitElement {
         //         this._reizenDummyData = Array.from(json);
         //         console.log(this._reizenDummyData);
         //     });
+    }
+
+    /**
+     * Called when an update was triggered, before rendering. Receives a Map of changed
+     * properties, and their previous values. This can be used for modifying or setting
+     * new properties before a render occurs.
+     */
+    update(changed: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
+        super.update(changed);
+        console.log('updated YAAY')
     }
 
     //TODO: make tableToCSV work with lit
@@ -238,7 +251,7 @@ export class OverzichtReizen extends LitElement {
                           <th>${type}</th>
                           <th>${begin}</th>
                           <th class="hiddensmolscreen">${eind}</th>
-                          <th>${km}</th>
+                          <th id=${km > 300 ? 'errorKM' : 'allGood'}>${km}</th>
                           <th class="hiddensmolscreen">${uitstoot}</th>
                           <th class="hiddensmolscreen">${kosten}</th>
                           <th @click=${this.wijzigDezeDataRij}><a href="#" >Wijzig</a></th>
