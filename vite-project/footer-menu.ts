@@ -1,5 +1,5 @@
-import {css, html, LitElement} from 'lit'
-import {customElement, property} from "lit-element";
+import { css, html, LitElement } from 'lit';
+import { customElement, property } from 'lit-element';
 
 /**
  * An example element.
@@ -12,7 +12,7 @@ export class MyElement extends LitElement {
   @property() currentPage: string;
 
   constructor() {
-    super()
+    super();
   }
 
   static get styles() {
@@ -150,15 +150,13 @@ export class MyElement extends LitElement {
             border-color: var(--kpn-wit);
         }
     }
-    `
+    `;
   }
 
   render() {
-
     return html`
-      
-        <footer>
-          <nav>
+      <footer>
+        <nav>
           <ul @click=${this._clickMenu} id="nope">
             <li>
               <a class="nav-button" href="#" id="Login">Log in</a>
@@ -173,9 +171,9 @@ export class MyElement extends LitElement {
               <a class="nav-button" href="#" id="Logout">Log out</a>
             </li>
           </ul>
-          </nav>
-        </footer>
-    `
+        </nav>
+      </footer>
+    `;
   }
 
   _clickMenu(e: Event) {
@@ -194,4 +192,3 @@ export class MyElement extends LitElement {
     }
   }
 }
-

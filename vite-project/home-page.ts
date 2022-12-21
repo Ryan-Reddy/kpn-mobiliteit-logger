@@ -1,5 +1,5 @@
-import {LitElement, css, html} from 'lit'
-import {customElement} from 'lit-element';
+import { LitElement, css, html } from 'lit';
+import { customElement } from 'lit-element';
 
 /**
  * An example element.
@@ -10,7 +10,7 @@ import {customElement} from 'lit-element';
 @customElement('home-page')
 export class HomePage extends LitElement {
   constructor() {
-    super()
+    super();
   }
 
   static get styles() {
@@ -74,11 +74,10 @@ export class HomePage extends LitElement {
           background-color: #f9f9f9;
         }
       }
-    `
+    `;
   }
 
   render() {
-
     return html`
       <header>
         <h1 class="header">Welkom bij de KNP medewerkers mobiliteits APP!</h1>
@@ -123,6 +122,6 @@ export class HomePage extends LitElement {
     
     </main>
       </body>
-    `
+    `;
   }
 }

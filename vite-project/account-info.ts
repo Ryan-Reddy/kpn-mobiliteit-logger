@@ -1,5 +1,5 @@
-import {css, html, LitElement} from 'lit'
-import {customElement, property} from "lit-element";
+import { css, html, LitElement } from 'lit';
+import { customElement, property } from 'lit-element';
 
 /**
  * An example element.
@@ -10,14 +10,14 @@ import {customElement, property} from "lit-element";
 
 @customElement('account-element')
 export class Login extends LitElement {
-    @property() currentPage = 'Reis Registreren';
+  @property() currentPage = 'Reis Registreren';
 
-    constructor() {
-        super()
-    }
+  constructor() {
+    super();
+  }
 
-    static get styles() {
-        return css`
+  static get styles() {
+    return css`
     * {
         margin: 0;
         padding: 0;
@@ -128,12 +128,11 @@ export class Login extends LitElement {
     .hiddensmolscreen {
       display: none;
     }
-    `
-    }
+    `;
+  }
 
-
-    render() {
-        return html`
+  render() {
+    return html`
             <header>
             <h1 class="header">Account info</h1>
                 <p>Breng hieronder wijzigingen in uw gegevens.</p>
@@ -186,18 +185,14 @@ export class Login extends LitElement {
             </footer>
             </div>
             </body>
-        `
-    }
-    // _login(e: Event) {
-    _login() {
-        console.log("login.login()")
-        this.currentPage = "Reis Registreren";
+        `;
+  }
+  // _login(e: Event) {
+  _login() {
+    console.log('login.login()');
+    this.currentPage = 'Reis Registreren';
 
-        //notify parent:
-        this.dispatchEvent(new Event('page-chosen'));
-    }
-
-
-
+    //notify parent:
+    this.dispatchEvent(new Event('page-chosen'));
+  }
 }
-
