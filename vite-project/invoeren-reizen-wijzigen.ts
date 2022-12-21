@@ -7,7 +7,7 @@ import {customElement, property} from 'lit-element';
  * @slot - This element has a slot
  * @csspart button - The button
  */
-@customElement('invoeren-reizen')
+@customElement('invoeren-reizen-wijzigen')
 export class InvoerenReizen extends LitElement {
   @property() currentPage = 'invoeren-reizen';
 

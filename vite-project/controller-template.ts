@@ -5,6 +5,7 @@ import './home-page.ts';
 import './nav-menu.ts';
 import './overzicht-reizen.js';
 import './invoeren-reizen.js';
+import './invoeren-reizen-wijzigen.js';
 import './thermometer.js';
 import './login.ts';
 import './account-info.ts';
@@ -22,13 +23,12 @@ import { NavMenu } from './nav-menu';
  * @csspart button - The button
  */
 @customElement('compiled-templates')
-export class CompiledTemplates extends LitElement {
+export class ControllerTemplate extends LitElement {
   @property() _currentPage: string;
   //TODO: make visible : "":
   @property() _homePageTemplateHidden = 'hidden';
-  @property() _invoerenTemplateHidden = 'hidden';
-  //TODO: hidden:
-  @property() _reisGeschiedenisTemplateHidden = '';
+  @property() _reisInvoerenTemplateHidden = 'hidden';
+  @property() _reisGeschiedenisTemplateHidden = 'hidden';
   @property() _loginTemplateHidden = 'hidden';
   @property() _logoutTemplateHidden = 'hidden';
   @property() _accountInfoTemplateHidden = 'hidden';
@@ -38,6 +38,8 @@ export class CompiledTemplates extends LitElement {
   @property() _passwordResetTemplateHidden = 'hidden';
   @property() _newAccountTemplateHidden = 'hidden';
   @property() _readmeTemplateHidden = 'hidden';
+  //TODO: hidden:
+  @property() _reisWijzigenTemplateHidden = '';
 
   constructor() {
     super();
@@ -98,11 +100,16 @@ export class CompiledTemplates extends LitElement {
                       this._homePageTemplateHidden
                     }>${this._homePageTemplate()}</div>
                     <div class=${
-                      this._invoerenTemplateHidden
-                    }>${this._invoerenTemplate()}</div>
+                      this._reisInvoerenTemplateHidden
+                    }>${this._reisInvoerenTemplate()}</div>
+                    <div class=${
+                      this._reisWijzigenTemplateHidden
+                    }>${this._reisWijzigenTemplate()}</div>
+              
                     <div class=${
                       this._reisGeschiedenisTemplateHidden
                     }>${this._overzichtTemplate()}</div>
+              
                     <div class=${
                       this._loginTemplateHidden
                     }>${this._loginTemplate()}</div>
@@ -149,7 +156,7 @@ export class CompiledTemplates extends LitElement {
       case 'Reis Registreren': {
         this.hideRest();
         console.log('reis registeren case');
-        this._invoerenTemplateHidden = '';
+        this._reisInvoerenTemplateHidden = '';
         break;
       }
       case 'Reisgeschiedenis': {
@@ -170,10 +177,10 @@ export class CompiledTemplates extends LitElement {
         this._supportTemplateHidden = '';
         break;
       }
-      // TODO: Logout needs work in compiled-templates.ts
+      // TODO: Logout needs work in controller-template.ts
       case 'Logout': {
         this.hideRest();
-        console.log('Logout needs work in compiled-templates.ts');
+        console.log('Logout needs work in controller-template.ts');
         this._logoutTemplateHidden = '';
         break;
       }
@@ -207,6 +214,22 @@ export class CompiledTemplates extends LitElement {
     }
   }
 
+  hideRest() {
+    this._homePageTemplateHidden = 'hidden';
+    this._reisInvoerenTemplateHidden = 'hidden';
+    this._reisGeschiedenisTemplateHidden = 'hidden';
+    this._loginTemplateHidden = 'hidden';
+    this._logoutTemplateHidden = 'hidden';
+    this._accountInfoTemplateHidden = 'hidden';
+    this._overzichtTemplateHidden = 'hidden';
+    this._thermometerTemplateHidden = 'hidden';
+    this._supportTemplateHidden = 'hidden';
+    this._passwordResetTemplateHidden = 'hidden';
+    this._newAccountTemplateHidden = 'hidden';
+    this._readmeTemplateHidden = 'hidden';
+    this._reisWijzigenTemplateHidden = 'hidden';
+  }
+
   headerTemplate() {
     return html` <header>
       <title>KPN-222</title>
@@ -222,8 +245,12 @@ export class CompiledTemplates extends LitElement {
     return html` <overzicht-reizen></overzicht-reizen>`;
   }
 
-  _invoerenTemplate() {
+  _reisInvoerenTemplate() {
     return html` <invoeren-reizen id="invoeren-reizen"></invoeren-reizen>`;
+  }
+
+  _reisWijzigenTemplate() {
+    return html` <invoeren-reizen-wijzigen id="invoeren-reizen"></invoeren-reizen-wijzigen>`;
   }
 
   _thermometerTemplate() {
@@ -256,15 +283,5 @@ export class CompiledTemplates extends LitElement {
     return html` <readme-element></readme-element>`;
   }
 
-  hideRest() {
-    this._homePageTemplateHidden = 'hidden';
-    this._loginTemplateHidden = 'hidden';
-    this._invoerenTemplateHidden = 'hidden';
-    this._invoerenTemplateHidden = 'hidden';
-    this._reisGeschiedenisTemplateHidden = 'hidden';
-    this._accountInfoTemplateHidden = 'hidden';
-    this._supportTemplateHidden = 'hidden';
-    this._passwordResetTemplateHidden = 'hidden';
-    this._newAccountTemplateHidden = 'hidden';
-  }
+
 }
