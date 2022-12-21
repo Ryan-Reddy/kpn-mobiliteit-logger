@@ -49,7 +49,7 @@ o888o  o888o     .8'     `Y888""8o o888o o888o      o888o  o888o `Y8bod8P' `Y8bo
 
                   ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
-                                       Archive Trawler (c) Hogeschool Utrecht
+                                       KPN Reizen Log (c) Hogeschool Utrecht
 
                            Jan-'23 :..... RELEASE.DATE .. LICENSE ..........: PIRATE
                                  0 :.......... DISC(S) .. Arch.TYPE ........: Desktop, web, mobile
