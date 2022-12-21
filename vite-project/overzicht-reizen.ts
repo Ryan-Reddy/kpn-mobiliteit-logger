@@ -24,7 +24,7 @@ export class OverzichtReizen extends LitElement {
     @property() _sorted5 = false;
     @property() _sorted6 = false;
     @property() _sorted7 = false;
-    @property()  sortsymboldown = '&#11015;';
+    @property()  sortsymboldown = '&#5167;';
     @property()  sortsymbolUP = '&#11016;';
 
     constructor() {
@@ -172,14 +172,14 @@ export class OverzichtReizen extends LitElement {
     <caption hidden>${this.titel}</caption>
     <thead>
             <tr @click=${this.headerClicked}>
-                <th class="columnHeads" id=${this.headers[0]} class="hiddensmolscreen">${this.headers[0]} &#11015;&#11014;</th>
-                <th class="columnHeads" id=${this.headers[1]}>${this.headers[1]} &#11015;&#11014;</th>
-                <th class="columnHeads" id=${this.headers[2]}>${this.headers[2]} &#11015;&#11014;</th>
-                <th class="columnHeads" id=${this.headers[3]} class="hiddensmolscreen">${this.headers[3]} &#11015;&#11014;</th>
-                <th class="columnHeads" id=${this.headers[4]}>${this.headers[4]} &#11015;&#11014;</th>
-                <th class="columnHeads" id=${this.headers[5]} class="hiddensmolscreen">${this.headers[5]} &#11015;&#11014;</th>
-                <th class="columnHeads" id=${this.headers[6]} class="hiddensmolscreen">${this.headers[6]} &#11015;&#11014;</th>
-                <th class="columnHeads" id=${this.headers[7]}>${this.headers[7]} &#11015;&#11014;</th>         
+                <th class="columnHeads" id=${this.headers[0]} class="hiddensmolscreen">${this.headers[0]} &#5167;&#5169;</th>
+                <th class="columnHeads" id=${this.headers[1]}>${this.headers[1]} &#5167;&#5169;</th>
+                <th class="columnHeads" id=${this.headers[2]}>${this.headers[2]} &#5167;&#5169;</th>
+                <th class="columnHeads" id=${this.headers[3]} class="hiddensmolscreen">${this.headers[3]} &#5167;&#5169;</th>
+                <th class="columnHeads" id=${this.headers[4]}>${this.headers[4]} &#5167;&#5169;</th>
+                <th class="columnHeads" id=${this.headers[5]} class="hiddensmolscreen">${this.headers[5]} &#5167;&#5169;</th>
+                <th class="columnHeads" id=${this.headers[6]} class="hiddensmolscreen">${this.headers[6]} &#5167;&#5169;</th>
+                <th class="columnHeads" id=${this.headers[7]}>${this.headers[7]} &#5167;&#5169;</th>         
             </tr>
     </thead>
         <tbody>
