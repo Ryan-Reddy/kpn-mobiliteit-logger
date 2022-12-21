@@ -235,20 +235,104 @@ export class OverzichtReizen extends LitElement {
         // TODO: implement style sorter https://www.scaler.com/topics/javascript-sort-an-array-of-objects/
         switch (id) {
             case this.headers[0]: { // project
-                this._reizenDummyData = this._reizenDummyData.sort((a, b) => a.project - b.project)
+                console.log(this._sorted0)
+                this._sorted0 = this._sorted0 === true ? false : true;
+
+                this._reizenDummyData = this._sorted0 === true
+                    ?
+                    this._reizenDummyData.sort((a, b) => {
+                        const projectA = a.project.toUpperCase(); // ignore upper and lowercase
+                        const projectB = b.project.toUpperCase(); // ignore upper and lowercase
+
+                        // typeA - typeB
+                        if (projectA > projectB) {
+                            return -1;
+                        }
+                        if (projectA < projectB) {
+                            return 1;
+                        }
+                        // names must be equal
+                        return 0;
+                    })
+                    :
+                    this._reizenDummyData.sort((a, b) => {
+                        const projectB = a.project.toUpperCase(); // ignore upper and lowercase
+                        const projectA = b.project.toUpperCase(); // ignore upper and lowercase
+                        if (projectA > projectB) {
+                            return -1;
+                        }
+                        if (projectA < projectB) {
+                            return 1;
+                        }
+                        // names must be equal
+                        return 0;
+                    })
                 break;
             }
             case this.headers[1]: { //type
-                this._reizenDummyData = this._reizenDummyData.sort((a, b) => a.type - b.type)
+                console.log(this._sorted1)
+                this._sorted1 = this._sorted1 === true ? false : true;
+
+                this._reizenDummyData = this._sorted1 === true
+                    ?
+                        this._reizenDummyData.sort((a, b) => {
+                            const typeA = a.type.toUpperCase(); // ignore upper and lowercase
+                            const typeB = b.type.toUpperCase(); // ignore upper and lowercase
+
+                            // typeA - typeB
+                            if (typeA > typeB) {
+                                return -1;
+                            }
+                            if (typeA < typeB) {
+                                return 1;
+                            }
+                            // names must be equal
+                            return 0;
+                        })
+                     :
+                     this._reizenDummyData.sort((a, b) => {
+                                const typeB = a.type.toUpperCase(); // ignore upper and lowercase
+                                const typeA = b.type.toUpperCase(); // ignore upper and lowercase
+                                if (typeA > typeB) {
+                                    return -1;
+                                }
+                                if (typeA < typeB) {
+                                    return 1;
+                                }
+                                // names must be equal
+                                return 0;
+                            })
                 break;
+
+
             }
+
             case this.headers[2]: { //begin
-                this._reizenDummyData = this._reizenDummyData.sort((a, b) => a.begin - b.begin)
+                console.log(this._sorted2)
+
+                this._sorted2 = this._sorted2 === true ? false : true;
+
+                this._reizenDummyData = this._sorted2
+                    ? this._reizenDummyData.sort((x, y) => {x = new Date(x.begin), y = new Date(y.begin)
+                        return x - y;
+                    }) :
+                    this._reizenDummyData.sort((y, x) => {x = new Date(x.begin), y = new Date(y.begin)
+                        return x - y;
+                    })
                 break;
             }
             case this.headers[3]: { //eind
+                console.log(this._sorted3)
 
-                this._reizenDummyData = this._reizenDummyData.sort((a, b) => a.eind - b.eind)
+                this._sorted3 = this._sorted3 === true ? false : true;
+
+                this._reizenDummyData = this._sorted3
+                    ? this._reizenDummyData.sort((x, y) => {x = new Date(x.eind), y = new Date(y.eind)
+                    return x - y;
+                }) :
+                    this._reizenDummyData.sort((y, x) => {x = new Date(x.eind), y = new Date(y.eind)
+                        return x - y;
+            })
                 break;
             }
             case this.headers[4]: { //km
@@ -280,6 +364,12 @@ export class OverzichtReizen extends LitElement {
                     : this._reizenDummyData.sort((u1, u2) => u2.kosten - u1.kosten);
                 break;
             }
+            case this.headers[7]: { //wijzig
+                alert('\'no sorting needed\'')
+            }
+                break;
+            default:
+                break;
         }
 
     }
