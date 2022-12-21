@@ -24,9 +24,11 @@ import {NavMenu} from './nav-menu';
 @customElement('compiled-templates')
 export class CompiledTemplates extends LitElement {
     @property() _currentPage: string;
-    @property() _homePageTemplateHidden = "";
+    //TODO: make visible : "":
+    @property() _homePageTemplateHidden = "hidden";
     @property() _invoerenTemplateHidden = "hidden";
-    @property() _reisGeschiedenisTemplateHidden = "hidden";
+    //TODO: hidden:
+    @property() _reisGeschiedenisTemplateHidden = "";
     @property() _loginTemplateHidden = "hidden";
     @property() _logoutTemplateHidden = "hidden";
     @property() _accountInfoTemplateHidden = "hidden";
@@ -58,11 +60,29 @@ export class CompiledTemplates extends LitElement {
     static get styles() {
         return css`
       :host {
-        max-width: 1280px;
+        max-width: 100vw;
         margin: 0 auto;
         padding: 2rem;
-        text-align: center;
       }
+
+      
+      page-container {
+          position: relative;
+            min-height: 100vh;
+
+      }
+      #content-wrap {
+         // text-align: center;
+          // padding-bottom: 8em;    /* Footer height */
+      }
+      footer-menu {
+              width: 100vw;
+
+        position: absolute;
+        bottom: 0;
+        height: 2.5rem;            /* Footer height */
+      }
+
       .hidden {
             display: none;
             pointer-events: none;
@@ -79,21 +99,26 @@ export class CompiledTemplates extends LitElement {
             <nav-menu @page-chosen=${this._onCurrentPageChanged}></nav-menu>
             ${this.headerTemplate()}
             <body>
-                <div class=${this._homePageTemplateHidden}>           ${this._homePageTemplate()}</div>
-                <div class=${this._invoerenTemplateHidden}>           ${this._invoerenTemplate()}</div>
-                <div class=${this._reisGeschiedenisTemplateHidden}>   ${this._overzichtTemplate()}</div>
-                <div class=${this._loginTemplateHidden}>              ${this._loginTemplate()}</div>
-                <div class=${this._logoutTemplateHidden}>             ${this._loginTemplate()}</div>
-                <div class=${this._supportTemplateHidden}>            ${this._supportTemplate()}</div>
-                <div class=${this._thermometerTemplateHidden}>        ${this._thermometerTemplate()}</div>
-                <div class=${this._accountInfoTemplateHidden}>        ${this._accountInfoTemplate()}</div>
-                <div class=${this._passwordResetTemplateHidden}>      ${this._resetPasswordTemplate()}</div>
-                <div class=${this._readmeTemplateHidden}>             ${this._readmeTemplate()}</div
+            <div id="page-container">
+                <div id="content-wrap">
+                    <div class=${this._homePageTemplateHidden}> ${this._homePageTemplate()}</div>
+                    <div class=${this._invoerenTemplateHidden}> ${this._invoerenTemplate()}</div>
+                    <div class=${this._reisGeschiedenisTemplateHidden}> ${this._overzichtTemplate()}</div>
+                    <div class=${this._loginTemplateHidden}> ${this._loginTemplate()}</div>
+                    <div class=${this._logoutTemplateHidden}> ${this._loginTemplate()}</div>
+                    <div class=${this._supportTemplateHidden}> ${this._supportTemplate()}</div>
+                    <div class=${this._thermometerTemplateHidden}> ${this._thermometerTemplate()}</div>
+                    <div class=${this._accountInfoTemplateHidden}> ${this._accountInfoTemplate()}</div>
+                    <div class=${this._passwordResetTemplateHidden}> ${this._resetPasswordTemplate()}</div>
+                    <div class=${this._readmeTemplateHidden}> ${this._readmeTemplate()}</div
+                </div>
+                <footer-menu @page-chosen=${this._onCurrentPageChanged}></footer-menu>
+            </div>
             </body>
-            <footer-menu @page-chosen=${this._onCurrentPageChanged}></footer-menu>
         `;
     }
-                // <div class=${this._newAccountTemplateHidden}>         ${this._newAccountTemplate()}</div
+
+    // <div class=${this._newAccountTemplateHidden}>         ${this._newAccountTemplate()}</div
 
 
     _onCurrentPageChanged(event: Event) {
@@ -225,6 +250,7 @@ export class CompiledTemplates extends LitElement {
         return html`
             <readme-element></readme-element>`;
     }
+
     hideRest() {
         this._homePageTemplateHidden = "hidden";
         this._loginTemplateHidden = "hidden";

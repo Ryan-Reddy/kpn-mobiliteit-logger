@@ -1,5 +1,5 @@
 import {css, html, LitElement} from 'lit';
-import {property} from "lit-element";
+import {customElement, property} from "lit-element";
 
 // import * as Rx from 'rx-dom';
 
@@ -9,14 +9,36 @@ import {property} from "lit-element";
  * @slot - This element has a slot
  * @csspart button - The button
  */
+@customElement('overzicht-reizen')
 export class OverzichtReizen extends LitElement {
     @property() titel = 'Overzicht Reizen';
     @property() _vervoerMiddelDummyData = [];
     @property() _reizenDummyData = [];
     @property() headers = ['Project', 'Type vervoer', 'Begin', 'Einde', 'Km', 'C02', 'Kosten', 'Wijzig',];
+    @property() _feedback = '';
+    @property() _sorted0 = false;
+    @property() _sorted1 = false;
+    @property() _sorted2 = false;
+    @property() _sorted3 = false;
+    @property() _sorted4 = false;
+    @property() _sorted5 = false;
+    @property() _sorted6 = false;
+    @property() _sorted7 = false;
 
     constructor() {
         super();
+        fetch('/vervoermiddel-CO2.json')
+            .then((response) => response.json())
+            .then((json) => {
+                this._vervoerMiddelDummyData = Array.from(json);
+                console.log(this._vervoerMiddelDummyData);
+            });
+        fetch('/dummydata-reizen.json')
+            .then((response) => response.json())
+            .then((json) => {
+                this._reizenDummyData = Array.from(json);
+                console.log(this._reizenDummyData);
+            });
     }
 
     static get styles() {
@@ -67,20 +89,20 @@ export class OverzichtReizen extends LitElement {
 
     connectedCallback() {
         super.connectedCallback();
-        // TODO insert ajax rsjx json file observer
-        //
-        fetch('/vervoermiddel-CO2.json')
-            .then((response) => response.json())
-            .then((json) => {
-                this._vervoerMiddelDummyData = Array.from(json);
-                console.log(this._vervoerMiddelDummyData);
-            });
-        fetch('/dummydata-reizen.json')
-            .then((response) => response.json())
-            .then((json) => {
-                this._reizenDummyData = Array.from(json);
-                console.log(this._reizenDummyData);
-            });
+        // // TODO insert ajax rsjx json file observer
+        // //
+        // fetch('/vervoermiddel-CO2.json')
+        //     .then((response) => response.json())
+        //     .then((json) => {
+        //         this._vervoerMiddelDummyData = Array.from(json);
+        //         console.log(this._vervoerMiddelDummyData);
+        //     });
+        // fetch('/dummydata-reizen.json')
+        //     .then((response) => response.json())
+        //     .then((json) => {
+        //         this._reizenDummyData = Array.from(json);
+        //         console.log(this._reizenDummyData);
+        //     });
     }
 
     //TODO: make tableToCSV work with lit
@@ -131,10 +153,10 @@ export class OverzichtReizen extends LitElement {
 
     render() {
         return html`
-          <header>
-          <H1 class="header">${this.titel}</H1>
-          </header>
-          
+            <header>
+                <H1 class="header">${this.titel}</H1>
+            </header>
+
             <body>
             <main>
     <span class="span">
@@ -144,17 +166,15 @@ export class OverzichtReizen extends LitElement {
     <table class="full">
     <caption hidden>${this.titel}</caption>
     <thead>
-    <tr>
-        <th class="hiddensmolscreen">${this.headers[0]}</th>
-        <th>${this.headers[1]}</th>
-        <th>${this.headers[2]}</th>
-        <th class="hiddensmolscreen">${this.headers[3]}</th>
-        <th>${this.headers[4]}</th>
-        <th class="hiddensmolscreen">${this.headers[5]}</th>
-        <th class="hiddensmolscreen">${this.headers[6]}</th>
-        <th>${this.headers[7]}</th>
-        <th class="hiddensmolscreen"></th>
-                
+    <tr @click=${this.headerClicked}>
+        <th id=${this.headers[0]} class="hiddensmolscreen">${this.headers[0]}</th>
+        <th id=${this.headers[1]}>${this.headers[1]}</th>
+        <th id=${this.headers[2]}>${this.headers[2]}</th>
+        <th id=${this.headers[3]} class="hiddensmolscreen">${this.headers[3]}</th>
+        <th id=${this.headers[4]}>${this.headers[4]}</th>
+        <th id=${this.headers[5]} class="hiddensmolscreen">${this.headers[5]}</th>
+        <th id=${this.headers[6]} class="hiddensmolscreen">${this.headers[6]}</th>
+        <th id=${this.headers[7]}>${this.headers[7]}</th>         
     </tr>
 
     </thead>
@@ -183,6 +203,9 @@ export class OverzichtReizen extends LitElement {
                 <button onclick="print()">Print...</button>
             </main>
             </body>
+            <span id="feedbackspan">
+              ${this._feedback}
+          </span>
         `;
     }
 
@@ -190,20 +213,74 @@ export class OverzichtReizen extends LitElement {
     filterColumnOnTerm(filter: string) {
         console.log('sortColumnSimple')
         console.log(filter)
-        // this._reizenDummyData = this._reizenDummyData.filter((Object) => {
-        //     Object.filter().project === filter
-        // });
+        // sort by value
 
     }
-    sortColumnSimple() {
+
+    sortColumnSimple(filter: string) {
         console.log('sortColumnSimple')
         console.log(this._reizenDummyData)
-        // this._reizenDummyData = this._reizenDummyData.map().sort();
-        // console.log(this._reizenDummyData)
-
+        this._reizenDummyData = this._reizenDummyData.sort((a, b) => a.filter - b.filter)
 
     }
 
-}
+    headerClicked(e: Event) {
+        console.log('headerClicked');
+        console.log(this._reizenDummyData);
+        const id = e.target.id;
+        console.log('id= ' + id);
 
-window.customElements.define('overzicht-reizen', OverzichtReizen);
+        this._feedback = 'Table column to be sorted: ' + id;
+
+        // TODO: implement style sorter https://www.scaler.com/topics/javascript-sort-an-array-of-objects/
+        switch (id) {
+            case this.headers[0]: { // project
+                this._reizenDummyData = this._reizenDummyData.sort((a, b) => a.project - b.project)
+                break;
+            }
+            case this.headers[1]: { //type
+                this._reizenDummyData = this._reizenDummyData.sort((a, b) => a.type - b.type)
+                break;
+            }
+            case this.headers[2]: { //begin
+                this._reizenDummyData = this._reizenDummyData.sort((a, b) => a.begin - b.begin)
+                break;
+            }
+            case this.headers[3]: { //eind
+
+                this._reizenDummyData = this._reizenDummyData.sort((a, b) => a.eind - b.eind)
+                break;
+            }
+            case this.headers[4]: { //km
+
+                console.log(this._sorted4)
+
+                this._sorted4 = this._sorted4 === true ? false : true;
+                this._reizenDummyData = this._sorted4
+                    ? this._reizenDummyData.sort((u1, u2) => u1.km - u2.km)
+                    : this._reizenDummyData.sort((u1, u2) => u2.km - u1.km);
+                break;
+
+            }
+            case this.headers[5]: { //uitstoot
+                console.log(this._sorted5)
+
+                this._sorted5 = this._sorted5 === true ? false : true;
+                this._reizenDummyData = this._sorted5
+                    ? this._reizenDummyData.sort((u1, u2) => u1.uitstoot - u2.uitstoot)
+                    : this._reizenDummyData.sort((u1, u2) => u2.uitstoot - u1.uitstoot);
+                break;
+            }
+            case this.headers[6]: { //kosten
+                console.log(this._sorted6)
+
+                this._sorted6 = this._sorted6 === true ? false : true;
+                this._reizenDummyData = this._sorted6
+                    ? this._reizenDummyData.sort((u1, u2) => u1.kosten - u2.kosten)
+                    : this._reizenDummyData.sort((u1, u2) => u2.kosten - u1.kosten);
+                break;
+            }
+        }
+
+    }
+}

@@ -33,18 +33,18 @@ export class MyElement extends LitElement {
     }
     
     footer {
-        width: 100%;
-        height: 8em;
-        border: 1px solid black;
-    
-        bottom: 0;
-        position: fixed;
-        overflow: hidden;
+        // width: 100%;
+        // height: 8em;
+        // bottom: 0;
+        // position: fixed;
         padding: 1rem 1.5rem;
-      
+    
+        overflow: hidden;
         display: flex;
         justify-content: space-between;
         align-items: center;
+      
+        border: 1px solid black;
         background-color: #151617;
         color: white;
         opacity: 1;
