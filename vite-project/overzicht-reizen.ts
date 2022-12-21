@@ -24,6 +24,8 @@ export class OverzichtReizen extends LitElement {
     @property() _sorted5 = false;
     @property() _sorted6 = false;
     @property() _sorted7 = false;
+    @property()  sortsymboldown = '&#11015;';
+    @property()  sortsymbolUP = '&#11016;';
 
     constructor() {
         super();
@@ -78,7 +80,12 @@ export class OverzichtReizen extends LitElement {
           border-bottom: 1px dotted #ddd;
           border-collapse: collapse;
         }
-        tr:hover {background-color: coral;}
+
+        .columnHeads {
+        background: green;
+
+        cursor: pointer;
+                }
 
     @media (max-width: 858px) {
     .hiddensmolscreen {
@@ -156,29 +163,26 @@ export class OverzichtReizen extends LitElement {
             <header>
                 <H1 class="header">${this.titel}</H1>
             </header>
-
             <body>
             <main>
     <span class="span">
                         <hr/>
-
         <div class="tablecontainer">
     <table class="full">
     <caption hidden>${this.titel}</caption>
     <thead>
-    <tr @click=${this.headerClicked}>
-        <th id=${this.headers[0]} class="hiddensmolscreen">${this.headers[0]}</th>
-        <th id=${this.headers[1]}>${this.headers[1]}</th>
-        <th id=${this.headers[2]}>${this.headers[2]}</th>
-        <th id=${this.headers[3]} class="hiddensmolscreen">${this.headers[3]}</th>
-        <th id=${this.headers[4]}>${this.headers[4]}</th>
-        <th id=${this.headers[5]} class="hiddensmolscreen">${this.headers[5]}</th>
-        <th id=${this.headers[6]} class="hiddensmolscreen">${this.headers[6]}</th>
-        <th id=${this.headers[7]}>${this.headers[7]}</th>         
-    </tr>
-
+            <tr @click=${this.headerClicked}>
+                <th class="columnHeads" id=${this.headers[0]} class="hiddensmolscreen">${this.headers[0]} &#11015;&#11014;</th>
+                <th class="columnHeads" id=${this.headers[1]}>${this.headers[1]} &#11015;&#11014;</th>
+                <th class="columnHeads" id=${this.headers[2]}>${this.headers[2]} &#11015;&#11014;</th>
+                <th class="columnHeads" id=${this.headers[3]} class="hiddensmolscreen">${this.headers[3]} &#11015;&#11014;</th>
+                <th class="columnHeads" id=${this.headers[4]}>${this.headers[4]} &#11015;&#11014;</th>
+                <th class="columnHeads" id=${this.headers[5]} class="hiddensmolscreen">${this.headers[5]} &#11015;&#11014;</th>
+                <th class="columnHeads" id=${this.headers[6]} class="hiddensmolscreen">${this.headers[6]} &#11015;&#11014;</th>
+                <th class="columnHeads" id=${this.headers[7]}>${this.headers[7]} &#11015;&#11014;</th>         
+            </tr>
     </thead>
-    <tbody>
+        <tbody>
     ${this._reizenDummyData.map(({begin, eind, km, kosten, project, type, uitstoot}) => html`
         <tr>
             <th class="hiddensmolscreen">${project}</th>
@@ -217,13 +221,6 @@ export class OverzichtReizen extends LitElement {
 
     }
 
-    sortColumnSimple(filter: string) {
-        console.log('sortColumnSimple')
-        console.log(this._reizenDummyData)
-        this._reizenDummyData = this._reizenDummyData.sort((a, b) => a.filter - b.filter)
-
-    }
-
     headerClicked(e: Event) {
         console.log('headerClicked');
         console.log(this._reizenDummyData);
@@ -238,87 +235,77 @@ export class OverzichtReizen extends LitElement {
                 console.log(this._sorted0)
                 this._sorted0 = this._sorted0 === true ? false : true;
 
-                this._reizenDummyData = this._sorted0 === true
-                    ?
-                    this._reizenDummyData.sort((a, b) => {
-                        const projectA = a.project.toUpperCase(); // ignore upper and lowercase
-                        const projectB = b.project.toUpperCase(); // ignore upper and lowercase
-
-                        // typeA - typeB
-                        if (projectA > projectB) {
-                            return -1;
-                        }
-                        if (projectA < projectB) {
-                            return 1;
-                        }
-                        // names must be equal
-                        return 0;
-                    })
-                    :
-                    this._reizenDummyData.sort((a, b) => {
-                        const projectB = a.project.toUpperCase(); // ignore upper and lowercase
-                        const projectA = b.project.toUpperCase(); // ignore upper and lowercase
-                        if (projectA > projectB) {
-                            return -1;
-                        }
-                        if (projectA < projectB) {
-                            return 1;
-                        }
-                        // names must be equal
-                        return 0;
-                    })
+                this._reizenDummyData = this._sorted0 === true ? this._reizenDummyData.sort((a, b) => {
+                    const projectA = a.project.toUpperCase(); // ignore upper and lowercase
+                    const projectB = b.project.toUpperCase(); // ignore upper and lowercase
+                    // typeA - typeB
+                    if (projectA > projectB) {
+                        return -1;
+                    }
+                    if (projectA < projectB) {
+                        return 1;
+                    }
+                    // names must be equal
+                    return 0;
+                }) : this._reizenDummyData.sort((a, b) => {
+                    const projectB = a.project.toUpperCase(); // ignore upper and lowercase
+                    const projectA = b.project.toUpperCase(); // ignore upper and lowercase
+                    if (projectA > projectB) {
+                        return -1;
+                    }
+                    if (projectA < projectB) {
+                        return 1;
+                    }
+                    // names must be equal
+                    return 0;
+                })
                 break;
             }
             case this.headers[1]: { //type
                 console.log(this._sorted1)
                 this._sorted1 = this._sorted1 === true ? false : true;
 
-                this._reizenDummyData = this._sorted1 === true
-                    ?
-                        this._reizenDummyData.sort((a, b) => {
-                            const typeA = a.type.toUpperCase(); // ignore upper and lowercase
-                            const typeB = b.type.toUpperCase(); // ignore upper and lowercase
+                this._reizenDummyData = this._sorted1 === true ? this._reizenDummyData.sort((a, b) => {
+                    const typeA = a.type.toUpperCase(); // ignore upper and lowercase
+                    const typeB = b.type.toUpperCase(); // ignore upper and lowercase
 
-                            // typeA - typeB
-                            if (typeA > typeB) {
-                                return -1;
-                            }
-                            if (typeA < typeB) {
-                                return 1;
-                            }
-                            // names must be equal
-                            return 0;
-                        })
-                     :
-                     this._reizenDummyData.sort((a, b) => {
-                                const typeB = a.type.toUpperCase(); // ignore upper and lowercase
-                                const typeA = b.type.toUpperCase(); // ignore upper and lowercase
-                                if (typeA > typeB) {
-                                    return -1;
-                                }
-                                if (typeA < typeB) {
-                                    return 1;
-                                }
-                                // names must be equal
-                                return 0;
-                            })
+                    // typeA - typeB
+                    if (typeA > typeB) {
+                        return -1;
+                    }
+                    if (typeA < typeB) {
+                        return 1;
+                    }
+                    // names must be equal
+                    return 0;
+                }) : this._reizenDummyData.sort((a, b) => {
+                    const typeB = a.type.toUpperCase(); // ignore upper and lowercase
+                    const typeA = b.type.toUpperCase(); // ignore upper and lowercase
+                    if (typeA > typeB) {
+                        return -1;
+                    }
+                    if (typeA < typeB) {
+                        return 1;
+                    }
+                    // names must be equal
+                    return 0;
+                })
                 break;
 
 
             }
-
             case this.headers[2]: { //begin
                 console.log(this._sorted2)
 
                 this._sorted2 = this._sorted2 === true ? false : true;
 
-                this._reizenDummyData = this._sorted2
-                    ? this._reizenDummyData.sort((x, y) => {x = new Date(x.begin), y = new Date(y.begin)
-                        return x - y;
-                    }) :
-                    this._reizenDummyData.sort((y, x) => {x = new Date(x.begin), y = new Date(y.begin)
-                        return x - y;
-                    })
+                this._reizenDummyData = this._sorted2 ? this._reizenDummyData.sort((x, y) => {
+                    x = new Date(x.begin), y = new Date(y.begin)
+                    return x - y;
+                }) : this._reizenDummyData.sort((y, x) => {
+                    x = new Date(x.begin), y = new Date(y.begin)
+                    return x - y;
+                })
                 break;
             }
             case this.headers[3]: { //eind
@@ -326,13 +313,13 @@ export class OverzichtReizen extends LitElement {
 
                 this._sorted3 = this._sorted3 === true ? false : true;
 
-                this._reizenDummyData = this._sorted3
-                    ? this._reizenDummyData.sort((x, y) => {x = new Date(x.eind), y = new Date(y.eind)
+                this._reizenDummyData = this._sorted3 ? this._reizenDummyData.sort((x, y) => {
+                    x = new Date(x.eind), y = new Date(y.eind)
                     return x - y;
-                }) :
-                    this._reizenDummyData.sort((y, x) => {x = new Date(x.eind), y = new Date(y.eind)
-                        return x - y;
-            })
+                }) : this._reizenDummyData.sort((y, x) => {
+                    x = new Date(x.eind), y = new Date(y.eind)
+                    return x - y;
+                })
                 break;
             }
             case this.headers[4]: { //km
@@ -340,9 +327,8 @@ export class OverzichtReizen extends LitElement {
                 console.log(this._sorted4)
 
                 this._sorted4 = this._sorted4 === true ? false : true;
-                this._reizenDummyData = this._sorted4
-                    ? this._reizenDummyData.sort((u1, u2) => u1.km - u2.km)
-                    : this._reizenDummyData.sort((u1, u2) => u2.km - u1.km);
+                // @ts-ignore
+                this._reizenDummyData = this._sorted4 ? this._reizenDummyData.sort((u1, u2) => u1.km - u2.km) : this._reizenDummyData.sort((u1, u2) => u2.km - u1.km);
                 break;
 
             }
@@ -350,18 +336,15 @@ export class OverzichtReizen extends LitElement {
                 console.log(this._sorted5)
 
                 this._sorted5 = this._sorted5 === true ? false : true;
-                this._reizenDummyData = this._sorted5
-                    ? this._reizenDummyData.sort((u1, u2) => u1.uitstoot - u2.uitstoot)
-                    : this._reizenDummyData.sort((u1, u2) => u2.uitstoot - u1.uitstoot);
+                // @ts-ignore
+                this._reizenDummyData = this._sorted5 ? this._reizenDummyData.sort((u1, u2) => u1.uitstoot - u2.uitstoot) : this._reizenDummyData.sort((u1, u2) => u2.uitstoot - u1.uitstoot);
                 break;
             }
             case this.headers[6]: { //kosten
                 console.log(this._sorted6)
 
                 this._sorted6 = this._sorted6 === true ? false : true;
-                this._reizenDummyData = this._sorted6
-                    ? this._reizenDummyData.sort((u1, u2) => u1.kosten - u2.kosten)
-                    : this._reizenDummyData.sort((u1, u2) => u2.kosten - u1.kosten);
+                this._reizenDummyData = this._sorted6 ? this._reizenDummyData.sort((u1, u2) => u1.kosten - u2.kosten) : this._reizenDummyData.sort((u1, u2) => u2.kosten - u1.kosten);
                 break;
             }
             case this.headers[7]: { //wijzig
