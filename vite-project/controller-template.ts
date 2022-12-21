@@ -28,7 +28,8 @@ export class ControllerTemplate extends LitElement {
   //TODO: make visible : "":
   @property() _homePageTemplateHidden = 'hidden';
   @property() _reisInvoerenTemplateHidden = 'hidden';
-  @property() _reisGeschiedenisTemplateHidden = 'hidden';
+  //TODO: hidden:
+  @property() _reisGeschiedenisTemplateHidden = '';
   @property() _loginTemplateHidden = 'hidden';
   @property() _logoutTemplateHidden = 'hidden';
   @property() _accountInfoTemplateHidden = 'hidden';
@@ -38,8 +39,7 @@ export class ControllerTemplate extends LitElement {
   @property() _passwordResetTemplateHidden = 'hidden';
   @property() _newAccountTemplateHidden = 'hidden';
   @property() _readmeTemplateHidden = 'hidden';
-  //TODO: hidden:
-  @property() _reisWijzigenTemplateHidden = '';
+  @property() _reisWijzigenTemplateHidden = 'hidden';
 
   constructor() {
     super();

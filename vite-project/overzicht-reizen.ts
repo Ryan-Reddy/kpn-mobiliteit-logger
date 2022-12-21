@@ -1,5 +1,6 @@
 import {css, html, LitElement} from 'lit';
 import {customElement, property} from 'lit-element';
+import {InvoerenReizen} from "./invoeren-reizen";
 
 // import * as Rx from 'rx-dom';
 
@@ -240,7 +241,7 @@ export class OverzichtReizen extends LitElement {
                           <th>${km}</th>
                           <th class="hiddensmolscreen">${uitstoot}</th>
                           <th class="hiddensmolscreen">${kosten}</th>
-                          <th><a href="#">Wijzig</a></th>
+                          <th @click=${this.wijzigDezeDataRij}><a href="#" >Wijzig</a></th>
                       </tr>
                   `)}
                 </tbody>
@@ -249,14 +250,27 @@ export class OverzichtReizen extends LitElement {
           </span>
                 <button>Exporteren als..</button>
                 <button @click="${this.tableToCSV}">download CSV</button>
-                <button @click="${this.filterColumnOnTerm('nobis')}">
-                    Filter on 'nobis'
-                </button>
+                <button @click="${this.filterColumnOnTerm('nobis')}">Filter on 'nobis'</button>
                 <button onclick="print()">Print...</button>
             </main>
             </body>
             <span id="feedbackspan"> ${this._feedback} </span>
         `;
+    }
+    wijzigDezeDataRij(event: Event) {
+        // TODO collect data from the table #32
+        console.log('wijzigDezeDataRij')
+        console.log(event.target)
+        const target = event.target as InvoerenReizen;
+        const parent = target.parentElement as any;
+        const grandParent = parent.parentElement as any;
+
+        console.log(parent.parentElement)
+        console.log(grandParent.previousSibling)
+
+        //notify parent:
+        this.dispatchEvent(new Event('page-chosen'));
+        this.dispatchEvent(new Event('row-chosen'));
     }
 
     // TODO: fix filter and sort:
@@ -269,11 +283,11 @@ export class OverzichtReizen extends LitElement {
     headerClicked(e: Event) {
         console.log('headerClicked');
         console.log(this._reizenDummyData);
-        const id = e !== null ? e.target.id : null;
+
+        const event = e as any;
+        const id = event.target.id;
         console.log('id= ' + id);
-
         this._feedback = 'Table column to be sorted: ' + id;
-
         // TODO: implement style sorter https://www.scaler.com/topics/javascript-sort-an-array-of-objects/
         switch (id) {
             case this.headers[0]: {
