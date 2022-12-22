@@ -6,7 +6,7 @@ import './nav-menu.ts';
 import './overzicht-reizen.js';
 import './invoeren-reizen.js';
 import './invoeren-reizen-wijzigen.js';
-import './thermometer.js';
+// import './thermometer.js';
 import './login.ts';
 import './account-info.ts';
 import './support.ts';
@@ -45,7 +45,6 @@ export class ControllerTemplate extends LitElement {
     super();
   }
 
-  // @eventOptions({capture: true}) _onClick(e: Event) {
   @eventOptions({ capture: true }) _onClick() {
     console.log('clicked event listener');
   }
