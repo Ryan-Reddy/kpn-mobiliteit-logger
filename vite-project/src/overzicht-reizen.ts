@@ -268,6 +268,7 @@ export class OverzichtReizen extends LitElement {
             </main>
             </body>
             <span id="feedbackspan"> ${this._feedback} </span>
+            
         `;
     }
     wijzigDezeDataRij(event: Event) {

@@ -15,16 +15,11 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@rollup/plugin-node-resolve": "^15.0.1",
     "dummy-data-generator": "^1.8.1",
-    "lit": "^2.4.1",
-    "rollup": "^3.7.5",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-minify-html-literals": "^1.2.6",
-    "rollup-plugin-terser": "^7.0.2",
+    "lit": "^2.5.0",
     "rxjs": "^7.8.0"
   },
   "devDependencies": {
-    "vite": "^4.0.0"
+    "vite": "^4.0.3"
   }
 }
