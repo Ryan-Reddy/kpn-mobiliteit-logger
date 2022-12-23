@@ -10,7 +10,7 @@ import { LitElement, html, customElement, property, css } from 'lit-element';
 export class NavMenu extends LitElement {
   @property() naamGebruiker = 'Hans Fumphriehd';
   @property() kpnLogo = '/public/branding/kpn-logo2-jpeg.jpg';
-  @property() currentPage: string;
+  @property() currentPage: string = '';
   @property() _kpnHomePageUrl = 'https://www.kpn.com/';
 
   constructor() {
