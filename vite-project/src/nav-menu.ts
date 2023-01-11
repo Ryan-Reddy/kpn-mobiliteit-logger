@@ -217,10 +217,10 @@ export class NavMenu extends LitElement {
             </label>
             <ul @click=${this._clickMenu} id="nope">
               <li>
-                <a class="nav-button" href="#" id="home-page">Home</a>
+                <a class="nav-button" href="home-page" id="home-page">Home</a>
               </li>
               <li>
-                <a class="nav-button" href="#" id="Reis Registreren"
+                <a class="nav-button" href="reis-registreren" id="Reis Registreren"
                   >Reis Registreren</a
                 >
               </li>

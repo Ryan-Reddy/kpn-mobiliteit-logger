@@ -44,6 +44,24 @@ export class OverzichtReizen extends LitElement {
             });
     }
 
+    connectedCallback() {
+        super.connectedCallback();
+        // // TODO insert ajax rsjx json file observer
+        // //
+        // fetch('/vervoermiddel-CO2.json')
+        //     .then((response) => response.json())
+        //     .then((json) => {
+        //         this._vervoerMiddelDummyData = Array.from(json);
+        //         console.log(this._vervoerMiddelDummyData);
+        //     });
+        // fetch('/dummydata-reizen.json')
+        //     .then((response) => response.json())
+        //     .then((json) => {
+        //         this._reizenDummyData = Array.from(json);
+        //         console.log(this._reizenDummyData);
+        //     });
+    }
+
     static get styles() {
         return css`
       * {
@@ -110,23 +128,6 @@ export class OverzichtReizen extends LitElement {
     `;
     }
 
-    connectedCallback() {
-        super.connectedCallback();
-        // // TODO insert ajax rsjx json file observer
-        // //
-        // fetch('/vervoermiddel-CO2.json')
-        //     .then((response) => response.json())
-        //     .then((json) => {
-        //         this._vervoerMiddelDummyData = Array.from(json);
-        //         console.log(this._vervoerMiddelDummyData);
-        //     });
-        // fetch('/dummydata-reizen.json')
-        //     .then((response) => response.json())
-        //     .then((json) => {
-        //         this._reizenDummyData = Array.from(json);
-        //         console.log(this._reizenDummyData);
-        //     });
-    }
 
     /**
      * Called when an update was triggered, before rendering. Receives a Map of changed
@@ -254,7 +255,7 @@ export class OverzichtReizen extends LitElement {
                           <th id=${km > 300 ? 'errorKM' : 'allGood'}>${km}</th>
                           <th class="hiddensmolscreen">${uitstoot}</th>
                           <th class="hiddensmolscreen">${kosten}</th>
-                          <th @click=${this.wijzigDezeDataRij}><a href="#" >Wijzig</a></th>
+                          <th @click=${this.wijzigDezeDataRij}><a href="wijzig" >Wijzig</a></th>
                       </tr>
                   `)}
                 </tbody>

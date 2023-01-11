@@ -109,11 +109,9 @@ export class ControllerTemplate extends LitElement {
                     <div class=${
                       this._reisWijzigenTemplateHidden
                     }>${this._reisWijzigenTemplate()}</div>
-              
                     <div class=${
                       this._reisGeschiedenisTemplateHidden
                     }>${this._overzichtTemplate()}</div>
-              
                     <div class=${
                       this._loginTemplateHidden
                     }>${this._loginTemplate()}</div>
@@ -234,15 +232,15 @@ export class ControllerTemplate extends LitElement {
     this._reisWijzigenTemplateHidden = 'hidden';
   }
 
+  _homePageTemplate() {
+    return html` <home-page></home-page>`;
+  }
+
   headerTemplate() {
     return html` <header>
       <title>KPN-222</title>
       <h1>${this._currentPage}</h1>
     </header>`;
-  }
-
-  _homePageTemplate() {
-    return html` <home-page></home-page>`;
   }
 
   _overzichtTemplate() {
