@@ -30,7 +30,8 @@ body {
   min-width: 320px;
   min-height: 100%;
 
-  background-image: url('/achtergrondshapes.webp');
+  /*background-image: url('. /vite-project/achtergrondshapes.webp');*/
+  background-image: url('public/achtergrondshapes.webp');
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: center;
