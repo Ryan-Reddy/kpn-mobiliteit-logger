@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, css, html } from '../node_modules/lit';
 
 import './footer-menu.js';
 import './home-page.ts';
