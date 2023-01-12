@@ -26,10 +26,9 @@ import { NavMenu } from './nav-menu';
 export class ControllerTemplate extends LitElement {
   @property() _currentPage: string | undefined;
   //TODO: make visible : "":
-  @property() _homePageTemplateHidden = 'hidden';
+  @property() _homePageTemplateHidden = '';
   @property() _reisInvoerenTemplateHidden = 'hidden';
-  //TODO: hidden:
-  @property() _reisGeschiedenisTemplateHidden = '';
+  @property() _reisGeschiedenisTemplateHidden = 'hidden';
   @property() _loginTemplateHidden = 'hidden';
   @property() _logoutTemplateHidden = 'hidden';
   @property() _accountInfoTemplateHidden = 'hidden';
