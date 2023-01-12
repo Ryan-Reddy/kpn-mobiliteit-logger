@@ -49,7 +49,7 @@ export class SupportElement extends LitElement {
           </button>
           <br />
           <div class=${this._hiddenElement}>
-            <img src="/Have-you-tried-turning-it-off-and-on-again.jpg" alt="Have-you-tried-turning-it-off-and-on-again?" />
+            <img src="/Have-you-tried-turning-it-off-and-on-again.jpg" alt="Hello IT... Have you tried turning it off and on again?" />
             <br />
             <br />
             <button>if so, call us on 69-420-420-69</button>
