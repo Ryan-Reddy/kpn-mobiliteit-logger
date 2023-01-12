@@ -24,7 +24,7 @@ import { NavMenu } from './nav-menu';
  */
 @customElement('compiled-templates')
 export class ControllerTemplate extends LitElement {
-  @property() _currentPage: string;
+  @property() _currentPage: string | undefined;
   //TODO: make visible : "":
   @property() _homePageTemplateHidden = 'hidden';
   @property() _reisInvoerenTemplateHidden = 'hidden';
