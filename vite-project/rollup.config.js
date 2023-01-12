@@ -16,7 +16,7 @@ const copyConfig = {
 // The main JavaScript bundle for modern browsers that support
 // JavaScript modules and other ES2015+ features.
 const config = {
-  input: './src/controller-template.ts',
+  input: 'src/controller-template.ts',
   output: {
     dir: 'build-modern/src/components',
     format: 'es',
