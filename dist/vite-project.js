@@ -69,7 +69,7 @@ const ce = (r) => new pe(typeof r == "string" ? r : r + "", void 0, Y), he = (r,
  * SPDX-License-Identifier: BSD-3-Clause
  */
 var E;
-const j = window, V = j.trustedTypes, ue = V ? V.emptyScript : "", B = j.reactiveElementPolyfillSupport, S = { toAttribute(r, e) {
+const j = window, V = j.trustedTypes, ue = V ? V.emptyScript : "", I = j.reactiveElementPolyfillSupport, S = { toAttribute(r, e) {
   switch (e) {
     case Boolean:
       r = r ? ue : null;
@@ -277,7 +277,7 @@ class w extends HTMLElement {
   firstUpdated(e) {
   }
 }
-w.finalized = !0, w.elementProperties = /* @__PURE__ */ new Map(), w.elementStyles = [], w.shadowRootOptions = { mode: "open" }, B == null || B({ ReactiveElement: w }), ((E = j.reactiveElementVersions) !== null && E !== void 0 ? E : j.reactiveElementVersions = []).push("1.5.0");
+w.finalized = !0, w.elementProperties = /* @__PURE__ */ new Map(), w.elementStyles = [], w.shadowRootOptions = { mode: "open" }, I == null || I({ ReactiveElement: w }), ((E = j.reactiveElementVersions) !== null && E !== void 0 ? E : j.reactiveElementVersions = []).push("1.5.0");
 var me = Object.defineProperty, ve = Object.getOwnPropertyDescriptor, Q = (r, e, i, o) => {
   for (var t = o > 1 ? void 0 : o ? ve(e, i) : e, n = r.length - 1, s; n >= 0; n--)
     (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
@@ -463,7 +463,7 @@ var ge = Object.defineProperty, be = Object.getOwnPropertyDescriptor, fe = (r, e
     (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
   return o && t && ge(e, i, t), t;
 };
-let I = class extends _ {
+let B = class extends _ {
   constructor() {
     super();
   }
@@ -578,9 +578,9 @@ let I = class extends _ {
     `;
   }
 };
-I = fe([
+B = fe([
   f("home-page")
-], I);
+], B);
 var _e = Object.defineProperty, ye = Object.getOwnPropertyDescriptor, z = (r, e, i, o) => {
   for (var t = o > 1 ? void 0 : o ? ye(e, i) : e, n = r.length - 1, s; n >= 0; n--)
     (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
@@ -1496,8 +1496,8 @@ p([
 l = p([
   f("invoeren-reizen")
 ], l);
-var je = Object.defineProperty, Pe = Object.getOwnPropertyDescriptor, c = (r, e, i, o) => {
-  for (var t = o > 1 ? void 0 : o ? Pe(e, i) : e, n = r.length - 1, s; n >= 0; n--)
+var je = Object.defineProperty, Te = Object.getOwnPropertyDescriptor, c = (r, e, i, o) => {
+  for (var t = o > 1 ? void 0 : o ? Te(e, i) : e, n = r.length - 1, s; n >= 0; n--)
     (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
   return o && t && je(e, i, t), t;
 };
@@ -1878,10 +1878,10 @@ c([
 d = c([
   f("invoeren-reizen-wijzigen")
 ], d);
-var Te = Object.defineProperty, xe = Object.getOwnPropertyDescriptor, X = (r, e, i, o) => {
+var Pe = Object.defineProperty, xe = Object.getOwnPropertyDescriptor, X = (r, e, i, o) => {
   for (var t = o > 1 ? void 0 : o ? xe(e, i) : e, n = r.length - 1, s; n >= 0; n--)
     (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
-  return o && t && Te(e, i, t), t;
+  return o && t && Pe(e, i, t), t;
 };
 let H = class extends _ {
   constructor() {
@@ -2257,7 +2257,7 @@ var Ce = Object.defineProperty, Se = Object.getOwnPropertyDescriptor, A = (r, e,
     (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
   return o && t && Ce(e, i, t), t;
 };
-let P = class extends _ {
+let T = class extends _ {
   constructor() {
     super(), this._hiddenElement = "hidden";
   }
@@ -2288,12 +2288,13 @@ let P = class extends _ {
     return g`
       <body>
         <main>
-          <button @click=${this._clickForSupport}>
+          <label hidden for="support"></label>
+          <button id="support" @click=${this._clickForSupport}>
             Click here for support!
           </button>
           <br />
           <div class=${this._hiddenElement}>
-            <img src="/Have-you-tried-turning-it-off-and-on-again.jpg" />
+            <img src="/Have-you-tried-turning-it-off-and-on-again.jpg" alt="Hello IT... Have you tried turning it off and on again?" />
             <br />
             <br />
             <button>if so, call us on 69-420-420-69</button>
@@ -2308,19 +2309,19 @@ let P = class extends _ {
 };
 A([
   a()
-], P.prototype, "_hiddenElement", 2);
+], T.prototype, "_hiddenElement", 2);
 A([
   a()
-], P.prototype, "currentPage", 2);
-P = A([
+], T.prototype, "currentPage", 2);
+T = A([
   f("support-element")
-], P);
+], T);
 var Oe = Object.defineProperty, He = Object.getOwnPropertyDescriptor, L = (r, e, i, o) => {
   for (var t = o > 1 ? void 0 : o ? He(e, i) : e, n = r.length - 1, s; n >= 0; n--)
     (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
   return o && t && Oe(e, i, t), t;
 };
-let T = class extends _ {
+let P = class extends _ {
   constructor() {
     super(), this._hiddenElement = "hidden";
   }
@@ -2394,13 +2395,13 @@ let T = class extends _ {
 };
 L([
   a()
-], T.prototype, "_hiddenElement", 2);
+], P.prototype, "_hiddenElement", 2);
 L([
   a()
-], T.prototype, "currentPage", 2);
-T = L([
+], P.prototype, "currentPage", 2);
+P = L([
   f("reset-password")
-], T);
+], P);
 var F = Object.freeze, te = Object.defineProperty, Re = Object.getOwnPropertyDescriptor, U = (r, e, i, o) => {
   for (var t = o > 1 ? void 0 : o ? Re(e, i) : e, n = r.length - 1, s; n >= 0; n--)
     (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);

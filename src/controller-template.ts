@@ -98,6 +98,7 @@ export class ControllerTemplate extends LitElement {
             <nav-menu @page-chosen=${this._onCurrentPageChanged}></nav-menu>
             ${this.headerTemplate()}
             <body>
+<!--            <body background="/branding/achtergrondshapes.webp">-->
             <div id="page-container">
                     <div class=${
                       this._homePageTemplateHidden

@@ -33,7 +33,7 @@ body {
   background-image: url('/branding/achtergrondshapes.webp');
   background-repeat: no-repeat;
   background-size: 100%;
-  background-position: center;
+  /*background-position: top;*/
 }
 
 @media (prefers-color-scheme: dark) {
