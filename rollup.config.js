@@ -1,6 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
-import minifyHTML from 'rollup-plugin-minify-html-literals';
+import terser from '@rollup/plugin-terser';
+import pkgMinifyHTML from 'rollup-plugin-minify-html-literals';
+const minifyHTML = pkgMinifyHTML.default
 import copy from 'rollup-plugin-copy';
 
 // Static assets will vary depending on the application
