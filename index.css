@@ -31,7 +31,7 @@ body {
   min-height: 100%;
 
   /*background-image: url('. /vite-project/achtergrondshapes.webp');*/
-  background-image: url('public/achtergrondshapes.webp');
+  background-image: url('/branding/achtergrondshapes.webp');
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: center;

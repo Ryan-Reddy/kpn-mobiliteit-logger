@@ -588,7 +588,7 @@ var _e = Object.defineProperty, ye = Object.getOwnPropertyDescriptor, z = (r, e,
 };
 let k = class extends se {
   constructor() {
-    super(), this.naamGebruiker = "Hans Fumphriehd", this.kpnLogo = "/public/branding/kpn-logo2-jpeg.jpg", this.currentPage = "", this._kpnHomePageUrl = "https://www.kpn.com/", this.onLoad();
+    super(), this.naamGebruiker = "Hans Fumphriehd", this.kpnLogo = "/branding/kpn-logo2-jpeg.jpg", this.currentPage = "", this._kpnHomePageUrl = "https://www.kpn.com/", this.onLoad();
   }
   static get styles() {
     return ae`
@@ -2625,7 +2625,7 @@ var Ue = Object.defineProperty, Ke = Object.getOwnPropertyDescriptor, v = (r, e,
 };
 let u = class extends re {
   constructor() {
-    super(), this._homePageTemplateHidden = "hidden", this._reisInvoerenTemplateHidden = "hidden", this._reisGeschiedenisTemplateHidden = "", this._loginTemplateHidden = "hidden", this._logoutTemplateHidden = "hidden", this._accountInfoTemplateHidden = "hidden", this._overzichtTemplateHidden = "hidden", this._thermometerTemplateHidden = "hidden", this._supportTemplateHidden = "hidden", this._passwordResetTemplateHidden = "hidden", this._newAccountTemplateHidden = "hidden", this._readmeTemplateHidden = "hidden", this._reisWijzigenTemplateHidden = "hidden";
+    super(), this._homePageTemplateHidden = "", this._reisInvoerenTemplateHidden = "hidden", this._reisGeschiedenisTemplateHidden = "hidden", this._loginTemplateHidden = "hidden", this._logoutTemplateHidden = "hidden", this._accountInfoTemplateHidden = "hidden", this._overzichtTemplateHidden = "hidden", this._thermometerTemplateHidden = "hidden", this._supportTemplateHidden = "hidden", this._passwordResetTemplateHidden = "hidden", this._newAccountTemplateHidden = "hidden", this._readmeTemplateHidden = "hidden", this._reisWijzigenTemplateHidden = "hidden";
   }
   _onClick() {
     console.log("clicked event listener");

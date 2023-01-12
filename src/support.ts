@@ -43,12 +43,13 @@ export class SupportElement extends LitElement {
     return html`
       <body>
         <main>
-          <button @click=${this._clickForSupport}>
+          <label hidden for="support"></label>
+          <button id="support" @click=${this._clickForSupport}>
             Click here for support!
           </button>
           <br />
           <div class=${this._hiddenElement}>
-            <img src="/Have-you-tried-turning-it-off-and-on-again.jpg" />
+            <img src="/Have-you-tried-turning-it-off-and-on-again.jpg" alt="Have-you-tried-turning-it-off-and-on-again?" />
             <br />
             <br />
             <button>if so, call us on 69-420-420-69</button>
