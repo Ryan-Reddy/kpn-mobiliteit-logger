@@ -1,8 +1,11 @@
+var ne = Object.defineProperty;
+var ae = (n, e, i) => e in n ? ne(n, e, { enumerable: !0, configurable: !0, writable: !0, value: i }) : n[e] = i;
+var a = (n, e, i) => (ae(n, typeof e != "symbol" ? e + "" : e, i), i);
 import "lit-html";
-import { LitElement as re, css as ne, html as b } from "lit-element/lit-element.js";
+import { LitElement as se, css as le, html as _ } from "lit-element/lit-element.js";
 import "lit-html/is-server.js";
-import { LitElement as _, css as y, html as g } from "lit";
-import { property as a, customElement as f, LitElement as se, css as ae, html as le, eventOptions as de } from "lit-element";
+import { LitElement as k, css as w, html as f } from "lit";
+import { property as l, customElement as y, LitElement as de, css as pe, html as ce, eventOptions as he } from "lit-element";
 (function() {
   const e = document.createElement("link").relList;
   if (e && e.supports && e.supports("modulepreload"))
@@ -10,21 +13,21 @@ import { property as a, customElement as f, LitElement as se, css as ae, html as
   for (const t of document.querySelectorAll('link[rel="modulepreload"]'))
     o(t);
   new MutationObserver((t) => {
-    for (const n of t)
-      if (n.type === "childList")
-        for (const s of n.addedNodes)
+    for (const r of t)
+      if (r.type === "childList")
+        for (const s of r.addedNodes)
           s.tagName === "LINK" && s.rel === "modulepreload" && o(s);
   }).observe(document, { childList: !0, subtree: !0 });
   function i(t) {
-    const n = {};
-    return t.integrity && (n.integrity = t.integrity), t.referrerpolicy && (n.referrerPolicy = t.referrerpolicy), t.crossorigin === "use-credentials" ? n.credentials = "include" : t.crossorigin === "anonymous" ? n.credentials = "omit" : n.credentials = "same-origin", n;
+    const r = {};
+    return t.integrity && (r.integrity = t.integrity), t.referrerpolicy && (r.referrerPolicy = t.referrerpolicy), t.crossorigin === "use-credentials" ? r.credentials = "include" : t.crossorigin === "anonymous" ? r.credentials = "omit" : r.credentials = "same-origin", r;
   }
   function o(t) {
     if (t.ep)
       return;
     t.ep = !0;
-    const n = i(t);
-    fetch(t.href, n);
+    const r = i(t);
+    fetch(t.href, r);
   }
 })();
 /**
@@ -32,19 +35,19 @@ import { property as a, customElement as f, LitElement as se, css as ae, html as
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const $ = window, M = $.ShadowRoot && ($.ShadyCSS === void 0 || $.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, Y = Symbol(), N = /* @__PURE__ */ new WeakMap();
-let pe = class {
+const P = window, L = P.ShadowRoot && (P.ShadyCSS === void 0 || P.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, Q = Symbol(), V = /* @__PURE__ */ new WeakMap();
+let ue = class {
   constructor(e, i, o) {
-    if (this._$cssResult$ = !0, o !== Y)
+    if (this._$cssResult$ = !0, o !== Q)
       throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
     this.cssText = e, this.t = i;
   }
   get styleSheet() {
     let e = this.o;
     const i = this.t;
-    if (M && e === void 0) {
+    if (L && e === void 0) {
       const o = i !== void 0 && i.length === 1;
-      o && (e = N.get(i)), e === void 0 && ((this.o = e = new CSSStyleSheet()).replaceSync(this.cssText), o && N.set(i, e));
+      o && (e = V.get(i)), e === void 0 && ((this.o = e = new CSSStyleSheet()).replaceSync(this.cssText), o && V.set(i, e));
     }
     return e;
   }
@@ -52,53 +55,53 @@ let pe = class {
     return this.cssText;
   }
 };
-const ce = (r) => new pe(typeof r == "string" ? r : r + "", void 0, Y), he = (r, e) => {
-  M ? r.adoptedStyleSheets = e.map((i) => i instanceof CSSStyleSheet ? i : i.styleSheet) : e.forEach((i) => {
-    const o = document.createElement("style"), t = $.litNonce;
-    t !== void 0 && o.setAttribute("nonce", t), o.textContent = i.cssText, r.appendChild(o);
+const me = (n) => new ue(typeof n == "string" ? n : n + "", void 0, Q), ge = (n, e) => {
+  L ? n.adoptedStyleSheets = e.map((i) => i instanceof CSSStyleSheet ? i : i.styleSheet) : e.forEach((i) => {
+    const o = document.createElement("style"), t = P.litNonce;
+    t !== void 0 && o.setAttribute("nonce", t), o.textContent = i.cssText, n.appendChild(o);
   });
-}, q = M ? (r) => r : (r) => r instanceof CSSStyleSheet ? ((e) => {
+}, B = L ? (n) => n : (n) => n instanceof CSSStyleSheet ? ((e) => {
   let i = "";
   for (const o of e.cssRules)
     i += o.cssText;
-  return ce(i);
-})(r) : r;
+  return me(i);
+})(n) : n;
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-var E;
-const j = window, V = j.trustedTypes, ue = V ? V.emptyScript : "", B = j.reactiveElementPolyfillSupport, S = { toAttribute(r, e) {
+var S;
+const T = window, I = T.trustedTypes, ve = I ? I.emptyScript : "", F = T.reactiveElementPolyfillSupport, H = { toAttribute(n, e) {
   switch (e) {
     case Boolean:
-      r = r ? ue : null;
+      n = n ? ve : null;
       break;
     case Object:
     case Array:
-      r = r == null ? r : JSON.stringify(r);
+      n = n == null ? n : JSON.stringify(n);
   }
-  return r;
-}, fromAttribute(r, e) {
-  let i = r;
+  return n;
+}, fromAttribute(n, e) {
+  let i = n;
   switch (e) {
     case Boolean:
-      i = r !== null;
+      i = n !== null;
       break;
     case Number:
-      i = r === null ? null : Number(r);
+      i = n === null ? null : Number(n);
       break;
     case Object:
     case Array:
       try {
-        i = JSON.parse(r);
+        i = JSON.parse(n);
       } catch {
         i = null;
       }
   }
   return i;
-} }, J = (r, e) => e !== r && (e == e || r == r), C = { attribute: !0, type: String, converter: S, reflect: !1, hasChanged: J };
-class w extends HTMLElement {
+} }, X = (n, e) => e !== n && (e == e || n == n), O = { attribute: !0, type: String, converter: H, reflect: !1, hasChanged: X };
+class $ extends HTMLElement {
   constructor() {
     super(), this._$Ei = /* @__PURE__ */ new Map(), this.isUpdatePending = !1, this.hasUpdated = !1, this._$El = null, this.u();
   }
@@ -114,7 +117,7 @@ class w extends HTMLElement {
       t !== void 0 && (this._$Ev.set(t, o), e.push(t));
     }), e;
   }
-  static createProperty(e, i = C) {
+  static createProperty(e, i = O) {
     if (i.state && (i.attribute = !1), this.finalize(), this.elementProperties.set(e, i), !i.noAccessor && !this.prototype.hasOwnProperty(e)) {
       const o = typeof e == "symbol" ? Symbol() : "__" + e, t = this.getPropertyDescriptor(e, o, i);
       t !== void 0 && Object.defineProperty(this.prototype, e, t);
@@ -124,12 +127,12 @@ class w extends HTMLElement {
     return { get() {
       return this[i];
     }, set(t) {
-      const n = this[e];
-      this[i] = t, this.requestUpdate(e, n, o);
+      const r = this[e];
+      this[i] = t, this.requestUpdate(e, r, o);
     }, configurable: !0, enumerable: !0 };
   }
   static getPropertyOptions(e) {
-    return this.elementProperties.get(e) || C;
+    return this.elementProperties.get(e) || O;
   }
   static finalize() {
     if (this.hasOwnProperty("finalized"))
@@ -148,9 +151,9 @@ class w extends HTMLElement {
     if (Array.isArray(e)) {
       const o = new Set(e.flat(1 / 0).reverse());
       for (const t of o)
-        i.unshift(q(t));
+        i.unshift(B(t));
     } else
-      e !== void 0 && i.push(q(e));
+      e !== void 0 && i.push(B(e));
     return i;
   }
   static _$Ep(e, i) {
@@ -177,7 +180,7 @@ class w extends HTMLElement {
   createRenderRoot() {
     var e;
     const i = (e = this.shadowRoot) !== null && e !== void 0 ? e : this.attachShadow(this.constructor.shadowRootOptions);
-    return he(i, this.constructor.elementStyles), i;
+    return ge(i, this.constructor.elementStyles), i;
   }
   connectedCallback() {
     var e;
@@ -198,25 +201,25 @@ class w extends HTMLElement {
   attributeChangedCallback(e, i, o) {
     this._$AK(e, o);
   }
-  _$EO(e, i, o = C) {
+  _$EO(e, i, o = O) {
     var t;
-    const n = this.constructor._$Ep(e, o);
-    if (n !== void 0 && o.reflect === !0) {
-      const s = (((t = o.converter) === null || t === void 0 ? void 0 : t.toAttribute) !== void 0 ? o.converter : S).toAttribute(i, o.type);
-      this._$El = e, s == null ? this.removeAttribute(n) : this.setAttribute(n, s), this._$El = null;
+    const r = this.constructor._$Ep(e, o);
+    if (r !== void 0 && o.reflect === !0) {
+      const s = (((t = o.converter) === null || t === void 0 ? void 0 : t.toAttribute) !== void 0 ? o.converter : H).toAttribute(i, o.type);
+      this._$El = e, s == null ? this.removeAttribute(r) : this.setAttribute(r, s), this._$El = null;
     }
   }
   _$AK(e, i) {
     var o;
-    const t = this.constructor, n = t._$Ev.get(e);
-    if (n !== void 0 && this._$El !== n) {
-      const s = t.getPropertyOptions(n), oe = typeof s.converter == "function" ? { fromAttribute: s.converter } : ((o = s.converter) === null || o === void 0 ? void 0 : o.fromAttribute) !== void 0 ? s.converter : S;
-      this._$El = n, this[n] = oe.fromAttribute(i, s.type), this._$El = null;
+    const t = this.constructor, r = t._$Ev.get(e);
+    if (r !== void 0 && this._$El !== r) {
+      const s = t.getPropertyOptions(r), b = typeof s.converter == "function" ? { fromAttribute: s.converter } : ((o = s.converter) === null || o === void 0 ? void 0 : o.fromAttribute) !== void 0 ? s.converter : H;
+      this._$El = r, this[r] = b.fromAttribute(i, s.type), this._$El = null;
     }
   }
   requestUpdate(e, i, o) {
     let t = !0;
-    e !== void 0 && (((o = o || this.constructor.getPropertyOptions(e)).hasChanged || J)(this[e], i) ? (this._$AL.has(e) || this._$AL.set(e, i), o.reflect === !0 && this._$El !== e && (this._$EC === void 0 && (this._$EC = /* @__PURE__ */ new Map()), this._$EC.set(e, o))) : t = !1), !this.isUpdatePending && t && (this._$E_ = this._$Ej());
+    e !== void 0 && (((o = o || this.constructor.getPropertyOptions(e)).hasChanged || X)(this[e], i) ? (this._$AL.has(e) || this._$AL.set(e, i), o.reflect === !0 && this._$El !== e && (this._$EC === void 0 && (this._$EC = /* @__PURE__ */ new Map()), this._$EC.set(e, o))) : t = !1), !this.isUpdatePending && t && (this._$E_ = this._$Ej());
   }
   async _$Ej() {
     this.isUpdatePending = !0;
@@ -235,13 +238,13 @@ class w extends HTMLElement {
     var e;
     if (!this.isUpdatePending)
       return;
-    this.hasUpdated, this._$Ei && (this._$Ei.forEach((t, n) => this[n] = t), this._$Ei = void 0);
+    this.hasUpdated, this._$Ei && (this._$Ei.forEach((t, r) => this[r] = t), this._$Ei = void 0);
     let i = !1;
     const o = this._$AL;
     try {
       i = this.shouldUpdate(o), i ? (this.willUpdate(o), (e = this._$ES) === null || e === void 0 || e.forEach((t) => {
-        var n;
-        return (n = t.hostUpdate) === null || n === void 0 ? void 0 : n.call(t);
+        var r;
+        return (r = t.hostUpdate) === null || r === void 0 ? void 0 : r.call(t);
       }), this.update(o)) : this._$Ek();
     } catch (t) {
       throw i = !1, this._$Ek(), t;
@@ -277,18 +280,19 @@ class w extends HTMLElement {
   firstUpdated(e) {
   }
 }
-w.finalized = !0, w.elementProperties = /* @__PURE__ */ new Map(), w.elementStyles = [], w.shadowRootOptions = { mode: "open" }, B == null || B({ ReactiveElement: w }), ((E = j.reactiveElementVersions) !== null && E !== void 0 ? E : j.reactiveElementVersions = []).push("1.5.0");
-var me = Object.defineProperty, ve = Object.getOwnPropertyDescriptor, Q = (r, e, i, o) => {
-  for (var t = o > 1 ? void 0 : o ? ve(e, i) : e, n = r.length - 1, s; n >= 0; n--)
-    (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
-  return o && t && me(e, i, t), t;
+$.finalized = !0, $.elementProperties = /* @__PURE__ */ new Map(), $.elementStyles = [], $.shadowRootOptions = { mode: "open" }, F == null || F({ ReactiveElement: $ }), ((S = T.reactiveElementVersions) !== null && S !== void 0 ? S : T.reactiveElementVersions = []).push("1.5.0");
+var be = Object.defineProperty, fe = Object.getOwnPropertyDescriptor, ee = (n, e, i, o) => {
+  for (var t = o > 1 ? void 0 : o ? fe(e, i) : e, r = n.length - 1, s; r >= 0; r--)
+    (s = n[r]) && (t = (o ? s(e, i, t) : s(t)) || t);
+  return o && t && be(e, i, t), t;
 };
-let O = class extends _ {
+let R = class extends k {
   constructor() {
     super();
+    a(this, "currentPage");
   }
   static get styles() {
-    return y`
+    return w`
     * {
         margin: 0;
         padding: 0;
@@ -425,7 +429,7 @@ let O = class extends _ {
     `;
   }
   render() {
-    return g`
+    return f`
       <footer>
         <nav>
           <ul @click=${this._clickMenu} id="nope">
@@ -446,29 +450,29 @@ let O = class extends _ {
       </footer>
     `;
   }
-  _clickMenu(r) {
+  _clickMenu(e) {
     console.log("_dispatchPageLink()");
-    const e = r.target.id;
-    console.log("id= " + e), this.currentPage !== e && (this.currentPage = e, this.dispatchEvent(new Event("page-chosen")));
+    const i = e.target.id;
+    console.log("id= " + i), this.currentPage !== i && (this.currentPage = i, this.dispatchEvent(new Event("page-chosen")));
   }
 };
-Q([
-  a()
-], O.prototype, "currentPage", 2);
-O = Q([
-  f("footer-menu")
-], O);
-var ge = Object.defineProperty, be = Object.getOwnPropertyDescriptor, fe = (r, e, i, o) => {
-  for (var t = o > 1 ? void 0 : o ? be(e, i) : e, n = r.length - 1, s; n >= 0; n--)
-    (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
-  return o && t && ge(e, i, t), t;
+ee([
+  l()
+], R.prototype, "currentPage", 2);
+R = ee([
+  y("footer-menu")
+], R);
+var _e = Object.defineProperty, ye = Object.getOwnPropertyDescriptor, ke = (n, e, i, o) => {
+  for (var t = o > 1 ? void 0 : o ? ye(e, i) : e, r = n.length - 1, s; r >= 0; r--)
+    (s = n[r]) && (t = (o ? s(e, i, t) : s(t)) || t);
+  return o && t && _e(e, i, t), t;
 };
-let I = class extends _ {
+let W = class extends k {
   constructor() {
     super();
   }
   static get styles() {
-    return y`
+    return w`
       :host {
         max-width: 1280px;
         margin: 0 auto;
@@ -531,7 +535,7 @@ let I = class extends _ {
     `;
   }
   render() {
-    return g`
+    return f`
       <header>
         <h1 class="header">Welkom bij de KNP medewerkers mobiliteits APP!</h1>
       </header>
@@ -578,20 +582,25 @@ let I = class extends _ {
     `;
   }
 };
-I = fe([
-  f("home-page")
-], I);
-var _e = Object.defineProperty, ye = Object.getOwnPropertyDescriptor, z = (r, e, i, o) => {
-  for (var t = o > 1 ? void 0 : o ? ye(e, i) : e, n = r.length - 1, s; n >= 0; n--)
-    (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
-  return o && t && _e(e, i, t), t;
+W = ke([
+  y("home-page")
+], W);
+var we = Object.defineProperty, ze = Object.getOwnPropertyDescriptor, j = (n, e, i, o) => {
+  for (var t = o > 1 ? void 0 : o ? ze(e, i) : e, r = n.length - 1, s; r >= 0; r--)
+    (s = n[r]) && (t = (o ? s(e, i, t) : s(t)) || t);
+  return o && t && we(e, i, t), t;
 };
-let k = class extends se {
+let z = class extends de {
   constructor() {
-    super(), this.naamGebruiker = "Hans Fumphriehd", this.kpnLogo = "/public/branding/kpn-logo2-jpeg.jpg", this.currentPage = "", this._kpnHomePageUrl = "https://www.kpn.com/", this.onLoad();
+    super();
+    a(this, "naamGebruiker", "Hans Fumphriehd");
+    a(this, "kpnLogo", "/public/branding/kpn-logo2-jpeg.jpg");
+    a(this, "currentPage", "");
+    a(this, "_kpnHomePageUrl", "https://www.kpn.com/");
+    this.onLoad();
   }
   static get styles() {
-    return ae`
+    return pe`
       * {
         margin: 0;
         padding: 0;
@@ -758,13 +767,13 @@ let k = class extends se {
     `;
   }
   script() {
-    let r = document.createElement("script");
-    return r.onload = this.onLoad.bind(this), r.src = "https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js", r;
+    let e = document.createElement("script");
+    return e.onload = this.onLoad.bind(this), e.src = "https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js", e;
   }
   onLoad() {
   }
   render() {
-    return le`
+    return ce`
       <body id="bodyofmenubar">
         <a href="#" class="ingelogd_als">ingelogd als ${this.naamGebruiker}</a>
         <div class="entire_menu_bar">
@@ -805,48 +814,64 @@ let k = class extends se {
       </body>
     `;
   }
-  _clickMenu(r) {
+  _clickMenu(e) {
     console.log("_dispatchPageLink()");
-    const e = r.target.id;
-    console.log("id= " + e), this.currentPage !== e && (this.currentPage = e, this.dispatchEvent(new Event("page-chosen")));
+    const i = e.target.id;
+    console.log("id= " + i), this.currentPage !== i && (this.currentPage = i, this.dispatchEvent(new Event("page-chosen")));
   }
   kpnHomePageUrl() {
     window.open(this._kpnHomePageUrl);
   }
 };
-z([
-  a()
-], k.prototype, "naamGebruiker", 2);
-z([
-  a()
-], k.prototype, "kpnLogo", 2);
-z([
-  a()
-], k.prototype, "currentPage", 2);
-z([
-  a()
-], k.prototype, "_kpnHomePageUrl", 2);
-k = z([
-  f("nav-menu")
-], k);
-var ke = Object.defineProperty, we = Object.getOwnPropertyDescriptor, m = (r, e, i, o) => {
-  for (var t = o > 1 ? void 0 : o ? we(e, i) : e, n = r.length - 1, s; n >= 0; n--)
-    (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
-  return o && t && ke(e, i, t), t;
+j([
+  l()
+], z.prototype, "naamGebruiker", 2);
+j([
+  l()
+], z.prototype, "kpnLogo", 2);
+j([
+  l()
+], z.prototype, "currentPage", 2);
+j([
+  l()
+], z.prototype, "_kpnHomePageUrl", 2);
+z = j([
+  y("nav-menu")
+], z);
+var $e = Object.defineProperty, je = Object.getOwnPropertyDescriptor, g = (n, e, i, o) => {
+  for (var t = o > 1 ? void 0 : o ? je(e, i) : e, r = n.length - 1, s; r >= 0; r--)
+    (s = n[r]) && (t = (o ? s(e, i, t) : s(t)) || t);
+  return o && t && $e(e, i, t), t;
 };
-let h = class extends _ {
+let u = class extends k {
   constructor() {
-    super(), this.titel = "Overzicht Reizen", this._vervoerMiddelDummyData = [], this._reizenDummyData = [], this.headers = ["Project", "Type vervoer", "Begin", "Einde", "Km", "C02", "Kosten", "Wijzig"], this._feedback = "", this._sorted0 = !1, this._sorted1 = !1, this._sorted2 = !1, this._sorted3 = !1, this._sorted4 = !1, this._sorted5 = !1, this._sorted6 = !1, this._sorted7 = !1, this.sortsymboldown = "&#5167;", this.sortsymbolUP = "&#11016;", fetch("/vervoermiddel-CO2.json").then((r) => r.json()).then((r) => {
-      this._vervoerMiddelDummyData = Array.from(r), console.log(this._vervoerMiddelDummyData);
-    }), fetch("/dummydata-reizen.json").then((r) => r.json()).then((r) => {
-      this._reizenDummyData = Array.from(r), console.log(this._reizenDummyData);
+    super();
+    a(this, "titel", "Overzicht Reizen");
+    a(this, "_vervoerMiddelDummyData", []);
+    a(this, "_reizenDummyData", []);
+    a(this, "headers", ["Project", "Type vervoer", "Begin", "Einde", "Km", "C02", "Kosten", "Wijzig"]);
+    a(this, "_feedback", "");
+    a(this, "_sorted0", !1);
+    a(this, "_sorted1", !1);
+    a(this, "_sorted2", !1);
+    a(this, "_sorted3", !1);
+    a(this, "_sorted4", !1);
+    a(this, "_sorted5", !1);
+    a(this, "_sorted6", !1);
+    a(this, "_sorted7", !1);
+    a(this, "sortsymboldown", "&#5167;");
+    a(this, "sortsymbolUP", "&#11016;");
+    fetch("/vervoermiddel-CO2.json").then((e) => e.json()).then((e) => {
+      this._vervoerMiddelDummyData = Array.from(e), console.log(this._vervoerMiddelDummyData);
+    }), fetch("/dummydata-reizen.json").then((e) => e.json()).then((e) => {
+      this._reizenDummyData = Array.from(e), console.log(this._reizenDummyData);
     });
   }
   connectedCallback() {
     super.connectedCallback();
   }
   static get styles() {
-    return y`
+    return w`
       * {
         margin: 0;
         padding: 0;
@@ -910,13 +935,13 @@ let h = class extends _ {
       }
     `;
   }
-  update(r) {
-    super.update(r), console.log("updated YAAY");
+  update(e) {
+    super.update(e), console.log("updated YAAY");
   }
   tableToCSV() {
   }
   render() {
-    return g`
+    return f`
             <header>
                 <h1 class="header">${this.titel}</h1>
             </header>
@@ -975,22 +1000,22 @@ let h = class extends _ {
                 </thead>
                 <tbody>
                   ${this._reizenDummyData.map(({
-      begin: r,
-      eind: e,
-      km: i,
-      kosten: o,
-      project: t,
-      type: n,
-      uitstoot: s
-    }) => g`
+      begin: e,
+      eind: i,
+      km: o,
+      kosten: t,
+      project: r,
+      type: s,
+      uitstoot: b
+    }) => f`
                       <tr>
+                          <th class="hiddensmolscreen">${r}</th>
+                          <th>${s}</th>
+                          <th>${e}</th>
+                          <th class="hiddensmolscreen">${i}</th>
+                          <th id=${o > 300 ? "errorKM" : "allGood"}>${o}</th>
+                          <th class="hiddensmolscreen">${b}</th>
                           <th class="hiddensmolscreen">${t}</th>
-                          <th>${n}</th>
-                          <th>${r}</th>
-                          <th class="hiddensmolscreen">${e}</th>
-                          <th id=${i > 300 ? "errorKM" : "allGood"}>${i}</th>
-                          <th class="hiddensmolscreen">${s}</th>
-                          <th class="hiddensmolscreen">${o}</th>
                           <th @click=${this.wijzigDezeDataRij}><a href="wijzig" >Wijzig</a></th>
                       </tr>
                   `)}
@@ -1008,56 +1033,56 @@ let h = class extends _ {
             
         `;
   }
-  wijzigDezeDataRij(r) {
-    console.log("wijzigDezeDataRij"), console.log(r.target);
-    const i = r.target.parentElement, o = i.parentElement;
-    console.log(i.parentElement), console.log(o.previousSibling), this.dispatchEvent(new Event("page-chosen")), this.dispatchEvent(new Event("row-chosen"));
+  wijzigDezeDataRij(e) {
+    console.log("wijzigDezeDataRij"), console.log(e.target);
+    const o = e.target.parentElement, t = o.parentElement;
+    console.log(o.parentElement), console.log(t.previousSibling), this.dispatchEvent(new Event("page-chosen")), this.dispatchEvent(new Event("row-chosen"));
   }
-  filterColumnOnTerm(r) {
-    console.log("sortColumnSimple"), console.log(r);
+  filterColumnOnTerm(e) {
+    console.log("sortColumnSimple"), console.log(e);
   }
-  headerClicked(r) {
+  headerClicked(e) {
     console.log("headerClicked"), console.log(this._reizenDummyData);
-    const i = r.target.id;
-    switch (console.log("id= " + i), this._feedback = "Table column to be sorted: " + i, i) {
+    const o = e.target.id;
+    switch (console.log("id= " + o), this._feedback = "Table column to be sorted: " + o, o) {
       case this.headers[0]: {
-        console.log(this._sorted0), this._sorted0 = this._sorted0 !== !0, this._reizenDummyData = this._sorted0 === !0 ? this._reizenDummyData.sort((o, t) => {
-          const n = o.project.toUpperCase(), s = t.project.toUpperCase();
-          return n > s ? -1 : n < s ? 1 : 0;
-        }) : this._reizenDummyData.sort((o, t) => {
-          const n = o.project.toUpperCase(), s = t.project.toUpperCase();
-          return s > n ? -1 : s < n ? 1 : 0;
+        console.log(this._sorted0), this._sorted0 = this._sorted0 !== !0, this._reizenDummyData = this._sorted0 === !0 ? this._reizenDummyData.sort((t, r) => {
+          const s = t.project.toUpperCase(), b = r.project.toUpperCase();
+          return s > b ? -1 : s < b ? 1 : 0;
+        }) : this._reizenDummyData.sort((t, r) => {
+          const s = t.project.toUpperCase(), b = r.project.toUpperCase();
+          return b > s ? -1 : b < s ? 1 : 0;
         });
         break;
       }
       case this.headers[1]: {
-        console.log(this._sorted1), this._sorted1 = this._sorted1 !== !0, this._reizenDummyData = this._sorted1 === !0 ? this._reizenDummyData.sort((o, t) => {
-          const n = o.type.toUpperCase(), s = t.type.toUpperCase();
-          return n > s ? -1 : n < s ? 1 : 0;
-        }) : this._reizenDummyData.sort((o, t) => {
-          const n = o.type.toUpperCase(), s = t.type.toUpperCase();
-          return s > n ? -1 : s < n ? 1 : 0;
+        console.log(this._sorted1), this._sorted1 = this._sorted1 !== !0, this._reizenDummyData = this._sorted1 === !0 ? this._reizenDummyData.sort((t, r) => {
+          const s = t.type.toUpperCase(), b = r.type.toUpperCase();
+          return s > b ? -1 : s < b ? 1 : 0;
+        }) : this._reizenDummyData.sort((t, r) => {
+          const s = t.type.toUpperCase(), b = r.type.toUpperCase();
+          return b > s ? -1 : b < s ? 1 : 0;
         });
         break;
       }
       case this.headers[2]: {
-        console.log(this._sorted2), this._sorted2 = this._sorted2 !== !0, this._reizenDummyData = this._sorted2 ? this._reizenDummyData.sort((o, t) => (o = new Date(o.begin), t = new Date(t.begin), o - t)) : this._reizenDummyData.sort((o, t) => (o = new Date(o.begin), t = new Date(t.begin), o - t));
+        console.log(this._sorted2), this._sorted2 = this._sorted2 !== !0, this._reizenDummyData = this._sorted2 ? this._reizenDummyData.sort((t, r) => (t = new Date(t.begin), r = new Date(r.begin), t - r)) : this._reizenDummyData.sort((t, r) => (t = new Date(t.begin), r = new Date(r.begin), t - r));
         break;
       }
       case this.headers[3]: {
-        console.log(this._sorted3), this._sorted3 = this._sorted3 !== !0, this._reizenDummyData = this._sorted3 ? this._reizenDummyData.sort((o, t) => (o = new Date(o.eind), t = new Date(t.eind), o - t)) : this._reizenDummyData.sort((o, t) => (o = new Date(o.eind), t = new Date(t.eind), o - t));
+        console.log(this._sorted3), this._sorted3 = this._sorted3 !== !0, this._reizenDummyData = this._sorted3 ? this._reizenDummyData.sort((t, r) => (t = new Date(t.eind), r = new Date(r.eind), t - r)) : this._reizenDummyData.sort((t, r) => (t = new Date(t.eind), r = new Date(r.eind), t - r));
         break;
       }
       case this.headers[4]: {
-        console.log(this._sorted4), this._sorted4 = this._sorted4 !== !0, this._reizenDummyData = this._sorted4 ? this._reizenDummyData.sort((o, t) => o.km - t.km) : this._reizenDummyData.sort((o, t) => t.km - o.km);
+        console.log(this._sorted4), this._sorted4 = this._sorted4 !== !0, this._reizenDummyData = this._sorted4 ? this._reizenDummyData.sort((t, r) => t.km - r.km) : this._reizenDummyData.sort((t, r) => r.km - t.km);
         break;
       }
       case this.headers[5]: {
-        console.log(this._sorted5), this._sorted5 = this._sorted5 !== !0, this._reizenDummyData = this._sorted5 ? this._reizenDummyData.sort((o, t) => o.uitstoot - t.uitstoot) : this._reizenDummyData.sort((o, t) => t.uitstoot - o.uitstoot);
+        console.log(this._sorted5), this._sorted5 = this._sorted5 !== !0, this._reizenDummyData = this._sorted5 ? this._reizenDummyData.sort((t, r) => t.uitstoot - r.uitstoot) : this._reizenDummyData.sort((t, r) => r.uitstoot - t.uitstoot);
         break;
       }
       case this.headers[6]: {
-        console.log(this._sorted6), this._sorted6 = this._sorted6 !== !0, this._reizenDummyData = this._sorted6 ? this._reizenDummyData.sort((o, t) => o.kosten - t.kosten) : this._reizenDummyData.sort((o, t) => t.kosten - o.kosten);
+        console.log(this._sorted6), this._sorted6 = this._sorted6 !== !0, this._reizenDummyData = this._sorted6 ? this._reizenDummyData.sort((t, r) => t.kosten - r.kosten) : this._reizenDummyData.sort((t, r) => r.kosten - t.kosten);
         break;
       }
       case this.headers[7]:
@@ -1066,74 +1091,91 @@ let h = class extends _ {
     }
   }
 };
-m([
-  a()
-], h.prototype, "titel", 2);
-m([
-  a()
-], h.prototype, "_vervoerMiddelDummyData", 2);
-m([
-  a()
-], h.prototype, "_reizenDummyData", 2);
-m([
-  a()
-], h.prototype, "headers", 2);
-m([
-  a()
-], h.prototype, "_feedback", 2);
-m([
-  a()
-], h.prototype, "_sorted0", 2);
-m([
-  a()
-], h.prototype, "_sorted1", 2);
-m([
-  a()
-], h.prototype, "_sorted2", 2);
-m([
-  a()
-], h.prototype, "_sorted3", 2);
-m([
-  a()
-], h.prototype, "_sorted4", 2);
-m([
-  a()
-], h.prototype, "_sorted5", 2);
-m([
-  a()
-], h.prototype, "_sorted6", 2);
-m([
-  a()
-], h.prototype, "_sorted7", 2);
-m([
-  a()
-], h.prototype, "sortsymboldown", 2);
-m([
-  a()
-], h.prototype, "sortsymbolUP", 2);
-h = m([
-  f("overzicht-reizen")
-], h);
-var ze = Object.defineProperty, $e = Object.getOwnPropertyDescriptor, p = (r, e, i, o) => {
-  for (var t = o > 1 ? void 0 : o ? $e(e, i) : e, n = r.length - 1, s; n >= 0; n--)
-    (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
-  return o && t && ze(e, i, t), t;
+g([
+  l()
+], u.prototype, "titel", 2);
+g([
+  l()
+], u.prototype, "_vervoerMiddelDummyData", 2);
+g([
+  l()
+], u.prototype, "_reizenDummyData", 2);
+g([
+  l()
+], u.prototype, "headers", 2);
+g([
+  l()
+], u.prototype, "_feedback", 2);
+g([
+  l()
+], u.prototype, "_sorted0", 2);
+g([
+  l()
+], u.prototype, "_sorted1", 2);
+g([
+  l()
+], u.prototype, "_sorted2", 2);
+g([
+  l()
+], u.prototype, "_sorted3", 2);
+g([
+  l()
+], u.prototype, "_sorted4", 2);
+g([
+  l()
+], u.prototype, "_sorted5", 2);
+g([
+  l()
+], u.prototype, "_sorted6", 2);
+g([
+  l()
+], u.prototype, "_sorted7", 2);
+g([
+  l()
+], u.prototype, "sortsymboldown", 2);
+g([
+  l()
+], u.prototype, "sortsymbolUP", 2);
+u = g([
+  y("overzicht-reizen")
+], u);
+var Pe = Object.defineProperty, Te = Object.getOwnPropertyDescriptor, c = (n, e, i, o) => {
+  for (var t = o > 1 ? void 0 : o ? Te(e, i) : e, r = n.length - 1, s; r >= 0; r--)
+    (s = n[r]) && (t = (o ? s(e, i, t) : s(t)) || t);
+  return o && t && Pe(e, i, t), t;
 };
-let l = class extends _ {
+let d = class extends k {
   constructor() {
-    super(), this.currentPage = "invoeren-reizen", this.eindTijdMin = "", this.beginTijdMax = "", this._hidden = "true", this.span_message = "", this.visibility_hidden_reisklasse = "visibility-hidden", this.visibility_hidden_zakelijkprive = "visibility-hidden", this._vertrekTijd = "", this._aankomstTijd = "", this._demoKM = "11", this._demoKosten = "111,11", this._demoVertrekLocatie = "Amsterdam", this._demoAankomstLocatie = "Utrecht", this.inputfield = "inputfield", this._vervoerMiddelDummyData = [];
-    let e = new Date();
-    e.setMinutes(e.getMinutes() - e.getTimezoneOffset()), e.setMilliseconds(0), e.setSeconds(0), this._vertrekTijd = e.toISOString().slice(0, -1);
+    super();
+    a(this, "currentPage", "invoeren-reizen");
+    a(this, "eindTijdMin", "");
+    a(this, "beginTijdMax", "");
+    a(this, "_hidden", "true");
+    a(this, "span_message", "");
+    a(this, "visibility_hidden_reisklasse", "visibility-hidden");
+    a(this, "visibility_hidden_zakelijkprive", "visibility-hidden");
+    a(this, "_vertrekTijd", "");
+    a(this, "_aankomstTijd", "");
+    a(this, "_demoKM", "11");
+    a(this, "_demoKosten", "111,11");
+    a(this, "_demoVertrekLocatie", "Amsterdam");
+    a(this, "_demoAankomstLocatie", "Utrecht");
+    a(this, "inputfield", "inputfield");
+    a(this, "_vervoerMiddelDummyData", []);
+    a(this, "_gekozenC02");
+    a(this, "_gekozenVoertuig");
     let i = new Date();
-    i.setMinutes(e.getMinutes() - e.getTimezoneOffset() + 60), i.setMilliseconds(0), i.setSeconds(0), this._aankomstTijd = i.toISOString().slice(0, -1), this.eindTijdMin = this._vertrekTijd, this.beginTijdMax = this._aankomstTijd + 60;
+    i.setMinutes(i.getMinutes() - i.getTimezoneOffset()), i.setMilliseconds(0), i.setSeconds(0), this._vertrekTijd = i.toISOString().slice(0, -1);
+    let o = new Date();
+    o.setMinutes(i.getMinutes() - i.getTimezoneOffset() + 60), o.setMilliseconds(0), o.setSeconds(0), this._aankomstTijd = o.toISOString().slice(0, -1), this.eindTijdMin = this._vertrekTijd, this.beginTijdMax = this._aankomstTijd + 60;
   }
   connectedCallback() {
-    super.connectedCallback(), fetch("/vervoermiddel-CO2.json").then((e) => e.json()).then((e) => {
-      this._vervoerMiddelDummyData = Array.from(e), console.log(this._vervoerMiddelDummyData);
+    super.connectedCallback(), fetch("/vervoermiddel-CO2.json").then((i) => i.json()).then((i) => {
+      this._vervoerMiddelDummyData = Array.from(i), console.log(this._vervoerMiddelDummyData);
     });
   }
   static get styles() {
-    return y`
+    return w`
       * {
         margin: 0;
         padding: 0;
@@ -1238,7 +1280,7 @@ let l = class extends _ {
     `;
   }
   render() {
-    return g`
+    return f`
             <header>
                 <H1>Welkom,</H1>
                 <br>
@@ -1255,7 +1297,406 @@ let l = class extends _ {
                                 <label for="vervoerstype">typeVervoer:</label>
                                 <select id="vervoerstype" class="${this.inputfield}" required focus>
                                     ${this._vervoerMiddelDummyData.map(
-      ({ naam: e, uitstoot: i }) => g`
+      ({ naam: i, uitstoot: o }) => f`
+                                        <option
+                                          disabled
+                                          hidden="${this._hidden}"
+                                          selected
+                                          value="0"
+                                        >
+                                          "kies hier uw vervoerstype!"
+                                        </option>
+                                        <option
+                                          @click="${this.optionClicked}"
+                                          id=${i}
+                                          value=${o}
+                                        >
+                                          ${i}
+                                        </option>
+                                      `
+    )}
+                                </select>
+                                <div id="vertrekLocatieDiv">
+                            <li class="alleenzakelijk" required>
+                                <label for="vertrekLocatie">Vertrek locatie:</label>
+                                <input class="${this.inputfield}" id="vertrekLocatie" name="vertrekLocatie"
+                                       placeholder="Vertrek locatie" value=${this._demoVertrekLocatie}/>
+                            </li>
+                        </div>
+                        <div id="aankomstLocatieDiv">
+                            <li class="alleenzakelijk" required>
+                                <label for="aankomstLocatie">Aankomst locatie:</label>
+                                <input class="${this.inputfield}" id="aankomstLocatie" name="aankomstLocatie"
+                                       placeholder="Aankomst locatie" value=${this._demoAankomstLocatie}/>
+                            </li>
+                        </div>
+                        <div id="beginTijdDiv">
+                            <li>
+                                <label for="beginTijd">Begin tijd:</label>
+                                <input @input=inputCallback class="${this.inputfield}" id="beginTijd" name="beginTijd"
+                                       required
+                                       value="${this._vertrekTijd}"
+                                       max="${this.beginTijdMax}"
+                                       type="datetime-local"
+                                />
+                            </li>
+                        </div>
+                        <div id="eindTijdDiv">
+                            <li>
+                                <label for="eindTijd">Eind tijd:</label>
+                                <input class="${this.inputfield}" id="eindTijd" required value="${this._aankomstTijd}"
+                                       min="${this.eindTijdMin}"
+                                       type="datetime-local"/>
+                            </li>
+                        </div>
+                        <div id="kmDiv">
+                            <li required>
+                                <label for="km" value="10">km:</label>
+                                <input class="${this.inputfield}" id="km" name="km" placeholder="Gereisde km" required
+                                       type="text"
+                                       value="${this._demoKM}"/>
+                            </li>
+                        </div>
+                        <div id="kostenDiv">
+                            <li class="alleenzakelijk" required>
+                                <label for="kosten">kosten:</label>
+                                <input class="${this.inputfield}" id="kosten" name="kosten"
+                                       placeholder="Kosten in euro's"
+                                       value="${this._demoKosten}"/>
+                            </li>
+                        </div>
+                        <div id="projectDiv">
+                            <li class="alleenzakelijk" required>
+                                <label for="project">Project:</label>
+                                <select class="${this.inputfield}" id="project" name="project">
+                                    <option disabled hidden selected value="0">Kies hier het project
+                                        waar u
+                                        voor hebt gereisd.
+                                    </option>
+                                    <option value="KPN-glasvezel-aanleg">KPN-glasvezel-aanleg</option>
+                                    <option value="KPN-modem-installatie">KPN-modem-installatie</option>
+                                    <option value="KPN-modem-reparatie">KPN-modem-reparatie</option>
+                                    <option value="Prive">Prive</option>
+                                </select>
+                            </li>
+                        </div>
+                    </ol>
+                    <div id="reisKlasseKeuzeMenu" class="${this.visibility_hidden_reisklasse}">
+                        <fieldset>
+                            <ol>
+                                <legend>Reisklasse keuze:</legend>
+                                <li>
+                                    <label for="eersteKlas" style="float:left" hidden>Eerste klas</label>
+                                    <input id="eersteKlas" name="klasse"
+                                           type="radio" value="true"/> Eerste klas
+                                </li>
+                                <li>
+                                    <label for="tweedeKlas" style="float:left" hidden>Tweede klas</label>
+                                    <input id="tweedeKlas" name="klasse"
+                                           type="radio" value="true"/> Tweede klas
+                                </li>
+                                <li>
+                                    <label for="highspeed" style="float:left" hidden>NS-Highspeed</label>
+                                    <input id="highspeed" name="klasse"
+                                           type="radio" value="true"/> NS-Highspeed
+                                </li>
+                            </ol>
+                        </fieldset>
+                    </div>
+                    <div id="priveZakelijkKeuzeMenu" class="${this.visibility_hidden_zakelijkprive}">
+                        <fieldset>
+                            <ul>
+                                <legend>Prive of zakelijke reis:</legend>
+                                <li>
+                                    <label for="zakelijk" style="float:left" hidden>Zakelijk</label>
+                                    <input id="zakelijk" name="zakelijk-prive"
+                                           type="radio" value="true"
+                                           @click=""
+                                    /> Zakelijk
+                                </li>
+                                <li>
+                                    <label for="prive" style="float:left" hidden></label>
+                                    <input id="prive" name="zakelijk-prive"
+                                           type="radio" value="true"/> Prive
+                                </li>
+                            </ul>
+                        </fieldset>
+                    </div>
+                    <div id="buttonsUnderFormDiv">
+                        <label for="verzendReis" hidden">Verzend</label>
+                        <input class="verzendReis" id="verzendReis" type="submit" value="verzendReis">
+
+                        <label for="zenden" hidden">Zenden(custom)</label>
+                        <button id="zenden" @click=${this.formElements}>Zenden(custom)</button>
+
+                        <label for="resetButton">Herlaad en leeg het formulier.</label>
+                        <input id="resetButton" type="reset" value="Reset velden">
+                        <br>
+                        <label for="herhalendeReisButton">Sla op als herhalende reis.</label>
+                        <input id="herhalendeReisButton" type="checkbox" value="Reset velden" disabled> Herhalende
+                        reis. [under-construction]
+                    </div>
+                </form>
+                <div id="feedbackSpan">
+                    ${this.span_message}
+                    <br>
+                    U heeft gekozen voor voertuig:
+                    ${this._gekozenVoertuig}
+                    <br>
+                    met gemiddelde uitstoot:
+                    ${this._gekozenC02}
+                    C02/km
+                </div>
+            </main>
+            </body>
+        `;
+  }
+  optionClicked(i) {
+    console.log("optionClicked");
+    const o = i.originalTarget.id, t = i.originalTarget.value;
+    switch (this._gekozenVoertuig = o, this._gekozenC02 = t, console.log(o), console.log(t), o) {
+      case "Trein/Metro/Tram":
+        this.visibility_hidden_zakelijkprive = "visibility-hidden", this.visibility_hidden_reisklasse = "";
+        break;
+      case "Scooter":
+      case "Elektr Scooter (incl deel scooter)":
+      case "Elektr Deelauto":
+      case "Hybride eigen auto":
+      case "Electr eigen auto":
+      case "Diesel eigen auto":
+      case "Benzine eigen auto":
+      case "eigenAuto":
+      case "deelAuto":
+        console.log("auto gekozen"), this.visibility_hidden_zakelijkprive = "", this.visibility_hidden_reisklasse = "visibility-hidden";
+        break;
+      case "Lopen":
+      case "Fiets":
+      case "OV Fiets":
+      case "bus":
+        this.visibility_hidden_zakelijkprive = "visibility-hidden", this.visibility_hidden_reisklasse = "visibility-hidden";
+        break;
+      default:
+        console.log("Kan de reis type vervoer niet herkennen");
+        break;
+    }
+  }
+  formElements() {
+    return console.log("_divs"), console.log(document.getElementsByClassName("inputfield") ?? null), this.querySelector(".inputfield") ?? null;
+  }
+};
+c([
+  l()
+], d.prototype, "currentPage", 2);
+c([
+  l()
+], d.prototype, "eindTijdMin", 2);
+c([
+  l()
+], d.prototype, "beginTijdMax", 2);
+c([
+  l()
+], d.prototype, "_hidden", 2);
+c([
+  l()
+], d.prototype, "span_message", 2);
+c([
+  l()
+], d.prototype, "visibility_hidden_reisklasse", 2);
+c([
+  l()
+], d.prototype, "visibility_hidden_zakelijkprive", 2);
+c([
+  l()
+], d.prototype, "_vertrekTijd", 2);
+c([
+  l()
+], d.prototype, "_aankomstTijd", 2);
+c([
+  l()
+], d.prototype, "_demoKM", 2);
+c([
+  l()
+], d.prototype, "_demoKosten", 2);
+c([
+  l()
+], d.prototype, "_demoVertrekLocatie", 2);
+c([
+  l()
+], d.prototype, "_demoAankomstLocatie", 2);
+c([
+  l()
+], d.prototype, "inputfield", 2);
+c([
+  l()
+], d.prototype, "_vervoerMiddelDummyData", 2);
+c([
+  l()
+], d.prototype, "_gekozenC02", 2);
+c([
+  l()
+], d.prototype, "_gekozenVoertuig", 2);
+d = c([
+  y("invoeren-reizen")
+], d);
+var xe = Object.defineProperty, De = Object.getOwnPropertyDescriptor, h = (n, e, i, o) => {
+  for (var t = o > 1 ? void 0 : o ? De(e, i) : e, r = n.length - 1, s; r >= 0; r--)
+    (s = n[r]) && (t = (o ? s(e, i, t) : s(t)) || t);
+  return o && t && xe(e, i, t), t;
+};
+let p = class extends k {
+  constructor() {
+    super();
+    a(this, "currentPage", "invoeren-reizen");
+    a(this, "eindTijdMin", "");
+    a(this, "beginTijdMax", "");
+    a(this, "_hidden", "true");
+    a(this, "span_message", "");
+    a(this, "visibility_hidden_reisklasse", "visibility-hidden");
+    a(this, "visibility_hidden_zakelijkprive", "visibility-hidden");
+    a(this, "_vertrekTijd", "");
+    a(this, "_aankomstTijd", "");
+    a(this, "_demoKM", "11");
+    a(this, "_demoKosten", "111,11");
+    a(this, "_demoVertrekLocatie", "Amsterdam");
+    a(this, "_demoAankomstLocatie", "Utrecht");
+    a(this, "inputfield", "inputfield");
+    a(this, "_vervoerMiddelDummyData", []);
+    a(this, "_gekozenC02");
+    a(this, "_gekozenVoertuig");
+    let e = new Date();
+    e.setMinutes(e.getMinutes() - e.getTimezoneOffset()), e.setMilliseconds(0), e.setSeconds(0), this._vertrekTijd = e.toISOString().slice(0, -1);
+    let i = new Date();
+    i.setMinutes(e.getMinutes() - e.getTimezoneOffset() + 60), i.setMilliseconds(0), i.setSeconds(0), this._aankomstTijd = i.toISOString().slice(0, -1), this.eindTijdMin = this._vertrekTijd, this.beginTijdMax = this._aankomstTijd + 60;
+  }
+  connectedCallback() {
+    super.connectedCallback(), fetch("/vervoermiddel-CO2.json").then((e) => e.json()).then((e) => {
+      this._vervoerMiddelDummyData = Array.from(e), console.log(this._vervoerMiddelDummyData);
+    });
+  }
+  static get styles() {
+    return w`
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+      }
+      .full {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+      }
+
+      H1 {
+        padding-top: 1em;
+        font-size: 2em;
+        padding-bottom: 0.5em;
+      }
+      header p {
+        font-size: 1em;
+      }
+
+      table {
+        padding: 1em;
+        background: var(--kpn-blauw);
+      }
+      label {
+        display: none;
+      }
+
+      form {
+        margin-top: 1em;
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      ol {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      li {
+        padding: 0.1em;
+      }
+
+      fieldset {
+        padding-left: 1em;
+        padding-right: 1em;
+        font-color: var(--kpn-zwart);
+      }
+
+      #vervoerstype {
+        background-color: var(--kpn-groen);
+      }
+
+      .inputfield {
+        width: 100%;
+        padding: 0.8em 0.4px;
+        /*margin: 0.1em;*/
+        border: none;
+        border-radius: 4px;
+        background-color: var(--kpn-blauw);
+        vertical-align: middle;
+        text-indent: 0.7em;
+      }
+
+      /*Buttons: */
+      input[type='button'],
+      input[type='submit'],
+      input[type='reset'] {
+        width: 33%;
+        background-color: var(--kpn-zwart);
+        border: none;
+        color: var(--kpn-wit);
+        padding: 1em 0px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+
+      .visibility-hidden {
+        display: none;
+        pointer-events: none;
+        color: lightgrey;
+        foreground-color: var(--kpn-grijs);
+        background-color: var(--kpn-grijs);
+        required: invalid;
+      }
+      #feedbackSpan {
+        background-color: var(--kpn-blauw);
+        place-items: center;
+        text-align: center;
+      }
+    `;
+  }
+  render() {
+    return f`
+            <header>
+                <H1>Welkom,</H1>
+                <br>
+                <p>vul hieronder zo nauwkeurig mogelijk uw reis in:</p>
+            </header>
+            <body>
+
+            <main>
+                <form class="formulierReizen" id="formulierReizen">
+                    <hr/>
+                    <ol>
+                        <div id="typeVervoerDiv2">
+                            <li>
+                                <label for="vervoerstype">typeVervoer:</label>
+                                <select id="vervoerstype" class="${this.inputfield}" required focus>
+                                    ${this._vervoerMiddelDummyData.map(
+      ({ naam: e, uitstoot: i }) => f`
                                         <option
                                           disabled
                                           hidden="${this._hidden}"
@@ -1442,453 +1883,72 @@ let l = class extends _ {
     return console.log("_divs"), console.log(document.getElementsByClassName("inputfield") ?? null), this.querySelector(".inputfield") ?? null;
   }
 };
-p([
-  a()
-], l.prototype, "currentPage", 2);
-p([
-  a()
-], l.prototype, "eindTijdMin", 2);
-p([
-  a()
-], l.prototype, "beginTijdMax", 2);
-p([
-  a()
-], l.prototype, "_hidden", 2);
-p([
-  a()
-], l.prototype, "span_message", 2);
-p([
-  a()
-], l.prototype, "visibility_hidden_reisklasse", 2);
-p([
-  a()
-], l.prototype, "visibility_hidden_zakelijkprive", 2);
-p([
-  a()
-], l.prototype, "_vertrekTijd", 2);
-p([
-  a()
-], l.prototype, "_aankomstTijd", 2);
-p([
-  a()
-], l.prototype, "_demoKM", 2);
-p([
-  a()
-], l.prototype, "_demoKosten", 2);
-p([
-  a()
-], l.prototype, "_demoVertrekLocatie", 2);
-p([
-  a()
-], l.prototype, "_demoAankomstLocatie", 2);
-p([
-  a()
-], l.prototype, "inputfield", 2);
-p([
-  a()
-], l.prototype, "_vervoerMiddelDummyData", 2);
-p([
-  a()
-], l.prototype, "_gekozenC02", 2);
-p([
-  a()
-], l.prototype, "_gekozenVoertuig", 2);
-l = p([
-  f("invoeren-reizen")
-], l);
-var je = Object.defineProperty, Pe = Object.getOwnPropertyDescriptor, c = (r, e, i, o) => {
-  for (var t = o > 1 ? void 0 : o ? Pe(e, i) : e, n = r.length - 1, s; n >= 0; n--)
-    (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
-  return o && t && je(e, i, t), t;
+h([
+  l()
+], p.prototype, "currentPage", 2);
+h([
+  l()
+], p.prototype, "eindTijdMin", 2);
+h([
+  l()
+], p.prototype, "beginTijdMax", 2);
+h([
+  l()
+], p.prototype, "_hidden", 2);
+h([
+  l()
+], p.prototype, "span_message", 2);
+h([
+  l()
+], p.prototype, "visibility_hidden_reisklasse", 2);
+h([
+  l()
+], p.prototype, "visibility_hidden_zakelijkprive", 2);
+h([
+  l()
+], p.prototype, "_vertrekTijd", 2);
+h([
+  l()
+], p.prototype, "_aankomstTijd", 2);
+h([
+  l()
+], p.prototype, "_demoKM", 2);
+h([
+  l()
+], p.prototype, "_demoKosten", 2);
+h([
+  l()
+], p.prototype, "_demoVertrekLocatie", 2);
+h([
+  l()
+], p.prototype, "_demoAankomstLocatie", 2);
+h([
+  l()
+], p.prototype, "inputfield", 2);
+h([
+  l()
+], p.prototype, "_vervoerMiddelDummyData", 2);
+h([
+  l()
+], p.prototype, "_gekozenC02", 2);
+h([
+  l()
+], p.prototype, "_gekozenVoertuig", 2);
+p = h([
+  y("invoeren-reizen-wijzigen")
+], p);
+var Ee = Object.defineProperty, Ce = Object.getOwnPropertyDescriptor, te = (n, e, i, o) => {
+  for (var t = o > 1 ? void 0 : o ? Ce(e, i) : e, r = n.length - 1, s; r >= 0; r--)
+    (s = n[r]) && (t = (o ? s(e, i, t) : s(t)) || t);
+  return o && t && Ee(e, i, t), t;
 };
-let d = class extends _ {
-  constructor() {
-    super(), this.currentPage = "invoeren-reizen", this.eindTijdMin = "", this.beginTijdMax = "", this._hidden = "true", this.span_message = "", this.visibility_hidden_reisklasse = "visibility-hidden", this.visibility_hidden_zakelijkprive = "visibility-hidden", this._vertrekTijd = "", this._aankomstTijd = "", this._demoKM = "11", this._demoKosten = "111,11", this._demoVertrekLocatie = "Amsterdam", this._demoAankomstLocatie = "Utrecht", this.inputfield = "inputfield", this._vervoerMiddelDummyData = [];
-    let r = new Date();
-    r.setMinutes(r.getMinutes() - r.getTimezoneOffset()), r.setMilliseconds(0), r.setSeconds(0), this._vertrekTijd = r.toISOString().slice(0, -1);
-    let e = new Date();
-    e.setMinutes(r.getMinutes() - r.getTimezoneOffset() + 60), e.setMilliseconds(0), e.setSeconds(0), this._aankomstTijd = e.toISOString().slice(0, -1), this.eindTijdMin = this._vertrekTijd, this.beginTijdMax = this._aankomstTijd + 60;
-  }
-  connectedCallback() {
-    super.connectedCallback(), fetch("/vervoermiddel-CO2.json").then((r) => r.json()).then((r) => {
-      this._vervoerMiddelDummyData = Array.from(r), console.log(this._vervoerMiddelDummyData);
-    });
-  }
-  static get styles() {
-    return y`
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        text-decoration: none;
-      }
-      .full {
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-      }
-
-      H1 {
-        padding-top: 1em;
-        font-size: 2em;
-        padding-bottom: 0.5em;
-      }
-      header p {
-        font-size: 1em;
-      }
-
-      table {
-        padding: 1em;
-        background: var(--kpn-blauw);
-      }
-      label {
-        display: none;
-      }
-
-      form {
-        margin-top: 1em;
-        padding-left: 1em;
-        padding-right: 1em;
-      }
-
-      ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-      }
-
-      ol {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-      }
-
-      li {
-        padding: 0.1em;
-      }
-
-      fieldset {
-        padding-left: 1em;
-        padding-right: 1em;
-        font-color: var(--kpn-zwart);
-      }
-
-      #vervoerstype {
-        background-color: var(--kpn-groen);
-      }
-
-      .inputfield {
-        width: 100%;
-        padding: 0.8em 0.4px;
-        /*margin: 0.1em;*/
-        border: none;
-        border-radius: 4px;
-        background-color: var(--kpn-blauw);
-        vertical-align: middle;
-        text-indent: 0.7em;
-      }
-
-      /*Buttons: */
-      input[type='button'],
-      input[type='submit'],
-      input[type='reset'] {
-        width: 33%;
-        background-color: var(--kpn-zwart);
-        border: none;
-        color: var(--kpn-wit);
-        padding: 1em 0px;
-        text-decoration: none;
-        margin: 4px 2px;
-        cursor: pointer;
-      }
-
-      .visibility-hidden {
-        display: none;
-        pointer-events: none;
-        color: lightgrey;
-        foreground-color: var(--kpn-grijs);
-        background-color: var(--kpn-grijs);
-        required: invalid;
-      }
-      #feedbackSpan {
-        background-color: var(--kpn-blauw);
-        place-items: center;
-        text-align: center;
-      }
-    `;
-  }
-  render() {
-    return g`
-            <header>
-                <H1>Welkom,</H1>
-                <br>
-                <p>vul hieronder zo nauwkeurig mogelijk uw reis in:</p>
-            </header>
-            <body>
-
-            <main>
-                <form class="formulierReizen" id="formulierReizen">
-                    <hr/>
-                    <ol>
-                        <div id="typeVervoerDiv2">
-                            <li>
-                                <label for="vervoerstype">typeVervoer:</label>
-                                <select id="vervoerstype" class="${this.inputfield}" required focus>
-                                    ${this._vervoerMiddelDummyData.map(
-      ({ naam: r, uitstoot: e }) => g`
-                                        <option
-                                          disabled
-                                          hidden="${this._hidden}"
-                                          selected
-                                          value="0"
-                                        >
-                                          "kies hier uw vervoerstype!"
-                                        </option>
-                                        <option
-                                          @click="${this.optionClicked}"
-                                          id=${r}
-                                          value=${e}
-                                        >
-                                          ${r}
-                                        </option>
-                                      `
-    )}
-                                </select>
-                                <div id="vertrekLocatieDiv">
-                            <li class="alleenzakelijk" required>
-                                <label for="vertrekLocatie">Vertrek locatie:</label>
-                                <input class="${this.inputfield}" id="vertrekLocatie" name="vertrekLocatie"
-                                       placeholder="Vertrek locatie" value=${this._demoVertrekLocatie}/>
-                            </li>
-                        </div>
-                        <div id="aankomstLocatieDiv">
-                            <li class="alleenzakelijk" required>
-                                <label for="aankomstLocatie">Aankomst locatie:</label>
-                                <input class="${this.inputfield}" id="aankomstLocatie" name="aankomstLocatie"
-                                       placeholder="Aankomst locatie" value=${this._demoAankomstLocatie}/>
-                            </li>
-                        </div>
-                        <div id="beginTijdDiv">
-                            <li>
-                                <label for="beginTijd">Begin tijd:</label>
-                                <input @input=inputCallback class="${this.inputfield}" id="beginTijd" name="beginTijd"
-                                       required
-                                       value="${this._vertrekTijd}"
-                                       max="${this.beginTijdMax}"
-                                       type="datetime-local"
-                                />
-                            </li>
-                        </div>
-                        <div id="eindTijdDiv">
-                            <li>
-                                <label for="eindTijd">Eind tijd:</label>
-                                <input class="${this.inputfield}" id="eindTijd" required value="${this._aankomstTijd}"
-                                       min="${this.eindTijdMin}"
-                                       type="datetime-local"/>
-                            </li>
-                        </div>
-                        <div id="kmDiv">
-                            <li required>
-                                <label for="km" value="10">km:</label>
-                                <input class="${this.inputfield}" id="km" name="km" placeholder="Gereisde km" required
-                                       type="text"
-                                       value="${this._demoKM}"/>
-                            </li>
-                        </div>
-                        <div id="kostenDiv">
-                            <li class="alleenzakelijk" required>
-                                <label for="kosten">kosten:</label>
-                                <input class="${this.inputfield}" id="kosten" name="kosten"
-                                       placeholder="Kosten in euro's"
-                                       value="${this._demoKosten}"/>
-                            </li>
-                        </div>
-                        <div id="projectDiv">
-                            <li class="alleenzakelijk" required>
-                                <label for="project">Project:</label>
-                                <select class="${this.inputfield}" id="project" name="project">
-                                    <option disabled hidden selected value="0">Kies hier het project
-                                        waar u
-                                        voor hebt gereisd.
-                                    </option>
-                                    <option value="KPN-glasvezel-aanleg">KPN-glasvezel-aanleg</option>
-                                    <option value="KPN-modem-installatie">KPN-modem-installatie</option>
-                                    <option value="KPN-modem-reparatie">KPN-modem-reparatie</option>
-                                    <option value="Prive">Prive</option>
-                                </select>
-                            </li>
-                        </div>
-                    </ol>
-                    <div id="reisKlasseKeuzeMenu" class="${this.visibility_hidden_reisklasse}">
-                        <fieldset>
-                            <ol>
-                                <legend>Reisklasse keuze:</legend>
-                                <li>
-                                    <label for="eersteKlas" style="float:left" hidden>Eerste klas</label>
-                                    <input id="eersteKlas" name="klasse"
-                                           type="radio" value="true"/> Eerste klas
-                                </li>
-                                <li>
-                                    <label for="tweedeKlas" style="float:left" hidden>Tweede klas</label>
-                                    <input id="tweedeKlas" name="klasse"
-                                           type="radio" value="true"/> Tweede klas
-                                </li>
-                                <li>
-                                    <label for="highspeed" style="float:left" hidden>NS-Highspeed</label>
-                                    <input id="highspeed" name="klasse"
-                                           type="radio" value="true"/> NS-Highspeed
-                                </li>
-                            </ol>
-                        </fieldset>
-                    </div>
-                    <div id="priveZakelijkKeuzeMenu" class="${this.visibility_hidden_zakelijkprive}">
-                        <fieldset>
-                            <ul>
-                                <legend>Prive of zakelijke reis:</legend>
-                                <li>
-                                    <label for="zakelijk" style="float:left" hidden>Zakelijk</label>
-                                    <input id="zakelijk" name="zakelijk-prive"
-                                           type="radio" value="true"
-                                           @click=""
-                                    /> Zakelijk
-                                </li>
-                                <li>
-                                    <label for="prive" style="float:left" hidden></label>
-                                    <input id="prive" name="zakelijk-prive"
-                                           type="radio" value="true"/> Prive
-                                </li>
-                            </ul>
-                        </fieldset>
-                    </div>
-                    <div id="buttonsUnderFormDiv">
-                        <label for="verzendReis" hidden">Verzend</label>
-                        <input class="verzendReis" id="verzendReis" type="submit" value="verzendReis">
-
-                        <label for="zenden" hidden">Zenden(custom)</label>
-                        <button id="zenden" @click=${this.formElements}>Zenden(custom)</button>
-
-                        <label for="resetButton">Herlaad en leeg het formulier.</label>
-                        <input id="resetButton" type="reset" value="Reset velden">
-                        <br>
-                        <label for="herhalendeReisButton">Sla op als herhalende reis.</label>
-                        <input id="herhalendeReisButton" type="checkbox" value="Reset velden" disabled> Herhalende
-                        reis. [under-construction]
-                    </div>
-                </form>
-                <div id="feedbackSpan">
-                    ${this.span_message}
-                    <br>
-                    U heeft gekozen voor voertuig:
-                    ${this._gekozenVoertuig}
-                    <br>
-                    met gemiddelde uitstoot:
-                    ${this._gekozenC02}
-                    C02/km
-                </div>
-            </main>
-            </body>
-        `;
-  }
-  optionClicked(r) {
-    console.log("optionClicked");
-    const e = r.originalTarget.id, i = r.originalTarget.value;
-    switch (this._gekozenVoertuig = e, this._gekozenC02 = i, console.log(e), console.log(i), e) {
-      case "Trein/Metro/Tram":
-        this.visibility_hidden_zakelijkprive = "visibility-hidden", this.visibility_hidden_reisklasse = "";
-        break;
-      case "Scooter":
-      case "Elektr Scooter (incl deel scooter)":
-      case "Elektr Deelauto":
-      case "Hybride eigen auto":
-      case "Electr eigen auto":
-      case "Diesel eigen auto":
-      case "Benzine eigen auto":
-      case "eigenAuto":
-      case "deelAuto":
-        console.log("auto gekozen"), this.visibility_hidden_zakelijkprive = "", this.visibility_hidden_reisklasse = "visibility-hidden";
-        break;
-      case "Lopen":
-      case "Fiets":
-      case "OV Fiets":
-      case "bus":
-        this.visibility_hidden_zakelijkprive = "visibility-hidden", this.visibility_hidden_reisklasse = "visibility-hidden";
-        break;
-      default:
-        console.log("Kan de reis type vervoer niet herkennen");
-        break;
-    }
-  }
-  formElements() {
-    return console.log("_divs"), console.log(document.getElementsByClassName("inputfield") ?? null), this.querySelector(".inputfield") ?? null;
-  }
-};
-c([
-  a()
-], d.prototype, "currentPage", 2);
-c([
-  a()
-], d.prototype, "eindTijdMin", 2);
-c([
-  a()
-], d.prototype, "beginTijdMax", 2);
-c([
-  a()
-], d.prototype, "_hidden", 2);
-c([
-  a()
-], d.prototype, "span_message", 2);
-c([
-  a()
-], d.prototype, "visibility_hidden_reisklasse", 2);
-c([
-  a()
-], d.prototype, "visibility_hidden_zakelijkprive", 2);
-c([
-  a()
-], d.prototype, "_vertrekTijd", 2);
-c([
-  a()
-], d.prototype, "_aankomstTijd", 2);
-c([
-  a()
-], d.prototype, "_demoKM", 2);
-c([
-  a()
-], d.prototype, "_demoKosten", 2);
-c([
-  a()
-], d.prototype, "_demoVertrekLocatie", 2);
-c([
-  a()
-], d.prototype, "_demoAankomstLocatie", 2);
-c([
-  a()
-], d.prototype, "inputfield", 2);
-c([
-  a()
-], d.prototype, "_vervoerMiddelDummyData", 2);
-c([
-  a()
-], d.prototype, "_gekozenC02", 2);
-c([
-  a()
-], d.prototype, "_gekozenVoertuig", 2);
-d = c([
-  f("invoeren-reizen-wijzigen")
-], d);
-var Te = Object.defineProperty, xe = Object.getOwnPropertyDescriptor, X = (r, e, i, o) => {
-  for (var t = o > 1 ? void 0 : o ? xe(e, i) : e, n = r.length - 1, s; n >= 0; n--)
-    (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
-  return o && t && Te(e, i, t), t;
-};
-let H = class extends _ {
+let M = class extends k {
   constructor() {
     super();
+    a(this, "currentPage");
   }
   static get styles() {
-    return y`
+    return w`
       * {
         margin: 0;
         padding: 0;
@@ -1991,7 +2051,7 @@ let H = class extends _ {
     `;
   }
   render() {
-    return g`
+    return f`
       <body>
         <div id="page-container">
           <main>
@@ -2052,28 +2112,29 @@ let H = class extends _ {
   _login() {
     console.log("login.login() neeeeds work");
   }
-  _clickMenu(e) {
-    const i = e.target.id;
-    console.log("id= " + i), this.currentPage = i, this.currentPage = i, console.log("currentPage now: " + this.currentPage), this.dispatchEvent(new Event("page-chosen"));
+  _clickMenu(i) {
+    const o = i.target.id;
+    console.log("id= " + o), this.currentPage = o, this.currentPage = o, console.log("currentPage now: " + this.currentPage), this.dispatchEvent(new Event("page-chosen"));
   }
 };
-X([
-  a()
-], H.prototype, "currentPage", 2);
-H = X([
-  f("login-element")
-], H);
-var De = Object.defineProperty, Ee = Object.getOwnPropertyDescriptor, ee = (r, e, i, o) => {
-  for (var t = o > 1 ? void 0 : o ? Ee(e, i) : e, n = r.length - 1, s; n >= 0; n--)
-    (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
-  return o && t && De(e, i, t), t;
+te([
+  l()
+], M.prototype, "currentPage", 2);
+M = te([
+  y("login-element")
+], M);
+var Se = Object.defineProperty, Oe = Object.getOwnPropertyDescriptor, ie = (n, e, i, o) => {
+  for (var t = o > 1 ? void 0 : o ? Oe(e, i) : e, r = n.length - 1, s; r >= 0; r--)
+    (s = n[r]) && (t = (o ? s(e, i, t) : s(t)) || t);
+  return o && t && Se(e, i, t), t;
 };
-let R = class extends _ {
+let A = class extends k {
   constructor() {
-    super(), this.currentPage = "Reis Registreren";
+    super();
+    a(this, "currentPage", "Reis Registreren");
   }
   static get styles() {
-    return y`
+    return w`
     * {
         margin: 0;
         padding: 0;
@@ -2187,7 +2248,7 @@ let R = class extends _ {
     `;
   }
   render() {
-    return g`
+    return f`
             <header>
             <h1 class="header">Account info</h1>
                 <p>Breng hieronder wijzigingen in uw gegevens.</p>
@@ -2246,23 +2307,25 @@ let R = class extends _ {
     console.log("login.login()"), this.currentPage = "Reis Registreren", this.dispatchEvent(new Event("page-chosen"));
   }
 };
-ee([
-  a()
-], R.prototype, "currentPage", 2);
-R = ee([
-  f("account-element")
-], R);
-var Ce = Object.defineProperty, Se = Object.getOwnPropertyDescriptor, A = (r, e, i, o) => {
-  for (var t = o > 1 ? void 0 : o ? Se(e, i) : e, n = r.length - 1, s; n >= 0; n--)
-    (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
-  return o && t && Ce(e, i, t), t;
+ie([
+  l()
+], A.prototype, "currentPage", 2);
+A = ie([
+  y("account-element")
+], A);
+var He = Object.defineProperty, Re = Object.getOwnPropertyDescriptor, U = (n, e, i, o) => {
+  for (var t = o > 1 ? void 0 : o ? Re(e, i) : e, r = n.length - 1, s; r >= 0; r--)
+    (s = n[r]) && (t = (o ? s(e, i, t) : s(t)) || t);
+  return o && t && He(e, i, t), t;
 };
-let P = class extends _ {
+let x = class extends k {
   constructor() {
-    super(), this._hiddenElement = "hidden";
+    super();
+    a(this, "_hiddenElement", "hidden");
+    a(this, "currentPage");
   }
   static get styles() {
-    return y`
+    return w`
       * {
         margin: 0;
         padding: 0;
@@ -2285,7 +2348,7 @@ let P = class extends _ {
     `;
   }
   render() {
-    return g`
+    return f`
       <body>
         <main>
           <button @click=${this._clickForSupport}>
@@ -2306,26 +2369,28 @@ let P = class extends _ {
     console.log("Click for support"), console.log(this._hiddenElement), this._hiddenElement = this._hiddenElement == "hidden" ? "" : "hidden";
   }
 };
-A([
-  a()
-], P.prototype, "_hiddenElement", 2);
-A([
-  a()
-], P.prototype, "currentPage", 2);
-P = A([
-  f("support-element")
-], P);
-var Oe = Object.defineProperty, He = Object.getOwnPropertyDescriptor, L = (r, e, i, o) => {
-  for (var t = o > 1 ? void 0 : o ? He(e, i) : e, n = r.length - 1, s; n >= 0; n--)
-    (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
-  return o && t && Oe(e, i, t), t;
+U([
+  l()
+], x.prototype, "_hiddenElement", 2);
+U([
+  l()
+], x.prototype, "currentPage", 2);
+x = U([
+  y("support-element")
+], x);
+var Me = Object.defineProperty, Ae = Object.getOwnPropertyDescriptor, K = (n, e, i, o) => {
+  for (var t = o > 1 ? void 0 : o ? Ae(e, i) : e, r = n.length - 1, s; r >= 0; r--)
+    (s = n[r]) && (t = (o ? s(e, i, t) : s(t)) || t);
+  return o && t && Me(e, i, t), t;
 };
-let T = class extends _ {
+let D = class extends k {
   constructor() {
-    super(), this._hiddenElement = "hidden";
+    super();
+    a(this, "_hiddenElement", "hidden");
+    a(this, "currentPage");
   }
   static get styles() {
-    return y`
+    return w`
       * {
         margin: 0;
         padding: 0;
@@ -2348,7 +2413,7 @@ let T = class extends _ {
     `;
   }
   render() {
-    return g`
+    return f`
       <h1 class="header">Account zoeken.</h1>
 
       <body>
@@ -2392,26 +2457,28 @@ let T = class extends _ {
     `;
   }
 };
-L([
-  a()
-], T.prototype, "_hiddenElement", 2);
-L([
-  a()
-], T.prototype, "currentPage", 2);
-T = L([
-  f("reset-password")
-], T);
-var F = Object.freeze, te = Object.defineProperty, Re = Object.getOwnPropertyDescriptor, U = (r, e, i, o) => {
-  for (var t = o > 1 ? void 0 : o ? Re(e, i) : e, n = r.length - 1, s; n >= 0; n--)
-    (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
-  return o && t && te(e, i, t), t;
-}, Me = (r, e) => F(te(r, "raw", { value: F(e || r.slice()) })), W;
-let x = class extends _ {
+K([
+  l()
+], D.prototype, "_hiddenElement", 2);
+K([
+  l()
+], D.prototype, "currentPage", 2);
+D = K([
+  y("reset-password")
+], D);
+var G = Object.freeze, oe = Object.defineProperty, Le = Object.getOwnPropertyDescriptor, N = (n, e, i, o) => {
+  for (var t = o > 1 ? void 0 : o ? Le(e, i) : e, r = n.length - 1, s; r >= 0; r--)
+    (s = n[r]) && (t = (o ? s(e, i, t) : s(t)) || t);
+  return o && t && oe(e, i, t), t;
+}, Ue = (n, e) => G(oe(n, "raw", { value: G(e || n.slice()) })), Z;
+let E = class extends k {
   constructor() {
-    super(), this._hiddenElement = "hidden";
+    super();
+    a(this, "_hiddenElement", "hidden");
+    a(this, "currentPage");
   }
   static get styles() {
-    return y`
+    return w`
       * {
         margin: 0;
         padding: 0;
@@ -2434,7 +2501,7 @@ let x = class extends _ {
     `;
   }
   render() {
-    return g(W || (W = Me([`
+    return f(Z || (Z = Ue([`
       <!DOCTYPE html>
       <html lang="en">
         <head>
@@ -2543,26 +2610,28 @@ let x = class extends _ {
     `])));
   }
 };
-U([
-  a()
-], x.prototype, "_hiddenElement", 2);
-U([
-  a()
-], x.prototype, "currentPage", 2);
-x = U([
-  f("new-account")
-], x);
-var G = Object.freeze, ie = Object.defineProperty, Ae = Object.getOwnPropertyDescriptor, K = (r, e, i, o) => {
-  for (var t = o > 1 ? void 0 : o ? Ae(e, i) : e, n = r.length - 1, s; n >= 0; n--)
-    (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
-  return o && t && ie(e, i, t), t;
-}, Le = (r, e) => G(ie(r, "raw", { value: G(e || r.slice()) })), Z;
-let D = class extends _ {
+N([
+  l()
+], E.prototype, "_hiddenElement", 2);
+N([
+  l()
+], E.prototype, "currentPage", 2);
+E = N([
+  y("new-account")
+], E);
+var Y = Object.freeze, re = Object.defineProperty, Ke = Object.getOwnPropertyDescriptor, q = (n, e, i, o) => {
+  for (var t = o > 1 ? void 0 : o ? Ke(e, i) : e, r = n.length - 1, s; r >= 0; r--)
+    (s = n[r]) && (t = (o ? s(e, i, t) : s(t)) || t);
+  return o && t && re(e, i, t), t;
+}, Ne = (n, e) => Y(re(n, "raw", { value: Y(e || n.slice()) })), J;
+let C = class extends k {
   constructor() {
-    super(), this._hiddenElement = "hidden";
+    super();
+    a(this, "_hiddenElement", "hidden");
+    a(this, "currentPage");
   }
   static get styles() {
-    return y`
+    return w`
       * {
         margin: 0;
         padding: 0;
@@ -2585,7 +2654,7 @@ let D = class extends _ {
     `;
   }
   render() {
-    return g(Z || (Z = Le([`
+    return f(J || (J = Ne([`
             <head>
                 <meta charset="UTF-8">
                 <title>README</title>
@@ -2609,23 +2678,37 @@ let D = class extends _ {
     console.log("Click for support"), console.log(this._hiddenElement), this._hiddenElement = this._hiddenElement == "hidden" ? "" : "hidden";
   }
 };
-K([
-  a()
-], D.prototype, "_hiddenElement", 2);
-K([
-  a()
-], D.prototype, "currentPage", 2);
-D = K([
-  f("readme-element")
-], D);
-var Ue = Object.defineProperty, Ke = Object.getOwnPropertyDescriptor, v = (r, e, i, o) => {
-  for (var t = o > 1 ? void 0 : o ? Ke(e, i) : e, n = r.length - 1, s; n >= 0; n--)
-    (s = r[n]) && (t = (o ? s(e, i, t) : s(t)) || t);
-  return o && t && Ue(e, i, t), t;
+q([
+  l()
+], C.prototype, "_hiddenElement", 2);
+q([
+  l()
+], C.prototype, "currentPage", 2);
+C = q([
+  y("readme-element")
+], C);
+var qe = Object.defineProperty, Ve = Object.getOwnPropertyDescriptor, v = (n, e, i, o) => {
+  for (var t = o > 1 ? void 0 : o ? Ve(e, i) : e, r = n.length - 1, s; r >= 0; r--)
+    (s = n[r]) && (t = (o ? s(e, i, t) : s(t)) || t);
+  return o && t && qe(e, i, t), t;
 };
-let u = class extends re {
+let m = class extends se {
   constructor() {
-    super(), this._homePageTemplateHidden = "hidden", this._reisInvoerenTemplateHidden = "hidden", this._reisGeschiedenisTemplateHidden = "", this._loginTemplateHidden = "hidden", this._logoutTemplateHidden = "hidden", this._accountInfoTemplateHidden = "hidden", this._overzichtTemplateHidden = "hidden", this._thermometerTemplateHidden = "hidden", this._supportTemplateHidden = "hidden", this._passwordResetTemplateHidden = "hidden", this._newAccountTemplateHidden = "hidden", this._readmeTemplateHidden = "hidden", this._reisWijzigenTemplateHidden = "hidden";
+    super();
+    a(this, "_currentPage");
+    a(this, "_homePageTemplateHidden", "hidden");
+    a(this, "_reisInvoerenTemplateHidden", "hidden");
+    a(this, "_reisGeschiedenisTemplateHidden", "");
+    a(this, "_loginTemplateHidden", "hidden");
+    a(this, "_logoutTemplateHidden", "hidden");
+    a(this, "_accountInfoTemplateHidden", "hidden");
+    a(this, "_overzichtTemplateHidden", "hidden");
+    a(this, "_thermometerTemplateHidden", "hidden");
+    a(this, "_supportTemplateHidden", "hidden");
+    a(this, "_passwordResetTemplateHidden", "hidden");
+    a(this, "_newAccountTemplateHidden", "hidden");
+    a(this, "_readmeTemplateHidden", "hidden");
+    a(this, "_reisWijzigenTemplateHidden", "hidden");
   }
   _onClick() {
     console.log("clicked event listener");
@@ -2636,7 +2719,7 @@ let u = class extends re {
     };
   }
   static get styles() {
-    return ne`
+    return le`
       :host {
         max-width: 100vw;
         margin: 0 auto;
@@ -2671,7 +2754,7 @@ let u = class extends re {
     `;
   }
   render() {
-    return b`
+    return _`
             <nav-menu @page-chosen=${this._onCurrentPageChanged}></nav-menu>
             ${this.headerTemplate()}
             <body>
@@ -2693,10 +2776,10 @@ let u = class extends re {
                 <footer-menu @page-chosen=${this._onCurrentPageChanged}></footer-menu>
         `;
   }
-  _onCurrentPageChanged(r) {
+  _onCurrentPageChanged(e) {
     console.log("_onCurrentPageChanged()");
-    const e = r.target;
-    switch (this._currentPage = e.currentPage, this._currentPage) {
+    const i = e.target;
+    switch (this._currentPage = i.currentPage, this._currentPage) {
       case "home-page": {
         this.hideRest(), console.log("home case"), this._homePageTemplateHidden = "";
         break;
@@ -2746,92 +2829,92 @@ let u = class extends re {
     this._homePageTemplateHidden = "hidden", this._reisInvoerenTemplateHidden = "hidden", this._reisGeschiedenisTemplateHidden = "hidden", this._loginTemplateHidden = "hidden", this._logoutTemplateHidden = "hidden", this._accountInfoTemplateHidden = "hidden", this._overzichtTemplateHidden = "hidden", this._thermometerTemplateHidden = "hidden", this._supportTemplateHidden = "hidden", this._passwordResetTemplateHidden = "hidden", this._newAccountTemplateHidden = "hidden", this._readmeTemplateHidden = "hidden", this._reisWijzigenTemplateHidden = "hidden";
   }
   _homePageTemplate() {
-    return b` <home-page></home-page>`;
+    return _` <home-page></home-page>`;
   }
   headerTemplate() {
-    return b` <header>
+    return _` <header>
       <title>KPN-222</title>
       <h1>${this._currentPage}</h1>
     </header>`;
   }
   _overzichtTemplate() {
-    return b` <overzicht-reizen></overzicht-reizen>`;
+    return _` <overzicht-reizen></overzicht-reizen>`;
   }
   _reisInvoerenTemplate() {
-    return b` <invoeren-reizen id="invoeren-reizen"></invoeren-reizen>`;
+    return _` <invoeren-reizen id="invoeren-reizen"></invoeren-reizen>`;
   }
   _reisWijzigenTemplate() {
-    return b` <invoeren-reizen-wijzigen id="invoeren-reizen"></invoeren-reizen-wijzigen>`;
+    return _` <invoeren-reizen-wijzigen id="invoeren-reizen"></invoeren-reizen-wijzigen>`;
   }
   _thermometerTemplate() {
-    return b` <thermometer></thermometer>`;
+    return _` <thermometer></thermometer>`;
   }
   _loginTemplate() {
-    return b` <login-element
+    return _` <login-element
       @page-chosen=${this._onCurrentPageChanged}
     ></login-element>`;
   }
   _supportTemplate() {
-    return b` <support-element></support-element>`;
+    return _` <support-element></support-element>`;
   }
   _accountInfoTemplate() {
-    return b` <account-element></account-element>`;
+    return _` <account-element></account-element>`;
   }
   _newAccountTemplate() {
-    return b` <new-account></new-account>`;
+    return _` <new-account></new-account>`;
   }
   _resetPasswordTemplate() {
-    return b` <reset-password></reset-password>`;
+    return _` <reset-password></reset-password>`;
   }
   _readmeTemplate() {
-    return b` <readme-element></readme-element>`;
+    return _` <readme-element></readme-element>`;
   }
 };
 v([
-  a()
-], u.prototype, "_currentPage", 2);
+  l()
+], m.prototype, "_currentPage", 2);
 v([
-  a()
-], u.prototype, "_homePageTemplateHidden", 2);
+  l()
+], m.prototype, "_homePageTemplateHidden", 2);
 v([
-  a()
-], u.prototype, "_reisInvoerenTemplateHidden", 2);
+  l()
+], m.prototype, "_reisInvoerenTemplateHidden", 2);
 v([
-  a()
-], u.prototype, "_reisGeschiedenisTemplateHidden", 2);
+  l()
+], m.prototype, "_reisGeschiedenisTemplateHidden", 2);
 v([
-  a()
-], u.prototype, "_loginTemplateHidden", 2);
+  l()
+], m.prototype, "_loginTemplateHidden", 2);
 v([
-  a()
-], u.prototype, "_logoutTemplateHidden", 2);
+  l()
+], m.prototype, "_logoutTemplateHidden", 2);
 v([
-  a()
-], u.prototype, "_accountInfoTemplateHidden", 2);
+  l()
+], m.prototype, "_accountInfoTemplateHidden", 2);
 v([
-  a()
-], u.prototype, "_overzichtTemplateHidden", 2);
+  l()
+], m.prototype, "_overzichtTemplateHidden", 2);
 v([
-  a()
-], u.prototype, "_thermometerTemplateHidden", 2);
+  l()
+], m.prototype, "_thermometerTemplateHidden", 2);
 v([
-  a()
-], u.prototype, "_supportTemplateHidden", 2);
+  l()
+], m.prototype, "_supportTemplateHidden", 2);
 v([
-  a()
-], u.prototype, "_passwordResetTemplateHidden", 2);
+  l()
+], m.prototype, "_passwordResetTemplateHidden", 2);
 v([
-  a()
-], u.prototype, "_newAccountTemplateHidden", 2);
+  l()
+], m.prototype, "_newAccountTemplateHidden", 2);
 v([
-  a()
-], u.prototype, "_readmeTemplateHidden", 2);
+  l()
+], m.prototype, "_readmeTemplateHidden", 2);
 v([
-  a()
-], u.prototype, "_reisWijzigenTemplateHidden", 2);
+  l()
+], m.prototype, "_reisWijzigenTemplateHidden", 2);
 v([
-  de({ capture: !0 })
-], u.prototype, "_onClick", 1);
-u = v([
-  f("compiled-templates")
-], u);
+  he({ capture: !0 })
+], m.prototype, "_onClick", 1);
+m = v([
+  y("compiled-templates")
+], m);
