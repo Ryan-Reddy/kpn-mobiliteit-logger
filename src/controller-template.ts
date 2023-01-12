@@ -1,4 +1,5 @@
 import { LitElement, css, html } from '../node_modules/lit';
+import { eventOptions, property, customElement } from 'lit-element';
 
 import './footer-menu.js';
 import './home-page.ts';
@@ -13,7 +14,6 @@ import './support.ts';
 import './reset-password.ts';
 import './new-account.ts';
 import './readme.ts';
-import { eventOptions, property, customElement } from 'lit-element';
 import { NavMenu } from './nav-menu';
 
 /**

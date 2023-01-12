@@ -4,8 +4,17 @@ import {defineConfig} from 'vite'
 export default defineConfig({
   base: ``,
   build: {
-    // outDir: './docs', // must be docs for github pages, check settings on root folder
-
+    server: {
+      // https: true,
+      host: true,
+      port: 5173,
+      secure: false,
+      strictPort: true,
+      hmr: {
+        port: 5173,
+        host: true,
+      },
+    },
     lib: {
       entry: './index.html',
       formats: ['es'],
