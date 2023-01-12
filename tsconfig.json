@@ -17,15 +17,9 @@
       "DOM"
     ],
     "skipLibCheck": true,
-    "baseUrl": ".",
-    "noEmit": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "skipLibCheck": true
+    "baseUrl": "."
   },
   "include": [
-    "src",
     "src/**/*.ts",
     "src/**/*.d.ts"
   ]
