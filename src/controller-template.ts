@@ -100,42 +100,18 @@ export class ControllerTemplate extends LitElement {
             <body>
 <!--            <body background="/branding/achtergrondshapes.webp">-->
             <div id="page-container">
-                    <div class=${
-                      this._homePageTemplateHidden
-                    }>${this._homePageTemplate()}</div>
-                    <div class=${
-                      this._reisInvoerenTemplateHidden
-                    }>${this._reisInvoerenTemplate()}</div>
-                    <div class=${
-                      this._reisWijzigenTemplateHidden
-                    }>${this._reisWijzigenTemplate()}</div>
-                    <div class=${
-                      this._reisGeschiedenisTemplateHidden
-                    }>${this._overzichtTemplate()}</div>
-                    <div class=${
-                      this._loginTemplateHidden
-                    }>${this._loginTemplate()}</div>
-                    <div class=${
-                      this._logoutTemplateHidden
-                    }>${this._loginTemplate()}</div>
-                    <div class=${
-                      this._supportTemplateHidden
-                    }>${this._supportTemplate()}</div>
-                    <div class=${
-                      this._thermometerTemplateHidden
-                    }>${this._thermometerTemplate()}</div>
-                    <div class=${
-                      this._accountInfoTemplateHidden
-                    }>${this._accountInfoTemplate()}</div>
-                    <div class=${
-                      this._passwordResetTemplateHidden
-                    }>${this._resetPasswordTemplate()}</div>
-                    <div class=${
-                      this._readmeTemplateHidden
-                    }>${this._readmeTemplate()}</div>
-                    <div class=${
-                      this._newAccountTemplateHidden
-                    }>${this._newAccountTemplate()}</div
+                    <div class=${ this._homePageTemplateHidden }>${this._homePageTemplate()}</div>
+                    <div class=${ this._reisInvoerenTemplateHidden }>${this._reisInvoerenTemplate()}</div>
+                    <div class=${ this._reisWijzigenTemplateHidden }>${this._reisWijzigenTemplate()}</div>
+                    <div class=${ this._reisGeschiedenisTemplateHidden }>${this._overzichtTemplate()}</div>
+                    <div class=${ this._loginTemplateHidden }>${this._loginTemplate()}</div>
+                    <div class=${ this._logoutTemplateHidden }>${this._loginTemplate()}</div>
+                    <div class=${ this._supportTemplateHidden }>${this._supportTemplate()}</div>
+                    <div class=${ this._thermometerTemplateHidden }>${this._thermometerTemplate()}</div>
+                    <div class=${ this._accountInfoTemplateHidden }>${this._accountInfoTemplate()}</div>
+                    <div class=${ this._passwordResetTemplateHidden }>${this._resetPasswordTemplate()}</div>
+                    <div class=${ this._readmeTemplateHidden }>${this._readmeTemplate()}</div>
+                    <div class=${ this._newAccountTemplateHidden }>${this._newAccountTemplate()}</div
             </div>
             </body>
                 <footer-menu @page-chosen=${
