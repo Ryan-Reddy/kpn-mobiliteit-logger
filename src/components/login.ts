@@ -1,8 +1,8 @@
 import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit-element';
+import { customElement, property } from 'lit/decorators.js';
 
 /**
- * An example element.
+ * A Login element.
  *
  * @slot - This element has a slot
  * @csspart button - The button
@@ -10,7 +10,7 @@ import { customElement, property } from 'lit-element';
 
 @customElement('login-element')
 export class Login extends LitElement {
-  @property() currentPage: string;
+  // @property() currentPage: string;
 
   constructor() {
     super();
@@ -189,12 +189,12 @@ export class Login extends LitElement {
     // @ts-ignore
     const id = e.target.id;
     console.log('id= ' + id);
-    this.currentPage = id;
+    // this.currentPage = id;
 
     // const hasChanged = this.currentPage !== id;
     // if (hasChanged) {
-    this.currentPage = id;
-    console.log('currentPage now: ' + this.currentPage);
+    // this.currentPage = id;
+    // console.log('currentPage now: ' + this.currentPage);
 
     //notify parent:
     this.dispatchEvent(new Event('page-chosen'));

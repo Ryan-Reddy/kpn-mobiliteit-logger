@@ -2719,7 +2719,7 @@ let u = class extends re {
         break;
       }
       case "Logout": {
-        this.hideRest(), console.log("Logout needs work in controller-template.ts"), this._logoutTemplateHidden = "";
+        this.hideRest(), console.log("Logout needs work in controller-template-REDUNDANT-due-to-VAADIN.ts"), this._logoutTemplateHidden = "";
         break;
       }
       case "Login": {
