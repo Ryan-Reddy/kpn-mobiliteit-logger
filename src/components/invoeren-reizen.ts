@@ -7,7 +7,7 @@ import {customElement, property} from 'lit-element';
  * @slot - This element has a slot
  * @csspart button - The button
  */
-@customElement('invoeren-reizen-wijzigen')
+@customElement('invoeren-reizen-element')
 export class InvoerenReizen extends LitElement {
     @property() currentPage = 'invoeren-reizen';
 
@@ -28,8 +28,8 @@ export class InvoerenReizen extends LitElement {
 
     @property() inputfield = 'inputfield';
     @property() _vervoerMiddelDummyData = [];
-    @property() _gekozenC02: string;
-    @property() _gekozenVoertuig: string;
+    @property() _gekozenC02: string | undefined;
+    @property() _gekozenVoertuig: string | undefined;
 
     constructor() {
         super();

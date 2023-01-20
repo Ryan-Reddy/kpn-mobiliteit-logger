@@ -10,7 +10,7 @@ import {InvoerenReizen} from "./invoeren-reizen";
  * @slot - This element has a slot
  * @csspart button - The button
  */
-@customElement('overzicht-reizen')
+@customElement('overzicht-reizen-element')
 export class OverzichtReizen extends LitElement {
     @property() titel = 'Overzicht Reizen';
     @property() _vervoerMiddelDummyData = [];
