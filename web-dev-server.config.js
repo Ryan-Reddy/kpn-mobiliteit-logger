@@ -1,19 +1,19 @@
 export default {
 
-  open: true,
+    open: true,
 
-  watch: true,
+    watch: true,
 
-  appIndex: 'index.html',
+    appIndex: 'index.html',
 
-  nodeResolve: {
+    nodeResolve: {
 
-    exportConditions: ['development'],
+        exportConditions: ['development'],
 
-    dedupe: true,
+        dedupe: true,
 
-  },
+    },
 
-  esbuildTarget: 'auto',
+    esbuildTarget: 'auto',
 
 };

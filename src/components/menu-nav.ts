@@ -1,5 +1,5 @@
-import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import {css, html, LitElement} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
 
 /**
  * An example element.
@@ -9,19 +9,19 @@ import { customElement, property } from 'lit/decorators.js';
  */
 @customElement('menu-nav-element')
 export class MenuNav extends LitElement {
-  @property() naamGebruiker = 'Hans Fumphriehd';
-  // @property() kpnLogo = '/public/branding/kpn-logo2-jpeg.jpg';
-  @property() kpnLogo = '/kpn-logo2-jpeg.jpg';
-  @property() currentPage: string = '';
-  @property() _kpnHomePageUrl = 'https://www.kpn.com/';
+    @property() naamGebruiker = 'Hans Fumphriehd';
+    // @property() kpnLogo = '/public/branding/kpn-logo2-jpeg.jpg';
+    @property() kpnLogo = '/kpn-logo2-jpeg.jpg';
+    @property() currentPage: string = '';
+    @property() _kpnHomePageUrl = 'https://www.kpn.com/';
 
-  constructor() {
-    super();
-    this.onLoad();
-  }
+    constructor() {
+        super();
+        this.onLoad();
+    }
 
-  static get styles() {
-    return css`
+    static get styles() {
+        return css`
       * {
         margin: 0;
         padding: 0;
@@ -186,22 +186,22 @@ export class MenuNav extends LitElement {
         }
       }
     `;
-  }
+    }
 
-  script() {
-    let script = document.createElement('script');
-    script.onload = this.onLoad.bind(this);
-    script.src = 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js';
-    return script;
-  }
+    script() {
+        let script = document.createElement('script');
+        script.onload = this.onLoad.bind(this);
+        script.src = 'https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.js';
+        return script;
+    }
 
-  onLoad() {
-    // alert('loaded nav-menu');
-  }
+    onLoad() {
+        // alert('loaded nav-menu');
+    }
 
-  render() {
-    // TODO create response menu with: https://www.codingnepalweb.com/responsive-dropdown-menu-bar-html-css/
-    return html`
+    render() {
+        // TODO create response menu with: https://www.codingnepalweb.com/responsive-dropdown-menu-bar-html-css/
+        return html`
       <body id="bodyofmenubar">
         <a href="#" class="ingelogd_als">ingelogd als ${this.naamGebruiker}</a>
         <div class="entire_menu_bar">
@@ -241,25 +241,25 @@ export class MenuNav extends LitElement {
         </div>
       </body>
     `;
-  }
-
-  _clickMenu(e: Event) {
-    console.log('_dispatchPageLink()');
-    // @ts-ignore
-    const id = e.target.id;
-    console.log('id= ' + id);
-
-    const hasChanged = this.currentPage !== id;
-
-    if (hasChanged) {
-      this.currentPage = id;
-
-      //notify parent:
-      this.dispatchEvent(new Event('page-chosen'));
     }
-  }
 
-  kpnHomePageUrl() {
-    window.open(this._kpnHomePageUrl);
-  }
+    _clickMenu(e: Event) {
+        console.log('_dispatchPageLink()');
+        // @ts-ignore
+        const id = e.target.id;
+        console.log('id= ' + id);
+
+        const hasChanged = this.currentPage !== id;
+
+        if (hasChanged) {
+            this.currentPage = id;
+
+            //notify parent:
+            this.dispatchEvent(new Event('page-chosen'));
+        }
+    }
+
+    kpnHomePageUrl() {
+        window.open(this._kpnHomePageUrl);
+    }
 }

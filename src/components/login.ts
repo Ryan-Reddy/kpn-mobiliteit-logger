@@ -1,5 +1,5 @@
-import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import {css, html, LitElement} from 'lit';
+import {customElement} from 'lit/decorators.js';
 
 /**
  * A Login element.
@@ -10,14 +10,14 @@ import { customElement, property } from 'lit/decorators.js';
 
 @customElement('login-element')
 export class Login extends LitElement {
-  // @property() currentPage: string;
+    // @property() currentPage: string;
 
-  constructor() {
-    super();
-  }
+    constructor() {
+        super();
+    }
 
-  static get styles() {
-    return css`
+    static get styles() {
+        return css`
       * {
         margin: 0;
         padding: 0;
@@ -118,10 +118,10 @@ export class Login extends LitElement {
         required: invalid;
       }
     `;
-  }
+    }
 
-  render() {
-    return html`
+    render() {
+        return html`
       <body>
         <div id="page-container">
           <main>
@@ -178,26 +178,26 @@ export class Login extends LitElement {
         </div>
       </body>
     `;
-  }
+    }
 
-  // _login(e: Event) {
-  _login() {
-    console.log('login.login() neeeeds work');
-  }
+    // _login(e: Event) {
+    _login() {
+        console.log('login.login() neeeeds work');
+    }
 
-  _clickMenu(e: Event) {
-    // @ts-ignore
-    const id = e.target.id;
-    console.log('id= ' + id);
-    // this.currentPage = id;
+    _clickMenu(e: Event) {
+        // @ts-ignore
+        const id = e.target.id;
+        console.log('id= ' + id);
+        // this.currentPage = id;
 
-    // const hasChanged = this.currentPage !== id;
-    // if (hasChanged) {
-    // this.currentPage = id;
-    // console.log('currentPage now: ' + this.currentPage);
+        // const hasChanged = this.currentPage !== id;
+        // if (hasChanged) {
+        // this.currentPage = id;
+        // console.log('currentPage now: ' + this.currentPage);
 
-    //notify parent:
-    this.dispatchEvent(new Event('page-chosen'));
-    // }
-  }
+        //notify parent:
+        this.dispatchEvent(new Event('page-chosen'));
+        // }
+    }
 }

@@ -1,5 +1,5 @@
-import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit-element';
+import {css, html, LitElement} from 'lit';
+import {customElement, property} from 'lit-element';
 
 /**
  * An example element.
@@ -9,16 +9,19 @@ import { customElement, property } from 'lit-element';
  */
 @customElement('title-element')
 export class SupportElement extends LitElement {
-  @property() _hiddenElement = 'hidden';
-  @property() currentPage: string;
-  constructor() {
-    super();
-  }
+    @property() _hiddenElement = 'hidden';
+    @property() currentPage: string;
 
-  static get styles() { return css``; }
+    constructor() {
+        super();
+    }
 
-  render() {
-    return html`
+    static get styles() {
+        return css``;
+    }
+
+    render() {
+        return html`
       <body>
         <main>
           <button @click=${this._clickForSupport}>
@@ -34,10 +37,11 @@ export class SupportElement extends LitElement {
         </main>
       </body>
     `;
-  }
-  _clickForSupport() {
-    console.log('Click for support');
-    console.log(this._hiddenElement);
-    this._hiddenElement = this._hiddenElement == 'hidden' ? '' : 'hidden';
-  }
+    }
+
+    _clickForSupport() {
+        console.log('Click for support');
+        console.log(this._hiddenElement);
+        this._hiddenElement = this._hiddenElement == 'hidden' ? '' : 'hidden';
+    }
 }

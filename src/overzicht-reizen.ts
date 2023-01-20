@@ -44,24 +44,6 @@ export class OverzichtReizen extends LitElement {
             });
     }
 
-    connectedCallback() {
-        super.connectedCallback();
-        // // TODO insert ajax rsjx json file observer
-        // //
-        // fetch('/vervoermiddel-CO2.json')
-        //     .then((response) => response.json())
-        //     .then((json) => {
-        //         this._vervoerMiddelDummyData = Array.from(json);
-        //         console.log(this._vervoerMiddelDummyData);
-        //     });
-        // fetch('/dummydata-reizen.json')
-        //     .then((response) => response.json())
-        //     .then((json) => {
-        //         this._reizenDummyData = Array.from(json);
-        //         console.log(this._reizenDummyData);
-        //     });
-    }
-
     static get styles() {
         return css`
       * {
@@ -128,6 +110,23 @@ export class OverzichtReizen extends LitElement {
     `;
     }
 
+    connectedCallback() {
+        super.connectedCallback();
+        // // TODO insert ajax rsjx json file observer
+        // //
+        // fetch('/vervoermiddel-CO2.json')
+        //     .then((response) => response.json())
+        //     .then((json) => {
+        //         this._vervoerMiddelDummyData = Array.from(json);
+        //         console.log(this._vervoerMiddelDummyData);
+        //     });
+        // fetch('/dummydata-reizen.json')
+        //     .then((response) => response.json())
+        //     .then((json) => {
+        //         this._reizenDummyData = Array.from(json);
+        //         console.log(this._reizenDummyData);
+        //     });
+    }
 
     /**
      * Called when an update was triggered, before rendering. Receives a Map of changed
@@ -245,8 +244,14 @@ export class OverzichtReizen extends LitElement {
                 </thead>
                 <tbody>
                   ${this._reizenDummyData.map(({
-                                                   begin, eind, km, kosten, project, type, uitstoot,
-                                               }) => html`
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                begin,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                eind,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                km,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                kosten,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                project,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                type,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                uitstoot,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }) => html`
                       <tr>
                           <th class="hiddensmolscreen">${project}</th>
                           <th>${type}</th>
@@ -272,6 +277,7 @@ export class OverzichtReizen extends LitElement {
             
         `;
     }
+
     wijzigDezeDataRij(event: Event) {
         // TODO collect data from the table #32
         console.log('wijzigDezeDataRij')

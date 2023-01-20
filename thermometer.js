@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'lit';
+import {css, html, LitElement} from 'lit';
 
 /**
  * An example element.
@@ -7,33 +7,33 @@ import { LitElement, css, html } from 'lit';
  * @csspart button - The button
  */
 export class MyElement extends LitElement {
-  constructor() {
-    super();
-    this.docsHint = 'Click on the Vite and Lit logos to learn more';
-    this.count = 0;
-  }
+    constructor() {
+        super();
+        this.docsHint = 'Click on the Vite and Lit logos to learn more';
+        this.count = 0;
+    }
 
-  static get properties() {
-    return {
-      /**
-       * Copy for the read the docs hint.
-       */
-      docsHint: { type: String },
+    static get properties() {
+        return {
+            /**
+             * Copy for the read the docs hint.
+             */
+            docsHint: {type: String},
 
-      /**
-       * The number of times the button has been clicked.
-       */
-      count: { type: Number },
+            /**
+             * The number of times the button has been clicked.
+             */
+            count: {type: Number},
 
-      /**
-       * The thermometer polygon pointer
-       */
-      mercury: { type: Number },
-    };
-  }
+            /**
+             * The thermometer polygon pointer
+             */
+            mercury: {type: Number},
+        };
+    }
 
-  static get styles() {
-    return css`
+    static get styles() {
+        return css`
       :host {
         max-width: 1280px;
         margin: 0 auto;
@@ -103,10 +103,10 @@ export class MyElement extends LitElement {
         }
       }
     `;
-  }
+    }
 
-  render() {
-    return html`
+    render() {
+        return html`
       <!DOCTYPE html>
       <html lang="en">
         <head>
@@ -184,11 +184,11 @@ export class MyElement extends LitElement {
         </div>
       </html>
     `;
-  }
+    }
 
-  _onClick() {
-    this.count++;
-  }
+    _onClick() {
+        this.count++;
+    }
 }
 
 window.customElements.define('thermometer-element', MyElement);

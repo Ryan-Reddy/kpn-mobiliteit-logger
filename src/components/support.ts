@@ -1,5 +1,5 @@
-import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import {css, html, LitElement} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
 
 /**
  * An example element.
@@ -9,14 +9,15 @@ import { customElement, property } from 'lit/decorators.js';
  */
 @customElement('support-element')
 export class SupportElement extends LitElement {
-  @property() _hiddenElement = 'hidden';
-  @property() currentPage: string | undefined;
-  constructor() {
-    super();
-  }
+    @property() _hiddenElement = 'hidden';
+    @property() currentPage: string | undefined;
 
-  static get styles() {
-    return css`
+    constructor() {
+        super();
+    }
+
+    static get styles() {
+        return css`
       * {
         margin: 0;
         padding: 0;
@@ -37,10 +38,10 @@ export class SupportElement extends LitElement {
         height: 2em;
       }
     `;
-  }
+    }
 
-  render() {
-    return html`
+    render() {
+        return html`
       <body>
         <main>
           <label hidden for="support"></label>
@@ -57,10 +58,11 @@ export class SupportElement extends LitElement {
         </main>
       </body>
     `;
-  }
-  _clickForSupport() {
-    console.log('Click for support');
-    console.log(this._hiddenElement);
-    this._hiddenElement = this._hiddenElement == 'hidden' ? '' : 'hidden';
-  }
+    }
+
+    _clickForSupport() {
+        console.log('Click for support');
+        console.log(this._hiddenElement);
+        this._hiddenElement = this._hiddenElement == 'hidden' ? '' : 'hidden';
+    }
 }

@@ -1,5 +1,5 @@
-import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import {css, html, LitElement} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
 
 /**
  * An example element.
@@ -10,14 +10,14 @@ import { customElement, property } from 'lit/decorators.js';
 
 @customElement('account-info-element')
 export class Accountinfo extends LitElement {
-  @property() currentPage = 'account info';
+    @property() currentPage = 'account info';
 
-  constructor() {
-    super();
-  }
+    constructor() {
+        super();
+    }
 
-  static get styles() {
-    return css`
+    static get styles() {
+        return css`
     * {
         margin: 0;
         padding: 0;
@@ -129,10 +129,10 @@ export class Accountinfo extends LitElement {
       display: none;
     }
     `;
-  }
+    }
 
-  render() {
-    return html`
+    render() {
+        return html`
             <header>
             <h1 class="header">Account info</h1>
                 <p>Breng hieronder wijzigingen in uw gegevens.</p>
@@ -186,13 +186,14 @@ export class Accountinfo extends LitElement {
             </div>
             </body>
         `;
-  }
-  // _login(e: Event) {
-  _login() {
-    console.log('login.login()');
-    this.currentPage = 'Reis Registreren';
+    }
 
-    //notify parent:
-    this.dispatchEvent(new Event('page-chosen'));
-  }
+    // _login(e: Event) {
+    _login() {
+        console.log('login.login()');
+        this.currentPage = 'Reis Registreren';
+
+        //notify parent:
+        this.dispatchEvent(new Event('page-chosen'));
+    }
 }

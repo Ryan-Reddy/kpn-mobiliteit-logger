@@ -1,5 +1,5 @@
-import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import {css, html, LitElement} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
 
 /**
  * An example element.
@@ -9,14 +9,15 @@ import { customElement, property } from 'lit/decorators.js';
  */
 @customElement('readme-element')
 export class ReadmeElement extends LitElement {
-  @property() _hiddenElement = 'hidden';
-  @property() currentPage: string | undefined;
-  constructor() {
-    super();
-  }
+    @property() _hiddenElement = 'hidden';
+    @property() currentPage: string | undefined;
 
-  static get styles() {
-    return css`
+    constructor() {
+        super();
+    }
+
+    static get styles() {
+        return css`
       * {
         margin: 0;
         padding: 0;
@@ -37,11 +38,11 @@ export class ReadmeElement extends LitElement {
         height: 2em;
       }
     `;
-  }
+    }
 
-  //TODO properly import /node_modules/zero-md:
-  render() {
-    return html`
+    //TODO properly import /node_modules/zero-md:
+    render() {
+        return html`
             <head>
                 <meta charset="UTF-8">
                 <title>README</title>
@@ -60,10 +61,11 @@ export class ReadmeElement extends LitElement {
             </body>
             </html>
     `;
-  }
-  _clickForSupport() {
-    console.log('Click for support');
-    console.log(this._hiddenElement);
-    this._hiddenElement = this._hiddenElement == 'hidden' ? '' : 'hidden';
-  }
+    }
+
+    _clickForSupport() {
+        console.log('Click for support');
+        console.log(this._hiddenElement);
+        this._hiddenElement = this._hiddenElement == 'hidden' ? '' : 'hidden';
+    }
 }

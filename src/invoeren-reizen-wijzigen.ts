@@ -1,4 +1,4 @@
-import { css, html, LitElement } from 'lit';
+import {css, html, LitElement} from 'lit';
 import {customElement, property} from 'lit-element';
 
 /**
@@ -9,58 +9,46 @@ import {customElement, property} from 'lit-element';
  */
 @customElement('invoeren-reizen-wijzigen')
 export class InvoerenReizen extends LitElement {
-  @property() currentPage = 'invoeren-reizen';
+    @property() currentPage = 'invoeren-reizen';
 
-  @property() eindTijdMin = '';
-  @property() beginTijdMax = '';
-  @property() _hidden = 'true';
-  @property() span_message = '';
-  @property() visibility_hidden_reisklasse = 'visibility-hidden';
-  @property() visibility_hidden_zakelijkprive = 'visibility-hidden';
+    @property() eindTijdMin = '';
+    @property() beginTijdMax = '';
+    @property() _hidden = 'true';
+    @property() span_message = '';
+    @property() visibility_hidden_reisklasse = 'visibility-hidden';
+    @property() visibility_hidden_zakelijkprive = 'visibility-hidden';
 
-  @property() _vertrekTijd = '';
-  @property() _aankomstTijd = '';
+    @property() _vertrekTijd = '';
+    @property() _aankomstTijd = '';
 
-  @property() _demoKM = '11';
-  @property() _demoKosten = '111,11';
-  @property() _demoVertrekLocatie = 'Amsterdam';
-  @property() _demoAankomstLocatie = 'Utrecht';
+    @property() _demoKM = '11';
+    @property() _demoKosten = '111,11';
+    @property() _demoVertrekLocatie = 'Amsterdam';
+    @property() _demoAankomstLocatie = 'Utrecht';
 
-  @property() inputfield = 'inputfield';
-  @property() _vervoerMiddelDummyData = [];
-  @property() _gekozenC02: string;
-  @property() _gekozenVoertuig: string;
+    @property() inputfield = 'inputfield';
+    @property() _vervoerMiddelDummyData = [];
+    @property() _gekozenC02: string;
+    @property() _gekozenVoertuig: string;
 
-  constructor() {
-    super();
-    let now = new Date();
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    now.setMilliseconds(0);
-    now.setSeconds(0);
-    this._vertrekTijd = now.toISOString().slice(0, -1);
-    let now1 = new Date();
-    now1.setMinutes(now.getMinutes() - now.getTimezoneOffset() + 60);
-    now1.setMilliseconds(0);
-    now1.setSeconds(0);
-    this._aankomstTijd = now1.toISOString().slice(0, -1);
-    this.eindTijdMin = this._vertrekTijd;
-    this.beginTijdMax = this._aankomstTijd +60;
-  }
+    constructor() {
+        super();
+        let now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        now.setMilliseconds(0);
+        now.setSeconds(0);
+        this._vertrekTijd = now.toISOString().slice(0, -1);
+        let now1 = new Date();
+        now1.setMinutes(now.getMinutes() - now.getTimezoneOffset() + 60);
+        now1.setMilliseconds(0);
+        now1.setSeconds(0);
+        this._aankomstTijd = now1.toISOString().slice(0, -1);
+        this.eindTijdMin = this._vertrekTijd;
+        this.beginTijdMax = this._aankomstTijd + 60;
+    }
 
-  connectedCallback() {
-    super.connectedCallback();
-    // TODO insert ajax rsjx json file observer
-    //
-    fetch('/vervoermiddel-CO2.json')
-      .then((response) => response.json())
-      .then((json) => {
-        this._vervoerMiddelDummyData = Array.from(json);
-        console.log(this._vervoerMiddelDummyData);
-      });
-  }
-
-  static get styles() {
-    return css`
+    static get styles() {
+        return css`
       * {
         margin: 0;
         padding: 0;
@@ -163,10 +151,22 @@ export class InvoerenReizen extends LitElement {
         text-align: center;
       }
     `;
-  }
+    }
 
-  render() {
-    return html`
+    connectedCallback() {
+        super.connectedCallback();
+        // TODO insert ajax rsjx json file observer
+        //
+        fetch('/vervoermiddel-CO2.json')
+            .then((response) => response.json())
+            .then((json) => {
+                this._vervoerMiddelDummyData = Array.from(json);
+                console.log(this._vervoerMiddelDummyData);
+            });
+    }
+
+    render() {
+        return html`
             <header>
                 <H1>Welkom,</H1>
                 <br>
@@ -182,10 +182,10 @@ export class InvoerenReizen extends LitElement {
                             <li>
                                 <label for="vervoerstype">typeVervoer:</label>
                                 <select id="vervoerstype" class="${
-                                  this.inputfield
-                                }" required focus>
+            this.inputfield
+        }" required focus>
                                     ${this._vervoerMiddelDummyData.map(
-                                      ({ naam, uitstoot }) => html`
+            ({naam, uitstoot}) => html`
                                         <option
                                           disabled
                                           hidden="${this._hidden}"
@@ -202,36 +202,36 @@ export class InvoerenReizen extends LitElement {
                                           ${naam}
                                         </option>
                                       `
-                                    )}
+        )}
                                 </select>
                                 <div id="vertrekLocatieDiv">
                             <li class="alleenzakelijk" required>
                                 <label for="vertrekLocatie">Vertrek locatie:</label>
                                 <input class="${
-                                  this.inputfield
-                                }" id="vertrekLocatie" name="vertrekLocatie"
+            this.inputfield
+        }" id="vertrekLocatie" name="vertrekLocatie"
                                        placeholder="Vertrek locatie" value=${
-                                         this._demoVertrekLocatie
-                                       }/>
+            this._demoVertrekLocatie
+        }/>
                             </li>
                         </div>
                         <div id="aankomstLocatieDiv">
                             <li class="alleenzakelijk" required>
                                 <label for="aankomstLocatie">Aankomst locatie:</label>
                                 <input class="${
-                                  this.inputfield
-                                }" id="aankomstLocatie" name="aankomstLocatie"
+            this.inputfield
+        }" id="aankomstLocatie" name="aankomstLocatie"
                                        placeholder="Aankomst locatie" value=${
-                                         this._demoAankomstLocatie
-                                       }/>
+            this._demoAankomstLocatie
+        }/>
                             </li>
                         </div>
                         <div id="beginTijdDiv">
                             <li>
                                 <label for="beginTijd">Begin tijd:</label>
                                 <input @input=inputCallback class="${
-                                  this.inputfield
-                                }" id="beginTijd" name="beginTijd"
+            this.inputfield
+        }" id="beginTijd" name="beginTijd"
                                        required
                                        value="${this._vertrekTijd}"
                                        max="${this.beginTijdMax}"
@@ -243,10 +243,10 @@ export class InvoerenReizen extends LitElement {
                             <li>
                                 <label for="eindTijd">Eind tijd:</label>
                                 <input class="${
-                                  this.inputfield
-                                }" id="eindTijd" required value="${
-      this._aankomstTijd
-    }"
+            this.inputfield
+        }" id="eindTijd" required value="${
+            this._aankomstTijd
+        }"
                                        min="${this.eindTijdMin}"
                                        type="datetime-local"/>
                             </li>
@@ -255,8 +255,8 @@ export class InvoerenReizen extends LitElement {
                             <li required>
                                 <label for="km" value="10">km:</label>
                                 <input class="${
-                                  this.inputfield
-                                }" id="km" name="km" placeholder="Gereisde km" required
+            this.inputfield
+        }" id="km" name="km" placeholder="Gereisde km" required
                                        type="text"
                                        value="${this._demoKM}"/>
                             </li>
@@ -265,8 +265,8 @@ export class InvoerenReizen extends LitElement {
                             <li class="alleenzakelijk" required>
                                 <label for="kosten">kosten:</label>
                                 <input class="${
-                                  this.inputfield
-                                }" id="kosten" name="kosten"
+            this.inputfield
+        }" id="kosten" name="kosten"
                                        placeholder="Kosten in euro's"
                                        value="${this._demoKosten}"/>
                             </li>
@@ -275,8 +275,8 @@ export class InvoerenReizen extends LitElement {
                             <li class="alleenzakelijk" required>
                                 <label for="project">Project:</label>
                                 <select class="${
-                                  this.inputfield
-                                }" id="project" name="project">
+            this.inputfield
+        }" id="project" name="project">
                                     <option disabled hidden selected value="0">Kies hier het project
                                         waar u
                                         voor hebt gereisd.
@@ -290,8 +290,8 @@ export class InvoerenReizen extends LitElement {
                         </div>
                     </ol>
                     <div id="reisKlasseKeuzeMenu" class="${
-                      this.visibility_hidden_reisklasse
-                    }">
+            this.visibility_hidden_reisklasse
+        }">
                         <fieldset>
                             <ol>
                                 <legend>Reisklasse keuze:</legend>
@@ -314,8 +314,8 @@ export class InvoerenReizen extends LitElement {
                         </fieldset>
                     </div>
                     <div id="priveZakelijkKeuzeMenu" class="${
-                      this.visibility_hidden_zakelijkprive
-                    }">
+            this.visibility_hidden_zakelijkprive
+        }">
                         <fieldset>
                             <ul>
                                 <legend>Prive of zakelijke reis:</legend>
@@ -340,8 +340,8 @@ export class InvoerenReizen extends LitElement {
 
                         <label for="zenden" hidden">Zenden(custom)</label>
                         <button id="zenden" @click=${
-                          this.formElements
-                        }>Zenden(custom)</button>
+            this.formElements
+        }>Zenden(custom)</button>
 
                         <label for="resetButton">Herlaad en leeg het formulier.</label>
                         <input id="resetButton" type="reset" value="Reset velden">
@@ -364,62 +364,61 @@ export class InvoerenReizen extends LitElement {
             </main>
             </body>
         `;
-  }
-
-  optionClicked(option: {
-    originalTarget: {
-      value: string;
-      id: string;
-    };
-  }) {
-    console.log('optionClicked');
-    const data = option.originalTarget.id;
-    const uitstoot = option.originalTarget.value;
-
-    this._gekozenVoertuig = data;
-    this._gekozenC02 = uitstoot;
-
-    console.log(data);
-    console.log(uitstoot);
-
-    switch (data) {
-      case 'Trein/Metro/Tram':
-        this.visibility_hidden_zakelijkprive = 'visibility-hidden';
-        this.visibility_hidden_reisklasse = '';
-        break;
-      case 'Scooter':
-      case 'Elektr Scooter (incl deel scooter)':
-      case 'Elektr Deelauto':
-      case 'Hybride eigen auto':
-      case 'Electr eigen auto':
-      case 'Diesel eigen auto':
-      case 'Benzine eigen auto':
-      case 'eigenAuto':
-      case 'deelAuto':
-        console.log('auto gekozen');
-        this.visibility_hidden_zakelijkprive = '';
-        this.visibility_hidden_reisklasse = 'visibility-hidden';
-        break;
-      case 'Lopen':
-      case 'Fiets':
-      case 'OV Fiets':
-      case 'bus':
-        this.visibility_hidden_zakelijkprive = 'visibility-hidden';
-        this.visibility_hidden_reisklasse = 'visibility-hidden';
-        break;
-      default:
-        {
-          console.log('Kan de reis type vervoer niet herkennen');
-        }
-        break;
     }
-  }
 
-  // get
-  formElements() {
-    console.log('_divs');
-    console.log(document.getElementsByClassName('inputfield') ?? null);
-    return this.querySelector('.inputfield') ?? null;
-  }
+    optionClicked(option: {
+        originalTarget: {
+            value: string;
+            id: string;
+        };
+    }) {
+        console.log('optionClicked');
+        const data = option.originalTarget.id;
+        const uitstoot = option.originalTarget.value;
+
+        this._gekozenVoertuig = data;
+        this._gekozenC02 = uitstoot;
+
+        console.log(data);
+        console.log(uitstoot);
+
+        switch (data) {
+            case 'Trein/Metro/Tram':
+                this.visibility_hidden_zakelijkprive = 'visibility-hidden';
+                this.visibility_hidden_reisklasse = '';
+                break;
+            case 'Scooter':
+            case 'Elektr Scooter (incl deel scooter)':
+            case 'Elektr Deelauto':
+            case 'Hybride eigen auto':
+            case 'Electr eigen auto':
+            case 'Diesel eigen auto':
+            case 'Benzine eigen auto':
+            case 'eigenAuto':
+            case 'deelAuto':
+                console.log('auto gekozen');
+                this.visibility_hidden_zakelijkprive = '';
+                this.visibility_hidden_reisklasse = 'visibility-hidden';
+                break;
+            case 'Lopen':
+            case 'Fiets':
+            case 'OV Fiets':
+            case 'bus':
+                this.visibility_hidden_zakelijkprive = 'visibility-hidden';
+                this.visibility_hidden_reisklasse = 'visibility-hidden';
+                break;
+            default: {
+                console.log('Kan de reis type vervoer niet herkennen');
+            }
+                break;
+        }
+    }
+
+    // get
+    formElements() {
+        console.log('_divs');
+        console.log(document.getElementsByClassName('inputfield') ?? null);
+        return this.querySelector('.inputfield') ?? null;
+    }
 }
 

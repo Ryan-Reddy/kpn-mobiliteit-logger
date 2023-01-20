@@ -1,5 +1,5 @@
-import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import {css, html, LitElement} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
 
 /**
  * A support page element.
@@ -9,13 +9,14 @@ import { customElement, property } from 'lit/decorators.js';
  */
 @customElement('not-found-element')
 export class NotFound extends LitElement {
-  @property() _hiddenElement = 'hidden';
-  constructor() {
-    super();
-  }
+    @property() _hiddenElement = 'hidden';
 
-  static get styles() {
-    return css`
+    constructor() {
+        super();
+    }
+
+    static get styles() {
+        return css`
       * {
         margin: 0;
         padding: 0;
@@ -76,10 +77,10 @@ export class NotFound extends LitElement {
 
       }
     `;
-  }
+    }
 
-  render() {
-    return html`<!doctype html>
+    render() {
+        return html`<!doctype html>
     <html lang="en">
 
     <head>
@@ -109,10 +110,11 @@ export class NotFound extends LitElement {
     </html>
     <!-- IE needs 512+ bytes: https://docs.microsoft.com/archive/blogs/ieinternals/friendly-http-error-pages -->
     `;
-  }
-  _clickForSupport() {
-    console.log('Click for support');
-    console.log(this._hiddenElement);
-    this._hiddenElement = this._hiddenElement == 'hidden' ? '' : 'hidden';
-  }
+    }
+
+    _clickForSupport() {
+        console.log('Click for support');
+        console.log(this._hiddenElement);
+        this._hiddenElement = this._hiddenElement == 'hidden' ? '' : 'hidden';
+    }
 }

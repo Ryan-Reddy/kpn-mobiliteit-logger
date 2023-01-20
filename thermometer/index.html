@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <script defer src="thermometer.js" type="text/javascript"></script>
+    <title></title>
     <!--// https://stackoverflow.com/questions/20180251/when-to-use-window-onload defer-->
 
 </head>
@@ -10,7 +11,8 @@
 
 
 <div class="range">
-    <input id="sliderinput" max="236" min="0" type="range" value="0">
+    <label for="sliderinput" hidden>slider for thermometer</label><input id="sliderinput" max="236" min="0" type="range"
+                                                                         value="0">
     <!--           oninput="rangeValue.innerText = this.value"-->
 </div>
 

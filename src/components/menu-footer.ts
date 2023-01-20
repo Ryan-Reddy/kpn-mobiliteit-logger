@@ -1,5 +1,5 @@
-import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import {css, html, LitElement} from 'lit';
+import {customElement} from 'lit/decorators.js';
 
 /**
  * An example element.
@@ -9,12 +9,12 @@ import { customElement, property } from 'lit/decorators.js';
  */
 @customElement('footer-menu')
 export class MenuFooter extends LitElement {
-  constructor() {
-    super();
-  }
+    constructor() {
+        super();
+    }
 
-  static get styles() {
-    return css`
+    static get styles() {
+        return css`
     * {
         margin: 0;
         padding: 0;
@@ -149,10 +149,10 @@ export class MenuFooter extends LitElement {
         }
     }
     `;
-  }
+    }
 
-  render() {
-    return html`
+    render() {
+        return html`
       <footer>
         <nav>
           <ul
@@ -174,21 +174,21 @@ export class MenuFooter extends LitElement {
         </nav>
       </footer>
     `;
-  }
+    }
 
-  _clickMenu(e: Event) {
-    console.log('_dispatchPageLink() need to write funcion clickmenu in menu-footer');
-  //   // @ts-ignore
-  //   const id = e.target.id;
-  //   console.log('id= ' + id);
-  //
-  //   const hasChanged = this.currentPage !== id;
-  //
-  //   if (hasChanged) {
-  //     this.currentPage = id;
-  //
-  //     //notify parent:
-  //     this.dispatchEvent(new Event('page-chosen'));
-  //   }
-  }
+    _clickMenu(e: Event) {
+        console.log('_dispatchPageLink() need to write funcion clickmenu in menu-footer');
+        //   // @ts-ignore
+        //   const id = e.target.id;
+        //   console.log('id= ' + id);
+        //
+        //   const hasChanged = this.currentPage !== id;
+        //
+        //   if (hasChanged) {
+        //     this.currentPage = id;
+        //
+        //     //notify parent:
+        //     this.dispatchEvent(new Event('page-chosen'));
+        //   }
+    }
 }
