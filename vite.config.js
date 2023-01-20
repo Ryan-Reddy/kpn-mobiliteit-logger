@@ -1,26 +1,16 @@
-import {defineConfig} from 'vite'
+// noinspection JSUnusedGlobalSymbols
+
+import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: ``,
+  root: './src',
+  publicDir: '../public',
   build: {
-    server: {
-      // https: true,
-      host: true,
-      port: 5173,
-      secure: false,
-      strictPort: true,
-      hmr: {
-        port: 5173,
-        host: true,
-      },
-    },
     lib: {
-      entry: './index.html',
+      entry: 'index.html',
       formats: ['es'],
     },
-    rollupOptions: {
-      external: /^lit/,
-    },
+    outDir: '../dist',
   },
-})
+});

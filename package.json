@@ -1,32 +1,43 @@
 {
-  "name": "vite-project",
+  "name": "v2fe-v2a-4-kpn-mobility",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "main": "dist/my-element.es.js",
-  "exports": {
-    ".": "./dist/my-element.es.js"
-  },
+  "version": "1.0.0",
+  "author": "Ryan van Lil-Reddy",
+  "description": "Mobiliteits Trackinog App, ter behoeve van het stimuleren van groen reizen.",
   "files": [
     "dist"
   ],
+  "license": "SEE LICENSE IN LICENSE.md",
   "scripts": {
-    "dev": "vite --host",
-    "build": "vite build"
+    "dev": "vite",
+    "build": "vite build",
+    "start": "npm run build && npm run dev",
+    "test": "echo \"Error: no test specified in package.json\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.4",
+    "vite": "^4.0.4"
   },
   "dependencies": {
     "@vaadin/router": "^1.7.4",
-    "dummy-data-generator": "^1.8.1",
-    "lit": "^2.5.0",
-    "rxjs": "^7.8.0"
-  },
-  "devDependencies": {
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-terser": "^0.3.0",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-minify-html-literals": "^1.2.6",
-    "rollup-plugin-ts": "^3.1.1",
     "typescript": "^4.9.4",
-    "vite": "^4.0.3"
-  }
+    "vite": "^4.0.4",
+    "rxjs": "^7.8.0",
+    "lit": "^2.6.1"
+  },
+  "main": "vite.config.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HU-SD-SV2FE-studenten-2022/v2fe-v2a-2.git"
+  },
+  "keywords": [
+    "kpn"
+  ],
+  "bugs": {
+    "url": "https://github.com/HU-SD-SV2FE-studenten-2022/v2fe-v2a-2/issues"
+  },
+  "homepage": "https://github.com/HU-SD-SV2FE-studenten-2022/v2fe-v2a-2#readme"
 }
