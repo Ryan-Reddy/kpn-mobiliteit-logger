@@ -5,8 +5,8 @@
     <meta charset="UTF-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <script defer src="vaadin-routing.js" type="module"></script>
-    <script defer src="components/menu-nav.ts" type="module"></script>
-    <script defer src="components/menu-footer.ts" type="module"></script>
+    <script src="components/menu-nav.ts" type="module"></script>
+    <script src="components/menu-footer.ts" type="module"></script>
 
     <link href="../index.css" rel="stylesheet"/>
 
@@ -14,11 +14,12 @@
 </head>
 
 <main>
-    <nav-menu @page-chosen=${this._onCurrentPageChanged}></nav-menu>
+<!--    <menu-nav-element @page-chosen=${this._onCurrentPageChanged}></menu-nav-element>-->
+    <menu-nav-element></menu-nav-element>
 
     <div id="app"></div>
     <img alt="background kpn blue-green-blobs./" src='/achtergrondshapes.webp'>
-
+    <footer-menu></footer-menu>
 </main>
 
 </html>

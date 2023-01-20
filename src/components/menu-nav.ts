@@ -10,8 +10,7 @@ import {customElement, property} from 'lit/decorators.js';
 @customElement('menu-nav-element')
 export class MenuNav extends LitElement {
     @property() naamGebruiker = 'Hans Fumphriehd';
-    // @property() kpnLogo = '/public/branding/kpn-logo2-jpeg.jpg';
-    @property() kpnLogo = '/kpn-logo2-jpeg.jpg';
+    @property() kpnLogo = 'kpn-logo2-jpeg.jpg';
     @property() currentPage: string = '';
     @property() _kpnHomePageUrl = 'https://www.kpn.com/';
 
