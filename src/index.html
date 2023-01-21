@@ -7,6 +7,7 @@
     <script defer src="vaadin-routing.js" type="module"></script>
     <script src="components/global/menu-nav.ts" type="module"></script>
     <script src="components/global/menu-footer.ts" type="module"></script>
+    <script src="components/global/thermometer.ts" type="module"></script>
 
     <link href="../index.css" rel="stylesheet"/>
 
@@ -14,9 +15,9 @@
 </head>
 
 <main>
-<!--    <menu-nav-element @page-chosen=${this._onCurrentPageChanged}></menu-nav-element>-->
+    <!--    <menu-nav-element @page-chosen=${this._onCurrentPageChanged}></menu-nav-element>-->
     <menu-nav-element></menu-nav-element>
-
+    <thermometer-element></thermometer-element>
     <div id="app"></div>
     <img alt="background kpn blue-green-blobs./" src='/achtergrondshapes.webp'>
     <footer-menu></footer-menu>

@@ -7,7 +7,7 @@
 // // import './overzicht-reizen.js';
 // // import './invoeren-reizen.js';
 // // import './invoeren-reizen-wijzigen.js';
-// // // import './thermometer.js';
+// // // import './thermometer.ts';
 // // import './login.ts';
 // // import './account-info.ts';
 // // import './support.ts';
