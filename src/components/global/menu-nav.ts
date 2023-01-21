@@ -201,44 +201,42 @@ export class MenuNav extends LitElement {
     render() {
         // TODO create response menu with: https://www.codingnepalweb.com/responsive-dropdown-menu-bar-html-css/
         return html`
-      <body id="bodyofmenubar">
-        <a href="#" class="ingelogd_als">ingelogd als ${this.naamGebruiker}</a>
-        <div class="entire_menu_bar">
-          <img
-            @click=${this.kpnHomePageUrl}
-            href="#"
-            src="${this.kpnLogo}"
-            alt="kpn-logo-zwart-op-wit"
-            class="nav-logo"
-          />
-          <nav>
-            <input type="checkbox" id="check" />
-            <label for="check">
-              <i class="fas fa-bars"></i>
-            </label>
-            <ul @click=${this._clickMenu} id="nope">
-                <li><a class="nav-button" href="home-page" id="home-page">Home</a></li>
+            <body id="bodyofmenubar">
+            <a href="#" class="ingelogd_als">ingelogd als ${this.naamGebruiker}</a>
+            <div class="entire_menu_bar">
+                <img
+                        @click=${this.kpnHomePageUrl}
+                        href="#"
+                        src="${this.kpnLogo}"
+                        alt="kpn-logo-zwart-op-wit"
+                        class="nav-logo"
+                />
+                <nav>
+                    <input type="checkbox" id="check"/>
+                    <label for="check">
+                        <i class="fas fa-bars"></i>
+                    </label>
+                    <ul @click=${this._clickMenu} id="nope">
+                        <li><a class="nav-button" href="home-page" id="home-page">Home</a></li>
 
-              <li>
-                <a class="nav-button" href="reis-registreren" id="Reis Registreren"
-                  >Reis Registreren</a
-                >
-              </li>
-              <li>
-                <a class="nav-button" href="#" id="Reisgeschiedenis"
-                  >Reisgeschiedenis</a
-                >
-              </li>
-                <li><a class="nav-button" href="account-info" id="Account">Account</a></li>
-                <li><a class="nav-button" href="support" id="Support">Support</a></li>
-              <li>
-                <a class="nav-button" href="#" id="Uitloggen">Uitloggen</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </body>
-    `;
+                        <li>
+                            <a class="nav-button" href="invoeren-reizen" id="Reis Registreren"
+                            >Reis Registreren</a
+                            >
+                        </li>
+                        <li>
+                            <a class="nav-button" href="overzicht-reizen" id="Reisgeschiedenis">Reisgeschiedenis</a>
+                        </li>
+                        <li><a class="nav-button" href="account-info" id="Account">Account</a></li>
+                        <li><a class="nav-button" href="support" id="Support">Support</a></li>
+                        <li>
+                            <a class="nav-button" href="#" id="Uitloggen">Uitloggen</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            </body>
+        `;
     }
 
     _clickMenu(e: Event) {
