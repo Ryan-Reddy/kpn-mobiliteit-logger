@@ -9,9 +9,9 @@ import {customElement, property} from 'lit/decorators.js';
  */
 @customElement('menu-nav-element')
 export class MenuNav extends LitElement {
-    @property() naamGebruiker = 'Hans Fumphriehd';
-    @property() kpnLogo = 'kpn-logo2-jpeg.jpg';
-    @property() currentPage: string = '';
+    @property() _naamGebruiker = 'Hans Fumphriehd';
+    @property() _kpnLogo = 'kpn-logo2-jpeg.jpg';
+    @property() _currentPage: string = '';
     @property() _kpnHomePageUrl = 'https://www.kpn.com/';
 
     constructor() {
@@ -202,12 +202,12 @@ export class MenuNav extends LitElement {
         // TODO create response menu with: https://www.codingnepalweb.com/responsive-dropdown-menu-bar-html-css/
         return html`
             <body id="bodyofmenubar">
-            <a href="#" class="ingelogd_als">ingelogd als ${this.naamGebruiker}</a>
+            <a href="#" class="ingelogd_als">ingelogd als ${this._naamGebruiker}</a>
             <div class="entire_menu_bar">
                 <img
                         @click=${this.kpnHomePageUrl}
                         href="#"
-                        src="${this.kpnLogo}"
+                        src="${this._kpnLogo}"
                         alt="kpn-logo-zwart-op-wit"
                         class="nav-logo"
                 />
@@ -245,10 +245,10 @@ export class MenuNav extends LitElement {
         const id = e.target.id;
         console.log('id= ' + id);
 
-        const hasChanged = this.currentPage !== id;
+        const hasChanged = this._currentPage !== id;
 
         if (hasChanged) {
-            this.currentPage = id;
+            this._currentPage = id;
 
             //notify parent:
             this.dispatchEvent(new Event('page-chosen'));

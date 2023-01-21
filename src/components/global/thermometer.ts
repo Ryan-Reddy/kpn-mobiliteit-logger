@@ -1,6 +1,5 @@
 import {css, html, LitElement} from 'lit';
-import {customElement} from 'lit/decorators.js';
-import {property} from "lit-element";
+import {customElement, property} from 'lit/decorators.js';
 
 /**
  * An example element.
@@ -11,6 +10,7 @@ import {property} from "lit-element";
 @customElement("thermometer-element")
 export class Thermometer extends LitElement {
   private sliderinput: any;
+  private mercury: any;
   constructor() {
     super();
   }

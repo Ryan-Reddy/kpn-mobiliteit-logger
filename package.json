@@ -15,14 +15,11 @@
     "test": "echo \"Error: no test specified in package.json\" && exit 1"
   },
   "devDependencies": {
-    "typescript": "^4.9.4",
     "vite": "^4.0.4"
   },
   "dependencies": {
     "@vaadin/router": "^1.7.4",
     "lit": "^2.6.1",
-    "rxjs": "^7.8.0",
-    "typescript": "^4.9.4",
     "zero-md": "^2.4.0"
   },
   "main": "vite.config.js",
