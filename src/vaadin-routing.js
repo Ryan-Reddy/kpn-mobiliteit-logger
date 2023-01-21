@@ -72,11 +72,6 @@ router.setRoutes([
     },
     {
         name: 'home-page-element', // doet niks impliciet
-        path: '/home-page',
-        component: 'home-page-element',
-    },
-    {
-        name: 'home-page-element', // doet niks impliciet
         path: '/',                  // standaard landingspage
         component: 'home-page-element',
     },

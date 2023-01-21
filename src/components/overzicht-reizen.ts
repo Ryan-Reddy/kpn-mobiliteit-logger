@@ -1,6 +1,6 @@
 import {css, html, LitElement, PropertyValueMap} from 'lit';
 import {customElement, property} from 'lit-element';
-import {InvoerenReizen} from "src/components/invoeren-reizen";
+import {InvoerenReizen} from "./invoeren-reizen";
 
 // import * as Rx from 'rx-dom';
 

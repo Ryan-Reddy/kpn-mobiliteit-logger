@@ -1,7 +1,7 @@
 {
   "name": "v2fe-v2a-4-kpn-mobility",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Ryan van Lil-Reddy",
   "description": "Mobiliteits Trackinog App, ter behoeve van het stimuleren van groen reizen.",
   "files": [

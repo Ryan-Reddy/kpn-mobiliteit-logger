@@ -1,5 +1,6 @@
 import {css, html, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
+import loginDTO from "../domain/loginDTO";
 
 /**
  * A Login element.
@@ -11,6 +12,8 @@ import {customElement, property} from 'lit/decorators.js';
 @customElement('login-element')
 export class Login extends LitElement {
     // @property() currentPage: string;
+    @property({type: Boolean}) open = true;
+    private _loginData: loginDTO | undefined;
 
     constructor() {
         super();
@@ -122,47 +125,15 @@ export class Login extends LitElement {
 
     render() {
         return html`
-      <body>
-        <div id="page-container">
-          <main>
-            <div id="content-wrap">
-              <form id="login_account">
-                <ul>
-                  <li>
-                    <label for="email">Email:</label>
-                    <input
-                      autocomplete="email"
-                      class="inputfield"
-                      id="email"
-                      name="email"
-                      required
-                      type="email"
-                      width="50%"
-                    /><br />
-                  </li>
-                  <li>
-                    <label for="password">Wachtwoord:</label>
-                    <input
-                      autocomplete="password"
-                      class="inputfield"
-                      id="password"
-                      name="password"
-                      required
-                      type="password"
-                    /><br /><br />
-                  </li>
-                  <li>
-                    <input
-                      id="login()_button"
-                      @click=${this._login}
-                      type="button"
-                      value="login()_button"
-                    />
-                  </li>
-                </ul>
-              </form>
-              <span id="postresponse"></span>
+                  
+                  <vaadin-grid .items="${this._loginData}">
+                      <vaadin-grid-column path="_email"></vaadin-grid-column>
+                      <vaadin-grid-column path="_password"></vaadin-grid-column>
+                  </vaadin-grid>
+                  
+                    <p ?hidden=${!this.open}>Logged in !!</p>
 
+              </form>
               <br /><br />
               <div @click=${this._clickMenu} id="nope">
                 <a class="nav-button" href="#" id="password-reset"
@@ -172,20 +143,29 @@ export class Login extends LitElement {
                 <a class="nav-button" href="#" id="new-account"
                   >Nieuw account creëren</a
                 >
-              </div>
-            </div>
-          </main>
-        </div>
-      </body>
+                  
     `;
     }
-
+    //
+    // @state()
+    // private items: Person[] = [];
+    //
+    // async firstUpdated() {
+    //     const { people } = await getPeople();
+    //     this.items = people;
+    // }
+    //
+    //
+    //
+    // // _login(e: Event) {
     // _login(e: Event) {
-    _login() {
-        console.log('login.login() neeeeds work');
-    }
-
-    _clickMenu(e: Event) {
+    //     const id = e.target.id;
+    //
+    //     alert("Logged In!" + id);
+    //     localStorage.setItem('username',e.value);
+    // }
+    //
+    private async _clickMenu() {
         // @ts-ignore
         const id = e.target.id;
         console.log('id= ' + id);
@@ -197,7 +177,9 @@ export class Login extends LitElement {
         // console.log('currentPage now: ' + this.currentPage);
 
         //notify parent:
-        this.dispatchEvent(new Event('page-chosen'));
+        // this.dispatchEvent(new Event('page-chosen'));
         // }
     }
+
+
 }

@@ -10,7 +10,7 @@ import {customElement, property} from 'lit/decorators.js';
 @customElement('menu-nav-element')
 export class MenuNav extends LitElement {
     @property() _naamGebruiker = 'Hans Fumphriehd';
-    @property() _kpnLogo = 'kpn-logo2-jpeg.jpg';
+    @property() _kpnLogo = 'branding/kpn-logo2-jpeg.jpg';
     @property() _currentPage: string = '';
     @property() _kpnHomePageUrl = 'https://www.kpn.com/';
 
@@ -217,7 +217,7 @@ export class MenuNav extends LitElement {
                         <i class="fas fa-bars"></i>
                     </label>
                     <ul @click=${this._clickMenu} id="nope">
-                        <li><a class="nav-button" href="home-page" id="home-page">Home</a></li>
+                        <li><a class="nav-button" href="/" id="home-page">Home</a></li>
 
                         <li>
                             <a class="nav-button" href="invoeren-reizen" id="Reis Registreren"

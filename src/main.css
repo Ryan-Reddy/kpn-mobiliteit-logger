@@ -30,7 +30,7 @@ body {
     min-width: 320px;
     min-height: 100%;
 
-    background-image: url('/branding/achtergrondshapes.webp');
+    background-image: url('achtergrondshapes.webp');
     background-repeat: no-repeat;
     background-size: 100%;
     /*background-position: top;*/
