@@ -1,5 +1,6 @@
 import {css, html, LitElement} from 'lit';
 import {customElement} from 'lit/decorators.js';
+import {property} from "lit-element";
 
 /**
  * An example element.
@@ -9,6 +10,7 @@ import {customElement} from 'lit/decorators.js';
  */
 @customElement("thermometer-element")
 export class Thermometer extends LitElement {
+  private sliderinput: any;
   constructor() {
     super();
   }
@@ -56,11 +58,9 @@ export class Thermometer extends LitElement {
       .card {
         padding: 2em;
       }
-
       .read-the-docs {
         color: #888;
       }
-
       a {
         font-weight: 500;
         color: #646cff;
@@ -111,31 +111,14 @@ export class Thermometer extends LitElement {
         <html lang="en">
         <head>
             <meta charset="UTF-8"/>
-            <script type="text/javascript">
-                const sliderInputElement = document.getElementById("sliderinput");
-                const thermometerMercury = document.getElementById('mercury');
-                const thermometerPolygon = document.getElementById('polygon');
-
-                sliderInputElement.addEventListener('change', function () {
-                    const sliderVal = sliderInputElement.value;
-                    const rangeValueThermometerFill = 236 + (sliderInputElement.value * -1);
-                    thermometerMercury.setAttribute('height', rangeValueThermometerFill);
-                    console.log('thermometerMercury position: ' + JSON.stringify(rangeValueThermometerFill) + ' (range: 236-0)')
-
-                    const polygonPosition = "translate(0 " + (((sliderVal) * -(236 / 241)) + 41) + ")";
-                    console.log('polygon position: ' + JSON.stringify(polygonPosition))
-                    thermometerPolygon.setAttribute('transform', polygonPosition);
-
-
-            </script>
         </head>
 
         <div class="range">
-            <input id="sliderinput" type="range" min="0" max="236" value="0"/>
-<!--                       oninput="rangeValue.innerText = this.value"-->
+          <button "@click'${this._thermometerInput}">hello          </button>
+          <input id="sliderinput" type="range" min="0" max="236" value=${(this.sliderinput)}"/>
         </div>
 
-        <div class="thermometer">
+          <div class="thermometer">
             <svg
                     id="thermometer-svg"
                     version="1.1"
@@ -155,13 +138,13 @@ export class Thermometer extends LitElement {
                 <g id="cover">
               <rect
                       fill="#ffffff"
-                      height="236"
+                      height="${this.mercury}"
                       id="mercury"
                       width="40.8"
                       x="167.4"
                       y="105.5"
               ></rect>
-                    // thermometer fill range: heigth=(0=full)-(236=empty)
+                    // thermometer fill range: height=(0=full)-(236=empty)
                     <polygon
                             fill="#00C300"
                             id="polygon"
@@ -182,5 +165,10 @@ export class Thermometer extends LitElement {
         </div>
         </html>
     `;
+  }
+
+  private _thermometerInput(e: Event) {
+    console.log(this.sliderinput.value);
+    this.mercury = this.sliderinput.value;
   }
 }
