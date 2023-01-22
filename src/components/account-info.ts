@@ -10,10 +10,11 @@ import {customElement, property} from 'lit/decorators.js';
 
 @customElement('account-info-element')
 export class Accountinfo extends LitElement {
-    @property() currentPage = 'account info';
+    @property() _currentPageTitle = 'Account info';
 
     constructor() {
         super();
+        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
     }
 
     static get styles() {
@@ -191,7 +192,6 @@ export class Accountinfo extends LitElement {
     // _login(e: Event) {
     _login() {
         console.log('login.login()');
-        this.currentPage = 'Reis Registreren';
 
         //notify parent:
         this.dispatchEvent(new Event('page-chosen'));

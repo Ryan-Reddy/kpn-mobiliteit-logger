@@ -10,10 +10,12 @@ import {customElement, property} from 'lit/decorators.js';
 @customElement('reset-password-element')
 export class ResetPassword extends LitElement {
     @property() _hiddenElement = 'hidden';
-    @property() currentPage: string | undefined;
+    @property() _currentPageTitle = 'Reset Password';
 
     constructor() {
         super();
+        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
+
     }
 
     // TODO: style page reset-password.ts

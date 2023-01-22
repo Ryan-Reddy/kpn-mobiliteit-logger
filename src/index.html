@@ -3,15 +3,15 @@
 
 <head>
     <!-- Meta tags -->
-    <meta charset="utf-8" />
-    <meta name="description" content="Creating Web Applications" />
-    <meta name="keywords" content="KPN mobility app" />
-    <meta name="author" content="Ryan van Lil-Reddy" />
+    <meta charset="utf-8"/>
+    <meta content="Creating Web Applications" name="description"/>
+    <meta content="KPN mobility app" name="keywords"/>
+    <meta content="Ryan van Lil-Reddy" name="author"/>
     <meta charset="UTF-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
     <script defer src="vaadin-routing.js" type="module"></script>
-<!--    <script src="components/global/menu-nav.ts" type="module"></script>-->
+    <!--    <script src="components/global/menu-nav.ts" type="module"></script>-->
     <script src="components/global/menu-footer.ts" type="module"></script>
 
     <link href="main.css" rel="stylesheet"/>
@@ -19,10 +19,15 @@
     <title>KPN</title>
 </head>
 
-    <menu-nav-element></menu-nav-element>
+<menu-nav-element></menu-nav-element>
 <main>
     <div id="app"></div>
     <footer-menu></footer-menu>
 </main>
+<script>
+  let title = sessionStorage.getItem('currentpagetitle');
+  console.log(title);
+  document.title = title;
+  </script>
 
 </html>

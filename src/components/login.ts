@@ -1,8 +1,7 @@
 import {css, html, LitElement} from 'lit';
-import {customElement, property, queryAll, query} from 'lit/decorators.js';
+import {customElement, property, query} from 'lit/decorators.js';
 
 import loginDTO from "../domain/loginDTO";
-import jquery from "jquery";
 
 /**
  * A Login element.
@@ -23,17 +22,13 @@ export class Login extends LitElement {
     @query('#_emailId') _emailInputElement?: HTMLInputElement;
     @query('#_passwordId') _passwordInputElement?: HTMLInputElement;
     @property() _shadowRoot: any;
+    private _currentPageTitle = "Login";
 
 
     constructor() {
         super();
-     }
-    firstUpdated(changedProperties) {
-        changedProperties.forEach((oldValue, propName) => {
-            console.log(`${propName} changed. oldValue: ${oldValue}`);
-        });
-        // @ts-ignore
-        const textArea = this.shadowRoot.getElementById(this._emailId);
+        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
+
     }
 
     static get styles() {
@@ -136,54 +131,65 @@ export class Login extends LitElement {
     `;
     }
 
+    firstUpdated(changedProperties) {
+        changedProperties.forEach((oldValue, propName) => {
+            console.log(`${propName} changed. oldValue: ${oldValue}`);
+        });
+        // @ts-ignore
+        const textArea = this.shadowRoot.getElementById(this._emailId);
+    }
+
     render() {
         return html`
             <body>
             <div id="page-container">
                 <main>
-                        <form id="login_account">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" 
-                                       autocomplete="email"
-                                       class="inputfield"
-                                       value=""
-                                       id="${this._emailId}" placeholder="Enter email">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password"
-                                       autocomplete="password"
-                                       class="inputfield" id="${this._passwordId}"
-                                    value=""
-                                       placeholder="Password">
-                            </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" autocomplete="password"
-                                       class="inputfield"
-                                       id="passwordInput">
-                                <input type="checkbox" checked="checked" name="remember"> Onthoudt mijn gegevens
-                            </div>
-                            <input @click=${this._login} type="submit" class="submit-login">
-                        </form>
+                    <form id="login_account">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email"
+                                   autocomplete="email"
+                                   class="inputfield"
+                                   value=""
+                                   id="${this._emailId}" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password"
+                                   autocomplete="password"
+                                   class="inputfield" id="${this._passwordId}"
+                                   value=""
+                                   placeholder="Password">
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" autocomplete="password"
+                                   class="inputfield"
+                                   id="passwordInput">
+                            <input type="checkbox" checked="checked" name="remember"> Onthoudt mijn gegevens
+                        </div>
+                        <input @click=${this._login} type="submit" class="submit-login">
+                    </form>
 
-                        <div @click=${this._clickMenu} id="nope">
+                    <div @click=${this._clickMenu} id="nope">
 
-                            <a class="nav-button" href="#" id="password-reset">Wachtwoord vergeten</a>
-                            ||
-                            <a class="nav-button" href="#" id="new-account">Nieuw account creëren</a>
+                        <a class="nav-button" href="#" id="password-reset">Wachtwoord vergeten</a>
+                        ||
+                        <a class="nav-button" href="#" id="new-account">Nieuw account creëren</a>
         `;
     }
 
     _login(e: Event) {
         const email = this._emailInputElement.value;
         const password = this._passwordInputElement.value;
+        localStorage.removeItem("username");
+        localStorage.removeItem("password");
 
-        localStorage.setItem("username",JSON.stringify(email))
+        sessionStorage.setItem("username", JSON.stringify(email))
         // TODO check input with db and return user
         //   DO NOT SAVE PW to localstorage or elsewhere
 
-        localStorage.setItem("password",JSON.stringify(password))
+        sessionStorage.setItem("password", JSON.stringify(password))
+        window.open('/home', '_self');
     }
 
 

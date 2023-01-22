@@ -10,10 +10,12 @@ import {customElement, property} from 'lit/decorators.js';
 @customElement('new-account-element')
 export class NewAccount extends LitElement {
     @property() _hiddenElement = 'hidden';
-    @property() currentPage: string | undefined;
+    @property() _currentPageTitle = 'New Account';
 
     constructor() {
         super();
+        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
+
     }
 
     static get styles() {

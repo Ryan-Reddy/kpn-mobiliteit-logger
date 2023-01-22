@@ -12,7 +12,7 @@ import {InvoerenReizen} from "./invoeren-reizen";
  */
 @customElement('overzicht-reizen-element')
 export class OverzichtReizen extends LitElement {
-    @property() titel = 'Overzicht Reizen';
+    @property() _currentPageTitle = 'Overzicht Reizen';
     @property() _vervoerMiddelDummyData = [];
     @property() _reizenDummyData = [];
     @property() headers = ['Project', 'Type vervoer', 'Begin', 'Einde', 'Km', 'C02', 'Kosten', 'Wijzig',];
@@ -30,6 +30,8 @@ export class OverzichtReizen extends LitElement {
 
     constructor() {
         super();
+        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
+
         fetch('/vervoermiddel-CO2.json')
             .then((response) => response.json())
             .then((json) => {

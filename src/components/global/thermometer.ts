@@ -1,5 +1,6 @@
 import {css, html, LitElement} from 'lit';
-import {customElement, property} from 'lit/decorators.js';
+import {customElement} from 'lit/decorators.js';
+import {property} from "lit/decorators";
 
 /**
  * An example element.
@@ -9,33 +10,37 @@ import {customElement, property} from 'lit/decorators.js';
  */
 @customElement("thermometer-element")
 export class Thermometer extends LitElement {
-  private sliderinput: any;
-  private mercury: any;
-  constructor() {
-    super();
-  }
+    private sliderinput: any;
+    private mercury: any;
+    @property() _currentPageTitle = 'Thermometer';
 
-  static get properties() {
-    return {
-      /**
-       * Copy for the read the docs hint.
-       */
-      docsHint: {type: String},
+    constructor() {
+        super();
+        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
+    }
 
-      /**
-       * The number of times the button has been clicked.
-       */
-      count: {type: Number},
 
-      /**
-       * The thermometer polygon pointer
-       */
-      mercury: {type: Number},
-    };
-  }
+    static get properties() {
+        return {
+            /**
+             * Copy for the read the docs hint.
+             */
+            docsHint: {type: String},
 
-  static get styles() {
-    return css`
+            /**
+             * The number of times the button has been clicked.
+             */
+            count: {type: Number},
+
+            /**
+             * The thermometer polygon pointer
+             */
+            mercury: {type: Number},
+        };
+    }
+
+    static get styles() {
+        return css`
       :host {
         max-width: 1280px;
         margin: 0 auto;
@@ -103,13 +108,14 @@ export class Thermometer extends LitElement {
         }
       }
     `;
-  }
+    }
 
-  render() {
-    return html`
+    render() {
+        return html`
         <!DOCTYPE html>
         <html lang="en">
         <head>
+            <title>Thermometer</title>
             <meta charset="UTF-8"/>
         </head>
 
@@ -165,10 +171,10 @@ export class Thermometer extends LitElement {
         </div>
         </html>
     `;
-  }
+    }
 
-  private _thermometerInput(e: Event) {
-    console.log(this.sliderinput.value);
-    this.mercury = this.sliderinput.value;
-  }
+    private _thermometerInput(e: Event) {
+        console.log(this.sliderinput.value);
+        this.mercury = this.sliderinput.value;
+    }
 }

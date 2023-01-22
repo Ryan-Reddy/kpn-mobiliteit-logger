@@ -10,10 +10,11 @@ import {customElement, property} from 'lit/decorators.js';
 @customElement('readme-element')
 export class ReadmeElement extends LitElement {
     @property() _hiddenElement = 'hidden';
-    @property() currentPage: string | undefined;
+    @property() _currentPageTitle = 'Readme';
 
     constructor() {
         super();
+        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
     }
 
     static get styles() {
@@ -54,7 +55,7 @@ export class ReadmeElement extends LitElement {
             <body>
             <main>
                 <h1>README FILE</h1>
-                <zero-md src="README.md"></zero-md>
+                <zero-md src="../README.md"></zero-md>
 
             </main>
 

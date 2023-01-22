@@ -10,10 +10,13 @@ import {customElement, property} from 'lit/decorators.js';
 @customElement('support-element')
 export class SupportElement extends LitElement {
     @property() _hiddenElement = 'hidden';
-    @property() currentPage: string | undefined;
+    @property() _currentPageTitle = 'Support';
 
     constructor() {
         super();
+    }
+    connectedCallback() {
+        super.connectedCallback();
     }
 
     static get styles() {
@@ -41,6 +44,8 @@ export class SupportElement extends LitElement {
     }
 
     render() {
+        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
+
         return html`
       <body>
         <main>
