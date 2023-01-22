@@ -1,5 +1,5 @@
 import {css, html, LitElement, PropertyValueMap} from 'lit';
-import {customElement, property} from 'lit-element';
+import {customElement, property} from 'lit/decorators.js';
 import {InvoerenReizen} from "./invoeren-reizen";
 
 // import * as Rx from 'rx-dom';

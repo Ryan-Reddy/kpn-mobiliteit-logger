@@ -18,7 +18,11 @@
     "vite": "^4.0.4"
   },
   "dependencies": {
+    "@vaadin/form-layout": "^23.3.5",
+    "@vaadin/grid": "^23.3.5",
+    "@vaadin/password-field": "^23.3.5",
     "@vaadin/router": "^1.7.4",
+    "@vaadin/text-field": "^23.3.5",
     "lit": "^2.6.1",
     "zero-md": "^2.4.0"
   },

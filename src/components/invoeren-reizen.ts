@@ -1,5 +1,5 @@
 import {css, html, LitElement} from 'lit';
-import {customElement, property} from 'lit-element';
+import {customElement, property} from 'lit/decorators.js';
 
 /**
  * An example element.
@@ -181,57 +181,43 @@ export class InvoerenReizen extends LitElement {
                         <div id="typeVervoerDiv2">
                             <li>
                                 <label for="vervoerstype">typeVervoer:</label>
-                                <select id="vervoerstype" class="${
-            this.inputfield
-        }" required focus>
-                                    ${this._vervoerMiddelDummyData.map(
-            ({naam, uitstoot}) => html`
+                                <select id="vervoerstype" class="${this.inputfield}" required focus>
+                                    ${this._vervoerMiddelDummyData.map(({naam, uitstoot}) => html`
                                         <option
-                                          disabled
-                                          hidden="${this._hidden}"
-                                          selected
-                                          value="0"
+                                                disabled
+                                                hidden="${this._hidden}"
+                                                selected
+                                                value="0"
                                         >
-                                          "kies hier uw vervoerstype!"
+                                            "kies hier uw vervoerstype!"
                                         </option>
                                         <option
-                                          @click="${this.optionClicked}"
-                                          id=${naam}
-                                          value=${uitstoot}
+                                                @click="${this.optionClicked}"
+                                                id=${naam}
+                                                value=${uitstoot}
                                         >
-                                          ${naam}
+                                            ${naam}
                                         </option>
-                                      `
-        )}
+                                    `)}
                                 </select>
                                 <div id="vertrekLocatieDiv">
                             <li class="alleenzakelijk" required>
                                 <label for="vertrekLocatie">Vertrek locatie:</label>
-                                <input class="${
-            this.inputfield
-        }" id="vertrekLocatie" name="vertrekLocatie"
-                                       placeholder="Vertrek locatie" value=${
-            this._demoVertrekLocatie
-        }/>
+                                <input class="${this.inputfield}" id="vertrekLocatie" name="vertrekLocatie"
+                                       placeholder="Vertrek locatie" value=${this._demoVertrekLocatie}/>
                             </li>
                         </div>
                         <div id="aankomstLocatieDiv">
                             <li class="alleenzakelijk" required>
                                 <label for="aankomstLocatie">Aankomst locatie:</label>
-                                <input class="${
-            this.inputfield
-        }" id="aankomstLocatie" name="aankomstLocatie"
-                                       placeholder="Aankomst locatie" value=${
-            this._demoAankomstLocatie
-        }/>
+                                <input class="${this.inputfield}" id="aankomstLocatie" name="aankomstLocatie"
+                                       placeholder="Aankomst locatie" value=${this._demoAankomstLocatie}/>
                             </li>
                         </div>
                         <div id="beginTijdDiv">
                             <li>
                                 <label for="beginTijd">Begin tijd:</label>
-                                <input @input=inputCallback class="${
-            this.inputfield
-        }" id="beginTijd" name="beginTijd"
+                                <input @input=inputCallback class="${this.inputfield}" id="beginTijd" name="beginTijd"
                                        required
                                        value="${this._vertrekTijd}"
                                        max="${this.beginTijdMax}"
@@ -242,11 +228,7 @@ export class InvoerenReizen extends LitElement {
                         <div id="eindTijdDiv">
                             <li>
                                 <label for="eindTijd">Eind tijd:</label>
-                                <input class="${
-            this.inputfield
-        }" id="eindTijd" required value="${
-            this._aankomstTijd
-        }"
+                                <input class="${this.inputfield}" id="eindTijd" required value="${this._aankomstTijd}"
                                        min="${this.eindTijdMin}"
                                        type="datetime-local"/>
                             </li>
@@ -254,9 +236,7 @@ export class InvoerenReizen extends LitElement {
                         <div id="kmDiv">
                             <li required>
                                 <label for="km" value="10">km:</label>
-                                <input class="${
-            this.inputfield
-        }" id="km" name="km" placeholder="Gereisde km" required
+                                <input class="${this.inputfield}" id="km" name="km" placeholder="Gereisde km" required
                                        type="text"
                                        value="${this._demoKM}"/>
                             </li>
@@ -264,9 +244,7 @@ export class InvoerenReizen extends LitElement {
                         <div id="kostenDiv">
                             <li class="alleenzakelijk" required>
                                 <label for="kosten">kosten:</label>
-                                <input class="${
-            this.inputfield
-        }" id="kosten" name="kosten"
+                                <input class="${this.inputfield}" id="kosten" name="kosten"
                                        placeholder="Kosten in euro's"
                                        value="${this._demoKosten}"/>
                             </li>
@@ -274,9 +252,7 @@ export class InvoerenReizen extends LitElement {
                         <div id="projectDiv">
                             <li class="alleenzakelijk" required>
                                 <label for="project">Project:</label>
-                                <select class="${
-            this.inputfield
-        }" id="project" name="project">
+                                <select class="${this.inputfield}" id="project" name="project">
                                     <option disabled hidden selected value="0">Kies hier het project
                                         waar u
                                         voor hebt gereisd.
@@ -289,9 +265,7 @@ export class InvoerenReizen extends LitElement {
                             </li>
                         </div>
                     </ol>
-                    <div id="reisKlasseKeuzeMenu" class="${
-            this.visibility_hidden_reisklasse
-        }">
+                    <div id="reisKlasseKeuzeMenu" class="${this.visibility_hidden_reisklasse}">
                         <fieldset>
                             <ol>
                                 <legend>Reisklasse keuze:</legend>
@@ -313,9 +287,7 @@ export class InvoerenReizen extends LitElement {
                             </ol>
                         </fieldset>
                     </div>
-                    <div id="priveZakelijkKeuzeMenu" class="${
-            this.visibility_hidden_zakelijkprive
-        }">
+                    <div id="priveZakelijkKeuzeMenu" class="${this.visibility_hidden_zakelijkprive}">
                         <fieldset>
                             <ul>
                                 <legend>Prive of zakelijke reis:</legend>
@@ -339,9 +311,7 @@ export class InvoerenReizen extends LitElement {
                         <input class="verzendReis" id="verzendReis" type="submit" value="verzendReis">
 
                         <label for="zenden" hidden">Zenden(custom)</label>
-                        <button id="zenden" @click=${
-            this.formElements
-        }>Zenden(custom)</button>
+                        <button id="zenden" @click=${this.formElements}>Zenden(custom)</button>
 
                         <label for="resetButton">Herlaad en leeg het formulier.</label>
                         <input id="resetButton" type="reset" value="Reset velden">
@@ -368,8 +338,7 @@ export class InvoerenReizen extends LitElement {
 
     optionClicked(option: {
         originalTarget: {
-            value: string;
-            id: string;
+            value: string; id: string;
         };
     }) {
         console.log('optionClicked');

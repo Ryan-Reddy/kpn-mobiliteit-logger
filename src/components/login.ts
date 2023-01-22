@@ -1,5 +1,6 @@
 import {css, html, LitElement} from 'lit';
-import {customElement, property} from 'lit/decorators.js';
+import {customElement, property, queryAll, query} from 'lit/decorators.js';
+
 import loginDTO from "../domain/loginDTO";
 
 /**
@@ -12,11 +13,31 @@ import loginDTO from "../domain/loginDTO";
 @customElement('login-element')
 export class Login extends LitElement {
     // @property() currentPage: string;
-    @property({type: Boolean}) open = true;
-    private _loginData: loginDTO | undefined;
+    @property() _loginData: loginDTO | undefined;
+    @property() _passwordInput = "wachtwoord";
+    @query('#_emailId') _emailInputElement?: HTMLDivElement;
+    // @queryAll('.inputfield') _allInputs?: NodeListOf<HTMLInputElement> | undefined;
+
+    @property() _emailId = "_emailId";
+    @property() _passwordId = "_passwordId";
+    // private _passwordPlaceholder = "password";
+    // private _emailPlaceholder = "email";
+    // private _submitButtonId = "submitButton";
+    // // @ts-ignore
+    // @query(this._submitButtonId) _emailInput?: HTMLDivElement | undefined;
+    //
+    @property() _shadowRoot: any;
+
 
     constructor() {
         super();
+     }
+    firstUpdated(changedProperties) {
+        changedProperties.forEach((oldValue, propName) => {
+            console.log(`${propName} changed. oldValue: ${oldValue}`);
+        });
+        // @ts-ignore
+        const textArea = this.shadowRoot.getElementById(this._emailId);
     }
 
     static get styles() {
@@ -47,8 +68,7 @@ export class Login extends LitElement {
       }
       label {
         /*font-size: 2em;*/
-        /*visibility: hidden;*/
-        display: none;
+        visibility: hidden;
       }
 
       form {
@@ -78,7 +98,6 @@ export class Login extends LitElement {
       fieldset {
         padding-left: 1em;
         padding-right: 1em;
-        font-color: var(--kpn-zwart);
       }
 
       #vervoerstype {
@@ -116,55 +135,58 @@ export class Login extends LitElement {
         display: none;
         pointer-events: none;
         color: lightgrey;
-        foreground-color: var(--kpn-grijs);
         background-color: var(--kpn-grijs);
-        required: invalid;
       }
     `;
     }
 
     render() {
         return html`
-                  
-                  <vaadin-grid .items="${this._loginData}">
-                      <vaadin-grid-column path="_email"></vaadin-grid-column>
-                      <vaadin-grid-column path="_password"></vaadin-grid-column>
-                  </vaadin-grid>
-                  
-                    <p ?hidden=${!this.open}>Logged in !!</p>
+            <body>
+            <div id="page-container">
+                <main>
+                        <form id="login_account">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" 
+                                       autocomplete="email"
+                                       class="inputfield"
+                                       id="${this._emailId}" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password"
+                                       autocomplete="password"
+                                       class="inputfield" id="${this._passwordId}"
+                                       placeholder="Password">
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" autocomplete="password"
+                                       class="inputfield"
+                                       id="passwordInput">
+                                <input type="checkbox" checked="checked" name="remember"> Onthoudt mijn gegevens
+                            </div>
+                            <input @click=${this._login} type="submit" class="submit-login">
+                        </form>
 
-              </form>
-              <br /><br />
-              <div @click=${this._clickMenu} id="nope">
-                <a class="nav-button" href="#" id="password-reset"
-                  >Wachtwoord vergeten</a
-                >
-                ||
-                <a class="nav-button" href="#" id="new-account"
-                  >Nieuw account creëren</a
-                >
-                  
-    `;
+                        <div @click=${this._clickMenu} id="nope">
+
+                            <a class="nav-button" href="#" id="password-reset">Wachtwoord vergeten</a>
+                            ||
+                            <a class="nav-button" href="#" id="new-account">Nieuw account creëren</a>
+        `;
     }
-    //
-    // @state()
-    // private items: Person[] = [];
-    //
-    // async firstUpdated() {
-    //     const { people } = await getPeople();
-    //     this.items = people;
-    // }
-    //
-    //
-    //
-    // // _login(e: Event) {
-    // _login(e: Event) {
-    //     const id = e.target.id;
-    //
-    //     alert("Logged In!" + id);
-    //     localStorage.setItem('username',e.value);
-    // }
-    //
+
+    _login(e: Event) {
+        // const em = this._shadowRoot.querySelector(this._emailId) ?? null;
+
+        console.log(this._emailInputElement)
+        console.log(this._emailInputElement?.getAttribute('value'))
+
+
+    }
+
+
     private async _clickMenu() {
         // @ts-ignore
         const id = e.target.id;
@@ -180,6 +202,4 @@ export class Login extends LitElement {
         // this.dispatchEvent(new Event('page-chosen'));
         // }
     }
-
-
 }
