@@ -2,6 +2,7 @@ import {css, html, LitElement} from 'lit';
 import {customElement, property, queryAll, query} from 'lit/decorators.js';
 
 import loginDTO from "../domain/loginDTO";
+import jquery from "jquery";
 
 /**
  * A Login element.
@@ -15,17 +16,12 @@ export class Login extends LitElement {
     // @property() currentPage: string;
     @property() _loginData: loginDTO | undefined;
     @property() _passwordInput = "wachtwoord";
-    @query('#_emailId') _emailInputElement?: HTMLDivElement;
     // @queryAll('.inputfield') _allInputs?: NodeListOf<HTMLInputElement> | undefined;
 
     @property() _emailId = "_emailId";
     @property() _passwordId = "_passwordId";
-    // private _passwordPlaceholder = "password";
-    // private _emailPlaceholder = "email";
-    // private _submitButtonId = "submitButton";
-    // // @ts-ignore
-    // @query(this._submitButtonId) _emailInput?: HTMLDivElement | undefined;
-    //
+    @query('#_emailId') _emailInputElement?: HTMLInputElement;
+    @query('#_passwordId') _passwordInputElement?: HTMLInputElement;
     @property() _shadowRoot: any;
 
 
@@ -151,6 +147,7 @@ export class Login extends LitElement {
                                 <input type="email" 
                                        autocomplete="email"
                                        class="inputfield"
+                                       value=""
                                        id="${this._emailId}" placeholder="Enter email">
                             </div>
                             <div class="form-group">
@@ -158,6 +155,7 @@ export class Login extends LitElement {
                                 <input type="password"
                                        autocomplete="password"
                                        class="inputfield" id="${this._passwordId}"
+                                    value=""
                                        placeholder="Password">
                             </div>
                             <div class="form-group form-check">
@@ -179,11 +177,14 @@ export class Login extends LitElement {
 
     _login(e: Event) {
         // const em = this._shadowRoot.querySelector(this._emailId) ?? null;
+        console.log(this._emailInputElement.value)
+        console.log(this._passwordInputElement.value)
 
-        console.log(this._emailInputElement)
-        console.log(this._emailInputElement?.getAttribute('value'))
 
 
+        const email = '';
+
+        localStorage.setItem("username",JSON.stringify(email))
     }
 
 
