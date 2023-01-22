@@ -176,15 +176,14 @@ export class Login extends LitElement {
     }
 
     _login(e: Event) {
-        // const em = this._shadowRoot.querySelector(this._emailId) ?? null;
-        console.log(this._emailInputElement.value)
-        console.log(this._passwordInputElement.value)
-
-
-
-        const email = '';
+        const email = this._emailInputElement.value;
+        const password = this._passwordInputElement.value;
 
         localStorage.setItem("username",JSON.stringify(email))
+        // TODO check input with db and return user
+        //   DO NOT SAVE PW to localstorage or elsewhere
+
+        localStorage.setItem("password",JSON.stringify(password))
     }
 
 
