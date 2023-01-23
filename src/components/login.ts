@@ -184,7 +184,7 @@ export class Login extends LitElement {
     _login(e: Event) {
         const email = this._emailInputElement.value;
         const password = this._passwordInputElement.value;
-        sessionStorage.removeItem("username");
+        sessionStorage.removeItem("userID");
         sessionStorage.removeItem("password");
 
         sessionStorage.setItem("userID", JSON.stringify(email))

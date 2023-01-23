@@ -1,6 +1,7 @@
 import {css, html, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 
+
 /**
  * An example element.
  *
@@ -19,29 +20,29 @@ export class Thermometer extends LitElement {
     @property() _slidePolygon= 10;  // Transform : (42=bottom) (-76=middle) (-194= top) range=(0-236 minus 194)
     @property() _thermoBreedte = '10vw';
     @property() _thermoHoogte = '10vw';
+    @property() _root;
 
     constructor() {
         super();
         sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
+        this._root =this.createRenderRoot();
+        this._root.addEventListener('mercury',
+            (e: Event) => this._thermometerInput,
+            true);
     }
     protected createRenderRoot() {
-        const root = super.createRenderRoot();
-        root.addEventListener('mercury',
-            (e: CustomEvent) => this._thermometerInput,
-            true);
-        return root;
+        return super.createRenderRoot();
     }
     connectedCallback() {
         super.connectedCallback();
-        const root = super.createRenderRoot();
-        root.addEventListener('mercury',
-            (e: Event) => {
-                return this._thermometerInput;
-            },
+        this._root =this.createRenderRoot();
+
+        this._root.addEventListener('mercury',
+            (e: Event) => this._thermometerInput,
             true);
     }
     disconnectedCallback() {
-        this.removeEventListener('mercury',
+        this._root.removeEventListener('mercury',
             (e: Event) => this._thermometerInput);
         super.disconnectedCallback();
     }
