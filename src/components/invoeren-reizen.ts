@@ -1,6 +1,7 @@
 import {css, html, LitElement} from 'lit';
 import {customElement, property, query, eventOptions} from 'lit/decorators.js';
 import {Thermometer} from "./global/thermometer";
+import { initializeApp } from 'firebase/app';
 
 /**
  * An example element.
@@ -23,7 +24,8 @@ export class InvoerenReizen extends LitElement {
     @property() inputfield = 'inputfield';
     @property() _vervoerMiddelDummyData = [];
     @property() _gekozenC02: string | undefined;
-    @property() _gekozenVoertuig: string | undefined;
+    @property() _gekozenVoertuig: string = "null";
+
 
     @query('.formDeelTweeZakelijkvsPrive') _formDeelTweeZakelijkvsPrive!: HTMLDivElement;
     @query('.reisKlasseKeuzeMenu') _formDeelReisKlasseKeuzeMenu!: HTMLDivElement;
@@ -31,8 +33,9 @@ export class InvoerenReizen extends LitElement {
     @query('.alleenZakelijk') _formZakelijkClassElements!: HTMLDivElement;
     @query('form') _entireForm!: HTMLFormElement;
     @property() _userName = '';
-    private _gekozenVoertuig: string = 0;
-    private _unsavedData: boolean;
+    private _unsavedData = false;
+    // @property() _firebaseConfig = fetch('/firebasee.json')
+    //     .then((response) => response.json());
 
     constructor() {
         super();
@@ -61,6 +64,8 @@ export class InvoerenReizen extends LitElement {
         this._aankomstTijd = now1.toISOString().slice(0, -1);
         this.eindTijdMin = this._vertrekTijd;
         this.beginTijdMax = this._aankomstTijd + 60;
+
+        const app = initializeApp(this._firebaseConfig);
     }
 
     static get styles() {
@@ -183,7 +188,7 @@ export class InvoerenReizen extends LitElement {
                             <h2>formDeelEen</h2>
                             <ol>
                                 <label for="vervoerstype">typeVervoer:</label>
-                                <select name="type" id="vervoerstype" class="${this.inputfield}" required focus @click="${this._vehicleChosen}">
+                                <select name="type" id="vervoerstype" class="${this.inputfield}" required @click="${this._vehicleChosen}">
                                     ${this._vervoerMiddelDummyData.map(({naam, uitstoot}) => html`
                                         <option
                                                 disabled
@@ -285,7 +290,7 @@ export class InvoerenReizen extends LitElement {
                                 </li>
                             </div>
                             <div id="kmDiv">
-                                <li required>
+                                <li>
                                     <label for="km" value="10">km:</label>
                                     <input class="${this.inputfield}" id="km" name="km" placeholder="Gereisde km"
                                            required
@@ -426,8 +431,20 @@ export class InvoerenReizen extends LitElement {
             console.log(`${key}: ${value}\n`)
             // output.textContent += `${key}: ${value}\n`;
         }
-        let travelID = formData.get('userID') + ' ';
-        travelID += formData.get('beginTijd');
+        const travelID = formData.get('userID') + ' ';
+        const nuTijd = Date.now().toLocaleString();
+
+        formData.append('travelID',travelID)
+        formData.append('tijdvanopslaan',nuTijd)
+
+        const object = {};
+        formData.forEach((value, key) => object[key] = value);
+        const jsonFormData = JSON.stringify(object);
+
+        console.log(jsonFormData)
+
+        var name="Name";
+
 
         //TODO save formdata to:
         // sessionStorage.setItem(travelID, formData)
