@@ -5,6 +5,7 @@ import './components/home-page';
 import './components/login';
 import './components/global/menu-footer';
 import './components/global/menu-nav';
+import './components/global/thermometer';
 import './components/new-account';
 import './components/global/not-found';
 import './components/readme';
@@ -69,6 +70,11 @@ router.setRoutes([
     name: 'invoeren-reizen-wijzigen-element', // doet niks impliciet
     path: '/invoeren-reizen-wijzigen',
     component: 'invoeren-reizen-wijzigen-element',
+  },
+  {
+    name: 'thermometer-element', // doet niks impliciet
+    path: '/thermometer',                  // standaard landingspage
+    component: 'thermometer-element',
   },
   {
     name: 'home-page-element', // doet niks impliciet
