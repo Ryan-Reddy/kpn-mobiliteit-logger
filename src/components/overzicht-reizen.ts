@@ -189,7 +189,7 @@ export class OverzichtReizen extends LitElement {
     render() {
         return html`
             <header>
-                <h1 class="header">${this.titel}</h1>
+                <h1 class="header">${this._currentPageTitle}</h1>
             </header>
             <body>
             <main>
@@ -198,7 +198,7 @@ export class OverzichtReizen extends LitElement {
             <div class="tablecontainer">
               <table class="full">
                 <caption hidden>
-                  ${this.titel}
+                  ${this._currentPageTitle}
                 </caption>
                 <thead>
                   <tr @click=${this.headerClicked} class="columnHeads"

@@ -141,6 +141,9 @@ export class Login extends LitElement {
 
     render() {
         return html`
+            <header>
+                <h1 class="header">${this._currentPageTitle}</h1>
+            </header>
             <body>
             <div id="page-container">
                 <main>

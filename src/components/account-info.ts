@@ -135,11 +135,10 @@ export class Accountinfo extends LitElement {
     render() {
         return html`
             <header>
-            <h1 class="header">Account info</h1>
-                <p>Breng hieronder wijzigingen in uw gegevens.</p>
-
+                <h1 class="header">${this._currentPageTitle}</h1>
+                <p>Breng hier wijzigingen aan in uw gegevens.</p>
             </header>
-
+            
         <body>
 
         <form id="postaccount">

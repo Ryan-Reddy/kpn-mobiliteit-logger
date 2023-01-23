@@ -45,7 +45,9 @@ export class ResetPassword extends LitElement {
 
     render() {
         return html`
-      <h1 class="header">Account zoeken.</h1>
+            <header>
+                <h1 class="header">${this._currentPageTitle}</h1>
+            </header>
 
       <body>
         <div id="page-container">

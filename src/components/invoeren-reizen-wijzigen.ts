@@ -169,9 +169,7 @@ export class InvoerenReizen extends LitElement {
     render() {
         return html`
             <header>
-                <H1>Welkom,</H1>
-                <br>
-                <p>vul hieronder zo nauwkeurig mogelijk uw reis in:</p>
+                <h1 class="header">${this._currentPageTitle}</h1>
             </header>
             <body>
 
@@ -421,5 +419,6 @@ export class InvoerenReizen extends LitElement {
         console.log(document.getElementsByClassName('inputfield') ?? null);
         return this.querySelector('.inputfield') ?? null;
     }
+
 }
 

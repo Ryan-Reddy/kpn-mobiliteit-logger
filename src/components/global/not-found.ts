@@ -10,6 +10,7 @@ import {customElement, property} from 'lit/decorators.js';
 @customElement('not-found-element')
 export class NotFound extends LitElement {
     @property() _hiddenElement = 'hidden';
+    @property() _currentPageTitle = "Uh oh.. Page Not Found";
 
     constructor() {
         super();
@@ -80,36 +81,34 @@ export class NotFound extends LitElement {
     }
 
     render() {
-        return html`<!doctype html>
-    <html lang="en">
 
-    <head>
-      <meta charset="utf-8">
-      <title>Page Not Found</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    </head>
+        return html`
+            <header>
+                <h1 class="header">${this._currentPageTitle}</h1>
+            </header>
+            <body>
+            <h1>Page Not Found</h1>
 
-    <body>
-    <h1>Page Not Found</h1>
+            <p>Sorry, but we only found this double rainbow.
+                But sometimes that's when you find something you didn't know you where looking for.
+                <br>
+                <i>What does it mean?</i>
+            </p>
+            <br>
+            <audio id="my_audio" src="yosemitebear_nountain_double_rainbow.mp3" loop="loop"></audio>
+            <img src="double_rainbow.png" height="533" width="800" alt="double rainbow all the way meme beautiful"/>
 
-    <p>Sorry, but the page you were trying to view does not exist.
-      But sometimes that's when you find something you didn't know you where looking for.
-    </p>
-    <br>
-    <audio id="my_audio" src="yosemitebear_nountain_double_rainbow.mp3" loop="loop"></audio>
-    <img src="double_rainbow.png" height="533" width="800" alt="double rainbow all the way meme beautiful"/>
+            </body>
+            <script>
+                window.onload = function () {
+                    document.getElementById("my_audio").play();
+                }
+            </script>
 
-    </body>
-    <script>
-      window.onload = function () {
-        document.getElementById("my_audio").play();
-      }
-    </script>
-
-    </html>
-    <!-- IE needs 512+ bytes: https://docs.microsoft.com/archive/blogs/ieinternals/friendly-http-error-pages -->
-    `;
+            </html>
+            <!-- IE needs 512+ bytes: https://docs.microsoft.com/archive/blogs/ieinternals/friendly-http-error-pages -->
+        `;
     }
 
     _clickForSupport() {

@@ -44,14 +44,13 @@ export class ReadmeElement extends LitElement {
     //TODO properly import /node_modules/zero-md:
     render() {
         return html`
-            <head>
-                <meta charset="UTF-8">
-                <title>README</title>
+            <header>
+                <h1 class="header">${this._currentPageTitle}</h1>
+            </header>
                 <script
                         type="module"
                         src="zero-md"
                 ></script>
-            </head>
             <body>
             <main>
                 <h1>README FILE</h1>

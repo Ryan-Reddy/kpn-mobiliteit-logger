@@ -14,7 +14,7 @@
     <!--    <script src="components/global/menu-nav.ts" type="module"></script>-->
     <script src="components/global/menu-footer.ts" type="module"></script>
 
-    <link href="main.css" rel="stylesheet"/>
+    <link href="css/main.css" rel="stylesheet"/>
 
     <title>KPN</title>
 </head>
@@ -25,9 +25,13 @@
     <footer-menu></footer-menu>
 </main>
 <script>
+  // addEventListener('storage', (event) => { });
+  window.onstorage = (event) => {
+
   let title = sessionStorage.getItem('currentpagetitle');
-  console.log(title);
-  document.title = title;
+    console.log(title);
+    document.title = title;
+  };
   </script>
 
 </html>

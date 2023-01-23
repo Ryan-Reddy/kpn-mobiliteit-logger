@@ -47,6 +47,9 @@ export class SupportElement extends LitElement {
         sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
 
         return html`
+            <header>
+                <h1 class="header">${this._currentPageTitle}</h1>
+            </header>
       <body>
         <main>
           <label hidden for="support"></label>

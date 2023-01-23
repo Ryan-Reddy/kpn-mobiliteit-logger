@@ -44,16 +44,9 @@ export class NewAccount extends LitElement {
 
     render() {
         return html`
-      <!DOCTYPE html>
-      <html lang="en">
-        <head>
-          <meta charset="UTF-8" />
-
-          <title>New Account</title>
-          <!-- must be uppermost imported script due to const localhost global usage -->
-
-          <script src="https://smtpjs.com/v3/smtp.js"></script>
-        </head>
+            <header>
+                <h1 class="header">${this._currentPageTitle}</h1>
+            </header>
 
         <h1 class="header">Maak een nieuw account.</h1>
 

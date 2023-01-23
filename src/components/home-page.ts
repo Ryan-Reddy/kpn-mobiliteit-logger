@@ -1,5 +1,5 @@
 import {css, html, LitElement} from 'lit';
-import {customElement} from 'lit/decorators.js';
+import {customElement, property} from 'lit/decorators.js';
 
 /**
  * An example element.
@@ -9,6 +9,8 @@ import {customElement} from 'lit/decorators.js';
  */
 @customElement('home-page-element')
 export class HomePage extends LitElement {
+    @property() _currentPageTitle = "Welkom bij de KNP medewerkers mobiliteit APP!"
+
     constructor() {
         super();
     }
@@ -80,9 +82,10 @@ export class HomePage extends LitElement {
 
     render() {
         return html`
-      <header>
-        <h1 class="header">Welkom bij de KNP medewerkers mobiliteits APP!</h1>
-      </header>
+            <header>
+                <h1 class="header">${this._currentPageTitle}</h1>
+            </header>
+
         <body>
         <main>
         <ul>

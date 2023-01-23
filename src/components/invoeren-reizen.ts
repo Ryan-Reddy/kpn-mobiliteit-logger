@@ -30,6 +30,7 @@ export class InvoerenReizen extends LitElement {
     @property() _vervoerMiddelDummyData = [];
     @property() _gekozenC02: string | undefined;
     @property() _gekozenVoertuig: string | undefined;
+    private _unsavedData: boolean;
 
     constructor() {
         super();
@@ -46,6 +47,7 @@ export class InvoerenReizen extends LitElement {
         this._aankomstTijd = now1.toISOString().slice(0, -1);
         this.eindTijdMin = this._vertrekTijd;
         this.beginTijdMax = this._aankomstTijd + 60;
+        this._unsavedData = false;
     }
 
     static get styles() {
@@ -169,14 +171,12 @@ export class InvoerenReizen extends LitElement {
     render() {
         return html`
             <header>
-                <H1>Welkom,</H1>
-                <br>
-                <p>vul hieronder zo nauwkeurig mogelijk uw reis in:</p>
+                <h1 class="header">${this._currentPageTitle}</h1>
             </header>
             <body>
 
             <main>
-                <form class="formulierReizen" id="formulierReizen">
+                <form class="formulierReizen" id="formulierReizen" @change=${e => this.onChange(e)}>
                     <hr/>
                     <ol>
                         <div id="typeVervoerDiv2">
@@ -312,7 +312,7 @@ export class InvoerenReizen extends LitElement {
                         <input class="verzendReis" id="verzendReis" type="submit" value="verzendReis">
 
                         <label for="zenden" hidden">Zenden(custom)</label>
-                        <button id="zenden" @click=${this.formElements}>Zenden(custom)</button>
+                        <button id="zenden" @click=${e =>this.formElements()}>Zenden(custom)</button>
 
                         <label for="resetButton">Herlaad en leeg het formulier.</label>
                         <input id="resetButton" type="reset" value="Reset velden">
@@ -390,5 +390,54 @@ export class InvoerenReizen extends LitElement {
         console.log(document.getElementsByClassName('inputfield') ?? null);
         return this.querySelector('.inputfield') ?? null;
     }
+    public onChange(e) {
+        this._unsavedData = true;
+    }
+
+    public onBeforeEnter(
+        location: RouterLocation,
+        commands: PreventAndRedirectCommands,
+        router: Router
+    ): Promise<unknown> | RedirectResult | undefined {
+        console.log('onBeforeEnter');
+        if (!this.isAuthorized()) {
+            // sync operation
+            // return commands.redirect('/');
+
+            // async operation
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log('Not authorized, redirect to home page');
+                    resolve(commands.redirect('/'));
+                }, 2000);
+            });
+        }
+
+        console.log('You can see this page');
+    }
+
+    private isAuthorized() {
+        // Logic to determine if the current user can see this page
+        return true; //TODO implement auth logic
+    }
+
+    public onBeforeLeave(
+        location: RouterLocation,
+        commands: PreventAndRedirectCommands,
+        router: Router
+    ): PreventResult | undefined {
+        if (this._unsavedData) {
+
+            console.log('onBeforeLeave');
+
+            const leave = window.confirm('Weet je zeker dat je deze pagina wil verlaten? \nUw ingevoerde gegevens zijn nog niet verzonden!');
+            if (!leave) {
+                console.log('onBeforeLeave commands.prevent()');
+                return commands.prevent();
+            }
+        }
+    }
+
+
 }
 
