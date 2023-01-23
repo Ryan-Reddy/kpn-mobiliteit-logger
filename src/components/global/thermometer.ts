@@ -33,8 +33,12 @@ export class Thermometer extends LitElement {
     }
     connectedCallback() {
         super.connectedCallback();
-        window.addEventListener('mercury',
-            (e: CustomEvent) => this._thermometerInput(e), true);
+        const root = super.createRenderRoot();
+        root.addEventListener('mercury',
+            (e: Event) => {
+                return this._thermometerInput;
+            },
+            true);
     }
     disconnectedCallback() {
         this.removeEventListener('mercury',
