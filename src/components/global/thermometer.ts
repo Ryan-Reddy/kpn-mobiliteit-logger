@@ -166,7 +166,7 @@ export class Thermometer extends LitElement {
         //TODO remove hard coding (15) = max C02 in list voertuigdata
         // mercury = thermometer-fill range: (0=full)-(236=empty) **/
 
-        this._mercury = ((e.detail.uitstoot) / 15) * 236;
+        this._mercury = (((e.detail.uitstoot) / 15) * -236)+236;
         this._slidePolygon = this._mercury-194
     }
 }
