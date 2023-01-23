@@ -16,7 +16,7 @@ export class InvoerenReizen extends LitElement {
     // @property() span_message = '';
     @property() _vertrekTijd = '';
     @property() _aankomstTijd = '';
-    // @property() _demoKM = '11';
+    @property() _demoKM = '';
     // @property() _demoKosten = '111,11';
     // @property() _demoVertrekLocatie = 'Amsterdam';
     // @property() _demoAankomstLocatie = 'Utrecht';
