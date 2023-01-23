@@ -128,8 +128,9 @@ export class Login extends LitElement {
     `;
     }
 
+    // @ts-ignore
     firstUpdated(changedProperties) {
-        changedProperties.forEach((oldValue, propName) => {
+        changedProperties.forEach((oldValue: any, propName: any) => {
             console.log(`${propName} changed. oldValue: ${oldValue}`);
         });
         // @ts-ignore
