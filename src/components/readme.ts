@@ -47,10 +47,8 @@ export class ReadmeElement extends LitElement {
             <header>
                 <h1 class="header">${this._currentPageTitle}</h1>
             </header>
-                <script
-                        type="module"
-                        src="zero-md"
-                ></script>
+            <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
+
             <body>
             <main>
                 <h1>README FILE</h1>

@@ -10,22 +10,22 @@ import {customElement, property, query} from 'lit/decorators.js';
 @customElement('invoeren-reizen-element')
 export class InvoerenReizen extends LitElement {
     @property() _currentPageTitle = 'Wijzigen Reis';
-    @property() eindTijdMin = '';
-    @property() beginTijdMax = '';
-    @property() span_message = '';
-    @property() _vertrekTijd = '';
-    @property() _aankomstTijd = '';
-    @property() _demoKM = '11';
-    @property() _demoKosten = '111,11';
-    @property() _demoVertrekLocatie = 'Amsterdam';
-    @property() _demoAankomstLocatie = 'Utrecht';
+    // @property() eindTijdMin = '';
+    // @property() beginTijdMax = '';
+    // @property() span_message = '';
+    // @property() _vertrekTijd = '';
+    // @property() _aankomstTijd = '';
+    // @property() _demoKM = '11';
+    // @property() _demoKosten = '111,11';
+    // @property() _demoVertrekLocatie = 'Amsterdam';
+    // @property() _demoAankomstLocatie = 'Utrecht';
     @property() inputfield = 'inputfield';
     @property() _vervoerMiddelDummyData = [];
     @property() _gekozenC02: string | undefined;
     @property() _gekozenVoertuig: string | undefined;
 
-    @query('.formDeelTweeZakelijkvsPrive') _formDeelTweeZakelijkvsPrive?: HTMLDivElement;
-    @query('.reisKlasseKeuzeMenu') _formDeelReisKlasseKeuzeMenu?: HTMLDivElement;
+    @query('.formDeelTweeZakelijkvsPrive') _formDeelTweeZakelijkvsPrive!: HTMLDivElement;
+    @query('.reisKlasseKeuzeMenu') _formDeelReisKlasseKeuzeMenu!: HTMLDivElement;
     @query('.formDeelDrie') _formDeelDrieElement!: HTMLDivElement;
     @query('.alleenZakelijk') _formZakelijkClassElements!: HTMLDivElement;
 
@@ -33,18 +33,14 @@ export class InvoerenReizen extends LitElement {
     constructor() {
         super();
         sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
-        let now = new Date();
-        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        now.setMilliseconds(0);
-        now.setSeconds(0);
-        this._vertrekTijd = now.toISOString().slice(0, -1);
-        let now1 = new Date();
-        now1.setMinutes(now.getMinutes() - now.getTimezoneOffset() + 60);
-        now1.setMilliseconds(0);
-        now1.setSeconds(0);
-        this._aankomstTijd = now1.toISOString().slice(0, -1);
-        this.eindTijdMin = this._vertrekTijd;
-        this.beginTijdMax = this._aankomstTijd + 60;
+
+        // TODO insert ajax rsjx json file observer
+        //
+        fetch('/vervoermiddel-CO2.json')
+            .then((response) => response.json())
+            .then((json) => {
+                this._vervoerMiddelDummyData = Array.from(json);
+            });
     }
 
     static get styles() {
@@ -150,14 +146,6 @@ export class InvoerenReizen extends LitElement {
 
     connectedCallback() {
         super.connectedCallback();
-        // TODO insert ajax rsjx json file observer
-        //
-        fetch('/vervoermiddel-CO2.json')
-            .then((response) => response.json())
-            .then((json) => {
-                this._vervoerMiddelDummyData = Array.from(json);
-                console.log(this._vervoerMiddelDummyData);
-            });
     }
 
     render() {
@@ -173,50 +161,28 @@ export class InvoerenReizen extends LitElement {
                     <ul>
                         <div id="formDeelEen">
                             <h2>formDeelEen</h2>
-                            <li>
+                            <ol>
                                 <label for="vervoerstype">typeVervoer:</label>
                                 <select id="vervoerstype" class="${this.inputfield}" required focus>
                                     ${this._vervoerMiddelDummyData.map(({naam, uitstoot}) => html`
                                         <option
-                                                disabled
-                                                hidden
-                                                selected
-                                                value="0"
-                                        >
-                                            "kies hier uw vervoerstype!"
-                                        </option>
-                                        <option
+                                                id="${naam}"
+                                                value="${uitstoot}"
                                                 @click="${this.formDeelTweeShow}"
-                                                id=${naam}
-                                                value=${uitstoot}
                                         >
                                             ${naam}
                                         </option>
                                     `)}
+                                    <option
+                                            disabled
+                                            hidden
+                                            selected
+                                            value="0"
+                                    >
+                                        "kies hier uw vervoerstype!"
+                                    </option>
                                 </select>
-                            </li>
-                        </div>
-                        <div id="reisKlasseKeuzeMenu" hidden>
-                            <fieldset>
-                                <ol>
-                                    <legend>Reisklasse keuze:</legend>
-                                    <li>
-                                        <label for="eersteKlas" style="float:left">Eerste klas</label>
-                                        <input id="eersteKlas" name="klasse"
-                                               type="radio" value="true"/> Eerste klas
-                                    </li>
-                                    <li>
-                                        <label for="tweedeKlas" style="float:left">Tweede klas</label>
-                                        <input id="tweedeKlas" name="klasse"
-                                               type="radio" value="true"/> Tweede klas
-                                    </li>
-                                    <li>
-                                        <label for="highspeed" style="float:left">NS-Highspeed</label>
-                                        <input id="highspeed" name="klasse"
-                                               type="radio" value="true"/> NS-Highspeed
-                                    </li>
-                                </ol>
-                            </fieldset>
+                            </ol>
                         </div>
                         <div class="formDeelTweeZakelijkvsPrive" hidden>
                             <h2>Zakelijk of prive keuze</h2>
@@ -224,11 +190,11 @@ export class InvoerenReizen extends LitElement {
                                 <label for="zakelijkOfPrive">zakelijk of prive:</label>
                                 <select id="zakelijkOfPrive" class="${this.inputfield}" required focus
                                 >
-                                    <option
-                                            disabled
-                                            hidden
+                                    <option disabled
+                                            aria-hidden="true"
                                             selected
-                                            value="0">
+                                            value="0"
+                                            hidden>
                                         "Prive of zakelijke reis:"
                                     </option>
                                     <label for="zakelijk" style="float:left" hidden>Zakelijk</label>
@@ -242,6 +208,24 @@ export class InvoerenReizen extends LitElement {
                                         Prive
                                     </option>
                                 </select>
+                            </li>
+                        </div>
+                        <div id="reisKlasseKeuzeMenu" hidden>
+                            <legend>Reisklasse keuze:</legend>
+                            <li>
+                                <label for="eersteKlas" style="float:left">Eerste klas</label>
+                                <input id="eersteKlas" name="klasse"
+                                       type="radio" value="true"/> Eerste klas
+                            </li>
+                            <li>
+                                <label for="tweedeKlas" style="float:left">Tweede klas</label>
+                                <input id="tweedeKlas" name="klasse"
+                                       type="radio" value="true"/> Tweede klas
+                            </li>
+                            <li>
+                                <label for="highspeed" style="float:left">NS-Highspeed</label>
+                                <input id="highspeed" name="klasse"
+                                       type="radio" value="true"/> NS-Highspeed
                             </li>
                         </div>
                         <div class="alleenZakelijk" hidden>
@@ -361,23 +345,16 @@ export class InvoerenReizen extends LitElement {
             value: string; id: string;
         };
     }) {
-        console.log('chosen vervoermiddel: formDeelTweeShow');
+        console.log('formDeelTweeShow');
         let keuze = option.originalTarget.id;
-        this._gekozenVoertuig = keuze;
-        this._gekozenC02 = option.originalTarget.value;
 
-        let _formDeelTweeZakelijkvsPriveGotten = this._formDeelTweeZakelijkvsPrive;
-        // _formDeelTweeZakelijkvsPriveGotten?.removeAttribute("hidden");
-
-        let _formDeelReisKlasseGotten = this._formDeelReisKlasseKeuzeMenu;
-        // _formDeelReisKlasseGotten?.removeAttribute("hidden");
         console.log('keuze: ' + keuze)
 
         switch (keuze) {
             case 'Trein/Metro/Tram':
                 console.log('Trein gekozen')
-                _formDeelTweeZakelijkvsPriveGotten?.removeAttribute("hidden");
-                _formDeelReisKlasseGotten?.removeAttribute("hidden");
+                this._formDeelTweeZakelijkvsPrive?.removeAttribute("hidden");
+                this._formDeelReisKlasseKeuzeMenu?.removeAttribute("hidden");
                 break;
             case 'Scooter':
             case 'Elektr Scooter (incl deel scooter)':
@@ -389,14 +366,14 @@ export class InvoerenReizen extends LitElement {
             case 'eigenAuto':
             case 'deelAuto':
                 console.log('auto gekozen');
-                _formDeelTweeZakelijkvsPriveGotten?.removeAttribute("hidden");
-                _formDeelReisKlasseGotten?.setAttribute("hidden","hidden");
+                this._formDeelTweeZakelijkvsPrive?.removeAttribute("hidden");
+                this._formDeelReisKlasseKeuzeMenu?.setAttribute("hidden","hidden");
                 break;
             case 'Lopen':
             case 'Fiets':
             case 'OV Fiets':
             case 'bus':
-                _formDeelTweeZakelijkvsPriveGotten?.removeAttribute("hidden");
+                this._formDeelTweeZakelijkvsPrive?.removeAttribute("hidden");
                 break;
             default: {
                 console.log('Kan de reis type vervoer niet herkennen');
