@@ -9,33 +9,20 @@ import {customElement, property} from 'lit/decorators.js';
  */
 @customElement("thermometer-element")
 export class Thermometer extends LitElement {
+    // courtesy of https://www.silentpartnersoftware.com/free-tools/fundraising-thermometer/
+    //  free fundraising thermometer
     @property() _currentPageTitle = 'Thermometer';
     private sliderinput: any;
-    private mercury: any;
+
+    /** mercury = thermometer-fill range: (0=full)-(236=empty) **/
+    @property() _mercury= 10;
+    @property() _slidePolygon= (this._mercury-194);  // Transform : (42=bottom) (-76=middle) (-194= top) range=(0-236 minus 194)
+    @property() _thermoBreedte = '10vw';
+    @property() _thermoHoogte = '10vw';
 
     constructor() {
         super();
         sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
-    }
-
-
-    static get properties() {
-        return {
-            /**
-             * Copy for the read the docs hint.
-             */
-            docsHint: {type: String},
-
-            /**
-             * The number of times the button has been clicked.
-             */
-            count: {type: Number},
-
-            /**
-             * The thermometer polygon pointer
-             */
-            mercury: {type: Number},
-        };
     }
 
     static get styles() {
@@ -47,11 +34,13 @@ export class Thermometer extends LitElement {
             text-align: center;
           }
 
+
           .logo {
             height: 6em;
             padding: 1.5em;
             will-change: filter;
           }
+          
 
           .logo:hover {
             filter: drop-shadow(0 0 2em #646cffaa);
@@ -128,18 +117,18 @@ export class Thermometer extends LitElement {
 
 
             <div class="thermometer">
-                <svg id="thermometer-svg" version="1.1" viewBox="-5 78.2 381.6 412.5" x="0px"
+                <svg width="${this._thermoHoogte}" height="${this._thermoBreedte}" id="thermometer-svg" version="1.1" viewBox="-5 78.2 381.6 412.5" preserveAspectRatio x="0px"
                      xml:space="preserve" xmlns="http://www.w3.org/2000/svg" y="0px">
         <g id="fill">
                                 <path d="M207.8,345.9V106.5h-40v239.4 c-11.6,6.9-19.4,19.5-19.4,33.9c0,21.8,17.6,39.4,39.4,39.4s39.4-17.6,39.4-39.4C227.2,365.4,219.4,352.7,207.8,345.9z"
                                       fill="#00C300"
                                       id="fill-path"></path>
                             </g>
-                    <g id="cover"><rect fill="#ffffff" height="118" id="cover-rect" width="40.8" x="167.4" y="105.5"></rect>
+                    <g id="cover"><rect fill="#ffffff" height="${this._mercury}" id="cover-rect" width="40.8" x="167.4" y="105.5"></rect>
                         // thermometer fill range: heigth=(0=full)-(236=empty)
                         <polygon fill="#00C300" id="polygon"
                                  points="233.7,291.3 225.8,299.9 233.7,308.5 236.8,308.5 236.8,291.3"
-                                 transform="translate(0 -78)"
+                                 transform="translate(0 ${this._slidePolygon})"
                                  xmlns="http://www.w3.org/2000/svg"></polygon>
                         // Transform translate min = (0 41); max = (0 -200)
                             </g>
@@ -156,6 +145,6 @@ export class Thermometer extends LitElement {
 
     private _thermometerInput(e: Event) {
         console.log(this.sliderinput.value);
-        this.mercury = this.sliderinput.value;
+        this._mercury = this.sliderinput.value;
     }
 }

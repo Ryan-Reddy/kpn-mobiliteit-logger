@@ -28,8 +28,6 @@ export class InvoerenReizen extends LitElement {
     @query('.reisKlasseKeuzeMenu') _formDeelReisKlasseKeuzeMenu!: HTMLDivElement;
     @query('.formDeelDrie') _formDeelDrieElement!: HTMLDivElement;
     @query('.alleenZakelijk') _formZakelijkClassElements!: HTMLDivElement;
-
-
     constructor() {
         super();
         sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
