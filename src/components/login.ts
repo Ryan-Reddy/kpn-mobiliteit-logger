@@ -184,10 +184,10 @@ export class Login extends LitElement {
     _login(e: Event) {
         const email = this._emailInputElement.value;
         const password = this._passwordInputElement.value;
-        localStorage.removeItem("username");
-        localStorage.removeItem("password");
+        sessionStorage.removeItem("username");
+        sessionStorage.removeItem("password");
 
-        sessionStorage.setItem("username", JSON.stringify(email))
+        sessionStorage.setItem("userID", JSON.stringify(email))
         // TODO check input with db and return user
         //   DO NOT SAVE PW to localstorage or elsewhere
 
