@@ -210,22 +210,26 @@ export class InvoerenReizen extends LitElement {
                                 </select>
                             </li>
                         </div>
-                        <div id="reisKlasseKeuzeMenu" hidden>
-                            <legend>Reisklasse keuze:</legend>
+                        <div class="reisKlasseKeuzeMenu" hidden>
+                            <h2>Reis klasse keuze</h2>
                             <li>
-                                <label for="eersteKlas" style="float:left">Eerste klas</label>
-                                <input id="eersteKlas" name="klasse"
-                                       type="radio" value="true"/> Eerste klas
-                            </li>
-                            <li>
-                                <label for="tweedeKlas" style="float:left">Tweede klas</label>
-                                <input id="tweedeKlas" name="klasse"
-                                       type="radio" value="true"/> Tweede klas
-                            </li>
-                            <li>
-                                <label for="highspeed" style="float:left">NS-Highspeed</label>
-                                <input id="highspeed" name="klasse"
-                                       type="radio" value="true"/> NS-Highspeed
+                                <label for="reisKlasseKeuzeMenuId">zakelijk of prive:</label>
+
+                                <select id="reisKlasseKeuzeMenuId" class="${this.inputfield}" required focus>
+                                    <option disabled
+                                            aria-hidden="true"
+                                            selected
+                                            value="0"
+                                            hidden>
+                                        "Reisklasse keuze:"
+                                    </option>
+                                    <label for="eersteKlas" style="float:left">Eerste klas</label>
+                                    <option id="eersteKlas" name="eersteKlas">Eerste klas</option>
+                                    <label for="tweedeKlas" style="float:left">Tweede klas</label>
+                                    <option id="tweedeKlas" name="tweedeKlas">Tweede klas</option>
+                                    <label for="highSpeed" style="float:left">Tweede klas</label>
+                                    <option id="highSpeed" name="highSpeed"> Tweede klas</option>
+                                </select>
                             </li>
                         </div>
                         <div class="alleenZakelijk" hidden>
@@ -311,6 +315,7 @@ export class InvoerenReizen extends LitElement {
             </body>
         `;
     }
+
     _optionClickedZakelijkOfPrive(option: {
         originalTarget: {
             value: string; id: string;
@@ -340,6 +345,7 @@ export class InvoerenReizen extends LitElement {
         }
 
     }
+
     formDeelTweeShow(option: {
         originalTarget: {
             value: string; id: string;
@@ -367,7 +373,7 @@ export class InvoerenReizen extends LitElement {
             case 'deelAuto':
                 console.log('auto gekozen');
                 this._formDeelTweeZakelijkvsPrive?.removeAttribute("hidden");
-                this._formDeelReisKlasseKeuzeMenu?.setAttribute("hidden","hidden");
+                this._formDeelReisKlasseKeuzeMenu?.setAttribute("hidden", "hidden");
                 break;
             case 'Lopen':
             case 'Fiets':
