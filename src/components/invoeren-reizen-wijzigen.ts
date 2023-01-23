@@ -17,6 +17,7 @@ export class InvoerenReizen extends LitElement {
     @property() span_message = '';
     @property() visibility_hidden_reisklasse = 'visibility-hidden';
     @property() visibility_hidden_zakelijkprive = 'visibility-hidden';
+    @property() _visibility_hidden_partII = 'visibility-hidden';
 
     @property() _vertrekTijd = '';
     @property() _aankomstTijd = '';
@@ -25,7 +26,6 @@ export class InvoerenReizen extends LitElement {
     @property() _demoKosten = '111,11';
     @property() _demoVertrekLocatie = 'Amsterdam';
     @property() _demoAankomstLocatie = 'Utrecht';
-
     @property() inputfield = 'inputfield';
     @property() _vervoerMiddelDummyData = [];
     @property() _gekozenC02: string | undefined;
@@ -33,7 +33,7 @@ export class InvoerenReizen extends LitElement {
 
     constructor() {
         super();
-        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
+        sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
         let now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
         now.setMilliseconds(0);
@@ -50,108 +50,113 @@ export class InvoerenReizen extends LitElement {
 
     static get styles() {
         return css`
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        text-decoration: none;
-      }
-      .full {
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-      }
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+          }
 
-      H1 {
-        padding-top: 1em;
-        font-size: 2em;
-        padding-bottom: 0.5em;
-      }
-      header p {
-        font-size: 1em;
-      }
+          .full {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+          }
 
-      table {
-        padding: 1em;
-        background: var(--kpn-blauw);
-      }
-      label {
-        display: none;
-      }
+          ._visibility_hidden_partII {
+            visibility: hidden;
+          }
 
-      form {
-        margin-top: 1em;
-        padding-left: 1em;
-        padding-right: 1em;
-      }
+          H1 {
+            padding-top: 1em;
+            font-size: 2em;
+            padding-bottom: 0.5em;
+          }
 
-      ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-      }
+          header p {
+            font-size: 1em;
+          }
 
-      ol {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-      }
+          table {
+            padding: 1em;
+            background: var(--kpn-blauw);
+          }
 
-      li {
-        padding: 0.1em;
-      }
+          form {
+            margin-top: 1em;
+            padding-left: 1em;
+            padding-right: 1em;
+          }
 
-      fieldset {
-        padding-left: 1em;
-        padding-right: 1em;
-        font-color: var(--kpn-zwart);
-      }
+          ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+          }
 
-      #vervoerstype {
-        background-color: var(--kpn-groen);
-      }
+          ol {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+          }
 
-      .inputfield {
-        width: 100%;
-        padding: 0.8em 0.4px;
-        /*margin: 0.1em;*/
-        border: none;
-        border-radius: 4px;
-        background-color: var(--kpn-blauw);
-        vertical-align: middle;
-        text-indent: 0.7em;
-      }
+          li {
+            padding: 0.1em;
+          }
 
-      /*Buttons: */
-      input[type='button'],
-      input[type='submit'],
-      input[type='reset'] {
-        width: 33%;
-        background-color: var(--kpn-zwart);
-        border: none;
-        color: var(--kpn-wit);
-        padding: 1em 0px;
-        text-decoration: none;
-        margin: 4px 2px;
-        cursor: pointer;
-      }
+          fieldset {
+            padding-left: 1em;
+            padding-right: 1em;
+            font-color: var(--kpn-zwart);
+          }
 
-      .visibility-hidden {
-        display: none;
-        pointer-events: none;
-        color: lightgrey;
-        foreground-color: var(--kpn-grijs);
-        background-color: var(--kpn-grijs);
-        required: invalid;
-      }
-      #feedbackSpan {
-        background-color: var(--kpn-blauw);
-        place-items: center;
-        text-align: center;
-      }
-    `;
+          #vervoerstype {
+            background-color: var(--kpn-groen);
+          }
+
+          .inputfield {
+            width: 100%;
+            padding: 0.8em 0.4px;
+            /*margin: 0.1em;*/
+            border: none;
+            border-radius: 4px;
+            background-color: var(--kpn-blauw);
+            vertical-align: middle;
+            text-indent: 0.7em;
+          }
+
+          /*Buttons: */
+
+          input[type='button'],
+          input[type='submit'],
+          input[type='reset'] {
+            width: 33%;
+            background-color: var(--kpn-zwart);
+            border: none;
+            color: var(--kpn-wit);
+            padding: 1em 0px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+          }
+
+          .visibility-hidden {
+            display: none;
+            pointer-events: none;
+            color: lightgrey;
+            foreground-color: var(--kpn-grijs);
+            background-color: var(--kpn-grijs);
+            required: invalid;
+          }
+
+          #feedbackSpan {
+            background-color: var(--kpn-blauw);
+            place-items: center;
+            text-align: center;
+          }
+        `;
     }
 
     connectedCallback() {
@@ -176,61 +181,51 @@ export class InvoerenReizen extends LitElement {
             <main>
                 <form class="formulierReizen" id="formulierReizen">
                     <hr/>
-                    <ol>
-                        <div id="typeVervoerDiv2">
-                            <li>
-                                <label for="vervoerstype">typeVervoer:</label>
-                                <select id="vervoerstype" class="${
-            this.inputfield
-        }" required focus>
-                                    ${this._vervoerMiddelDummyData.map(
-            ({naam, uitstoot}) => html`
-                                        <option
-                                          disabled
-                                          hidden="${this._hidden}"
-                                          selected
-                                          value="0"
-                                        >
-                                          "kies hier uw vervoerstype!"
-                                        </option>
-                                        <option
-                                          @click="${this.optionClicked}"
-                                          id=${naam}
-                                          value=${uitstoot}
-                                        >
-                                          ${naam}
-                                        </option>
-                                      `
-        )}
-                                </select>
-                                <div id="vertrekLocatieDiv">
+                    <div id="formDeelEen">
+                        <li>
+                            <label for="vervoerstype">typeVervoer:</label>
+                            <select id="vervoerstype" class="${this.inputfield}" required focus>
+                                ${this._vervoerMiddelDummyData.map(({naam, uitstoot}) => html`
+                                    <option
+                                            disabled
+                                            hidden="${this._hidden}"
+                                            selected
+                                            value="0"
+                                    >
+                                        "kies hier uw vervoerstype!"
+                                    </option>
+                                    <option
+                                            @click="${this.optionClicked}"
+                                            id=${naam}
+                                            value=${uitstoot}
+                                    >
+                                        ${naam}
+                                    </option>
+                                `)}
+                            </select>
+                        </li>
+                    </div>
+                    <div class="formDeelTwee" hidden>
+
+                        <div id="vertrekLocatieDiv">
                             <li class="alleenzakelijk" required>
                                 <label for="vertrekLocatie">Vertrek locatie:</label>
-                                <input class="${
-            this.inputfield
-        }" id="vertrekLocatie" name="vertrekLocatie"
-                                       placeholder="Vertrek locatie" value=${
-            this._demoVertrekLocatie
-        }/>
+                                <input class="${this.inputfield}" id="vertrekLocatie" name="vertrekLocatie"
+                                       placeholder="Vertrek locatie" value=${this._demoVertrekLocatie}/>
                             </li>
                         </div>
                         <div id="aankomstLocatieDiv">
                             <li class="alleenzakelijk" required>
                                 <label for="aankomstLocatie">Aankomst locatie:</label>
-                                <input class="${
-            this.inputfield
-        }" id="aankomstLocatie" name="aankomstLocatie"
-                                       placeholder="Aankomst locatie" value=${
-            this._demoAankomstLocatie
-        }/>
+                                <input class="${this.inputfield}" id="aankomstLocatie" name="aankomstLocatie"
+                                       placeholder="Aankomst locatie" value=${this._demoAankomstLocatie}/>
                             </li>
                         </div>
                         <div id="beginTijdDiv">
                             <li>
                                 <label for="beginTijd">Begin tijd:</label>
-                                <input @input=inputCallback class="${
-            this.inputfield
-        }" id="beginTijd" name="beginTijd"
+                                <input @input=inputCallback class="${this.inputfield}" id="beginTijd"
+                                       name="beginTijd"
                                        required
                                        value="${this._vertrekTijd}"
                                        max="${this.beginTijdMax}"
@@ -241,11 +236,8 @@ export class InvoerenReizen extends LitElement {
                         <div id="eindTijdDiv">
                             <li>
                                 <label for="eindTijd">Eind tijd:</label>
-                                <input class="${
-            this.inputfield
-        }" id="eindTijd" required value="${
-            this._aankomstTijd
-        }"
+                                <input class="${this.inputfield}" id="eindTijd" required
+                                       value="${this._aankomstTijd}"
                                        min="${this.eindTijdMin}"
                                        type="datetime-local"/>
                             </li>
@@ -253,9 +245,8 @@ export class InvoerenReizen extends LitElement {
                         <div id="kmDiv">
                             <li required>
                                 <label for="km" value="10">km:</label>
-                                <input class="${
-            this.inputfield
-        }" id="km" name="km" placeholder="Gereisde km" required
+                                <input class="${this.inputfield}" id="km" name="km" placeholder="Gereisde km"
+                                       required
                                        type="text"
                                        value="${this._demoKM}"/>
                             </li>
@@ -263,9 +254,7 @@ export class InvoerenReizen extends LitElement {
                         <div id="kostenDiv">
                             <li class="alleenzakelijk" required>
                                 <label for="kosten">kosten:</label>
-                                <input class="${
-            this.inputfield
-        }" id="kosten" name="kosten"
+                                <input class="${this.inputfield}" id="kosten" name="kosten"
                                        placeholder="Kosten in euro's"
                                        value="${this._demoKosten}"/>
                             </li>
@@ -273,9 +262,7 @@ export class InvoerenReizen extends LitElement {
                         <div id="projectDiv">
                             <li class="alleenzakelijk" required>
                                 <label for="project">Project:</label>
-                                <select class="${
-            this.inputfield
-        }" id="project" name="project">
+                                <select class="${this.inputfield}" id="project" name="project">
                                     <option disabled hidden selected value="0">Kies hier het project
                                         waar u
                                         voor hebt gereisd.
@@ -287,68 +274,65 @@ export class InvoerenReizen extends LitElement {
                                 </select>
                             </li>
                         </div>
-                    </ol>
-                    <div id="reisKlasseKeuzeMenu" class="${
-            this.visibility_hidden_reisklasse
-        }">
-                        <fieldset>
-                            <ol>
-                                <legend>Reisklasse keuze:</legend>
-                                <li>
-                                    <label for="eersteKlas" style="float:left" hidden>Eerste klas</label>
-                                    <input id="eersteKlas" name="klasse"
-                                           type="radio" value="true"/> Eerste klas
-                                </li>
-                                <li>
-                                    <label for="tweedeKlas" style="float:left" hidden>Tweede klas</label>
-                                    <input id="tweedeKlas" name="klasse"
-                                           type="radio" value="true"/> Tweede klas
-                                </li>
-                                <li>
-                                    <label for="highspeed" style="float:left" hidden>NS-Highspeed</label>
-                                    <input id="highspeed" name="klasse"
-                                           type="radio" value="true"/> NS-Highspeed
-                                </li>
-                            </ol>
-                        </fieldset>
-                    </div>
-                    <div id="priveZakelijkKeuzeMenu" class="${
-            this.visibility_hidden_zakelijkprive
-        }">
-                        <fieldset>
-                            <ul>
-                                <legend>Prive of zakelijke reis:</legend>
-                                <li>
-                                    <label for="zakelijk" style="float:left" hidden>Zakelijk</label>
-                                    <input id="zakelijk" name="zakelijk-prive"
-                                           type="radio" value="true"
-                                           @click=""
-                                    /> Zakelijk
-                                </li>
-                                <li>
-                                    <label for="prive" style="float:left" hidden></label>
-                                    <input id="prive" name="zakelijk-prive"
-                                           type="radio" value="true"/> Prive
-                                </li>
-                            </ul>
-                        </fieldset>
-                    </div>
-                    <div id="buttonsUnderFormDiv">
-                        <label for="verzendReis" hidden">Verzend</label>
-                        <input class="verzendReis" id="verzendReis" type="submit" value="verzendReis">
+                        <div id="reisKlasseKeuzeMenu">
+                            <fieldset class="${this.visibility_hidden_reisklasse}">
+                                <ol>
+                                    <legend>Reisklasse keuze:</legend>
+                                    <li>
+                                        <label for="eersteKlas" style="float:left" hidden>Eerste klas</label>
+                                        <input id="eersteKlas" name="klasse"
+                                               type="radio" value="true"/> Eerste klas
+                                    </li>
+                                    <li>
+                                        <label for="tweedeKlas" style="float:left" hidden>Tweede klas</label>
+                                        <input id="tweedeKlas" name="klasse"
+                                               type="radio" value="true"/> Tweede klas
+                                    </li>
+                                    <li>
+                                        <label for="highspeed" style="float:left" hidden>NS-Highspeed</label>
+                                        <input id="highspeed" name="klasse"
+                                               type="radio" value="true"/> NS-Highspeed
+                                    </li>
+                                </ol>
+                            </fieldset>
+                        </div>
+                        <div id="priveZakelijkKeuzeMenu">
+                            <fieldset class="${this.visibility_hidden_zakelijkprive}">
+                                <ul>
+                                    <legend>Prive of zakelijke reis:</legend>
+                                    <li>
+                                        <label for="zakelijk" style="float:left" hidden>Zakelijk</label>
+                                        <input id="zakelijk" name="zakelijk-prive"
+                                               type="radio" value="true"
+                                               @click=""
+                                        /> Zakelijk
+                                    </li>
+                                    <li>
+                                        <label for="prive" style="float:left" hidden></label>
+                                        <input id="prive" name="zakelijk-prive"
+                                               type="radio" value="true"/> Prive
+                                    </li>
+                                </ul>
+                            </fieldset>
+                        </div>
+                        </part-two>
 
-                        <label for="zenden" hidden">Zenden(custom)</label>
-                        <button id="zenden" @click=${
-            this.formElements
-        }>Zenden(custom)</button>
+                        <div id="buttonsUnderFormDiv">
+                            <label for="verzendReis" hidden">Verzend</label>
+                            <input class="verzendReis" id="verzendReis" type="submit" value="verzendReis">
 
-                        <label for="resetButton">Herlaad en leeg het formulier.</label>
-                        <input id="resetButton" type="reset" value="Reset velden">
-                        <br>
-                        <label for="herhalendeReisButton">Sla op als herhalende reis.</label>
-                        <input id="herhalendeReisButton" type="checkbox" value="Reset velden" disabled> Herhalende
-                        reis. [under-construction]
+                            <label for="zenden" hidden">Zenden(custom)</label>
+                            <button id="zenden" @click=${this.formElements}>Zenden(custom)</button>
+
+                            <label for="resetButton">Herlaad en leeg het formulier.</label>
+                            <input id="resetButton" type="reset" value="Reset velden">
+                            <br>
+                            <label for="herhalendeReisButton">Sla op als herhalende reis.</label>
+                            <input id="herhalendeReisButton" type="checkbox" value="Reset velden" disabled> Herhalende
+                            reis. [under-construction]
+                        </div>
                     </div>
+
                 </form>
                 <div id="feedbackSpan">
                     ${this.span_message}
@@ -367,8 +351,7 @@ export class InvoerenReizen extends LitElement {
 
     optionClicked(option: {
         originalTarget: {
-            value: string;
-            id: string;
+            value: string; id: string;
         };
     }) {
         console.log('optionClicked');
