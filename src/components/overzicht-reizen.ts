@@ -2,6 +2,10 @@ import {css, html, LitElement, PropertyValueMap} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
 import {InvoerenReizen} from "./invoeren-reizen";
 
+import {ajax} from 'rxjs/ajax';
+import {map, catchError, of} from 'rxjs';
+import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, RouterLocation} from "@vaadin/router";
+
 // import * as Rx from 'rx-dom';
 
 /**
@@ -27,6 +31,8 @@ export class OverzichtReizen extends LitElement {
     @property() _sorted7 = false;
     @property() sortsymboldown = '&#5167;';
     @property() sortsymbolUP = '&#11016;';
+    private _unsavedData = false;
+
 
     constructor() {
         super();
@@ -44,6 +50,18 @@ export class OverzichtReizen extends LitElement {
                 this._reizenDummyData = Array.from(json);
                 console.log(this._reizenDummyData);
             });
+        //TODO implement AJAX observable
+
+        // const obs$ = ajax('https://api.github.com/users?per_page=5').pipe(map(userResponse => console.log('users: ', userResponse)), catchError(error => {
+        //     console.log('error: ', error);
+        //     return of(error);
+        // }));
+        //
+        // obs$.subscribe({
+        //     next: value => console.log(value), error: err => console.log(err)
+        // });
+
+
     }
 
     static get styles() {
@@ -441,5 +459,43 @@ export class OverzichtReizen extends LitElement {
             default:
                 break;
         }
+    }
+    public onChange() {
+        this._unsavedData = true;
+    }
+    public onBeforeEnter(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): Promise<unknown> | RedirectResult | undefined {
+        console.log('onBeforeEnter');
+        if (!this.isAuthorized()) {
+            // sync operation
+            // return commands.redirect('/');
+
+            // async operation
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log('Not authorized, redirect to home page');
+                    resolve(commands.redirect('/login'));
+                }, 2000);
+            });
+        }
+
+        console.log('You can see this page');
+    }
+
+    public onBeforeLeave(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): PreventResult | undefined {
+        if (this._unsavedData) {
+
+            console.log('onBeforeLeave');
+
+            const leave = window.confirm('Weet je zeker dat je deze pagina wil verlaten? \nUw ingevoerde gegevens zijn nog niet verzonden!');
+            if (!leave) {
+                console.log('onBeforeLeave commands.prevent()');
+                return commands.prevent();
+            }
+        }
+    }
+
+
+    private isAuthorized() {
+        return !!sessionStorage.getItem('userID');
     }
 }

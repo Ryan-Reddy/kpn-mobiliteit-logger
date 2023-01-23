@@ -12,15 +12,12 @@ import loginDTO from "../domain/loginDTO";
 
 @customElement('login-element')
 export class Login extends LitElement {
-    // @property() currentPage: string;
     @property() _loginData: loginDTO | undefined;
     @property() _passwordInput = "wachtwoord";
-    // @queryAll('.inputfield') _allInputs?: NodeListOf<HTMLInputElement> | undefined;
-
     @property() _emailId = "_emailId";
     @property() _passwordId = "_passwordId";
-    @query('#_emailId') _emailInputElement?: HTMLInputElement;
-    @query('#_passwordId') _passwordInputElement?: HTMLInputElement;
+    @query('#_emailId') _emailInputElement!: HTMLInputElement;
+    @query('#_passwordId') _passwordInputElement!: HTMLInputElement;
     @property() _shadowRoot: any;
     private _currentPageTitle = "Login";
 

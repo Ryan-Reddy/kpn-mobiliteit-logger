@@ -16,7 +16,6 @@
 
     <link href="css/main.css" rel="stylesheet"/>
 
-    <title>KPN</title>
 </head>
 
 <menu-nav-element></menu-nav-element>
@@ -26,7 +25,8 @@
 </main>
 <script>
   // addEventListener('storage', (event) => { });
-  window.onstorage = (event) => {
+
+  window.onchange = (event) => {
 
   let title = sessionStorage.getItem('currentpagetitle');
     console.log(title);

@@ -1,5 +1,6 @@
 import {css, html, LitElement} from 'lit';
 import {customElement, property} from 'lit/decorators.js';
+import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, RouterLocation} from "@vaadin/router";
 
 /**
  * An example element.
@@ -11,6 +12,7 @@ import {customElement, property} from 'lit/decorators.js';
 @customElement('account-info-element')
 export class Accountinfo extends LitElement {
     @property() _currentPageTitle = 'Account info';
+    private _unsavedData = false;
 
     constructor() {
         super();
@@ -194,5 +196,43 @@ export class Accountinfo extends LitElement {
 
         //notify parent:
         this.dispatchEvent(new Event('page-chosen'));
+    }
+    public onChange() {
+        this._unsavedData = true;
+    }
+    public onBeforeEnter(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): Promise<unknown> | RedirectResult | undefined {
+        console.log('onBeforeEnter');
+        if (!this.isAuthorized()) {
+            // sync operation
+            // return commands.redirect('/');
+
+            // async operation
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log('Not authorized, redirect to home page');
+                    resolve(commands.redirect('/login'));
+                }, 2000);
+            });
+        }
+
+        console.log('You can see this page');
+    }
+
+    public onBeforeLeave(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): PreventResult | undefined {
+        if (this._unsavedData) {
+
+            console.log('onBeforeLeave');
+
+            const leave = window.confirm('Weet je zeker dat je deze pagina wil verlaten? \nUw ingevoerde gegevens zijn nog niet verzonden!');
+            if (!leave) {
+                console.log('onBeforeLeave commands.prevent()');
+                return commands.prevent();
+            }
+        }
+    }
+
+
+    private isAuthorized() {
+        return !!sessionStorage.getItem('userID');
     }
 }

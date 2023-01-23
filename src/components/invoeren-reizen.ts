@@ -1,6 +1,7 @@
 import {css, html, LitElement} from 'lit';
 import {customElement, property, query, eventOptions, queryAll} from 'lit/decorators.js';
 import {Thermometer} from "./global/thermometer";
+import { PreventAndRedirectCommands, Router, RouterLocation, RedirectResult, PreventResult} from "@vaadin/router";
 
 /**
  * An example element.
@@ -32,7 +33,7 @@ export class InvoerenReizen extends LitElement {
     @queryAll('._alleenZakelijkClass') _alleenZakelijkClassElementList!: NodeListOf<HTMLElement>;
 
     @query('form') _entireForm!: HTMLFormElement;
-    @property() _userName = '';
+    @property() _userName!: string;
     private _unsavedData = false;
 
     constructor() {
@@ -44,13 +45,13 @@ export class InvoerenReizen extends LitElement {
         fetch('/vervoermiddel-CO2.json')
             .then((response) => response.json())
             .then((json) => {
-                let res = json.map(({naam, uitstoot}) => ({naam: naam, uitstoot: uitstoot}));
+                let res = json.map(({naam, uitstoot} : {naam:any, uitstoot:any}) => ({naam: naam, uitstoot: uitstoot}));
                 console.log(res)
 
                 this._vervoerMiddelDummyData = res;
             });
-        this._userName = sessionStorage.getItem('userID');
-        let now = new Date();
+        this._userName = sessionStorage.getItem('userID')!;
+        let now = new Date()!;
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
         now.setMilliseconds(0);
         now.setSeconds(0);
@@ -62,6 +63,7 @@ export class InvoerenReizen extends LitElement {
         this._aankomstTijd = now1.toISOString().slice(0, -1);
         this.eindTijdMin = this._vertrekTijd;
         this.beginTijdMax = this._aankomstTijd + 60;
+
 
     }
 
@@ -185,7 +187,7 @@ export class InvoerenReizen extends LitElement {
                         <li>
                             <label for="vervoerstype">typeVervoer:</label>
                             <select name="type" id="vervoerstype" class="${this.inputfield}" required
-                                    @click="${this._vehicleChosen}">
+                                    >
                                 ${this._vervoerMiddelDummyData.map(({naam, uitstoot}) => html`
                                     <option
                                             disabled
@@ -293,7 +295,7 @@ export class InvoerenReizen extends LitElement {
 
                         <label for="zenden" hidden">Zenden(custom)</label>
                         <input class="bottomButtons" id="zenden" form="formulierReizen" type="button"
-                               @click=${e => this.customFormSend()} value="Verzenden">
+                               @click=${this.customFormSend} value="Verzenden">
 
                         <label for="resetButton" hidden>Herlaad en leeg het formulier.</label>
                         <input class="bottomButtons" id="resetButton" type="reset" value="Reset velden"
@@ -419,6 +421,7 @@ export class InvoerenReizen extends LitElement {
         formData.append('tijdvanopslaan', nuTijd)
 
         const object = {};
+        // @ts-ignore
         formData.forEach((value, key) => object[key] = value);
         const jsonFormData = JSON.stringify(object);
 
@@ -434,6 +437,15 @@ export class InvoerenReizen extends LitElement {
 
     };
 
+    private _dispatchEventUitstoot() {
+        console.log('_vehicleChosen reached')
+
+        const myEvent = new CustomEvent('mercury', {
+            detail: {uitstoot: this._gekozenC02, voertuigkeuze: this._gekozenVoertuig}, bubbles: true, composed: true
+        });
+        this.dispatchEvent(myEvent);
+    }
+
     public onChange() {
         this._unsavedData = true;
     }
@@ -448,7 +460,7 @@ export class InvoerenReizen extends LitElement {
             return new Promise((resolve, reject) => {
                 setTimeout(() => {
                     console.log('Not authorized, redirect to home page');
-                    resolve(commands.redirect('/'));
+                    resolve(commands.redirect('/login'));
                 }, 2000);
             });
         }
@@ -469,14 +481,6 @@ export class InvoerenReizen extends LitElement {
         }
     }
 
-    private _dispatchEventUitstoot() {
-        console.log('_vehicleChosen reached')
-
-        const myEvent = new CustomEvent('mercury', {
-            detail: {uitstoot: this._gekozenC02, voertuigkeuze: this._gekozenVoertuig}, bubbles: true, composed: true
-        });
-        this.dispatchEvent(myEvent);
-    }
 
     private isAuthorized() {
         return !!sessionStorage.getItem('userID');
