@@ -54,7 +54,14 @@ export class ReadmeElement extends LitElement {
             <body>
             <main>
                 <h1>README FILE</h1>
-                <zero-md src="../README.md"></zero-md>
+                <zero-md src="../README.md">
+                    <template>
+                        <!-- Define your own styles inside a \`<style>\` tag -->
+                        <style>
+                            ;
+                        </style>
+                    </template>
+                </zero-md>
 
             </main>
 
