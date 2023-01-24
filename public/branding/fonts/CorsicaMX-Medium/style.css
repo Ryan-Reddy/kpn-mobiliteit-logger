@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Corsica MX';
+    src: local('Corsica MX Medium'), local('Corsica-MX-Medium'),
+        url('CorsicaMX-Medium.woff2') format('woff2'),
+        url('CorsicaMX-Medium.woff') format('woff'),
+        url('CorsicaMX-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
