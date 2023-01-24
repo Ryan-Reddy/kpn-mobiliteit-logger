@@ -1,18 +1,12 @@
 import {css, html, LitElement, PropertyValueMap} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
-
-import {ajax} from 'rxjs/ajax';
-import {map, catchError, of} from 'rxjs';
 import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, RouterLocation} from "@vaadin/router";
 
 import '@vaadin/grid';
 import '@vaadin/grid/vaadin-grid-selection-column.js';
-// import '@vaadin/vaadin-grid';
-// import '@vaadin/grid/vaadin-grid-selection-column.js';
-// import '@vaadin/select';
-// import '@vaadin/notification';
-// import { getPeople } from 'Frontend/demo/domain/DataService.java';
-// import type Person from 'Frontend/generated/com/vaadin/demo/domain/Person';
+
+import './example-indicator';
+import './example-chart';
 
 
 /**
@@ -211,77 +205,86 @@ export class OverzichtReizen extends LitElement {
 
     render() {
         return html`
-            <header>
-                <h1 class="header">${this._currentPageTitle}</h1>
-            </header>
+            <head>
+                <style>
+                    .filter0 { grid-area: filter0; }
+                    .filter1 { grid-area: filter1; }
+                    .filter2 { grid-area: filter2; }
+                    .filter3 { grid-area: filter3; }
+                    .filter4 { grid-area: filter4; }
+                    .filter5 { grid-area: filter5; }
+                    .item1 { grid-area: header; }
+                    .item2 { grid-area: menu; }
+                    .chart { grid-area: chart; }
+                    .item4 { grid-area: right; }
+                    .item5 { grid-area: footer; }
+
+                    .grid-container {
+                        display: grid;
+                        grid-template-areas:
+                        'filter0    filter1 filter2 filter3 filter4 filter5'
+                        'menu       header  header  header  header  right'
+                        'menu       chart    chart    chart    chart   right'
+                        'menu       footer  footer  footer  footer  right';
+                        gap: 10px;
+                        background-color: #2196F3;
+                        padding: 10px;
+                    }
+
+                    .grid-container > div {
+                        background-color: var(--kpn-blauw);
+                        color: var(--kpn-wit);
+
+                        text-align: center;
+                        padding: 20px 10%;
+                        font-size: 30px;
+                    }
+                </style>
+            </head>
             <body>
-            <main>
-                test
-                <vaadin-grid .items="${this._reizenDummyData}">
-                    <vaadin-grid-selection-column auto-select>
-                    </vaadin-grid-selection-column>
-                    <vaadin-grid-column path="Project"></vaadin-grid-column>
-                    <vaadin-grid-column path="type"></vaadin-grid-column>
-                    <vaadin-grid-column path="beginTijd"></vaadin-grid-column>
-                    <vaadin-grid-column path="eindTijd"></vaadin-grid-column>
-                    <vaadin-grid-column path="vertrekLocatie"></vaadin-grid-column>
-                    <vaadin-grid-column path="aankomstLocatie"></vaadin-grid-column>
-                    <vaadin-grid-column path="C02"></vaadin-grid-column>
-                    <vaadin-grid-column path="Kosten"></vaadin-grid-column>
-                    <vaadin-grid-column path="km"></vaadin-grid-column>
-                    <vaadin-grid-column path="klasse"></vaadin-grid-column>
-                    <vaadin-grid-column path="zakelijkOfPrive"></vaadin-grid-column>
-                </vaadin-grid>
-            </main>
+
+            <h1>Grid Layout</h1>
+
+            <p>This grid layout contains six columns and three rows:</p>
+            <div class="grid-container">
+                <div class="item00">
+                    <example-indicator current="745" change="+33.7" title="Current users"></example-indicator>
+                </div>
+                <div class="item01"><example-indicator
+                        current="54.6k"
+                        change="-112.45"
+                        title="View events"
+                ></example-indicator></div>
+                <div class="item02"><example-indicator
+                        current="54.6k"
+                        change="-112.45"
+                        title="View events"
+                ></example-indicator></div>
+                <div class="item03"><example-indicator
+                        current="18%"
+                        change="+3.9"
+                        title="Conversion rate"
+                ></example-indicator></div>
+                <div class="item04">
+                    <example-indicator current="-123.45" title="Custom metric"></example-indicator>
+                </div>
+                <div class="item05">
+                    <example-indicator current="-123.45" title="Custom metric"></example-indicator>
+                </div>
+                <div class="item1">Header</div>
+                <div class="item2">Menu</div>
+                <div class="chart">Chart here</div>
+                <div class="item4">Right</div>
+                <div class="item5">Footer</div>
+            </div>
+
+            
+            
+            
+
+<!--            <example-chart></example-chart>-->
+            
             </body>
-            <script>
-                addEventListener('WebComponentsReady', function() {
-                    Polymer({
-                        is: 'dataprovider-select-all',
-
-                        properties: {
-                            inverted: {
-                                type: Boolean,
-                                value: false
-                            },
-                            indeterminate: {
-                                type: Boolean,
-                                value: false
-                            }
-                        },
-
-                        observers: ['_resetSelection(inverted)'],
-
-                        _resetSelection: function(inverted) {
-                            this.$.grid.selectedItems = [];
-                            this.updateStyles();
-                            this.indeterminate = false;
-                        },
-
-                        _invert: function(e) {
-                            this.inverted = !this.inverted;
-                        },
-
-                        // iOS needs indeterminated + checked at the same time
-                        _isChecked: function(inverted, indeterminate) {
-                            return indeterminate || inverted;
-                        },
-
-                        _selectItem: function(e) {
-                            if (e.target.checked === this.inverted) {
-                                this.$.grid.deselectItem(e.model.item);
-                            } else {
-                                this.$.grid.selectItem(e.model.item);
-                            }
-                            this.indeterminate = this.$.grid.selectedItems.length > 0;
-                        },
-
-                        _isSelected: function(inverted, selected) {
-                            return inverted != selected;
-                        }
-                    });
-                });
-            </script>
         `;
     }
     public onChange() {
