@@ -23,12 +23,13 @@ export class OverzichtReizen extends LitElement {
     @property() _vervoerMiddelDummyData = [];
     @property() _reizenDummyData = [];
     // @property() items: Person[] = [];
-    @state() @property() data$: Observable<any>;
+    @state() @property() data$: Observable<any> | undefined;
     // @state()
     @property() _unsavedData = false;
     @property() _totaleC02= 500;
     @property() _totaleKM= 34703;
     @property() _persoonlijkeKM=200;
+    private _persoonlijkeC02= 20;
 
     constructor() {
         super();
@@ -41,6 +42,8 @@ export class OverzichtReizen extends LitElement {
                 this._vervoerMiddelDummyData = Array.from(json);
                 console.log(this._vervoerMiddelDummyData);
             });
+
+        console.log(this._vervoerMiddelDummyData)
 
     }
 
@@ -71,28 +74,6 @@ export class OverzichtReizen extends LitElement {
 
           main {
           }
-
-          .tablecontainer {
-            height: 60vh;
-            overflow: auto;
-          }
-
-          table {
-            background: var(--kpn-zwart);
-            max-height: 100%;
-          }
-
-          th {
-            padding: 0.6em;
-            border-bottom: 1px dotted #ddd;
-            border-collapse: collapse;
-          }
-
-          .columnHeads {
-            background: var(--kpn-groen);
-            cursor: pointer;
-          }
-
           @media (max-width: 858px) {
             .hiddensmolscreen {
               display: none;
@@ -124,7 +105,6 @@ export class OverzichtReizen extends LitElement {
 
     connectedCallback() {
         super.connectedCallback();
-        this.firstUpdated()
     }
 
     /**
@@ -155,53 +135,6 @@ export class OverzichtReizen extends LitElement {
         this.data$.subscribe({
             next: result => console.log(result), complete: () => console.log('done')
         })
-    }
-
-
-    //TODO: make tableToCSV work with lit
-    // https://www.geeksforgeeks.org/how-to-export-html-table-to-csv-using-javascript/
-    tableToCSV() {
-        //   console.log('tableToCSV');
-        //   // Variable to store the final csv data
-        //   var csv_data = [];
-        //   // Get each row data
-        //   var rows = document.getElementsByTagName('tr');
-        //   for (var i = 0; i < rows.length; i++) {
-        //     // Get each column data
-        //     var cols = rows[i].querySelectorAll('td,th');
-        //     // Stores each csv row data
-        //     var csvrow = [];
-        //     for (var j = 0; j < cols.length; j++) {
-        //       // Get the text data of each cell of a row and push it to csvrow
-        //       csvrow.push(cols[j].innerHTML);
-        //     }
-        //     csv_data.push(csvrow.join(","));
-        //   }
-        //   csv_data = csv_data.join('\n');
-        // }
-        //
-        // downloadCSVFile(csv_data) {
-        //
-        //   // Create CSV file object and feed our
-        //   // csv_data into it
-        //   let CSVFile = new Blob([csv_data], { type: "text/csv" });
-        //
-        //   // Create to temporary link to initiate
-        //   // download process
-        //   var temp_link = document.createElement('a');
-        //
-        //   // Download csv file
-        //   temp_link.download = "GfG.csv";
-        //   var url = window.URL.createObjectURL(CSVFile);
-        //   temp_link.href = url;
-        //
-        //   // This link should not be displayed
-        //   temp_link.style.display = "none";
-        //   document.body.appendChild(temp_link);
-        //
-        //   // Automatically click the link to trigger download
-        //   temp_link.click();
-        //   document.body.removeChild(temp_link);
     }
 
     render() {
@@ -317,9 +250,6 @@ export class OverzichtReizen extends LitElement {
                 </div>
                 <div class="item1">Header</div>
                 <div class="item2">Menu</div>
-                
-<!--                 TODO might delete script import: -->
-                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <div class="chart">
                     <chart-element></chart-element>
                 </div>

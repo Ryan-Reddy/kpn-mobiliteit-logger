@@ -4,6 +4,7 @@ import {InvoerenReizen} from "./invoeren-reizen";
 
 import type { GridActiveItemChangedEvent } from '@vaadin/grid';
 import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, RouterLocation} from "@vaadin/router";
+import csvDownload from 'json-to-csv-export'
 
 /**
  * An example element.
@@ -154,53 +155,6 @@ export class OverzichtReizen extends LitElement {
         super.update(changed);
         console.log('updated YAAY')
     }
-
-    //TODO: make tableToCSV work with lit
-    // https://www.geeksforgeeks.org/how-to-export-html-table-to-csv-using-javascript/
-    tableToCSV() {
-        //   console.log('tableToCSV');
-        //   // Variable to store the final csv data
-        //   var csv_data = [];
-        //   // Get each row data
-        //   var rows = document.getElementsByTagName('tr');
-        //   for (var i = 0; i < rows.length; i++) {
-        //     // Get each column data
-        //     var cols = rows[i].querySelectorAll('td,th');
-        //     // Stores each csv row data
-        //     var csvrow = [];
-        //     for (var j = 0; j < cols.length; j++) {
-        //       // Get the text data of each cell of a row and push it to csvrow
-        //       csvrow.push(cols[j].innerHTML);
-        //     }
-        //     csv_data.push(csvrow.join(","));
-        //   }
-        //   csv_data = csv_data.join('\n');
-        // }
-        //
-        // downloadCSVFile(csv_data) {
-        //
-        //   // Create CSV file object and feed our
-        //   // csv_data into it
-        //   let CSVFile = new Blob([csv_data], { type: "text/csv" });
-        //
-        //   // Create to temporary link to initiate
-        //   // download process
-        //   var temp_link = document.createElement('a');
-        //
-        //   // Download csv file
-        //   temp_link.download = "GfG.csv";
-        //   var url = window.URL.createObjectURL(CSVFile);
-        //   temp_link.href = url;
-        //
-        //   // This link should not be displayed
-        //   temp_link.style.display = "none";
-        //   document.body.appendChild(temp_link);
-        //
-        //   // Automatically click the link to trigger download
-        //   temp_link.click();
-        //   document.body.removeChild(temp_link);
-    }
-
     render() {
         return html`
             <header>
@@ -236,7 +190,8 @@ export class OverzichtReizen extends LitElement {
                     ${JSON.stringify(this.selectedItems)}</p>
                 <button>Edit geselecteerde rij</button>
                 <button>Exporteren als..</button>
-                <button @click="${this.tableToCSV}">download CSV</button>
+                <button @click="${this.tableToCSVDownloader}">download CSV</button>
+                <button @click="${this.tableToJsonDownloader}">download JSON</button>
                 <button @click="${this.filterColumnOnTerm('nobis')}">Filter on 'nobis'</button>
                 <button onclick="print()">Print...</button>
             </main>
@@ -260,6 +215,36 @@ export class OverzichtReizen extends LitElement {
         this.dispatchEvent(new Event('page-chosen'));
         this.dispatchEvent(new Event('row-chosen'));
     }
+
+    //
+    // const dataToConvert = {
+    //     data: this._reizenDummyData,
+    //     filename: 'ip_addresses_report',
+    //     delimiter: ',',
+    //     headers: ['IP', "Full Name", "IP Address"]
+    // }
+    // tableToCSVDownloader() {
+    //
+    //
+    //     var dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(this.dataToConvert);
+    //     var downloadAnchorNode = document.createElement('a');
+    //     downloadAnchorNode.setAttribute("href",     dataStr);
+    //     downloadAnchorNode.setAttribute("download", exportName + ".json");
+    //     document.body.appendChild(downloadAnchorNode); // required for firefox
+    //     downloadAnchorNode.click();
+    //     downloadAnchorNode.remove();
+    // }
+
+    tableToJsonDownloader(exportObj: any, exportName: string){
+        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this._reizenDummyData));
+        var downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href",     dataStr);
+        downloadAnchorNode.setAttribute("download", exportName + ".json");
+        document.body.appendChild(downloadAnchorNode); // required for firefox
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+    }
+
 
     // TODO: fix filter and sort:
     filterColumnOnTerm(filter: string) {
