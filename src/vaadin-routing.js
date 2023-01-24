@@ -14,6 +14,7 @@ import './view/components/support';
 import './view/components/overzicht-reizen';
 import './view/components/invoeren-reizen';
 import './view/components/dashboard/dashboard';
+import './view/components/dashboard/example-chart';
 
 import './view/components/invoeren-reizen-wijzigen';
 
@@ -81,6 +82,11 @@ router.setRoutes([
     name: 'login-element', // doet niks impliciet
     path: '/',                  // standaard landingspage
     component: 'login-element',
+  },
+  {
+    name: 'chart-element', // doet niks impliciet
+    path: '/chart',                  // standaard landingspage
+    component: 'chart-element',
   },
   {
     name: 'dashboard-element', // doet niks impliciet

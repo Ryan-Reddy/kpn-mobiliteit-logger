@@ -30,6 +30,7 @@
     "@vaadin/vaadin-charts": "^23.3.5",
     "@vaadin/vaadin-grid": "^5.7.14",
     "@vaadin/vertical-layout": "^23.3.5",
+    "chart.js": "^4.2.0",
     "json-reader-writer": "^1.0.4",
     "lit": "^2.6.1",
     "rxjs": "^7.8.0",

@@ -317,8 +317,11 @@ export class OverzichtReizen extends LitElement {
                 </div>
                 <div class="item1">Header</div>
                 <div class="item2">Menu</div>
+                
+<!--                 TODO might delete script import: -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <div class="chart">
-                    <example-chart></example-chart>
+                    <chart-element></chart-element>
                 </div>
                 <div class="item4">Right</div>
                 <div class="item5">Footer</div>
