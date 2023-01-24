@@ -160,6 +160,7 @@ export class MenuFooter extends LitElement {
                         <li>
                             <a class="nav-button" href="support" id="Support">Support</a>
                         </li>
+                        <li><a class="nav-button" href="account-info" id="Account">Account</a></li>
                         <li>
                             <a class="nav-button" href="readme" id="Readme">Readme</a>
                         </li>

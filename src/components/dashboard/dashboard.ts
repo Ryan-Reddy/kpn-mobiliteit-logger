@@ -229,6 +229,9 @@ export class OverzichtReizen extends LitElement {
                         gap: 10px;
                         background-color: #2196F3;
                         padding: 10px;
+                        width: 95%;
+                        margin-left: auto;
+                        margin-right: auto;
                     }
 
                     .grid-container > div {
@@ -273,7 +276,9 @@ export class OverzichtReizen extends LitElement {
                 </div>
                 <div class="item1">Header</div>
                 <div class="item2">Menu</div>
-                <div class="chart">Chart here</div>
+                <div class="chart">
+                    <example-chart></example-chart>
+                </div>
                 <div class="item4">Right</div>
                 <div class="item5">Footer</div>
             </div>

@@ -36,10 +36,10 @@ export class Example extends LitElement {
     }
 
     @state()
-    private events: ViewEvent[] = [];
+    private _events: ViewEvent[] = [];
 
     async firstUpdated() {
-        this.events = await getViewEvents();
+        this._events = await this.getViewEvents();
     }
 
     render() {
@@ -47,12 +47,17 @@ export class Example extends LitElement {
       <header class="title">View events</header>
       <vaadin-chart .additionalOptions="${chartOptions}" .categories="${monthNames}" type="area">
         ${repeat(
-            this.events,
+            this._events,
             ({ id }) => id,
             ({ city, data }) =>
                 html`<vaadin-chart-series .title="${city}" .values="${data}"></vaadin-chart-series>`
         )}
       </vaadin-chart>
     `;
+    }
+
+
+    get getViewEvents(): ViewEvent[] {
+        return this._events;
     }
 }

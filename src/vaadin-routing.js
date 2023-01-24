@@ -78,9 +78,9 @@ router.setRoutes([
     component: 'thermometer-element',
   },
   {
-    name: 'home-page-element', // doet niks impliciet
+    name: 'login-element', // doet niks impliciet
     path: '/',                  // standaard landingspage
-    component: 'home-page-element',
+    component: 'login-element',
   },
   {
     name: 'dashboard-element', // doet niks impliciet

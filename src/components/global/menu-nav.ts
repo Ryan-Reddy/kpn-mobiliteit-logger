@@ -226,8 +226,8 @@ export class MenuNav extends LitElement {
                         <li>
                             <a class="nav-button" href="overzicht-reizen" id="Reisgeschiedenis">Reisgeschiedenis</a>
                         </li>
-                        <li><a class="nav-button" href="account-info" id="Account">Account</a></li>
-                        <li><a class="nav-button" href="support" id="Support">Support</a></li>
+                        <li><a class="dashboard-button" href="dashboard" id="Dashboard">Dashboard</a></li>
+
                         <li>
                             <a class="nav-button" href="#" id="Uitloggen">Uitloggen</a>
                         </li>
