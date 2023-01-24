@@ -1,21 +1,21 @@
 import {Router} from '@vaadin/router';
 
-import './components/account-info';
-import './components/home-page';
-import './components/login';
-import './components/global/menu-footer';
-import './components/global/menu-nav';
-import './components/global/thermometer';
-import './components/new-account';
-import './components/global/not-found';
-import './components/readme';
-import './components/reset-password';
-import './components/support';
-import './components/overzicht-reizen';
-import './components/invoeren-reizen';
-import './components/dashboard/dashboard';
+import './view/components/account-info';
+import './view/components/home-page';
+import './view/components/login';
+import './view/components/global/menu-footer';
+import './view/components/global/menu-nav';
+import './view/components/global/thermometer';
+import './view/components/new-account';
+import './view/components/global/not-found';
+import './view/components/readme';
+import './view/components/reset-password';
+import './view/components/support';
+import './view/components/overzicht-reizen';
+import './view/components/invoeren-reizen';
+import './view/components/dashboard/dashboard';
 
-import './components/invoeren-reizen-wijzigen';
+import './view/components/invoeren-reizen-wijzigen';
 
 const app = document.querySelector('#app');
 export const router = new Router(app);

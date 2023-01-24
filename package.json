@@ -18,6 +18,7 @@
     "vite": "^4.0.4"
   },
   "dependencies": {
+    "@pwrs/zero-md": "^1.4.0",
     "@vaadin/form-layout": "^23.3.5",
     "@vaadin/grid": "^23.3.5",
     "@vaadin/icon": "^23.3.5",
