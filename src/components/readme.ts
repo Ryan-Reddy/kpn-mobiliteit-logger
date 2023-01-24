@@ -11,7 +11,7 @@ import {customElement, property} from 'lit/decorators.js';
 export class ReadmeElement extends LitElement {
     @property() _hiddenElement = 'hidden';
     @property() _currentPageTitle = 'Readme';
-    @property() _readmeFile: '/README.md';
+    @property() _readmeFile= '/README.md';
 
     constructor() {
         super();

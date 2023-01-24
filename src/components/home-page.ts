@@ -10,9 +10,11 @@ import {customElement, property} from 'lit/decorators.js';
 @customElement('home-page-element')
 export class HomePage extends LitElement {
     @property() _currentPageTitle = "Welkom bij de KNP medewerkers mobiliteit APP!"
+    @property() _currentPageTitle = 'Support';
 
     constructor() {
         super();
+        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
     }
 
     static get styles() {

@@ -34,6 +34,7 @@ export class InvoerenReizen extends LitElement {
     constructor() {
         super();
         sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
+
         let now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
         now.setMilliseconds(0);

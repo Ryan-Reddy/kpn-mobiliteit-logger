@@ -42,22 +42,6 @@ export class OverzichtReizen extends LitElement {
                 console.log(this._vervoerMiddelDummyData);
             });
 
-        // fetch('/database/dummydata-reizen.json')
-        //     .then((response) => response.json())
-        //     .then((json) => {
-        //         this._reizenDummyData = Array.from(json);
-        //         console.log(this._reizenDummyData);
-        //     });
-        //TODO implement AJAX observable
-
-        // const obs$ = ajax('https://api.github.com/users?per_page=5').pipe(map(userResponse => console.log('users: ', userResponse)), catchError(error => {
-        //     console.log('error: ', error);
-        //     return of(error);
-        // }));
-        //
-        // obs$.subscribe({
-        //     next: value => console.log(value), error: err => console.log(err)
-        // });
     }
 
     static get styles() {
@@ -141,20 +125,6 @@ export class OverzichtReizen extends LitElement {
     connectedCallback() {
         super.connectedCallback();
         this.firstUpdated()
-        // // TODO insert ajax rsjx json file observer
-        // //
-        // fetch('/vervoermiddel-CO2.json')
-        //     .then((response) => response.json())
-        //     .then((json) => {
-        //         this._vervoerMiddelDummyData = Array.from(json);
-        //         console.log(this._vervoerMiddelDummyData);
-        //     });
-        // fetch('/dummydata-reizen.json')
-        //     .then((response) => response.json())
-        //     .then((json) => {
-        //         this._reizenDummyData = Array.from(json);
-        //         console.log(this._reizenDummyData);
-        //     });
     }
 
     /**
@@ -164,6 +134,7 @@ export class OverzichtReizen extends LitElement {
      */
     update(changed: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
         super.update(changed);
+
     }
 
     async firstUpdated() {

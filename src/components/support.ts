@@ -14,6 +14,8 @@ export class SupportElement extends LitElement {
 
     constructor() {
         super();
+        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
+
     }
     connectedCallback() {
         super.connectedCallback();
@@ -44,8 +46,6 @@ export class SupportElement extends LitElement {
     }
 
     render() {
-        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
-
         return html`
             <header>
                 <h1 class="header">${this._currentPageTitle}</h1>

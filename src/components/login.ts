@@ -25,7 +25,6 @@ export class Login extends LitElement {
     constructor() {
         super();
         sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
-
     }
 
     static get styles() {

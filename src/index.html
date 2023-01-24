@@ -20,6 +20,7 @@
     <script defer src="vaadin-routing.js" type="module"></script>
     <!--    <script src="components/global/menu-nav.ts" type="module"></script>-->
     <script src="components/global/menu-footer.ts" type="module"></script>
+    <title>KPN Mobiliteits App</title>
 
 </head>
 
@@ -33,7 +34,7 @@
 <script>
   // addEventListener('storage', (event) => { });
 
-  window.onchange = (event) => {
+  window.onblur = (event) => {
 
   let title = sessionStorage.getItem('currentpagetitle');
     console.log(title);
