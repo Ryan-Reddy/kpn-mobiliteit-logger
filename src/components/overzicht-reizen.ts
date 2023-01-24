@@ -5,7 +5,6 @@ import {InvoerenReizen} from "./invoeren-reizen";
 import {ajax} from 'rxjs/ajax';
 import {map, catchError, of} from 'rxjs';
 import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, RouterLocation} from "@vaadin/router";
-
 // import * as Rx from 'rx-dom';
 
 /**
@@ -72,14 +71,19 @@ export class OverzichtReizen extends LitElement {
         font-size: 1em;
       }
       main {
+        align-content: center;
+
       }
       .tablecontainer {
-        height: 60vh;
+        height: 70vh;
         overflow: auto;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 10px;
       }
       table {
         background: var(--kpn-zwart);
-        max-height: 100%;
       }
       th {
         padding: 0.6em;
@@ -203,7 +207,6 @@ export class OverzichtReizen extends LitElement {
             </header>
             <body>
             <main>
-          <span class="span">
             <hr/>
             <div class="tablecontainer">
                 <vaadin-grid .items="${this._reizenDummyData}">
@@ -222,7 +225,6 @@ export class OverzichtReizen extends LitElement {
                     <vaadin-grid-column path="zakelijkOfPrive"></vaadin-grid-column>
                 </vaadin-grid>
             </div>
-          </span>
                 <button>Exporteren als..</button>
                 <button @click="${this.tableToCSV}">download CSV</button>
                 <button @click="${this.filterColumnOnTerm('nobis')}">Filter on 'nobis'</button>

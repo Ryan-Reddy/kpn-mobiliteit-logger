@@ -51,6 +51,10 @@ body {
         color: var(--kpn-wit);
         background: var(--kpn-zwart);
     }
+    vaadin-grid {
+        color: var(--kpn-wit);
+        background: var(--kpn-zwart);
+    }
 
     :root .entire_menu_bar {
         color: var(--kpn-wit);
