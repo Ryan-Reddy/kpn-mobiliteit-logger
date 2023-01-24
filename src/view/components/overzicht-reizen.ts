@@ -94,6 +94,7 @@ export class OverzichtReizen extends LitElement {
         background: var(--kpn-groen);
         cursor: pointer;
       }
+          
       @media (max-width: 858px) {
         .hiddensmolscreen {
           display: none;
@@ -209,7 +210,8 @@ export class OverzichtReizen extends LitElement {
             <main>
             <hr/>
             <div class="tablecontainer">
-                <vaadin-grid .items="${this._reizenDummyData}" 
+                <vaadin-grid .items="${this._reizenDummyData}"
+                             theme="row-stripes"
                              .selectedItems="${this.selectedItems}"
                              @active-item-changed="${(e: GridActiveItemChangedEvent<reisDTO>) => {
                                  const item = e.detail.value;

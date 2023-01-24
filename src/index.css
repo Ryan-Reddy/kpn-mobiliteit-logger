@@ -72,6 +72,10 @@ footer {
     main {
         color: var(--kpn-wit);
         background-color: var(--kpn-zwart);
+        /* These edit the vaadin grid colors: */
+        --lumo-base-color: var(--kpn-zwart);
+        --lumo-body-text-color: var(--kpn-wit);
+
     }
 
     table {
