@@ -1,11 +1,9 @@
 import {css, html, LitElement, PropertyValueMap} from 'lit';
-import {customElement, property} from 'lit/decorators.js';
+import {customElement, property, state} from 'lit/decorators.js';
 import {InvoerenReizen} from "./invoeren-reizen";
 
-import {ajax} from 'rxjs/ajax';
-import {map, catchError, of} from 'rxjs';
+import type { GridActiveItemChangedEvent } from '@vaadin/grid';
 import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, RouterLocation} from "@vaadin/router";
-// import * as Rx from 'rx-dom';
 
 /**
  * An example element.
@@ -19,6 +17,8 @@ export class OverzichtReizen extends LitElement {
     @property() _vervoerMiddelDummyData = [];
     @property() _reizenDummyData = [];
     private _unsavedData = false;
+    @state()
+    private selectedItems: unknown;
     constructor() {
         super();
         sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
@@ -209,22 +209,30 @@ export class OverzichtReizen extends LitElement {
             <main>
             <hr/>
             <div class="tablecontainer">
-                <vaadin-grid .items="${this._reizenDummyData}">
-                    <vaadin-grid-selection-column auto-select>
-                    </vaadin-grid-selection-column>
-                    <vaadin-grid-column path="Project"></vaadin-grid-column>
-                    <vaadin-grid-column path="type"></vaadin-grid-column>
-                    <vaadin-grid-column path="beginTijd"></vaadin-grid-column>
-                    <vaadin-grid-column path="eindTijd"></vaadin-grid-column>
-                    <vaadin-grid-column path="vertrekLocatie"></vaadin-grid-column>
-                    <vaadin-grid-column path="aankomstLocatie"></vaadin-grid-column>
-                    <vaadin-grid-column path="C02"></vaadin-grid-column>
-                    <vaadin-grid-column path="Kosten"></vaadin-grid-column>
-                    <vaadin-grid-column path="km"></vaadin-grid-column>
-                    <vaadin-grid-column path="klasse"></vaadin-grid-column>
-                    <vaadin-grid-column path="zakelijkOfPrive"></vaadin-grid-column>
+                <vaadin-grid .items="${this._reizenDummyData}" 
+                             .selectedItems="${this.selectedItems}"
+                             @active-item-changed="${(e: GridActiveItemChangedEvent<reisDTO>) => {
+                                 const item = e.detail.value;
+                                 this.selectedItems = item ? [item] : [];
+                                 console.log(this.selectedItems)
+                             }}"
+                >
+                    <vaadin-grid-column header="Project" path="Project"></vaadin-grid-column>
+                    <vaadin-grid-column header="Vervoertype" path="type"></vaadin-grid-column>
+                    <vaadin-grid-column header="Begin" path="beginTijd"></vaadin-grid-column>
+                    <vaadin-grid-column header="Eind" path="eindTijd"></vaadin-grid-column>
+                    <vaadin-grid-column header="Vertrek"" path="vertrekLocatie"></vaadin-grid-column>
+                    <vaadin-grid-column header="Aankomst" path="aankomstLocatie"></vaadin-grid-column>
+                    <vaadin-grid-column header="Totale C02" path="C02"></vaadin-grid-column>
+                    <vaadin-grid-column header="Kosten" path="Kosten"></vaadin-grid-column>
+                    <vaadin-grid-column header="KM" path="km"></vaadin-grid-column>
+                    <vaadin-grid-column header="Klasse" path="klasse"></vaadin-grid-column>
+                    <vaadin-grid-column header="zakelijkOfPrive" path="zakelijkOfPrive"></vaadin-grid-column>
                 </vaadin-grid>
             </div>
+                <p>Selected row:
+                    ${JSON.stringify(this.selectedItems)}</p>
+                <button>Edit geselecteerde rij</button>
                 <button>Exporteren als..</button>
                 <button @click="${this.tableToCSV}">download CSV</button>
                 <button @click="${this.filterColumnOnTerm('nobis')}">Filter on 'nobis'</button>
@@ -235,7 +243,6 @@ export class OverzichtReizen extends LitElement {
             
         `;
     }
-
     wijzigDezeDataRij(event: Event) {
         // TODO collect data from the table #32
         console.log('wijzigDezeDataRij')
@@ -258,7 +265,6 @@ export class OverzichtReizen extends LitElement {
         console.log(filter);
         // sort by value
     }
-
     headerClicked(e: Event) {
         console.log('headerClicked');
         console.log(this._reizenDummyData);
@@ -418,7 +424,6 @@ export class OverzichtReizen extends LitElement {
 
         console.log('You can see this page');
     }
-
     public onBeforeLeave(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): PreventResult | undefined {
         if (this._unsavedData) {
 
@@ -431,8 +436,6 @@ export class OverzichtReizen extends LitElement {
             }
         }
     }
-
-
     private isAuthorized() {
         return !!sessionStorage.getItem('userID');
     }

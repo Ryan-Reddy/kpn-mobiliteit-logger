@@ -26,24 +26,13 @@ public class reisDTO {
         this._totaleUitstoot = totaleUitstoot;
 }
 public toString() {
-    let s: string =
-        "{ReisID: " + this._reisId +
+    return "{ReisID: " + this._reisId +
         "; username= " + this._username +
-        "; starttime= " + time +
-        "; endtime= " + nowEndTime +
-        "; ryan= " + ryan +
         //                    "; bayan= " + bayan +
         //                    "; oussama= " + oussama +
         //                    "; mees=" + mees +
         //                    "; mohamed= " + mohamed +
         //                    "; thijs= " + thijs +
         "; note= '";
-
-    if (endTime.equals("<now>")) {
-        return s + note.replace("\n","") + "'}";
-    } else {
-        return s + note + "'}";
-    }
-
 }
 }
