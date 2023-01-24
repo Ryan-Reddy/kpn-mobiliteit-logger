@@ -1,4 +1,4 @@
-import {css, html, LitElement, PropertyValueMap} from 'lit';
+import {css, html, LitElement, PropertyValueMap, render} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
 import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, RouterLocation} from "@vaadin/router";
 
@@ -7,6 +7,8 @@ import '@vaadin/grid/vaadin-grid-selection-column.js';
 
 import './example-indicator';
 import './example-chart';
+import {catchError, map, Observable, of, switchMap} from "rxjs";
+import {fromFetch} from "rxjs/internal/observable/dom/fetch";
 
 
 /**
@@ -20,13 +22,17 @@ export class OverzichtReizen extends LitElement {
     @property() _currentPageTitle = 'Overzicht Reizen';
     @property() _vervoerMiddelDummyData = [];
     @property() _reizenDummyData = [];
-    private _unsavedData = false;
-    // @state()
     // @property() items: Person[] = [];
+    @state() @property() data$: Observable<any>;
+    // @state()
+    @property() _unsavedData = false;
+    @property() _totaleC02= 500;
+    @property() _totaleKM= 34703;
+    @property() _persoonlijkeKM=200;
 
     constructor() {
         super();
-        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
+        sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
         // this.classList.add('basic-board');
 
         fetch('/database/vervoermiddel-CO2.json')
@@ -56,72 +62,85 @@ export class OverzichtReizen extends LitElement {
 
     static get styles() {
         return css`
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        text-decoration: none;
-      }
-      .full {
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-      }
-      H1 {
-        padding-top: 1em;
-        font-size: 2em;
-        padding-bottom: 0.5em;
-      }
-      header p {
-        font-size: 1em;
-      }
-      main {
-      }
-      .tablecontainer {
-        height: 60vh;
-        overflow: auto;
-      }
-      table {
-        background: var(--kpn-zwart);
-        max-height: 100%;
-      }
-      th {
-        padding: 0.6em;
-        border-bottom: 1px dotted #ddd;
-        border-collapse: collapse;
-      }
-      .columnHeads {
-        background: var(--kpn-groen);
-        cursor: pointer;
-      }
-      @media (max-width: 858px) {
-        .hiddensmolscreen {
-          display: none;
-        }
-      }
-      #errorKM {
-        background: var(--kpn-warning-red);
-      }
-      @media (prefers-color-scheme: light) {
-        :root {
-          color: var(--kpn-zwart);
-          background-color: var(--kpn-wit);
-        }
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+          }
 
-        table {
-          background: var(--kpn-wit);
-          border: 1px solid var(--kpn-zwart);
-          border-color: var(--kpn-wit);
-        }
-        th {
-          border-bottom: 1px dotted var(--kpn-zwart);
-        }
-      }
-    `;
+          .full {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+          }
+
+          H1 {
+            padding-top: 1em;
+            font-size: 2em;
+            padding-bottom: 0.5em;
+          }
+
+          header p {
+            font-size: 1em;
+          }
+
+          main {
+          }
+
+          .tablecontainer {
+            height: 60vh;
+            overflow: auto;
+          }
+
+          table {
+            background: var(--kpn-zwart);
+            max-height: 100%;
+          }
+
+          th {
+            padding: 0.6em;
+            border-bottom: 1px dotted #ddd;
+            border-collapse: collapse;
+          }
+
+          .columnHeads {
+            background: var(--kpn-groen);
+            cursor: pointer;
+          }
+
+          @media (max-width: 858px) {
+            .hiddensmolscreen {
+              display: none;
+            }
+          }
+
+          #errorKM {
+            background: var(--kpn-warning-red);
+          }
+
+          @media (prefers-color-scheme: light) {
+            :root {
+              color: var(--kpn-zwart);
+              background-color: var(--kpn-wit);
+            }
+
+            table {
+              background: var(--kpn-wit);
+              border: 1px solid var(--kpn-zwart);
+              border-color: var(--kpn-wit);
+            }
+
+            th {
+              border-bottom: 1px dotted var(--kpn-zwart);
+            }
+          }
+        `;
     }
 
     connectedCallback() {
         super.connectedCallback();
+        this.firstUpdated()
         // // TODO insert ajax rsjx json file observer
         // //
         // fetch('/vervoermiddel-CO2.json')
@@ -146,14 +165,25 @@ export class OverzichtReizen extends LitElement {
     update(changed: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
         super.update(changed);
     }
+
     async firstUpdated() {
-        this._reizenDummyData = await fetch('/database/MOCK-REIZEN.json')
-            .then((response) => response.json())
-            .then((json) => {
-                return Array.from(json);
-            });
-        // const { people } = await getPeople();
-        // this.items = people;
+        this.data$ = fromFetch('/database/MOCK-REIZEN.json').pipe(switchMap(response => {
+            if (response.ok) {
+                // OK return data
+                return response.json();
+            } else {
+                // Server is returning a status requiring the client to try something else.
+                return of({error: true, message: `Error ${response.status}`});
+            }
+        }), catchError(err => {
+            // Network or other error, handle appropriately
+            console.error(err);
+            return of({error: true, message: err.message})
+        }));
+
+        this.data$.subscribe({
+            next: result => console.log(result), complete: () => console.log('done')
+        })
     }
 
 
@@ -207,17 +237,49 @@ export class OverzichtReizen extends LitElement {
         return html`
             <head>
                 <style>
-                    .filter0 { grid-area: filter0; }
-                    .filter1 { grid-area: filter1; }
-                    .filter2 { grid-area: filter2; }
-                    .filter3 { grid-area: filter3; }
-                    .filter4 { grid-area: filter4; }
-                    .filter5 { grid-area: filter5; }
-                    .item1 { grid-area: header; }
-                    .item2 { grid-area: menu; }
-                    .chart { grid-area: chart; }
-                    .item4 { grid-area: right; }
-                    .item5 { grid-area: footer; }
+                    .filter0 {
+                        grid-area: filter0;
+                    }
+
+                    .filter1 {
+                        grid-area: filter1;
+                    }
+
+                    .filter2 {
+                        grid-area: filter2;
+                    }
+
+                    .filter3 {
+                        grid-area: filter3;
+                    }
+
+                    .filter4 {
+                        grid-area: filter4;
+                    }
+
+                    .filter5 {
+                        grid-area: filter5;
+                    }
+
+                    .item1 {
+                        grid-area: header;
+                    }
+
+                    .item2 {
+                        grid-area: menu;
+                    }
+
+                    .chart {
+                        grid-area: chart;
+                    }
+
+                    .item4 {
+                        grid-area: right;
+                    }
+
+                    .item5 {
+                        grid-area: footer;
+                    }
 
                     .grid-container {
                         display: grid;
@@ -229,7 +291,6 @@ export class OverzichtReizen extends LitElement {
                         gap: 10px;
                         background-color: #2196F3;
                         padding: 10px;
-                        width: 95%;
                         margin-left: auto;
                         margin-right: auto;
                     }
@@ -246,30 +307,39 @@ export class OverzichtReizen extends LitElement {
             </head>
             <body>
 
-            <h1>Grid Layout</h1>
+            <h1>KPN dashboard</h1>
 
-            <p>This grid layout contains six columns and three rows:</p>
             <div class="grid-container">
                 <div class="item00">
                     <example-indicator current="745" change="+33.7" title="Current users"></example-indicator>
                 </div>
-                <div class="item01"><example-indicator
-                        current="54.6k"
-                        change="-112.45"
-                        title="View events"
-                ></example-indicator></div>
-                <div class="item02"><example-indicator
-                        current="54.6k"
-                        change="-112.45"
-                        title="View events"
-                ></example-indicator></div>
-                <div class="item03"><example-indicator
-                        current="18%"
-                        change="+3.9"
-                        title="Conversion rate"
-                ></example-indicator></div>
+                <div class="item01">
+                    <example-indicator
+                            current="${this._totaleKM} km"
+                            change="-112.45"
+                            title="Totalen gereisd"
+                    ></example-indicator>
+                </div>
+                <div class="item02">
+                    <example-indicator
+                            current="${this._persoonlijkeKM} km"
+                            change="-3.9"
+                            title="Persoonlijke km"
+                    ></example-indicator>
+                </div>
+                <div class="item03">
+                    <example-indicator
+                            current="${this._totaleC02}kg C02"
+                            change="-112.45"
+                            title="Totalen C02"
+                    ></example-indicator>
+                </div>
                 <div class="item04">
-                    <example-indicator current="-123.45" title="Custom metric"></example-indicator>
+                    <example-indicator
+                            current="${this._persoonlijkeC02}kg C02"
+                            change="-112.45 "
+                            title="Totalen C02"
+                    </example-indicator>
                 </div>
                 <div class="item05">
                     <example-indicator current="-123.45" title="Custom metric"></example-indicator>
@@ -283,18 +353,17 @@ export class OverzichtReizen extends LitElement {
                 <div class="item5">Footer</div>
             </div>
 
-            
-            
-            
 
-<!--            <example-chart></example-chart>-->
-            
+            <!--            <example-chart></example-chart>-->
+
             </body>
         `;
     }
+
     public onChange() {
         this._unsavedData = true;
     }
+
     public onBeforeEnter(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): Promise<unknown> | RedirectResult | undefined {
         console.log('onBeforeEnter');
         if (!this.isAuthorized()) {

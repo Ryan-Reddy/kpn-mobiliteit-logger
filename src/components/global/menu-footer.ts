@@ -32,9 +32,9 @@ export class MenuFooter extends LitElement {
 
           footer {
           / / width: 100 %;
-          / / height: 8 em;
+          /// / height: 8 em;
           / / bottom: 0;
-          / / position: fixed;
+          /// / position: fixed;
             padding: 1rem 1.5rem;
 
             overflow: hidden;
@@ -96,14 +96,9 @@ export class MenuFooter extends LitElement {
           }
 
           @media (max-width: 952px) {
-            .nav-logo {
-              height: 3em;
-              padding-left: 50px;
-            }
-
             nav ul li a {
               font-size: 10px;
-              display: inline-block;
+              //display: inline-block;
               line-height: 8em;
               margin: 0 1em;
             }
@@ -114,18 +109,18 @@ export class MenuFooter extends LitElement {
               display: block;
             }
 
-            u: {
-              position: fixed;
+            ul: {
+              position: relative;
               width: 100%;
-              height: 100vh;
-              top: 80px;
+              height: 100%;
+              //top: 80px;
               left: -100%;
               text-align: center;
               transition: all .5s;
-            } nav ul li {
-              display: block;
-            } nav ul li a {
-              font-size: 20px;
+            } 
+            nav ul li {
+              //display: block;
+              font-size: 10px;
             };
 
             a:hover, a.active {
@@ -149,7 +144,6 @@ export class MenuFooter extends LitElement {
 
     render() {
         return html`
-            <footer>
                 <nav>
                     <ul
                             @click=${this._clickMenu}
@@ -169,7 +163,6 @@ export class MenuFooter extends LitElement {
                         </li>
                     </ul>
                 </nav>
-            </footer>
         `;
     }
 

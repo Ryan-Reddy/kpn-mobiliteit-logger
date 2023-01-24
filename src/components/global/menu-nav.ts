@@ -9,8 +9,8 @@ import {customElement, property} from 'lit/decorators.js';
  */
 @customElement('menu-nav-element')
 export class MenuNav extends LitElement {
-    @property() _naamGebruiker = 'Hans Fumphriehd';
-    @property() _kpnLogo = 'branding/KPN-Logo.svg';
+    @property() _naamGebruiker = sessionStorage.getItem('userID');
+    @property() _kpnLogo = 'branding/Logo_kpn_banner.svg';
     @property() _currentPage: string = '';
     @property() _kpnHomePageUrl = 'https://www.kpn.com/';
 
@@ -109,8 +109,8 @@ export class MenuNav extends LitElement {
       }
 
       img {
-        //-webkit-filter: invert(1);
-        //filter: invert(1);
+        -webkit-filter: invert(1);
+        filter: invert(1);
       }
 
       .nav-logo:hover {
@@ -174,14 +174,14 @@ export class MenuNav extends LitElement {
         nav ul li a {
           color: var(--kpn-zwart);
           background-color: var(--kpn-wit);
-          border-color: var(--kpn-wit);
+          border-color: lightgray;
         }
         .ingelogd_als {
           color: red;
         }
         img {
-          //-webkit-filter: invert(1);
-          //filter: invert(0);
+          -webkit-filter: invert(1);
+          filter: invert(0);
         }
       }
     `;

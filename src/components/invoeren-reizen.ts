@@ -182,7 +182,7 @@ export class InvoerenReizen extends LitElement {
                 <form class="formulierReizen" id="formulierReizen" @onChange="${this.onChange()}">
                     <hr>
                     <br>
-                    <h2>formDeelEen</h2>
+                    <h2>Voertuig keuze</h2>
                     <ul id="formDeelEen">
                         <li>
                             <label for="vervoerstype">typeVervoer:</label>
