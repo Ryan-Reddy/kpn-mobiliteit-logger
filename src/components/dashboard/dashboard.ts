@@ -5,8 +5,12 @@ import {ajax} from 'rxjs/ajax';
 import {map, catchError, of} from 'rxjs';
 import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, RouterLocation} from "@vaadin/router";
 
-import '@vaadin/board';
 import '@vaadin/grid';
+import '@vaadin/grid/vaadin-grid-selection-column.js';
+// import '@vaadin/vaadin-grid';
+// import '@vaadin/grid/vaadin-grid-selection-column.js';
+// import '@vaadin/select';
+// import '@vaadin/notification';
 // import { getPeople } from 'Frontend/demo/domain/DataService.java';
 // import type Person from 'Frontend/generated/com/vaadin/demo/domain/Person';
 
@@ -22,18 +26,6 @@ export class OverzichtReizen extends LitElement {
     @property() _currentPageTitle = 'Overzicht Reizen';
     @property() _vervoerMiddelDummyData = [];
     @property() _reizenDummyData = [];
-    @property() headers = ['Project', 'Type vervoer', 'Begin', 'Einde', 'Km', 'C02', 'Kosten', 'Wijzig',];
-    // @property() _feedback = '';
-    // @property() _sorted0 = false;
-    // @property() _sorted1 = false;
-    // @property() _sorted2 = false;
-    // @property() _sorted3 = false;
-    // @property() _sorted4 = false;
-    // @property() _sorted5 = false;
-    // @property() _sorted6 = false;
-    // @property() _sorted7 = false;
-    // @property() sortsymboldown = '&#5167;';
-    // @property() sortsymbolUP = '&#11016;';
     private _unsavedData = false;
     // @state()
     // @property() items: Person[] = [];
@@ -49,6 +41,7 @@ export class OverzichtReizen extends LitElement {
                 this._vervoerMiddelDummyData = Array.from(json);
                 console.log(this._vervoerMiddelDummyData);
             });
+
         // fetch('/database/dummydata-reizen.json')
         //     .then((response) => response.json())
         //     .then((json) => {
@@ -158,11 +151,15 @@ export class OverzichtReizen extends LitElement {
      */
     update(changed: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
         super.update(changed);
-        console.log('updated YAAY')
     }
     async firstUpdated() {
-        const { people } = await getPeople();
-        this.items = people;
+        this._reizenDummyData = await fetch('/database/MOCK-REIZEN.json')
+            .then((response) => response.json())
+            .then((json) => {
+                return Array.from(json);
+            });
+        // const { people } = await getPeople();
+        // this.items = people;
     }
 
 
@@ -220,7 +217,9 @@ export class OverzichtReizen extends LitElement {
             <body>
             <main>
                 test
-                <vaadin-grid .items="${this._vervoerMiddelDummyData}">
+                <vaadin-grid .items="${this._reizenDummyData}">
+                    <vaadin-grid-selection-column auto-select>
+                    </vaadin-grid-selection-column>
                     <vaadin-grid-column path="Project"></vaadin-grid-column>
                     <vaadin-grid-column path="type"></vaadin-grid-column>
                     <vaadin-grid-column path="beginTijd"></vaadin-grid-column>
@@ -232,10 +231,57 @@ export class OverzichtReizen extends LitElement {
                     <vaadin-grid-column path="km"></vaadin-grid-column>
                     <vaadin-grid-column path="klasse"></vaadin-grid-column>
                     <vaadin-grid-column path="zakelijkOfPrive"></vaadin-grid-column>
-                    <vaadin-grid-column path="Kosten"></vaadin-grid-column>
                 </vaadin-grid>
             </main>
             </body>
+            <script>
+                addEventListener('WebComponentsReady', function() {
+                    Polymer({
+                        is: 'dataprovider-select-all',
+
+                        properties: {
+                            inverted: {
+                                type: Boolean,
+                                value: false
+                            },
+                            indeterminate: {
+                                type: Boolean,
+                                value: false
+                            }
+                        },
+
+                        observers: ['_resetSelection(inverted)'],
+
+                        _resetSelection: function(inverted) {
+                            this.$.grid.selectedItems = [];
+                            this.updateStyles();
+                            this.indeterminate = false;
+                        },
+
+                        _invert: function(e) {
+                            this.inverted = !this.inverted;
+                        },
+
+                        // iOS needs indeterminated + checked at the same time
+                        _isChecked: function(inverted, indeterminate) {
+                            return indeterminate || inverted;
+                        },
+
+                        _selectItem: function(e) {
+                            if (e.target.checked === this.inverted) {
+                                this.$.grid.deselectItem(e.model.item);
+                            } else {
+                                this.$.grid.selectItem(e.model.item);
+                            }
+                            this.indeterminate = this.$.grid.selectedItems.length > 0;
+                        },
+
+                        _isSelected: function(inverted, selected) {
+                            return inverted != selected;
+                        }
+                    });
+                });
+            </script>
         `;
     }
     public onChange() {

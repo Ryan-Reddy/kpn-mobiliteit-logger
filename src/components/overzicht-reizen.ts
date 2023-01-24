@@ -19,21 +19,7 @@ export class OverzichtReizen extends LitElement {
     @property() _currentPageTitle = 'Overzicht Reizen';
     @property() _vervoerMiddelDummyData = [];
     @property() _reizenDummyData = [];
-    @property() headers = ['Project', 'Type vervoer', 'Begin', 'Einde', 'Km', 'C02', 'Kosten', 'Wijzig',];
-    @property() _feedback = '';
-    @property() _sorted0 = false;
-    @property() _sorted1 = false;
-    @property() _sorted2 = false;
-    @property() _sorted3 = false;
-    @property() _sorted4 = false;
-    @property() _sorted5 = false;
-    @property() _sorted6 = false;
-    @property() _sorted7 = false;
-    @property() sortsymboldown = '&#5167;';
-    @property() sortsymbolUP = '&#11016;';
     private _unsavedData = false;
-
-
     constructor() {
         super();
         sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
@@ -44,7 +30,8 @@ export class OverzichtReizen extends LitElement {
                 this._vervoerMiddelDummyData = Array.from(json);
                 console.log(this._vervoerMiddelDummyData);
             });
-        fetch('/database/dummydata-reizen.json')
+
+        fetch('/database/MOCK-REIZEN.json')
             .then((response) => response.json())
             .then((json) => {
                 this._reizenDummyData = Array.from(json);
@@ -60,7 +47,6 @@ export class OverzichtReizen extends LitElement {
         // obs$.subscribe({
         //     next: value => console.log(value), error: err => console.log(err)
         // });
-
 
     }
 
@@ -147,7 +133,13 @@ export class OverzichtReizen extends LitElement {
         //         console.log(this._reizenDummyData);
         //     });
     }
-
+    async firstUpdated() {
+        this._reizenDummyData = await fetch('/database/MOCK-REIZEN.json')
+            .then((response) => response.json())
+            .then((json) => {
+                return Array.from(json);
+            });
+    }
     /**
      * Called when an update was triggered, before rendering. Receives a Map of changed
      * properties, and their previous values. This can be used for modifying or setting
@@ -214,77 +206,21 @@ export class OverzichtReizen extends LitElement {
           <span class="span">
             <hr/>
             <div class="tablecontainer">
-              <table class="full">
-                <caption hidden>
-                  ${this._currentPageTitle}
-                </caption>
-                <thead>
-                  <tr @click=${this.headerClicked} class="columnHeads"
-                  >
-                    <th
-                            id=${this.headers[0]}
-                            class="hiddensmolscreen"
-                    >
-                      ${this.headers[0]} &#5167;&#5169;
-                    </th>
-                    <th id=${this.headers[1]}>
-                      ${this.headers[1]} &#5167;&#5169;
-                    </th>
-                    <th id=${this.headers[2]}>
-                      ${this.headers[2]} &#5167;&#5169;
-                    </th>
-                    <th
-                           
-                            id=${this.headers[3]}
-                            class="hiddensmolscreen"
-                    >
-                      ${this.headers[3]} &#5167;&#5169;
-                    </th>
-                    <th id=${this.headers[4]}>
-                      ${this.headers[4]} &#5167;&#5169;
-                    </th>
-                    <th
-                           
-                            id=${this.headers[5]}
-                            class="hiddensmolscreen"
-                    >
-                      ${this.headers[5]} &#5167;&#5169;
-                    </th>
-                    <th
-                           
-                            id=${this.headers[6]}
-                            class="hiddensmolscreen"
-                    >
-                      ${this.headers[6]} &#5167;&#5169;
-                    </th>
-                    <th id=${this.headers[7]}>
-                      ${this.headers[7]} &#5167;&#5169;
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${this._reizenDummyData.map(({
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                begin,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                eind,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                km,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                kosten,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                project,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                type,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                uitstoot,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            }) => html`
-                      <tr>
-                          <th class="hiddensmolscreen">${project}</th>
-                          <th>${type}</th>
-                          <th>${begin}</th>
-                          <th class="hiddensmolscreen">${eind}</th>
-                          <th id=${km > 300 ? 'errorKM' : 'allGood'}>${km}</th>
-                          <th class="hiddensmolscreen">${uitstoot}</th>
-                          <th class="hiddensmolscreen">${kosten}</th>
-                          <th @click=${this.wijzigDezeDataRij}><a href="wijzig" >Wijzig</a></th>
-                      </tr>
-                  `)}
-                </tbody>
-              </table>
+                <vaadin-grid .items="${this._reizenDummyData}">
+                    <vaadin-grid-selection-column auto-select>
+                    </vaadin-grid-selection-column>
+                    <vaadin-grid-column path="Project"></vaadin-grid-column>
+                    <vaadin-grid-column path="type"></vaadin-grid-column>
+                    <vaadin-grid-column path="beginTijd"></vaadin-grid-column>
+                    <vaadin-grid-column path="eindTijd"></vaadin-grid-column>
+                    <vaadin-grid-column path="vertrekLocatie"></vaadin-grid-column>
+                    <vaadin-grid-column path="aankomstLocatie"></vaadin-grid-column>
+                    <vaadin-grid-column path="C02"></vaadin-grid-column>
+                    <vaadin-grid-column path="Kosten"></vaadin-grid-column>
+                    <vaadin-grid-column path="km"></vaadin-grid-column>
+                    <vaadin-grid-column path="klasse"></vaadin-grid-column>
+                    <vaadin-grid-column path="zakelijkOfPrive"></vaadin-grid-column>
+                </vaadin-grid>
             </div>
           </span>
                 <button>Exporteren als..</button>
