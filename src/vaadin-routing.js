@@ -13,6 +13,7 @@ import './components/reset-password';
 import './components/support';
 import './components/overzicht-reizen';
 import './components/invoeren-reizen';
+import './components/dashboard/dashboard';
 
 import './components/invoeren-reizen-wijzigen';
 
@@ -80,6 +81,11 @@ router.setRoutes([
     name: 'home-page-element', // doet niks impliciet
     path: '/',                  // standaard landingspage
     component: 'home-page-element',
+  },
+  {
+    name: 'dashboard-element', // doet niks impliciet
+    path: '/dashboard',                  // standaard landingspage
+    component: 'dashboard-element',
   },
   {
     name: '404-catchall', // doet niks impliciet

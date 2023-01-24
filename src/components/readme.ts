@@ -11,6 +11,7 @@ import {customElement, property} from 'lit/decorators.js';
 export class ReadmeElement extends LitElement {
     @property() _hiddenElement = 'hidden';
     @property() _currentPageTitle = 'Readme';
+    @property() _readmeFile: '/README.md';
 
     constructor() {
         super();
@@ -30,9 +31,7 @@ export class ReadmeElement extends LitElement {
         display: none;
         pointer-events: none;
         color: lightgrey;
-        foreground-color: grey;
         background-color: var(--kpn-grijs);
-        required: invalid;
       }
       button {
         width: 66%;
@@ -52,7 +51,7 @@ export class ReadmeElement extends LitElement {
             <body>
             <main>
                 <h1>README FILE</h1>
-                <zero-md src="../README.md">
+                <zero-md src="${this._readmeFile}">
                     <template>
                         <!-- Define your own styles inside a \`<style>\` tag -->
                         <style>

@@ -38,13 +38,13 @@ export class OverzichtReizen extends LitElement {
         super();
         sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
 
-        fetch('/vervoermiddel-CO2.json')
+        fetch('/database/vervoermiddel-CO2.json')
             .then((response) => response.json())
             .then((json) => {
                 this._vervoerMiddelDummyData = Array.from(json);
                 console.log(this._vervoerMiddelDummyData);
             });
-        fetch('/dummydata-reizen.json')
+        fetch('/database/dummydata-reizen.json')
             .then((response) => response.json())
             .then((json) => {
                 this._reizenDummyData = Array.from(json);

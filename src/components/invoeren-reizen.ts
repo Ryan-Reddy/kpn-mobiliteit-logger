@@ -42,7 +42,7 @@ export class InvoerenReizen extends LitElement {
 
         // TODO insert ajax rsjx json file observer
         //
-        fetch('/vervoermiddel-CO2.json')
+        fetch('/database/vervoermiddel-CO2.json')
             .then((response) => response.json())
             .then((json) => {
                 let res = json.map(({naam, uitstoot} : {naam:any, uitstoot:any}) => ({naam: naam, uitstoot: uitstoot}));
@@ -277,6 +277,7 @@ export class InvoerenReizen extends LitElement {
                         <li>
                             <label for="eindTijd">Eind tijd:</label>
                             <input class="_alleenZakelijkClass" id="eindTijd"
+                                   name="eindTijd"
                                    value="${this._aankomstTijd}"
                                    min="${this.eindTijdMin}"
                                    type="datetime-local"/>

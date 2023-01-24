@@ -10,7 +10,7 @@ import {customElement, property} from 'lit/decorators.js';
 @customElement('menu-nav-element')
 export class MenuNav extends LitElement {
     @property() _naamGebruiker = 'Hans Fumphriehd';
-    @property() _kpnLogo = 'branding/kpn-logo2-jpeg.jpg';
+    @property() _kpnLogo = 'branding/KPN-Logo.svg';
     @property() _currentPage: string = '';
     @property() _kpnHomePageUrl = 'https://www.kpn.com/';
 
@@ -109,8 +109,8 @@ export class MenuNav extends LitElement {
       }
 
       img {
-        -webkit-filter: invert(1);
-        filter: invert(1);
+        //-webkit-filter: invert(1);
+        //filter: invert(1);
       }
 
       .nav-logo:hover {
@@ -180,8 +180,8 @@ export class MenuNav extends LitElement {
           color: red;
         }
         img {
-          -webkit-filter: invert(1);
-          filter: invert(0);
+          //-webkit-filter: invert(1);
+          //filter: invert(0);
         }
       }
     `;
@@ -206,7 +206,6 @@ export class MenuNav extends LitElement {
             <div class="entire_menu_bar">
                 <img
                         @click=${this.kpnHomePageUrl}
-                        href="#"
                         src="${this._kpnLogo}"
                         alt="kpn-logo-zwart-op-wit"
                         class="nav-logo"

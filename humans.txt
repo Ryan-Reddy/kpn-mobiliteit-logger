@@ -1,0 +1,17 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Ryan van Lil-Reddy -- Creator -- https://www.linkedin.com/in/ryan-reddy-productions/
+    Ryan van Lil-Reddy -- github -- https://github.com/Ryan-Reddy
+
+
+# LOVE,
+
+    Ryan Reddy
+
+# TECHNOLOGY COLOPHON
+
+    CSS3, HTML5
+    Apache Server Configs, jQuery, Modernizr, Normalize.css
