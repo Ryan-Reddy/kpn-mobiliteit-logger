@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import LocalstorageService from './localstorage-service';
+import LocalstorageService from './localstorageService';
 
 const STORAGE_KEY = 'data';
 const DATA_INIT = [];

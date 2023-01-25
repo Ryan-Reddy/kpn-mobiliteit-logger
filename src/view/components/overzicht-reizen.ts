@@ -5,6 +5,8 @@ import {InvoerenReizen} from "./invoeren-reizen";
 import type { GridActiveItemChangedEvent } from '@vaadin/grid';
 import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, RouterLocation} from "@vaadin/router";
 import csvDownload from 'json-to-csv-export'
+import {ajax} from "rxjs/internal/ajax/ajax";
+import * as LocalstorageService from  'services/localstorageService.js';
 
 /**
  * An example element.
@@ -16,23 +18,27 @@ import csvDownload from 'json-to-csv-export'
 export class OverzichtReizen extends LitElement {
     @property() _currentPageTitle = 'Overzicht Reizen';
     @property() _vervoerMiddelDummyData = [];
-    @property() _reizenDummyData = [];
+    @property() _reizenDummyData: Array<reisDTO>[];
     private _unsavedData = false;
     @state()
     private selectedItems: unknown;
+    private _thermometerInput: any;
     constructor() {
         super();
         sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
 
-        fetch('/database/vervoermiddel-CO2.json')
-            .then((response) => response.json())
-            .then((json) => {
-                this._vervoerMiddelDummyData = Array.from(json);
-                console.log(this._vervoerMiddelDummyData);
-            });
-
+        // fetch('/database/vervoermiddel-CO2.json')
+        //     .then((response) => response.json())
+        //     .then((json) => {
+        //         this._vervoerMiddelDummyData = Array.from(json);
+        //         console.log(this._vervoerMiddelDummyData);
+        //     });
         // @ts-ignore
-        this._reizenDummyData = JSON.parse(sessionStorage.getItem('reizenData'));
+        this._reizenDummyData = JSON.stringify(localStorage.getItem('reizenData'));
+        console.log(this._reizenDummyData)
+
+
+
 
         //
         // fetch('/database/MOCK-REIZEN.json')
@@ -42,12 +48,11 @@ export class OverzichtReizen extends LitElement {
         //         console.log(this._reizenDummyData);
         //     });
         //TODO implement AJAX observable
-
-        // const obs$ = ajax('https://api.github.com/users?per_page=5').pipe(map(userResponse => console.log('users: ', userResponse)), catchError(error => {
+        // let obs$: Observable<unknown>;
+        // obs$ = ajax(JSON.stringify(localStorage.getItem('reizenData'))).pipe(map(userResponse => console.log('users: ', userResponse)), catchError(error => {
         //     console.log('error: ', error);
         //     return of(error);
         // }));
-        //
         // obs$.subscribe({
         //     next: value => console.log(value), error: err => console.log(err)
         // });
@@ -206,6 +211,7 @@ export class OverzichtReizen extends LitElement {
     }
     wijzigDezeDataRij(event: Event) {
         // TODO collect data from the table #32
+        //  Load invoeren-reizen with this data
         console.log('wijzigDezeDataRij')
         console.log(event.target)
         const target = event.target as InvoerenReizen;
@@ -252,148 +258,148 @@ export class OverzichtReizen extends LitElement {
 
     // TODO: fix filter and sort:
     filterColumnOnTerm(filter: string) {
-        console.log('sortColumnSimple');
-        console.log(filter);
-        // sort by value
-    }
-    headerClicked(e: Event) {
-        console.log('headerClicked');
-        console.log(this._reizenDummyData);
-
-        const event = e as any;
-        const id = event.target.id;
-        console.log('id= ' + id);
-        this._feedback = 'Table column to be sorted: ' + id;
-        // TODO: implement style sorter https://www.scaler.com/topics/javascript-sort-an-array-of-objects/
-        switch (id) {
-            case this.headers[0]: {
-                // project
-                console.log(this._sorted0);
-                this._sorted0 = this._sorted0 === true ? false : true;
-
-                this._reizenDummyData = this._sorted0 === true ? this._reizenDummyData.sort((a: any, b: any) => {
-                    const projectA = a.project.toUpperCase(); // ignore upper and lowercase
-                    const projectB = b.project.toUpperCase(); // ignore upper and lowercase
-                    // typeA - typeB
-                    if (projectA > projectB) {
-                        return -1;
-                    }
-                    if (projectA < projectB) {
-                        return 1;
-                    }
-                    // names must be equal
-                    return 0;
-                }) : this._reizenDummyData.sort((a: any, b: any) => {
-                    const projectB = a.project.toUpperCase(); // ignore upper and lowercase
-                    const projectA = b.project.toUpperCase(); // ignore upper and lowercase
-                    if (projectA > projectB) {
-                        return -1;
-                    }
-                    if (projectA < projectB) {
-                        return 1;
-                    }
-                    // names must be equal
-                    return 0;
-                });
-                break;
-            }
-            case this.headers[1]: {
-                //type
-                console.log(this._sorted1);
-                this._sorted1 = this._sorted1 === true ? false : true;
-
-                this._reizenDummyData = this._sorted1 === true ? this._reizenDummyData.sort((a: any, b: any) => {
-                    const typeA = a.type.toUpperCase(); // ignore upper and lowercase
-                    const typeB = b.type.toUpperCase(); // ignore upper and lowercase
-
-                    // typeA - typeB
-                    if (typeA > typeB) {
-                        return -1;
-                    }
-                    if (typeA < typeB) {
-                        return 1;
-                    }
-                    // names must be equal
-                    return 0;
-                }) : this._reizenDummyData.sort((a: any, b: any) => {
-                    const typeB = a.type.toUpperCase(); // ignore upper and lowercase
-                    const typeA = b.type.toUpperCase(); // ignore upper and lowercase
-                    if (typeA > typeB) {
-                        return -1;
-                    }
-                    if (typeA < typeB) {
-                        return 1;
-                    }
-                    // names must be equal
-                    return 0;
-                });
-                break;
-            }
-            case this.headers[2]: {
-                //begin
-                console.log(this._sorted2);
-
-                this._sorted2 = this._sorted2 === true ? false : true;
-
-                this._reizenDummyData = this._sorted2 ? this._reizenDummyData.sort((x: any, y: any) => {
-                    (x = new Date(x.begin)), (y = new Date(y.begin));
-                    return x - y;
-                }) : this._reizenDummyData.sort((x: any, y: any) => {
-                    (x = new Date(x.begin)), (y = new Date(y.begin));
-                    return x - y;
-                });
-                break;
-            }
-            case this.headers[3]: {
-                //eind
-                console.log(this._sorted3);
-
-                this._sorted3 = this._sorted3 === true ? false : true;
-
-                this._reizenDummyData = this._sorted3 ? this._reizenDummyData.sort((x: any, y: any) => {
-                    (x = new Date(x.eind)), (y = new Date(y.eind));
-                    return x - y;
-                }) : this._reizenDummyData.sort((x: any, y: any) => {
-                    (x = new Date(x.eind)), (y = new Date(y.eind));
-                    return x - y;
-                });
-                break;
-            }
-            case this.headers[4]: {
-                //km
-
-                console.log(this._sorted4);
-
-                this._sorted4 = this._sorted4 === true ? false : true;
-                // @ts-ignore
-                this._reizenDummyData = this._sorted4 ? this._reizenDummyData.sort((u1: any, u2: any) => u1.km - u2.km) : this._reizenDummyData.sort((u1: any, u2: any) => u2.km - u1.km);
-                break;
-            }
-            case this.headers[5]: {
-                //uitstoot
-                console.log(this._sorted5);
-
-                this._sorted5 = this._sorted5 === true ? false : true;
-                // @ts-ignore
-                this._reizenDummyData = this._sorted5 ? this._reizenDummyData.sort((u1: any, u2: any) => u1.uitstoot - u2.uitstoot) : this._reizenDummyData.sort((u1: any, u2: any) => u2.uitstoot - u1.uitstoot);
-                break;
-            }
-            case this.headers[6]: {
-                //kosten
-                console.log(this._sorted6);
-
-                this._sorted6 = this._sorted6 === true ? false : true;
-                this._reizenDummyData = this._sorted6 ? this._reizenDummyData.sort((u1: any, u2: any) => u1.kosten - u2.kosten) : this._reizenDummyData.sort((u1: any, u2: any) => u2.kosten - u1.kosten);
-                break;
-            }
-            case this.headers[7]: {
-                //wijzig
-                alert("'no sorting needed'");
-            }
-                break;
-            default:
-                break;
-        }
+    //     console.log('sortColumnSimple');
+    //     console.log(filter);
+    //     // sort by value
+    // }
+    // headerClicked(e: Event) {
+    //     console.log('headerClicked');
+    //     console.log(this._reizenDummyData);
+    //
+    //     const event = e as any;
+    //     const id = event.target.id;
+    //     console.log('id= ' + id);
+    //     this._feedback = 'Table column to be sorted: ' + id;
+    //     // TODO: implement style sorter https://www.scaler.com/topics/javascript-sort-an-array-of-objects/
+    //     switch (id) {
+    //         case this.headers[0]: {
+    //             // project
+    //             console.log(this._sorted0);
+    //             this._sorted0 = this._sorted0 === true ? false : true;
+    //
+    //             this._reizenDummyData = this._sorted0 === true ? this._reizenDummyData.sort((a: any, b: any) => {
+    //                 const projectA = a.project.toUpperCase(); // ignore upper and lowercase
+    //                 const projectB = b.project.toUpperCase(); // ignore upper and lowercase
+    //                 // typeA - typeB
+    //                 if (projectA > projectB) {
+    //                     return -1;
+    //                 }
+    //                 if (projectA < projectB) {
+    //                     return 1;
+    //                 }
+    //                 // names must be equal
+    //                 return 0;
+    //             }) : this._reizenDummyData.sort((a: any, b: any) => {
+    //                 const projectB = a.project.toUpperCase(); // ignore upper and lowercase
+    //                 const projectA = b.project.toUpperCase(); // ignore upper and lowercase
+    //                 if (projectA > projectB) {
+    //                     return -1;
+    //                 }
+    //                 if (projectA < projectB) {
+    //                     return 1;
+    //                 }
+    //                 // names must be equal
+    //                 return 0;
+    //             });
+    //             break;
+    //         }
+    //         case this.headers[1]: {
+    //             //type
+    //             console.log(this._sorted1);
+    //             this._sorted1 = this._sorted1 === true ? false : true;
+    //
+    //             this._reizenDummyData = this._sorted1 === true ? this._reizenDummyData.sort((a: any, b: any) => {
+    //                 const typeA = a.type.toUpperCase(); // ignore upper and lowercase
+    //                 const typeB = b.type.toUpperCase(); // ignore upper and lowercase
+    //
+    //                 // typeA - typeB
+    //                 if (typeA > typeB) {
+    //                     return -1;
+    //                 }
+    //                 if (typeA < typeB) {
+    //                     return 1;
+    //                 }
+    //                 // names must be equal
+    //                 return 0;
+    //             }) : this._reizenDummyData.sort((a: any, b: any) => {
+    //                 const typeB = a.type.toUpperCase(); // ignore upper and lowercase
+    //                 const typeA = b.type.toUpperCase(); // ignore upper and lowercase
+    //                 if (typeA > typeB) {
+    //                     return -1;
+    //                 }
+    //                 if (typeA < typeB) {
+    //                     return 1;
+    //                 }
+    //                 // names must be equal
+    //                 return 0;
+    //             });
+    //             break;
+    //         }
+    //         case this.headers[2]: {
+    //             //begin
+    //             console.log(this._sorted2);
+    //
+    //             this._sorted2 = this._sorted2 === true ? false : true;
+    //
+    //             this._reizenDummyData = this._sorted2 ? this._reizenDummyData.sort((x: any, y: any) => {
+    //                 (x = new Date(x.begin)), (y = new Date(y.begin));
+    //                 return x - y;
+    //             }) : this._reizenDummyData.sort((x: any, y: any) => {
+    //                 (x = new Date(x.begin)), (y = new Date(y.begin));
+    //                 return x - y;
+    //             });
+    //             break;
+    //         }
+    //         case this.headers[3]: {
+    //             //eind
+    //             console.log(this._sorted3);
+    //
+    //             this._sorted3 = this._sorted3 === true ? false : true;
+    //
+    //             this._reizenDummyData = this._sorted3 ? this._reizenDummyData.sort((x: any, y: any) => {
+    //                 (x = new Date(x.eind)), (y = new Date(y.eind));
+    //                 return x - y;
+    //             }) : this._reizenDummyData.sort((x: any, y: any) => {
+    //                 (x = new Date(x.eind)), (y = new Date(y.eind));
+    //                 return x - y;
+    //             });
+    //             break;
+    //         }
+    //         case this.headers[4]: {
+    //             //km
+    //
+    //             console.log(this._sorted4);
+    //
+    //             this._sorted4 = this._sorted4 === true ? false : true;
+    //             // @ts-ignore
+    //             this._reizenDummyData = this._sorted4 ? this._reizenDummyData.sort((u1: any, u2: any) => u1.km - u2.km) : this._reizenDummyData.sort((u1: any, u2: any) => u2.km - u1.km);
+    //             break;
+    //         }
+    //         case this.headers[5]: {
+    //             //uitstoot
+    //             console.log(this._sorted5);
+    //
+    //             this._sorted5 = this._sorted5 === true ? false : true;
+    //             // @ts-ignore
+    //             this._reizenDummyData = this._sorted5 ? this._reizenDummyData.sort((u1: any, u2: any) => u1.uitstoot - u2.uitstoot) : this._reizenDummyData.sort((u1: any, u2: any) => u2.uitstoot - u1.uitstoot);
+    //             break;
+    //         }
+    //         case this.headers[6]: {
+    //             //kosten
+    //             console.log(this._sorted6);
+    //
+    //             this._sorted6 = this._sorted6 === true ? false : true;
+    //             this._reizenDummyData = this._sorted6 ? this._reizenDummyData.sort((u1: any, u2: any) => u1.kosten - u2.kosten) : this._reizenDummyData.sort((u1: any, u2: any) => u2.kosten - u1.kosten);
+    //             break;
+    //         }
+    //         case this.headers[7]: {
+    //             //wijzig
+    //             alert("'no sorting needed'");
+    //         }
+    //             break;
+    //         default:
+    //             break;
+    //     }
     }
     public onChange() {
         this._unsavedData = true;

@@ -10,16 +10,14 @@ import {customElement, property} from 'lit/decorators.js';
  */
 @customElement("thermometer-element")
 export class Thermometer extends LitElement {
-    // courtesy of https://www.silentpartnersoftware.com/free-tools/fundraising-thermometer/
-    //  free fundraising thermometer
+    // customization of https://www.silentpartnersoftware.com/free-tools/fundraising-thermometer/
     @property() _currentPageTitle = 'Thermometer';
     /** mercury = thermometer-fill range: (0=full)-(236=empty) **/
-    @property() _mercury = 10;
-    @property() _slidePolygon = 10;  // Transform : (42=bottom) (-76=middle) (-194= top) range=(0-236 minus 194)
+    @property() _mercury = 0;
+    @property() _slidePolygon = -194;  // Transform : (42=bottom) (-76=middle) (-194= top) range=(0-236 minus 194)
     @property() _thermoBreedte = '10vw';
     @property() _thermoHoogte = '10vw';
     @property() _root;
-    private sliderinput: any;
 
     constructor() {
         super();
@@ -27,7 +25,8 @@ export class Thermometer extends LitElement {
 
         sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
         this._root = this.createRenderRoot();
-        this._root.addEventListener('mercury', (e: Event) => this._thermometerInput, true);
+        // @ts-ignore
+        window.addEventListener('mercury-event', this._thermometerInput, true);
     }
 
     static get styles() {
@@ -112,27 +111,19 @@ export class Thermometer extends LitElement {
     }
 
     connectedCallback() {
-        super.connectedCallback();
         console.log('thermometer connectedCallback')
-        this._root = this.createRenderRoot();
-        this._root.addEventListener('mercury', (e: Event) => this._thermometerInput, true);
+        // @ts-ignore
+        window.addEventListener('mercury-event', this._thermometerInput, true);
+        super.connectedCallback();
     }
 
     disconnectedCallback() {
-        this._root.removeEventListener('mercury', (e: Event) => this._thermometerInput);
+        // this._root.removeEventListener('mercury', (e: Event) => this._thermometerInput, true);
         super.disconnectedCallback();
     }
 
     render() {
         return html`
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <title>Thermometer</title>
-                <meta charset="UTF-8"/>
-            </head>
-
-
             <div class="thermometer">
                 <svg width="${this._thermoHoogte}" height="${this._thermoBreedte}" id="thermometer-svg" version="1.1"
                      viewBox="-5 78.2 381.6 412.5" preserveAspectRatio x="0px"
@@ -160,12 +151,7 @@ export class Thermometer extends LitElement {
             </html>
         `;
     }
-
-    protected createRenderRoot() {
-        return super.createRenderRoot();
-    }
-
-    private _thermometerInput(e: CustomEvent) {
+    private _thermometerInput(e: { detail: { uitstoot: any; voertuigkeuze: any; }; }) {
         console.log('reached thermometer.ts._thermometerInput()')
         console.log(e.detail.uitstoot)
         console.log(e.detail.voertuigkeuze)
