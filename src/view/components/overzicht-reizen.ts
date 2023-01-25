@@ -31,12 +31,16 @@ export class OverzichtReizen extends LitElement {
                 console.log(this._vervoerMiddelDummyData);
             });
 
-        fetch('/database/MOCK-REIZEN.json')
-            .then((response) => response.json())
-            .then((json) => {
-                this._reizenDummyData = Array.from(json);
-                console.log(this._reizenDummyData);
-            });
+        // @ts-ignore
+        this._reizenDummyData = JSON.parse(sessionStorage.getItem('reizenData'));
+
+        //
+        // fetch('/database/MOCK-REIZEN.json')
+        //     .then((response) => response.json())
+        //     .then((json) => {
+        //         this._reizenDummyData = Array.from(json);
+        //         console.log(this._reizenDummyData);
+        //     });
         //TODO implement AJAX observable
 
         // const obs$ = ajax('https://api.github.com/users?per_page=5').pipe(map(userResponse => console.log('users: ', userResponse)), catchError(error => {

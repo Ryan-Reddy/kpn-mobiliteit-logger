@@ -11,9 +11,10 @@ public class reisDTO {
     private _kosten!: string;
     private _uitstoot!: string;
     private _totaleUitstoot!: string;
+    private _zakelijk!: boolean;
 
     public reisDTO(reisId: string, username: string, type: string, project: string, begin:Date,
-    eind: Date, km: string, uitstoot: string, kosten: string, totaleUitstoot: string) {
+    eind: Date, km: string, uitstoot: string, kosten: string, totaleUitstoot: string, zakelijk: boolean) {
         this._reisId = reisId;
         this._username = username;
         this._type = type;
@@ -24,6 +25,7 @@ public class reisDTO {
         this._kosten = kosten;
         this._uitstoot = uitstoot;
         this._totaleUitstoot = totaleUitstoot;
+        this._zakelijk = zakelijk;
 }
 public toString() {
     return "{ReisID: " + this._reisId +

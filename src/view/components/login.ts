@@ -182,7 +182,7 @@ export class Login extends LitElement {
         sessionStorage.removeItem("userID");
         sessionStorage.removeItem("password");
 
-        sessionStorage.setItem("userID", JSON.stringify(email)+JSON.stringify(password))
+        sessionStorage.setItem("userID", JSON.stringify(email) + Date.now().toString())
         // TODO check input with db and return user
         //   DO NOT SAVE PW to localstorage or elsewhere
         window.open('/invoeren-reizen', '_self');

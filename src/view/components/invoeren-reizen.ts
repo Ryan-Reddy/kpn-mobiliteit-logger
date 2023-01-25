@@ -2,7 +2,6 @@ import {css, html, LitElement} from 'lit';
 import {customElement, property, query, eventOptions, queryAll} from 'lit/decorators.js';
 import {Thermometer} from "./global/thermometer";
 import { PreventAndRedirectCommands, Router, RouterLocation, RedirectResult, PreventResult} from "@vaadin/router";
-
 /**
  * An example element.
  *
@@ -17,10 +16,10 @@ export class InvoerenReizen extends LitElement {
     // @property() span_message = '';
     @property() _vertrekTijd = '';
     @property() _aankomstTijd = '';
-    @property() _demoKM = '';
-    // @property() _demoKosten = '111,11';
-    // @property() _demoVertrekLocatie = 'Amsterdam';
-    // @property() _demoAankomstLocatie = 'Utrecht';
+    @property() _demoKM = null;
+    @property() _demoKosten = null;
+    @property() _demoVertrekLocatie = null;
+    @property() _demoAankomstLocatie = null;
     @property() inputfield = 'inputfield';
     @property() _vervoerMiddelDummyData = [];
     @property() _gekozenC02: string | undefined;
@@ -34,7 +33,8 @@ export class InvoerenReizen extends LitElement {
 
     @query('form') _entireForm!: HTMLFormElement;
     @property() _userName!: string;
-    private _unsavedData = false;
+    @property() _unsavedData = false;
+    @property() _reizenDummyData = [];
 
     constructor() {
         super();
@@ -50,6 +50,16 @@ export class InvoerenReizen extends LitElement {
 
                 this._vervoerMiddelDummyData = res;
             });
+        fetch('/database/MOCK-REIZEN.json')
+            .then((response) => response.json())
+            .then((json) => {
+                this._reizenDummyData = Array.from(json);
+                console.log(this._reizenDummyData);
+            });
+        // TODO replace with json from localStorage
+        // localStorage.getItem('reizenData');
+
+
         this._userName = sessionStorage.getItem('userID')!;
         let now = new Date()!;
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
@@ -192,7 +202,8 @@ export class InvoerenReizen extends LitElement {
                                     <option
                                             disabled
                                             hidden
-                                            value="0"
+                                            value=null
+                                            selected
                                     >
                                     <option
                                             id="${uitstoot}"
@@ -211,22 +222,27 @@ export class InvoerenReizen extends LitElement {
                         <h2>Zakelijk of prive keuze</h2>
                         <li>
                             <label for="zakelijkOfPrive">zakelijk of prive:</label>
-                            <select name="zakelijkOfPrive" id="zakelijkOfPrive" class="${this.inputfield}" required>
+                            <select name="Zakelijk" id="Zakelijk" class="${this.inputfield}" required>
+                                <option disabled
+                                        value="Zakelijke reis:"
+                                        hidden>
+                                    
+                                </option>
+                                
                                 <label for="prive" style="float:left" hidden>Prive</label>
                                 <option id="prive"
+                                        value=false
                                         @click="${this._optionClickedZakelijkOfPrive}">
                                     Prive
                                 </option>
-                                <option disabled
-                                        value="0"
-                                        hidden>
-                                    "Prive of zakelijke reis:"
-                                </option>
+
                                 <label for="zakelijk" style="float:left" hidden>Zakelijk</label>
                                 <option id="zakelijk"
+                                        value=true
                                         @click="${this._optionClickedZakelijkOfPrive}">
                                     Zakelijk
                                 </option>
+                                
                             </select>
                         </li>
                     </ul>
@@ -237,7 +253,8 @@ export class InvoerenReizen extends LitElement {
                             <select name="klasse" id="reisKlasseKeuzeMenu" class="${this.inputfield}" required>
                                 <option disabled
                                         aria-hidden="true"
-                                        value="0"
+                                        value=null
+                                        selected
                                         hidden
                                 >
                                     "Reisklasse keuze:"
@@ -257,12 +274,14 @@ export class InvoerenReizen extends LitElement {
                             <label for="vertrekLocatie">Vertrek locatie:</label>
                             <input class="_alleenZakelijkClass" id="vertrekLocatie"
                                    name="vertrekLocatie"
+                                   value=${this._demoVertrekLocatie}
                                    placeholder="Vertrek locatie"/>
                         </li>
                         <li>
                             <label for="aankomstLocatie">Aankomst locatie:</label>
                             <input class="_alleenZakelijkClass" id="aankomstLocatie"
                                    name="aankomstLocatie"
+                                   value=${this._demoAankomstLocatie}
                                    placeholder="Aankomst locatie"/>
                         </li>
                         <li>
@@ -323,7 +342,6 @@ export class InvoerenReizen extends LitElement {
     connectedCallback() {
         super.connectedCallback();
     }
-
     _optionClickedZakelijkOfPrive(option: {
         originalTarget: {
             value: string; id: string;
@@ -358,14 +376,14 @@ export class InvoerenReizen extends LitElement {
     formDeelTweeShowEnThermometerUpdate(option: {
         originalTarget: {
             value: string; id: string;
-        };
-    }) {
+        };    }) {
         console.log('formDeelTweeShow');
 
         this._gekozenVoertuig = option.originalTarget.value;
         this._gekozenC02 = option.originalTarget.id;
         console.log('keuze: ' + this._gekozenVoertuig)
         console.log('uitstoot: ' + this._gekozenC02)
+
 
         this._dispatchEventUitstoot()
 
@@ -403,6 +421,7 @@ export class InvoerenReizen extends LitElement {
 
     // get
     customFormSend() {
+        console.log('customFormSend reached')
 
         const form = this._entireForm;
         const formData = new FormData(form);
@@ -415,10 +434,8 @@ export class InvoerenReizen extends LitElement {
             console.log(`${key}: ${value}\n`)
             // output.textContent += `${key}: ${value}\n`;
         }
-        const travelID = formData.get('userID') + ' ';
         const nuTijd = Date.now().toLocaleString();
 
-        formData.append('travelID', travelID)
         formData.append('tijdvanopslaan', nuTijd)
 
         const object = {};
@@ -426,10 +443,16 @@ export class InvoerenReizen extends LitElement {
         formData.forEach((value, key) => object[key] = value);
         const jsonFormData = JSON.stringify(object);
 
+
         console.log(jsonFormData)
+        let jsonString = JSON.stringify(this._vervoerMiddelDummyData);
 
-        var name = "Name";
 
+        // @ts-ignore
+        this._reizenDummyData.push(JSON.parse(jsonFormData));
+        console.log(this._reizenDummyData);
+
+        localStorage.setItem('reizenData',JSON.stringify(this._reizenDummyData));
 
         //TODO save formdata to:
         // sessionStorage.setItem(travelID, formData)
@@ -439,11 +462,13 @@ export class InvoerenReizen extends LitElement {
     };
 
     private _dispatchEventUitstoot() {
+        // TODO fix
         console.log('_vehicleChosen reached')
 
         const myEvent = new CustomEvent('mercury', {
             detail: {uitstoot: this._gekozenC02, voertuigkeuze: this._gekozenVoertuig}, bubbles: true, composed: true
         });
+        console.log('mercury customevent dispatching')
         this.dispatchEvent(myEvent);
     }
 
