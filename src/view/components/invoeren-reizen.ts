@@ -11,19 +11,19 @@ import { PreventAndRedirectCommands, Router, RouterLocation, RedirectResult, Pre
 @customElement('invoeren-reizen-element')
 export class InvoerenReizen extends LitElement {
     @property() _currentPageTitle = 'Wijzigen Reis';
-    @property() eindTijdMin = '';
-    @property() beginTijdMax = '';
-    // @property() span_message = '';
-    @property() _vertrekTijd = '';
-    @property() _aankomstTijd = '';
+    @property() eindTijdMin = null;
+    @property() beginTijdMax = null;
+    @property() _vertrekTijd = null;
+    @property() _aankomstTijd = null;
     @property() _demoKM = null;
     @property() _demoKosten = null;
     @property() _demoVertrekLocatie = null;
     @property() _demoAankomstLocatie = null;
+    private _demoProject = null;
     @property() inputfield = 'inputfield';
     @property() _vervoerMiddelDummyData = [];
     @property() _gekozenC02: string | undefined;
-    @property() _gekozenVoertuig: string = "null";
+    @property() _gekozenVoertuig = null;
 
     @query('.formDeelTweeZakelijkvsPrive') _formDeelTweeZakelijkvsPrive!: HTMLDivElement;
     @query('.reisKlasseKeuzeMenu') _formDeelReisKlasseKeuzeMenu!: HTMLDivElement;
@@ -95,9 +95,13 @@ export class InvoerenReizen extends LitElement {
           }
 
           label {
-            visibility: hidden;
+            //visibility: hidden;
           }
-
+          
+          .label:hover {
+              visibility: visible;
+          }
+          
           H1 {
             padding-top: 1em;
             font-size: 2em;
@@ -146,28 +150,34 @@ export class InvoerenReizen extends LitElement {
           .bottomButtons {
             display:inline-block;
             width: 33%;
+            margin: auto;
+
             background-color: var(--kpn-groen);
             border: none;
             color: var(--kpn-wit);
-            padding: 0.5em;
+            padding: 0.8em 0.4px;
             text-decoration: none;
-            margin: 4px 2px;
             cursor: pointer;
-            float: left; /* Float the buttons side by side */
-
           }
-          .bottomButtonsBox {
-            
-            width: 1vw;
+          #bottomButtonsBox {
+            justify-content: center;
+            display: flex;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+            //display: flex;
+            place-items: center;
+
+            align-content: center;
+            text-align: center;
           }
 
           .visibility-hidden {
             display: none;
             pointer-events: none;
             color: lightgrey;
-            foreground-color: var(--kpn-grijs);
+            color: var(--kpn-grijs);
             background-color: var(--kpn-grijs);
-            required: invalid;
           }
 
           #feedbackSpan {
@@ -195,8 +205,9 @@ export class InvoerenReizen extends LitElement {
                     <h2>Voertuig keuze</h2>
                     <ul id="formDeelEen">
                         <li>
-                            <label for="vervoerstype">typeVervoer:</label>
-                            <select name="type" id="vervoerstype" class="${this.inputfield}" required
+                            <label class="label" for="vervoerstype">typeVervoer:</label>
+                            <select tooltip="vervoerstype"
+                                    name="type" id="vervoerstype" class="${this.inputfield}" required
                                     >
                                 ${this._vervoerMiddelDummyData.map(({naam, uitstoot}) => html`
                                     <option
@@ -221,7 +232,7 @@ export class InvoerenReizen extends LitElement {
                     <ul class="formDeelTweeZakelijkvsPrive" hidden>
                         <h2>Zakelijk of prive keuze</h2>
                         <li>
-                            <label for="zakelijkOfPrive">zakelijk of prive:</label>
+                            <label class="label" for="zakelijkOfPrive">zakelijk of prive:</label>
                             <select name="Zakelijk" id="Zakelijk" class="${this.inputfield}" required>
                                 <option disabled
                                         value="Zakelijke reis:"
@@ -229,14 +240,14 @@ export class InvoerenReizen extends LitElement {
                                     
                                 </option>
                                 
-                                <label for="prive" style="float:left" hidden>Prive</label>
+                                <label class="label" class="label" class="label" for="prive" style="float:left" hidden>Prive</label>
                                 <option id="prive"
                                         value=false
                                         @click="${this._optionClickedZakelijkOfPrive}">
                                     Prive
                                 </option>
 
-                                <label for="zakelijk" style="float:left" hidden>Zakelijk</label>
+                                <label class="label" for="zakelijk" style="float:left" hidden>Zakelijk</label>
                                 <option id="zakelijk"
                                         value=true
                                         @click="${this._optionClickedZakelijkOfPrive}">
@@ -249,7 +260,7 @@ export class InvoerenReizen extends LitElement {
                     <ul class="reisKlasseKeuzeMenu" hidden>
                         <h2>Reis klasse keuze</h2>
                         <li>
-                            <label for="reisKlasseKeuzeMenu">zakelijk of prive:</label>
+                            <label class="label" for="reisKlasseKeuzeMenu">zakelijk of prive:</label>
                             <select name="klasse" id="reisKlasseKeuzeMenu" class="${this.inputfield}" required>
                                 <option disabled
                                         aria-hidden="true"
@@ -259,11 +270,11 @@ export class InvoerenReizen extends LitElement {
                                 >
                                     "Reisklasse keuze:"
                                 </option>
-                                <label for="eersteKlas" style="float:left">Eerste klas</label>
+                                <label class="label" for="eersteKlas" style="float:left">Eerste klas</label>
                                 <option id="eersteKlas">Eerste klas</option>
-                                <label for="tweedeKlas" style="float:left">Tweede klas</label>
+                                <label class="label" for="tweedeKlas" style="float:left">Tweede klas</label>
                                 <option id="tweedeKlas">Tweede klas</option>
-                                <label for="highSpeed" style="float:left">Tweede klas</label>
+                                <label class="label" for="highSpeed" style="float:left">Tweede klas</label>
                                 <option id="highSpeed"> Tweede klas</option>
                             </select>
                         </li>
@@ -271,21 +282,21 @@ export class InvoerenReizen extends LitElement {
                     <ul class="alleenZakelijk" hidden>
                         <h2>formdeeldrie</h2>
                         <li>
-                            <label for="vertrekLocatie">Vertrek locatie:</label>
+                            <label class="label" for="vertrekLocatie">Vertrek locatie:</label>
                             <input class="_alleenZakelijkClass" id="vertrekLocatie"
                                    name="vertrekLocatie"
                                    value=${this._demoVertrekLocatie}
                                    placeholder="Vertrek locatie"/>
                         </li>
                         <li>
-                            <label for="aankomstLocatie">Aankomst locatie:</label>
+                            <label class="label" for="aankomstLocatie">Aankomst locatie:</label>
                             <input class="_alleenZakelijkClass" id="aankomstLocatie"
                                    name="aankomstLocatie"
                                    value=${this._demoAankomstLocatie}
                                    placeholder="Aankomst locatie"/>
                         </li>
                         <li>
-                            <label for="beginTijd">Begin tijd:</label>
+                            <label class="label" for="beginTijd">Begin tijd:</label>
                             <input class="_alleenZakelijkClass" id="beginTijd"
                                    name="beginTijd"
                                    value="${this._vertrekTijd}"
@@ -294,7 +305,7 @@ export class InvoerenReizen extends LitElement {
                             />
                         </li>
                         <li>
-                            <label for="eindTijd">Eind tijd:</label>
+                            <label class="label" for="eindTijd">Eind tijd:</label>
                             <input class="_alleenZakelijkClass" id="eindTijd"
                                    name="eindTijd"
                                    value="${this._aankomstTijd}"
@@ -302,23 +313,42 @@ export class InvoerenReizen extends LitElement {
                                    type="datetime-local"/>
                         </li>
                         <li id="kmDiv">
-                            <label for="km">Km:</label>
+                            <label class="label" for="km">Km:</label>
                             <input class="_alleenZakelijkClass"
                                    name="km"
                                    value=${this._demoKM}
                                    placeholder="Gereisde km"/>
                         </li>
+                        <li id="kostenDiv">
+                            <label class="label" for="Kosten">Kosten:</label>
+                            <input class="_alleenZakelijkClass"
+                                   name="Kosten"
+                                   value=${this._demoKosten}
+                                   placeholder="Kosten"/>
+                        </li>
+                        <li id="projectDiv">
+                            <label class="Project" for="Kosten">Project:</label>
+                            <select name="Project" id="Project" class="_alleenZakelijkClass" required>
+                                <option disabled value=${this._demoProject} selected hidden>
+                                    Project Keuze
+                                </option>
+                                
+                                <label class="label" for="Montage" style="float:left">Montage op locatie</label>
+                                <option id="Montage">Tweede klas</option>
+                                
+                                <label class="label" for="Klantgesprek" style="float:left">Klantgesprek</label>
+                                <option id="Klantgesprek">Klantgesprek</option>
+                            </select>
+                        </li>
                     </ul>
+                    <hr>
+                    <br>
+                    
                     <div id="bottomButtonsBox">
-<!--                        <label for="verzendReis" hidden">Verzend</label>-->
-<!--                        <input class="bottomButtons" id="verzendReis" type="submit" value="verzendReis">-->
-
-                        <label for="zenden" hidden">Zenden(custom)</label>
-                        <input class="bottomButtons" id="zenden" form="formulierReizen" type="button"
+                        <input class="bottomButtons" id="zenden" form="formulierReizen" type="button" aria-label="Verzend formulier"
                                @click=${this.customFormSend} value="Verzenden">
 
-                        <label for="resetButton" hidden>Herlaad en leeg het formulier.</label>
-                        <input class="bottomButtons" id="resetButton" type="reset" value="Reset velden"
+                        <input class="bottomButtons" id="resetButton" type="reset" value="Reset velden" aria-label="reset formulier"
                         style="background-color: var(--kpn-warning-red)">
                     </div>
 
