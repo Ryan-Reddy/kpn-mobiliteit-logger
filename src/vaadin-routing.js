@@ -14,7 +14,7 @@ import './view/components/support';
 import './view/components/overzicht-reizen';
 import './view/components/invoeren-reizen';
 import './view/components/dashboard/dashboard';
-import './view/components/dashboard/example-chart';
+import './view/components/dashboard/chart';
 
 import './view/components/invoeren-reizen-wijzigen';
 

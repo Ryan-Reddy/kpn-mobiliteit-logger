@@ -399,7 +399,9 @@ export class OverzichtReizen extends LitElement {
         if (!this.isAuthorized()) {
             // sync operation
             // return commands.redirect('/');
-
+            this._root.addEventListener('mercury',
+                (e: Event) => this._thermometerInput,
+                true);
             // async operation
             return new Promise((resolve, reject) => {
                 setTimeout(() => {

@@ -5,7 +5,7 @@ import '@vaadin/icons';
 import '@vaadin/vertical-layout';
 
 @customElement('example-indicator')
-export class ExampleIndicator extends LitElement {
+export class Indicator extends LitElement {
   static get styles() {
     return css`
       .title {

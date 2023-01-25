@@ -162,12 +162,10 @@ export class Login extends LitElement {
                                    placeholder="Password">
                         </div>
                         <div class="form-group form-check">
-                            <input type="checkbox" autocomplete="password"
-                                   class="inputfield"
-                                   id="passwordInput">
-                            <input type="checkbox" checked="checked" name="remember"> Onthoudt mijn gegevens
+                            Onthoudt mijn gegevens
+                            <input type="checkbox" checked="checked" name="remember"> 
                         </div>
-                        <input @click=${this._login} type="submit" class="submit-login">
+                        <input @click=${this._login} type="button" class="submit-login" value="Verzenden">
                     </form>
 
                     <div @click=${this._clickMenu} id="nope">
@@ -184,12 +182,10 @@ export class Login extends LitElement {
         sessionStorage.removeItem("userID");
         sessionStorage.removeItem("password");
 
-        sessionStorage.setItem("userID", JSON.stringify(email))
+        sessionStorage.setItem("userID", JSON.stringify(email)+JSON.stringify(password))
         // TODO check input with db and return user
         //   DO NOT SAVE PW to localstorage or elsewhere
-
-        sessionStorage.setItem("password", JSON.stringify(password))
-        window.open('/home', '_self');
+        window.open('/invoeren-reizen', '_self');
     }
 
 

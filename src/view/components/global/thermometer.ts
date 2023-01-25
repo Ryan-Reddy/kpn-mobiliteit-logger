@@ -13,39 +13,23 @@ export class Thermometer extends LitElement {
     // courtesy of https://www.silentpartnersoftware.com/free-tools/fundraising-thermometer/
     //  free fundraising thermometer
     @property() _currentPageTitle = 'Thermometer';
-    private sliderinput: any;
-
     /** mercury = thermometer-fill range: (0=full)-(236=empty) **/
-    @property() _mercury= 10;
-    @property() _slidePolygon= 10;  // Transform : (42=bottom) (-76=middle) (-194= top) range=(0-236 minus 194)
+    @property() _mercury = 10;
+    @property() _slidePolygon = 10;  // Transform : (42=bottom) (-76=middle) (-194= top) range=(0-236 minus 194)
     @property() _thermoBreedte = '10vw';
     @property() _thermoHoogte = '10vw';
     @property() _root;
+    private sliderinput: any;
 
     constructor() {
         super();
-        sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
-        this._root =this.createRenderRoot();
-        this._root.addEventListener('mercury',
-            (e: Event) => this._thermometerInput,
-            true);
-    }
-    protected createRenderRoot() {
-        return super.createRenderRoot();
-    }
-    connectedCallback() {
-        super.connectedCallback();
-        this._root =this.createRenderRoot();
+        console.log('thermometer constructor')
 
-        this._root.addEventListener('mercury',
-            (e: Event) => this._thermometerInput,
-            true);
+        sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
+        this._root = this.createRenderRoot();
+        this._root.addEventListener('mercury', (e: Event) => this._thermometerInput, true);
     }
-    disconnectedCallback() {
-        this._root.removeEventListener('mercury',
-            (e: Event) => this._thermometerInput);
-        super.disconnectedCallback();
-    }
+
     static get styles() {
         return css`
           :host {
@@ -61,7 +45,7 @@ export class Thermometer extends LitElement {
             padding: 1.5em;
             will-change: filter;
           }
-          
+
 
           .logo:hover {
             filter: drop-shadow(0 0 2em #646cffaa);
@@ -127,6 +111,18 @@ export class Thermometer extends LitElement {
         `;
     }
 
+    connectedCallback() {
+        super.connectedCallback();
+        console.log('thermometer connectedCallback')
+        this._root = this.createRenderRoot();
+        this._root.addEventListener('mercury', (e: Event) => this._thermometerInput, true);
+    }
+
+    disconnectedCallback() {
+        this._root.removeEventListener('mercury', (e: Event) => this._thermometerInput);
+        super.disconnectedCallback();
+    }
+
     render() {
         return html`
             <!DOCTYPE html>
@@ -138,7 +134,8 @@ export class Thermometer extends LitElement {
 
 
             <div class="thermometer">
-                <svg width="${this._thermoHoogte}" height="${this._thermoBreedte}" id="thermometer-svg" version="1.1" viewBox="-5 78.2 381.6 412.5" preserveAspectRatio x="0px"
+                <svg width="${this._thermoHoogte}" height="${this._thermoBreedte}" id="thermometer-svg" version="1.1"
+                     viewBox="-5 78.2 381.6 412.5" preserveAspectRatio x="0px"
                      xml:space="preserve" xmlns="http://www.w3.org/2000/svg" y="0px">
         <g id="fill">
                                 <path d="M207.8,345.9V106.5h-40v239.4 c-11.6,6.9-19.4,19.5-19.4,33.9c0,21.8,17.6,39.4,39.4,39.4s39.4-17.6,39.4-39.4C227.2,365.4,219.4,352.7,207.8,345.9z"
@@ -164,6 +161,10 @@ export class Thermometer extends LitElement {
         `;
     }
 
+    protected createRenderRoot() {
+        return super.createRenderRoot();
+    }
+
     private _thermometerInput(e: CustomEvent) {
         console.log('reached thermometer.ts._thermometerInput()')
         console.log(e.detail.uitstoot)
@@ -171,7 +172,7 @@ export class Thermometer extends LitElement {
         //TODO remove hard coding (15) = max C02 in list voertuigdata
         // mercury = thermometer-fill range: (0=full)-(236=empty) **/
 
-        this._mercury = (((e.detail.uitstoot) / 15) * -236)+236;
-        this._slidePolygon = this._mercury-194
+        this._mercury = (((e.detail.uitstoot) / 15) * -236) + 236;
+        this._slidePolygon = this._mercury - 194
     }
 }

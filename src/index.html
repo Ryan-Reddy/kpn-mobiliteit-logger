@@ -24,6 +24,7 @@
     <!--    needed for readme-->
     <script defer src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script>
     <script defer type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
+
 </head>
 
 <menu-nav-element></menu-nav-element>
@@ -39,7 +40,7 @@
 <script>
   // addEventListener('storage', (event) => { });
 
-  window.onblur = (event) => {
+  window.onchange = (event) => {
 
   let title = sessionStorage.getItem('currentpagetitle');
     console.log(title);
