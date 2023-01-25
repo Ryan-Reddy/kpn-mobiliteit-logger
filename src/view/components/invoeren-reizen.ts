@@ -37,8 +37,8 @@ export class InvoerenReizen extends LitElement {
     @property() _reizenDummyData: any;
     @property() _mercury = 0;
     @property() _slidePolygon = -194;  // Transform : (42=bottom) (-76=middle) (-194= top) range=(0-236 minus 194)
-    @property() _thermoBreedte = '10vw';
-    @property() _thermoHoogte = '10vw';
+    @property() _thermoBreedte = '20vw';
+    @property() _thermoHoogte = '20vw';
 
     constructor() {
         super();
@@ -129,6 +129,16 @@ export class InvoerenReizen extends LitElement {
             margin: 0;
             padding: 0.5em;
             overflow: hidden;
+          }
+          
+          .thermometer {
+            background-color: var(--kpn-grijs);
+            opacity: 0.9;
+            width: 20vw;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 30em;
+            margin-top: 5em;
           }
           
           #vervoerstype {
