@@ -33,19 +33,13 @@ export class OverzichtReizen extends LitElement {
         //         console.log(this._vervoerMiddelDummyData);
         //     });
         // @ts-ignore
-        this._reizenDummyData = JSON.parse(localStorage.getItem('reizenData'));
+        console.log(localStorage.getItem('reizenData'));
+        console.log(JSON.parse(localStorage.getItem('reizenData')));
+        this._reizenDummyData = JSON.parse();
         console.log(this._reizenDummyData)
 
 
 
-
-        //
-        // fetch('/database/MOCK-REIZEN.json')
-        //     .then((response) => response.json())
-        //     .then((json) => {
-        //         this._reizenDummyData = Array.from(json);
-        //         console.log(this._reizenDummyData);
-        //     });
         //TODO implement AJAX observable
         // let obs$: Observable<unknown>;
         // obs$ = ajax(JSON.stringify(localStorage.getItem('reizenData'))).pipe(map(userResponse => console.log('users: ', userResponse)), catchError(error => {

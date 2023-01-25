@@ -512,10 +512,10 @@ export class InvoerenReizen extends LitElement {
         // } else {                                               // if there was data => .push() to it and then store this.
                 let arr = [];
         try {
-            arr =this._getReizenData();
+            arr = this._getReizenData();
         } catch (e) {
-            console.log(e.stackTrace)
-        }
+            arr = [];
+       }
                 arr.push(object);
                 console.log(arr)
                 localStorage.setItem('reizenData', JSON.stringify(arr));
@@ -525,32 +525,6 @@ export class InvoerenReizen extends LitElement {
         this._getReizenData()
 
     };
-
-    private _dispatchEventUitstoot() {
-        // TODO fix
-        console.log('_vehicleChosen reached')
-
-        const myEvent = new CustomEvent('mercury-event', {
-            detail: {uitstoot: this._gekozenC02, voertuigkeuze: this._gekozenVoertuig}, bubbles: true, composed: true
-        });
-        this.dispatchEvent(myEvent);
-        console.log('mercury-event customevent dispatching')
-    }
-
-    private _thermometerInput(e: CustomEvent) {
-        console.log('reached invoeren-reizen.ts._thermometerInput()')
-        console.log(e.detail.uitstoot)
-        console.log(e.detail.voertuigkeuze)
-        //TODO remove hard coding (15) = max C02 in list voertuigdata
-        // mercury = thermometer-fill range: (0=full)-(236=empty) **/
-
-        this._mercury = (((e.detail.uitstoot) / 15) * -236) + 236;
-        this._slidePolygon = this._mercury - 194
-    }
-
-    public onChange() {
-        this._unsavedData = true;
-    }
     _getReizenData() {
         try {
             // @ts-ignore
@@ -558,9 +532,9 @@ export class InvoerenReizen extends LitElement {
 
         } catch (e) {
             localStorage.removeItem('reizenData');
+            return [];
         }
     }
-
     public onBeforeEnter(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): Promise<unknown> | RedirectResult | undefined {
         console.log('onBeforeEnter');
         if (!this.isAuthorized()) {
@@ -591,8 +565,29 @@ export class InvoerenReizen extends LitElement {
             }
         }
     }
+    private _dispatchEventUitstoot() {
+        // TODO fix
+        console.log('_vehicleChosen reached')
 
+        const myEvent = new CustomEvent('mercury-event', {
+            detail: {uitstoot: this._gekozenC02, voertuigkeuze: this._gekozenVoertuig}, bubbles: true, composed: true
+        });
+        this.dispatchEvent(myEvent);
+        console.log('mercury-event customevent dispatching')
+    }
+    private _thermometerInput(e: CustomEvent) {
+        console.log('reached invoeren-reizen.ts._thermometerInput()')
+        console.log(e.detail.uitstoot)
+        console.log(e.detail.voertuigkeuze)
+        //TODO remove hard coding (15) = max C02 in list voertuigdata
+        // mercury = thermometer-fill range: (0=full)-(236=empty) **/
 
+        this._mercury = (((e.detail.uitstoot) / 15) * -236) + 236;
+        this._slidePolygon = this._mercury - 194
+    }
+    public onChange() {
+        this._unsavedData = true;
+    }
     private isAuthorized() {
         return !!sessionStorage.getItem('userID');
     }
