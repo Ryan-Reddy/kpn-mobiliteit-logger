@@ -13,6 +13,7 @@ export class MenuNav extends LitElement {
     @property() _kpnLogo = 'branding/Logo_kpn_banner.svg';
     @property() _currentPage: string = '';
     @property() _kpnHomePageUrl = 'https://www.kpn.com/';
+    private _root: any;
 
     constructor() {
         super();
@@ -21,170 +22,168 @@ export class MenuNav extends LitElement {
 
     static get styles() {
         return css`
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        text-decoration: none;
-      }
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+          }
 
-      body {
-        font-size: 14px;
-        font-family: Montserrat;
-        color: var(--kpn-wit);
-        font-size: 1em;
-        opacity: 1;
-      }
+          body {
+            font-size: 14px;
+            font-family: Montserrat;
+            color: var(--kpn-wit);
+            font-size: 1em;
+            opacity: 1;
+          }
 
-      .entire_menu_bar {
-        height: 8em;
-        border: 1px solid var(--kpn-zwart);
-        background-color: #151617;
+          .entire_menu_bar {
+            height: 8em;
+            border: 1px solid var(--kpn-zwart);
+            background-color: #151617;
 
-        position: relative;
-        overflow: hidden;
-        padding: 1rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            padding: 1rem 1.5rem;
 
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
 
-      .ingelogd_als {
-        width: 176px;
-        color: yellow;
-        position: relative;
-        left: 1em;
-        font-family: Fira Code;
-        font-size: 12px;
-        text-align: left;
-      }
+          .ingelogd_als {
+            width: 176px;
+            color: yellow;
+            position: relative;
+            left: 1em;
+            font-family: Fira Code;
+            font-size: 12px;
+            text-align: left;
+          }
 
-      nav ul {
-        float: right;
-        margin-right: 8em;
-        padding-right: 8em;
-      }
+          nav ul {
+            float: right;
+            margin-right: 8em;
+            padding-right: 8em;
+          }
 
-      nav ul li {
-        display: inline-block;
-        line-height: 8em;
-        margin: 0 5px;
-      }
+          nav ul li {
+            display: inline-block;
+            line-height: 8em;
+            margin: 0 5px;
+          }
 
-      nav ul li a {
-        color: var(--kpn-wit);
-        border-radius: 3px;
-        text-transform: uppercase;
-        padding: 5px;
-      }
+          nav ul li a {
+            color: var(--kpn-wit);
+            border-radius: 3px;
+            text-transform: uppercase;
+            padding: 5px;
+          }
 
-      a:visited {
-        text-decoration: none;
-      }
+          a:visited {
+            text-decoration: none;
+          }
 
-      a:link {
-        text-decoration: none;
-      }
+          a:link {
+            text-decoration: none;
+          }
 
-      a.active,
-      a:hover {
-        background: var(--kpn-groen);
-        transition: 0.5s;
-      }
+          a.active,
+          a:hover {
+            background: var(--kpn-groen);
+            transition: 0.5s;
+          }
 
-      .nav-button {
-        opacity: 1;
-        text-align: center;
-      }
+          .nav-button {
+            opacity: 1;
+            text-align: center;
+          }
 
-      .nav-logo {
-        object-fit: cover;
-        height: 5em;
-        opacity: 1;
-        position: absolute;
-        right: 2em;
-        overflow: hidden;
-        padding: 0 2em;
-      }
+          .nav-logo {
+            object-fit: cover;
+            height: 5em;
+            opacity: 1;
+            position: absolute;
+            right: 2em;
+            overflow: hidden;
+            padding: 0 2em;
+          }
 
-      img {
-        -webkit-filter: invert(1);
-        filter: invert(1);
-      }
+          img {
+            -webkit-filter: invert(1);
+            filter: invert(1);
+          }
 
-      .nav-logo:hover {
-        height: 3.5em;
-      }
+          .nav-logo:hover {
+            height: 3.5em;
+          }
 
-      #check {
-        display: none;
-      }
+          #check {
+            display: none;
+          }
 
-      #check:checked ~ ul {
-        left: 0;
-      }
+          #check:checked ~ ul {
+            left: 0;
+          }
 
-      @media (max-width: 952px) {
-        .nav-logo {
-          height: 3em;
-          padding-left: 50px;
-        }
+          @media (max-width: 952px) {
+            .nav-logo {
+              height: 3em;
+              padding-left: 50px;
+            }
 
-        nav ul li a {
-          font-size: 10px;
-          display: inline-block;
-          line-height: 8em;
-          margin: 0 1em;
-        }
-      }
+            nav ul li a {
+              font-size: 10px;
+              display: inline-block;
+              line-height: 8em;
+              margin: 0 1em;
+            }
+          }
 
-      @media (max-width: 858px) {
-        .checkbtn {
-          display: block;
-        }
+          @media (max-width: 858px) {
+            .checkbtn {
+              display: block;
+            }
 
-        u: {
-          position: fixed;
-          width: 100%;
-          height: 100vh;
-          top: 80px;
-          left: -100%;
-          text-align: center;
-          transition: all 0.5s;
-        }
+            u: {
+              position: fixed;
+              width: 100%;
+              height: 100vh;
+              top: 80px;
+              left: -100%;
+              text-align: center;
+              transition: all 0.5s;
+            } nav ul li {
+              display: block;
+            } nav ul li a {
+              font-size: 20px;
+            };
 
-        nav ul li {
-          display: block;
-        }
+            a:hover,
+            a.active {
+              background: none;
+              color: #333;
+            }
+          }
 
-        nav ul li a {
-          font-size: 20px;
-        };
+          @media (prefers-color-scheme: light) {
+            .entire_menu_bar,
+            nav ul li a {
+              color: var(--kpn-zwart);
+              background-color: var(--kpn-wit);
+              border-color: lightgray;
+            }
 
-        a:hover,
-        a.active {
-          background: none;
-          color: #333;
-        }
-      }
+            .ingelogd_als {
+              color: red;
+            }
 
-      @media (prefers-color-scheme: light) {
-        .entire_menu_bar,
-        nav ul li a {
-          color: var(--kpn-zwart);
-          background-color: var(--kpn-wit);
-          border-color: lightgray;
-        }
-        .ingelogd_als {
-          color: red;
-        }
-        img {
-          -webkit-filter: invert(1);
-          filter: invert(0);
-        }
-      }
-    `;
+            img {
+              -webkit-filter: invert(1);
+              filter: invert(0);
+            }
+          }
+        `;
     }
 
     script() {
@@ -195,8 +194,11 @@ export class MenuNav extends LitElement {
     }
 
     onLoad() {
+        this._root = this.createRenderRoot();
+        console.log('The page has fully loaded');
         // alert('loaded nav-menu');
     }
+
 
     render() {
         // TODO create response menu with: https://www.codingnepalweb.com/responsive-dropdown-menu-bar-html-css/
@@ -216,8 +218,6 @@ export class MenuNav extends LitElement {
                         <i class="fas fa-bars"></i>
                     </label>
                     <ul @click=${this._clickMenu} id="nope">
-                        <li><a class="nav-button" href="/" id="home-page">Home</a></li>
-
                         <li>
                             <a class="nav-button" href="invoeren-reizen" id="Reis Registreren"
                             >Reis Registreren</a
@@ -227,10 +227,7 @@ export class MenuNav extends LitElement {
                             <a class="nav-button" href="overzicht-reizen" id="Reisgeschiedenis">Reisgeschiedenis</a>
                         </li>
                         <li><a class="dashboard-button" href="dashboard" id="Dashboard">Dashboard</a></li>
-
-                        <li>
-                            <a class="nav-button" href="#" id="Uitloggen">Uitloggen</a>
-                        </li>
+                        
                     </ul>
                 </nav>
             </div>

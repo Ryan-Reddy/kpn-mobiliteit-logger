@@ -25,6 +25,10 @@ export class Example extends LitElement {
             font-weight: 700;
             margin-block-end: var(--lumo-space-m);
           }
+          canvas {
+            : brown;
+            //background-color: brown;
+          }
         `;
     }
     constructor() {
@@ -39,8 +43,6 @@ export class Example extends LitElement {
             <div>
                 <canvas id="myChart"></canvas>
             </div>
-
-            chart
             <script>
 
             </script>
@@ -52,13 +54,19 @@ async updated() {
 
         const ctx = this.shadowRoot.getElementById('myChart');
 
+        // @ts-ignore
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: ['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    label: 'Kilometers zonder uitstoot!',
+                    data: [355, 310, 189, 196, 254, 280],
+                    borderWidth: 1
+                },
+                {
+                    label: 'Kilometers met uitstoot!',
+                    data: [245, 265, 421, 404, 346, 320],
                     borderWidth: 1
                 }]
             },

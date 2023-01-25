@@ -1,5 +1,6 @@
 import {css, html, LitElement} from 'lit';
-import {customElement} from 'lit/decorators.js';
+import {customElement, property, query} from 'lit/decorators.js';
+import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, RouterLocation} from "@vaadin/router";
 
 /**
  * An example element.
@@ -9,10 +10,28 @@ import {customElement} from 'lit/decorators.js';
  */
 @customElement('footer-menu')
 export class MenuFooter extends LitElement {
+    @property() _root;
+    @query('.whole') whole!: HTMLDivElement;
     constructor() {
         super();
+        this._root = this.createRenderRoot();
     }
 
+    onload = () => {
+        if(sessionStorage.getItem('currentpagetitle') == 'Login') {
+            this.whole.setAttribute("hidden", "hidden")
+        }
+    };
+    connectedCallback() {
+        super.connectedCallback();
+        console.log('thermometer connectedCallback')
+        this._root = this.createRenderRoot();
+    }
+
+    disconnectedCallback() {
+        sessionStorage.removeItem('currentpagetitle')
+        super.disconnectedCallback();
+    }
     static get styles() {
         return css`
           * {
@@ -144,6 +163,7 @@ export class MenuFooter extends LitElement {
 
     render() {
         return html`
+            <div class="whole">
                 <nav>
                     <ul
                             @click=${this._clickMenu}
@@ -159,26 +179,48 @@ export class MenuFooter extends LitElement {
                             <a class="nav-button" href="readme" id="Readme">Readme</a>
                         </li>
                         <li>
-                            <a class="nav-button" href="#" id="Logout">Log out</a>
+                            <a class="nav-button" href="#" @click="${this.logOut}" id="Logout">Log out</a>
                         </li>
                     </ul>
                 </nav>
+            </div>
         `;
     }
-
-    _clickMenu(e: Event) {
-        console.log('_dispatchPageLink() need to write funcion clickmenu in menu-footer');
-        //   // @ts-ignore
-        //   const id = e.target.id;
-        //   console.log('id= ' + id);
-        //
-        //   const hasChanged = this.currentPage !== id;
-        //
-        //   if (hasChanged) {
-        //     this.currentPage = id;
-        //
-        //     //notify parent:
-        //     this.dispatchEvent(new Event('page-chosen'));
-        //   }
+    logOut() {
+        !sessionStorage.removeItem('userID');
     }
+    public onBeforeEnter(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): Promise<unknown> | RedirectResult | undefined {
+        console.log('onBeforeEnter');
+        if (!this.isAuthorized()) {
+            // sync operation
+            // return commands.redirect('/');
+
+            // async operation
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log('Not authorized, redirect to home page');
+                    resolve(commands.redirect('/login'));
+                }, 2000);
+            });
+        }
+        this.whole.removeAttribute('hidden')
+
+        console.log('You can see this page');
+    }
+    public onBeforeLeave(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): PreventResult | undefined {
+        if (this._unsavedData) {
+
+            console.log('onBeforeLeave');
+
+            const leave = window.confirm('Weet je zeker dat je deze pagina wil verlaten? \nUw ingevoerde gegevens zijn nog niet verzonden!');
+            if (!leave) {
+                console.log('onBeforeLeave commands.prevent()');
+                return commands.prevent();
+            }
+        }
+    }
+    private isAuthorized() {
+        return !!sessionStorage.getItem('userID');
+    }
+
 }

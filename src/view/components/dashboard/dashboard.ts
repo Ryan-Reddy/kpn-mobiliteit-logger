@@ -5,8 +5,8 @@ import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, Route
 import '@vaadin/grid';
 import '@vaadin/grid/vaadin-grid-selection-column.js';
 
-import './example-indicator';
-import './example-chart';
+import './indicator';
+import './chart';
 import {catchError, map, Observable, of, switchMap} from "rxjs";
 import {fromFetch} from "rxjs/internal/observable/dom/fetch";
 
@@ -193,7 +193,7 @@ export class OverzichtReizen extends LitElement {
                         'menu       chart    chart    chart    chart   right'
                         'menu       footer  footer  footer  footer  right';
                         gap: 10px;
-                        background-color: #2196F3;
+                        /*background-color:var(--kpn-zwart);*/
                         padding: 10px;
                         margin-left: auto;
                         margin-right: auto;
@@ -250,7 +250,7 @@ export class OverzichtReizen extends LitElement {
                 </div>
                 <div class="item1">Header</div>
                 <div class="item2">Menu</div>
-                <div class="chart">
+                <div class="chart" style="background-color: transparent">
                     <chart-element></chart-element>
                 </div>
                 <div class="item4">Right</div>
