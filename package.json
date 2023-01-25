@@ -31,6 +31,7 @@
     "@vaadin/vaadin-grid": "^5.7.14",
     "@vaadin/vertical-layout": "^23.3.5",
     "chart.js": "^4.2.0",
+    "jquery-json": "^2.6.0",
     "json-reader-writer": "^1.0.4",
     "json-to-csv-export": "^2.1.1",
     "json2csv-export": "^1.0.5",

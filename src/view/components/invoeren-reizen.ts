@@ -2,6 +2,7 @@ import {css, html, LitElement} from 'lit';
 import {customElement, property, query, eventOptions, queryAll} from 'lit/decorators.js';
 import {Thermometer} from "./global/thermometer";
 import { PreventAndRedirectCommands, Router, RouterLocation, RedirectResult, PreventResult} from "@vaadin/router";
+
 /**
  * An example element.
  *
@@ -34,7 +35,7 @@ export class InvoerenReizen extends LitElement {
     @query('form') _entireForm!: HTMLFormElement;
     @property() _userName!: string;
     @property() _unsavedData = false;
-    @property() _reizenDummyData: any;
+    @property() _reizenDummyData: string | string[] | null;
     @property() _mercury = 0;
     @property() _slidePolygon = -194;  // Transform : (42=bottom) (-76=middle) (-194= top) range=(0-236 minus 194)
     @property() _thermoBreedte = '20vw';
@@ -56,10 +57,7 @@ export class InvoerenReizen extends LitElement {
             });
         // localStorage.removeItem('reizenData');
 
-        // @ts-ignore
-        this._reizenDummyData = localStorage.getItem('reizenData');
-        // this._reizenDummyData = JSON.parse(reizenDataAsString);
-        console.log('parsed this._reizenDummyData' + this._reizenDummyData)
+        this._getReizenData();
 
         this._userName = sessionStorage.getItem('userID')!;
         let now = new Date()!;
@@ -407,7 +405,7 @@ export class InvoerenReizen extends LitElement {
 
     connectedCallback() {
         super.connectedCallback();
-        this._reizenDummyData = localStorage.getItem('reizenData');
+        this._getReizenData();
     }
     _optionClickedZakelijkOfPrive(option: {
         originalTarget: {
@@ -507,23 +505,24 @@ export class InvoerenReizen extends LitElement {
 
         const jsonFormData = JSON.stringify(object);
         console.log(jsonFormData)
-        console.log(this._reizenDummyData)
 
-        //Todo continue
-
-
-
-        // this._reizenDummyData['this._reizenDummyData']).push(JSON.parse(jsonFormData)
-
-
-
-
-        localStorage.setItem('reizenData',jsonFormData);
-        // localStorage.setItem('reizenData',JSON.stringify(jsonFormData));
-
+        // if(this._reizenDummyData== null) {                      // if no curr data => add this form as first
+        //     console.log('null')
+        //     localStorage.setItem('reizenData',jsonFormData);
+        // } else {                                               // if there was data => .push() to it and then store this.
+                let arr = [];
+        try {
+            arr =this._getReizenData();
+        } catch (e) {
+            console.log(e.stackTrace)
+        }
+                arr.push(object);
+                console.log(arr)
+                localStorage.setItem('reizenData', JSON.stringify(arr));
 
         this._unsavedData =false; // remove unsaved data
         alert('Uw data is opgeslagen :)')
+        this._getReizenData()
 
     };
 
@@ -551,6 +550,15 @@ export class InvoerenReizen extends LitElement {
 
     public onChange() {
         this._unsavedData = true;
+    }
+    _getReizenData() {
+        try {
+            // @ts-ignore
+            return JSON.parse(localStorage.getItem('reizenData'));
+
+        } catch (e) {
+            localStorage.removeItem('reizenData');
+        }
     }
 
     public onBeforeEnter(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): Promise<unknown> | RedirectResult | undefined {

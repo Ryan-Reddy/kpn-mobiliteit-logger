@@ -6,7 +6,6 @@ import type { GridActiveItemChangedEvent } from '@vaadin/grid';
 import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, RouterLocation} from "@vaadin/router";
 import csvDownload from 'json-to-csv-export'
 import {ajax} from "rxjs/internal/ajax/ajax";
-import * as LocalstorageService from  'services/localstorageService.js';
 
 /**
  * An example element.
@@ -34,7 +33,7 @@ export class OverzichtReizen extends LitElement {
         //         console.log(this._vervoerMiddelDummyData);
         //     });
         // @ts-ignore
-        this._reizenDummyData = JSON.stringify(localStorage.getItem('reizenData'));
+        this._reizenDummyData = JSON.parse(localStorage.getItem('reizenData'));
         console.log(this._reizenDummyData)
 
 
@@ -409,7 +408,7 @@ export class OverzichtReizen extends LitElement {
         if (!this.isAuthorized()) {
             // sync operation
             // return commands.redirect('/');
-            this._root.addEventListener('mercury',
+            window.addEventListener('mercury',
                 (e: Event) => this._thermometerInput,
                 true);
             // async operation

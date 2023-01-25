@@ -1,4 +1,4 @@
-export class localstorageService {
+export default class localstorageService {
     static async getStorage(key) {
         return new Promise((resolve) => {
             resolve(JSON.parse(window.localStorage.getItem(key)));
