@@ -23,7 +23,7 @@ const _db = getDatabase();
 export class DataService {
     static writeReisData(reisOmOpTeSlaan: reisDTO) {
         const db = getDatabase();
-        set(ref(_db, ("Test/" + reisOmOpTeSlaan.username)), {
+        set(ref(_db, ("Test/" + reisOmOpTeSlaan.username +"/"+ reisOmOpTeSlaan.reisId)), {
             reisOmOpTeSlaan
         })
             .then(() => {

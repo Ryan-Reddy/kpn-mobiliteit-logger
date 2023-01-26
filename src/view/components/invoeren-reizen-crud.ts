@@ -436,11 +436,16 @@ class InvoerenReizen extends LitElement {
 
 
     // ------------------------------------ IMPORTS + CONFIG ------------------------------------------------//
+    /**
+     * collect alle data uit formulier, vertaal met reisDTO => sla op in db
+     */
     persistDataToDb(
     ) {
+        // @ts-ignore
+        const username = sessionStorage.getItem('userID').split("@")[0].slice(1) + "";
         const reis = new reisDTO(
-            "testReisId",//TODO generate ID
-            "testUser", //TODO fix the username
+            Date.now().toLocaleString(),
+            username,
             this._vervoerSelector.getAttribute('value')+"",
             this._Project.getAttribute('value')+"",
             this._beginTijd.getAttribute('value')+"",
@@ -454,7 +459,6 @@ class InvoerenReizen extends LitElement {
             (this._mercury * (this._km.getAttribute('value')+0)).toString(),
             this._Zakelijk.getAttribute('value')=='zakelijk'); //TODO fix the boolean
         DataService.writeReisData(reis);
-
     }
 
 
