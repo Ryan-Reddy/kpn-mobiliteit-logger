@@ -1,26 +1,10 @@
 import {css, html, LitElement} from 'lit';
 import {customElement, property, query, eventOptions, queryAll} from 'lit/decorators.js';
 import {Thermometer} from "./global/thermometer";
-// import { PreventAndRedirectCommands, Router, RouterLocation, RedirectResult, PreventResult} from "@vaadin/router";
+import {DataService} from "../../services/firebaseDBwriterService";
+import {reisDTO} from "../../domain/reisDTO";
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, child, update, remove } from "firebase/database";
-import {dateTimestampProvider} from "rxjs/internal/scheduler/dateTimestampProvider";
-
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyCk9m0DdvQ4IFB6kWtS9dMIgTZkc9J0-Vw",
-    authDomain: "kpn-mobility-ryan-van-lil.firebaseapp.com",
-    databaseURL: "https://kpn-mobility-ryan-van-lil-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "kpn-mobility-ryan-van-lil",
-    storageBucket: "kpn-mobility-ryan-van-lil.appspot.com",
-    messagingSenderId: "970585657860",
-    appId: "1:970585657860:web:34bfcae1f13222ec3d1b51"
-};
-
-
+// import { reisDTO } from '../../domain/reisDTO';
 /**
  * An example element.
  *
@@ -28,7 +12,7 @@ const firebaseConfig = {
  * @csspart button - The button
  */
 @customElement('invoeren-reizen-crud')
-export class InvoerenReizen extends LitElement {
+class InvoerenReizen extends LitElement {
     @property() _currentPageTitle = 'Wijzigen Reis';
     @property() eindTijdMin = null;
     @property() beginTijdMax = null;
@@ -60,11 +44,11 @@ export class InvoerenReizen extends LitElement {
     @property() _thermoHoogte = '20vw';
 
     // ------------------------ queries of all inputfields
-    @query('#vervoerstype') _vervoerstype!: HTMLElement;
+    @query('#vervoerselector') _vervoerSelector!: HTMLElement;
     @query('#Zakelijk') _Zakelijk!: HTMLElement;
     @query('#reisKlasseKeuzeMenu') _reisKlasseKeuzeMenu!: HTMLElement;
-    @query('#aankomstLocatie') _aankomstLocatie!: HTMLElement;
-    @query('#vertrekLocatie') _vertrekLocatie!: HTMLElement;
+    @query('#aankomstLocatie') _eindLocatie!: HTMLElement;
+    @query('#vertrekLocatie') _beginLocatie!: HTMLElement;
     @query('#beginTijd') _beginTijd!: HTMLElement;
     @query('#eindTijd') _eindTijd!: HTMLElement;
     @query('#Kosten') _Kosten!: HTMLElement;
@@ -91,10 +75,6 @@ export class InvoerenReizen extends LitElement {
 
                 this._vervoerMiddelDummyData = res;
             });
-        // localStorage.removeItem('reizenData');
-
-        // this._getReizenData();
-
         this._userName = sessionStorage.getItem('userID')!;
         let now = new Date()!;
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
@@ -108,12 +88,6 @@ export class InvoerenReizen extends LitElement {
         this._aankomstTijd = now1.toISOString().slice(0, -1);
         this.eindTijdMin = this._vertrekTijd;
         this.beginTijdMax = this._aankomstTijd + 60;
-
-        // Initialize Firebase
-        this._app = initializeApp(firebaseConfig);
-
-        this._db = getDatabase();
-
     }
 
     static get styles() {
@@ -242,6 +216,7 @@ export class InvoerenReizen extends LitElement {
 
     render() {
         return html`
+            <!DOCTYPE html>
             <header>
                 <h1 class="header">${this._currentPageTitle}</h1>
             </header>
@@ -255,7 +230,7 @@ export class InvoerenReizen extends LitElement {
                         <li>
                             <label class="label" for="vervoerstype">typeVervoer:</label>
                             <select tooltip="vervoerstype"
-                                    name="type" id="vervoerstype" class="${this.inputfield}" required
+                                    name="type" id="vervoerselector" class="${this.inputfield}" required
                                     >
                                 ${this._vervoerMiddelDummyData.map(({naam, uitstoot}) => html`
                                     <option
@@ -395,8 +370,9 @@ export class InvoerenReizen extends LitElement {
                     <br>
                     
                     <div id="bottomButtonsBox">
-                        <input class="bottomButtons" id="zenden" form="formulierReizen" type="button" aria-label="Verzend formulier"
-                               @click=${this.customFormSend} value="Verzenden">
+                        <button class="bottomButtons" id="zenden" form="formulierReizen" aria-label="Verzend formulier"
+                                @click="${this.persistDataToDb}"
+                                value="Verzenden"></button>
 
                         <input class="bottomButtons" id="resetButton" type="reset" value="Reset velden" aria-label="reset formulier"
                         style="background-color: var(--kpn-warning-red)">
@@ -443,7 +419,9 @@ export class InvoerenReizen extends LitElement {
                 
                 <!-- ------------------------------------ CRUD ------------------------------------------------>
                 <div id="bottomButtonsBox">
-                    <button id="insertButton" @click="${this.InsertData}">INSERT</button>
+                    <button id="insertButton" 
+                            @click="${this.persistDataToDb}"
+                    >INSERT</button>
                     <button id="selectButton">SELECT</button>
                     <button id="updateButton">UPDATE</button>
                     <button id="deleteButton">DELETE</button>
@@ -458,24 +436,25 @@ export class InvoerenReizen extends LitElement {
 
 
     // ------------------------------------ IMPORTS + CONFIG ------------------------------------------------//
-    InsertData() {
-        set(ref(this._db,("TheStudents/"+"id/"+Date.now())),{
-            vervoerstype: this._vervoerstype.getAttribute('value'),
-            Zakelijk: this._Zakelijk.getAttribute('value'),
-            reisKlasseKeuzeMenu: this._reisKlasseKeuzeMenu.getAttribute('value'),
-            aankomstLocatie: this._aankomstLocatie.getAttribute('value'),
-            vertrekLocatie: this._vertrekLocatie.getAttribute('value'),
-            beginTijd: this._beginTijd.getAttribute('value'),
-            eindTijd: this._eindTijd.getAttribute('value'),
-            Kosten: this._Kosten.getAttribute('value'),
-            km: this._km.getAttribute('value'),
-            Project: this._Project.getAttribute('value'),
-        })
-            .then(()=>{
-                alert('data stored succesfully');
-            }).catch((error)=>{
-            alert('datastore unsuccesfull, error: '+ error)
-        })
+    persistDataToDb(
+    ) {
+        const reis = new reisDTO(
+            "testReisId",//TODO generate ID
+            "testUser", //TODO fix the username
+            this._vervoerSelector.getAttribute('value')+"",
+            this._Project.getAttribute('value')+"",
+            this._beginTijd.getAttribute('value')+"",
+            this._eindTijd.getAttribute('value')+"",
+            this._beginLocatie.getAttribute('value')+"",
+            this._eindLocatie.getAttribute('value')+"",
+            this._km.getAttribute('value')+"",
+            this._Kosten.getAttribute('value')+"",
+            this._mercury.toString(),
+            // @ts-ignore
+            (this._mercury * (this._km.getAttribute('value')+0)).toString(),
+            this._Zakelijk.getAttribute('value')=='zakelijk'); //TODO fix the boolean
+        DataService.writeReisData(reis);
+
     }
 
 

@@ -59,9 +59,9 @@ router.setRoutes([
     component: 'account-info-element',
   },
   {
-    name: 'invoeren-reizen-element', // doet niks impliciet
+    name: 'invoeren-reizen-crud', // doet niks impliciet
     path: '/invoeren-reizen',
-    component: 'invoeren-reizen-element',
+    component: 'invoeren-reizen-crud',
   },
   {
     name: 'overzicht-reizen-element', // doet niks impliciet
