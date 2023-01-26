@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "view/components/firebaseConfig/app";
-import { getDatabase } from "view/components/firebaseConfig/database"
+import { initializeApp } from "firebase/app";
+import { getDatabase, get, ref, set, child, update, remove } from "firebase/database";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 

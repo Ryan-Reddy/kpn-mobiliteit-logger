@@ -22,18 +22,15 @@ class InvoerenReizen extends LitElement {
     @property() _demoKosten = null;
     @property() _demoVertrekLocatie = null;
     @property() _demoAankomstLocatie = null;
-    private _demoProject = null;
     @property() inputfield = 'inputfield';
     @property() _vervoerMiddelDummyData = [];
     @property() _gekozenC02: string | undefined;
     @property() _gekozenVoertuig: string | undefined;
-
     @query('.formDeelTweeZakelijkvsPrive') _formDeelTweeZakelijkvsPrive!: HTMLDivElement;
     @query('.reisKlasseKeuzeMenu') _formDeelReisKlasseKeuzeMenu!: HTMLDivElement;
     @query('.formDeelDrie') _formDeelDrieElement!: HTMLDivElement;
     @query('.alleenZakelijk') _formZakelijkDiv!: HTMLDivElement;
     @queryAll('._alleenZakelijkClass') _alleenZakelijkClassElementList!: NodeListOf<HTMLElement>;
-
     @query('form') _entireForm!: HTMLFormElement;
     @property() _userName!: string;
     @property() _unsavedData = false;
@@ -42,7 +39,6 @@ class InvoerenReizen extends LitElement {
     @property() _slidePolygon = -194;  // Transform : (42=bottom) (-76=middle) (-194= top) range=(0-236 minus 194)
     @property() _thermoBreedte = '20vw';
     @property() _thermoHoogte = '20vw';
-
     // ------------------------ queries of all inputfields
     @query('#vervoerselector') _vervoerSelector!: HTMLElement;
     @query('#Zakelijk') _Zakelijk!: HTMLElement;
@@ -54,13 +50,14 @@ class InvoerenReizen extends LitElement {
     @query('#Kosten') _Kosten!: HTMLElement;
     @query('#km') _km!: HTMLElement;
     @query('#Project') _Project!: HTMLElement;
-
     @query('#insertButton') insBtn!: HTMLInputElement;
     @query('#selectButton') selBtn!: HTMLInputElement;
     @query('#updateButton') updBtn!: HTMLInputElement;
     @query('#deleteButton') delBtn!: HTMLInputElement;
     @property() _app: any;
     @property() _db: any;
+    private _demoProject = null;
+
     constructor() {
         super();
         sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
@@ -70,7 +67,10 @@ class InvoerenReizen extends LitElement {
         fetch('/database/vervoermiddel-CO2.json')
             .then((response) => response.json())
             .then((json) => {
-                let res = json.map(({naam, uitstoot} : {naam:any, uitstoot:any}) => ({naam: naam, uitstoot: uitstoot}));
+                let res = json.map(({naam, uitstoot}: { naam: any, uitstoot: any }) => ({
+                    naam: naam,
+                    uitstoot: uitstoot
+                }));
                 console.log(res)
 
                 this._vervoerMiddelDummyData = res;
@@ -110,11 +110,11 @@ class InvoerenReizen extends LitElement {
           label {
             //visibility: hidden;
           }
-          
+
           .label:hover {
-              visibility: visible;
+            visibility: visible;
           }
-          
+
           H1 {
             padding-top: 1em;
             font-size: 2em;
@@ -143,7 +143,7 @@ class InvoerenReizen extends LitElement {
             padding: 0.5em;
             overflow: hidden;
           }
-          
+
           .thermometer {
             background-color: var(--kpn-grijs);
             opacity: 0.9;
@@ -153,7 +153,7 @@ class InvoerenReizen extends LitElement {
             border-radius: 30em;
             margin-top: 5em;
           }
-          
+
           #vervoerstype {
             background-color: var(--kpn-groen);
           }
@@ -171,7 +171,7 @@ class InvoerenReizen extends LitElement {
           /*Buttons: */
 
           .bottomButtons {
-            display:inline-block;
+            display: inline-block;
             width: 33%;
             margin: auto;
 
@@ -182,6 +182,7 @@ class InvoerenReizen extends LitElement {
             text-decoration: none;
             cursor: pointer;
           }
+
           #bottomButtonsBox {
             justify-content: center;
             display: flex;
@@ -231,7 +232,7 @@ class InvoerenReizen extends LitElement {
                             <label class="label" for="vervoerstype">typeVervoer:</label>
                             <select tooltip="vervoerstype"
                                     name="type" id="vervoerselector" class="${this.inputfield}" required
-                                    >
+                            >
                                 ${this._vervoerMiddelDummyData.map(({naam, uitstoot}) => html`
                                     <option
                                             disabled
@@ -260,9 +261,9 @@ class InvoerenReizen extends LitElement {
                                 <option disabled
                                         value="Zakelijke reis:"
                                         hidden>
-                                    
+
                                 </option>
-                                
+
                                 <label class="label" class="label" class="label" for="prive" style="float:left" hidden>Prive</label>
                                 <option id="prive"
                                         value=false
@@ -276,7 +277,7 @@ class InvoerenReizen extends LitElement {
                                         @click="${this._optionClickedZakelijkOfPrive}">
                                     Zakelijk
                                 </option>
-                                
+
                             </select>
                         </li>
                     </ul>
@@ -357,10 +358,10 @@ class InvoerenReizen extends LitElement {
                                 <option disabled value=${this._demoProject} selected hidden>
                                     Project Keuze
                                 </option>
-                                
+
                                 <label class="label" for="Montage" style="float:left">Montage op locatie</label>
                                 <option id="Montage">Tweede klas</option>
-                                
+
                                 <label class="label" for="Klantgesprek" style="float:left">Klantgesprek</label>
                                 <option id="Klantgesprek">Klantgesprek</option>
                             </select>
@@ -368,15 +369,16 @@ class InvoerenReizen extends LitElement {
                     </ul>
                     <hr>
                     <br>
-                    
+
                     <div id="bottomButtonsBox">
                         <button class="bottomButtons" id="zenden" form="formulierReizen" aria-label="Verzend formulier"
                                 @click="${this.persistDataToDb}"
                                 value="Verzenden"></button>
 
-                        <input class="bottomButtons" id="resetButton" type="reset" value="Reset velden" aria-label="reset formulier"
-                        style="background-color: var(--kpn-warning-red)">
-                    </div>                    
+                        <input class="bottomButtons" id="resetButton" type="reset" value="Reset velden"
+                               aria-label="reset formulier"
+                               style="background-color: var(--kpn-warning-red)">
+                    </div>
 
                 </form>
                 <br>
@@ -392,7 +394,8 @@ class InvoerenReizen extends LitElement {
                 </div>
 
                 <div class="thermometer">
-                    <svg width="${this._thermoHoogte}" height="${this._thermoBreedte}" id="thermometer-svg" version="1.1"
+                    <svg width="${this._thermoHoogte}" height="${this._thermoBreedte}" id="thermometer-svg"
+                         version="1.1"
                          viewBox="-5 78.2 381.6 412.5" preserveAspectRatio x="0px"
                          xml:space="preserve" xmlns="http://www.w3.org/2000/svg" y="0px">
         <g id="fill">
@@ -416,19 +419,23 @@ class InvoerenReizen extends LitElement {
                         </svg>
                 </div>
 
-                
+
                 <!-- ------------------------------------ CRUD ------------------------------------------------>
                 <div id="bottomButtonsBox">
-                    <button id="insertButton" 
+                    <button id="insertButton"
                             @click="${this.persistDataToDb}"
-                    >INSERT</button>
-                    <button id="selectButton">SELECT</button>
+                    >INSERT
+                    </button>
+                    <button id="selectButton"
+                            @click="${this.persistDataToDb}"
+
+                    >SELECT</button>
                     <button id="updateButton">UPDATE</button>
                     <button id="deleteButton">DELETE</button>
                 </div>
 
                 </html>
-<!--                <thermometer-element></thermometer-element>-->
+                <!--                <thermometer-element></thermometer-element>-->
             </main>
             </body>
         `;
@@ -439,33 +446,26 @@ class InvoerenReizen extends LitElement {
     /**
      * collect alle data uit formulier, vertaal met reisDTO => sla op in db
      */
-    persistDataToDb(
-    ) {
+    persistDataToDb() {
         // @ts-ignore
         const username = sessionStorage.getItem('userID').split("@")[0].slice(1) + "";
-        const reis = new reisDTO(
-            Date.now().toLocaleString(),
-            username,
-            this._vervoerSelector.getAttribute('value')+"",
-            this._Project.getAttribute('value')+"",
-            this._beginTijd.getAttribute('value')+"",
-            this._eindTijd.getAttribute('value')+"",
-            this._beginLocatie.getAttribute('value')+"",
-            this._eindLocatie.getAttribute('value')+"",
-            this._km.getAttribute('value')+"",
-            this._Kosten.getAttribute('value')+"",
-            this._mercury.toString(),
-            // @ts-ignore
-            (this._mercury * (this._km.getAttribute('value')+0)).toString(),
-            this._Zakelijk.getAttribute('value')=='zakelijk'); //TODO fix the boolean
+        const reis = new reisDTO(Date.now().toLocaleString(), username, this._vervoerSelector.getAttribute('value') + "", this._Project.getAttribute('value') + "", this._beginTijd.getAttribute('value') + "", this._eindTijd.getAttribute('value') + "", this._beginLocatie.getAttribute('value') + "", this._eindLocatie.getAttribute('value') + "", this._km.getAttribute('value') + "", this._Kosten.getAttribute('value') + "", this._mercury.toString(), // @ts-ignore
+            (this._mercury * (this._km.getAttribute('value') + 0)).toString(), this._Zakelijk.getAttribute('value') == 'zakelijk'); //TODO fix the boolean
+
+        console.log(reis)
         DataService.writeReisData(reis);
     }
 
+    _getReizenData() {
+        DataService.readReisData('ryan');
+
+    }
 
     connectedCallback() {
         super.connectedCallback();
         this._getReizenData();
     }
+
     _optionClickedZakelijkOfPrive(option: {
         originalTarget: {
             value: string; id: string;
@@ -500,7 +500,8 @@ class InvoerenReizen extends LitElement {
     formDeelTweeShowEnThermometerUpdate(option: {
         originalTarget: {
             value: string; id: string;
-        };    }) {
+        };
+    }) {
         console.log('formDeelTweeShow');
 
         // @ts-ignore
@@ -510,7 +511,7 @@ class InvoerenReizen extends LitElement {
         console.log('uitstoot: ' + this._gekozenC02)
 
         // @ts-ignore
-        this._mercury = (((this._gekozenC02 ) / 15) * -236) + 236;
+        this._mercury = (((this._gekozenC02) / 15) * -236) + 236;
         this._slidePolygon = this._mercury - 194
 
         this._dispatchEventUitstoot()
@@ -580,21 +581,13 @@ class InvoerenReizen extends LitElement {
         console.log(arr)
         localStorage.setItem('reizenData', JSON.stringify(arr));
 
-        this._unsavedData =false; // remove unsaved data
+        this._unsavedData = false; // remove unsaved data
         alert('Uw data is opgeslagen :)')
         this._getReizenData()
 
     };
-    _getReizenData() {
-        try {
-            // @ts-ignore
-            return JSON.parse(localStorage.getItem('reizenData'));
 
-        } catch (e) {
-            localStorage.removeItem('reizenData');
-            return [];
-        }
-    }
+
     public onBeforeEnter(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): Promise<unknown> | RedirectResult | undefined {
         console.log('onBeforeEnter');
         if (!this.isAuthorized()) {
@@ -625,6 +618,11 @@ class InvoerenReizen extends LitElement {
             }
         }
     }
+
+    public onChange() {
+        this._unsavedData = true;
+    }
+
     private _dispatchEventUitstoot() {
         // TODO fix
         console.log('_vehicleChosen reached')
@@ -635,6 +633,7 @@ class InvoerenReizen extends LitElement {
         this.dispatchEvent(myEvent);
         console.log('mercury-event customevent dispatching')
     }
+
     private _thermometerInput(e: CustomEvent) {
         console.log('reached invoeren-reizen.ts._thermometerInput()')
         console.log(e.detail.uitstoot)
@@ -645,9 +644,7 @@ class InvoerenReizen extends LitElement {
         this._mercury = (((e.detail.uitstoot) / 15) * -236) + 236;
         this._slidePolygon = this._mercury - 194
     }
-    public onChange() {
-        this._unsavedData = true;
-    }
+
     private isAuthorized() {
         return !!sessionStorage.getItem('userID');
     }
