@@ -36,7 +36,6 @@ export class SupportElement extends LitElement {
         color: lightgray;
         foreground-color: var(--kpn-grijs);
         background-color: var(--kpn-grijs);
-        required: invalid;
       }
       button {
         width: 66%;

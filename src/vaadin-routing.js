@@ -16,7 +16,7 @@ import './view/components/invoeren-reizen';
 import './view/components/dashboard/dashboard';
 import './view/components/dashboard/chart';
 
-import './view/components/invoeren-reizen-wijzigen';
+import './view/components/invoeren-reizen-crud';
 
 const app = document.querySelector('#app');
 export const router = new Router(app);
@@ -69,9 +69,9 @@ router.setRoutes([
     component: 'overzicht-reizen-element',
   },
   {
-    name: 'invoeren-reizen-wijzigen-element', // doet niks impliciet
-    path: '/invoeren-reizen-wijzigen',
-    component: 'invoeren-reizen-wijzigen-element',
+    name: 'invoeren-reizen-crud', // doet niks impliciet
+    path: '/invoeren-reizen-crud',
+    component: 'invoeren-reizen-crud',
   },
   {
     name: 'thermometer-element', // doet niks impliciet

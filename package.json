@@ -18,6 +18,7 @@
     "vite": "^4.0.4"
   },
   "dependencies": {
+    "@firebase/database": "^0.14.1",
     "@pwrs/zero-md": "^1.4.0",
     "@vaadin/form-layout": "^23.3.5",
     "@vaadin/grid": "^23.3.5",
@@ -31,11 +32,16 @@
     "@vaadin/vaadin-grid": "^5.7.14",
     "@vaadin/vertical-layout": "^23.3.5",
     "chart.js": "^4.2.0",
+    "g": "^2.0.1",
+    "install": "^0.13.0",
     "jquery-json": "^2.6.0",
     "json-reader-writer": "^1.0.4",
     "json-to-csv-export": "^2.1.1",
     "json2csv-export": "^1.0.5",
     "lit": "^2.6.1",
+    "npm": "^9.3.1",
+    "or": "^0.2.0",
+    "pg": "^8.8.0",
     "rxjs": "^7.8.0",
     "zero-md": "^2.4.0"
   },
