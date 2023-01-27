@@ -53,7 +53,7 @@ export class firebaseService {
                     }
                     console.log(obj)
                     sessionStorage.setItem('retrievedReizen',obj)
-                    let arr = Array.from(obj.values());
+                    let arr = Array.from(obj);
                     console.log(arr)
                     return ;
                 }

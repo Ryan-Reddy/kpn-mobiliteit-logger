@@ -131,16 +131,15 @@ export class OverzichtReizen extends LitElement {
         super.update(changed);
         console.log('updated YAAY')
     }
-    // async firstUpdated() {
-    //         this._reizenData = await fetch('/database/MOCK-REIZEN.json')
-    //             .then((response) => response.json())
-    //             .then((json) => {
-    //                 return Array.from(json);
-    //             });
-    //         console.log(this._reizenData)
-    //     this._reizenData = this.selectAllData();
-    //         console.log(this._reizenData)
-    // }
+    async firstUpdated() {
+            this._reizenData = await fetch('/database/MOCK-REIZEN.json')
+                .then((response) => response.json())
+                .then((json) => {
+                    return Array.from(json);
+                });
+            console.log(this._reizenData)
+
+    }
     async selectAllData() {
         try {
             let data = await firebaseService.readReisDataAll();
