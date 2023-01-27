@@ -23,7 +23,7 @@ export class OverzichtReizen extends LitElement {
     @property() _db: any;
     @property() _currentPageTitle = 'Overzicht Reizen';
     @property() _vervoerMiddelDummyData = [];
-    @property() _reizenData;
+    @property() _reizenData: unknown;
     private _unsavedData = false;
     @state()
     private selectedItems: unknown;
@@ -147,8 +147,20 @@ export class OverzichtReizen extends LitElement {
                     return Array.from(json);
                 });
             console.log(this._reizenData)
-        this._reizenData = await firebaseService.readReisDataUser(sessionStorage.getItem('userID'));
+        this._reizenData = await this.selectAllData();
+            console.log(this._reizenData)
     }
+    updated(){
+        console.log(this._reizenData)
+    }
+
+    async getData() {
+        this._reizenData = (firebaseService.readReisDataUser("Test"));
+    }
+    selectAllData(){
+        this._reizenData = (firebaseService.readReisDataAll());
+    }
+
 
     render() {
         return html`
@@ -159,7 +171,8 @@ export class OverzichtReizen extends LitElement {
             <main>
             <hr/>
             <div class="tablecontainer">
-                <vaadin-grid .items="${this._reizenData}"
+                <vaadin-grid
+                        .items="${this._reizenData}"
                              theme="row-stripes"
                              .selectedItems="${this.selectedItems}"
                              @active-item-changed="${(e: GridActiveItemChangedEvent<reisDTO>) => {
@@ -181,12 +194,13 @@ export class OverzichtReizen extends LitElement {
                     <vaadin-grid-column header="Klasse" path="_klasse"></vaadin-grid-column>
                     <vaadin-grid-column header="zakelijkOfPrive" path="_zakelijk"></vaadin-grid-column>
                 </vaadin-grid>
+                Grid<reisDTO> grid = new Grid<>();
             </div>
                 <p>Selected row:
                     ${JSON.stringify(this.selectedItems)}</p>
                 <button>Edit geselecteerde rij</button>
                 <button>Exporteren als..</button>
-                <button @click="${this.tableToCSVDownloader}">download CSV</button>
+<!--              <button @click="${this.tableToCSVDownloader}">download CSV</button> -->
                 <button @click="${this.tableToJsonDownloader}">download JSON</button>
                 <button @click="${this.filterColumnOnTerm('nobis')}">Filter on 'nobis'</button>
                 <button onclick="print()">Print...</button>
@@ -194,15 +208,13 @@ export class OverzichtReizen extends LitElement {
             </body>
         `;
     }
-    // selectData(){
-    //     this._reizenData = firebaseService.readReisDataAll();
-    // }
+
     wijzigDezeDataRij(event: Event) {
         // TODO collect data from the table #32
         //  Load invoeren-reizen with this data
         console.log('wijzigDezeDataRij')
         console.log(event.target)
-        const target = event.target as InvoerenReizen;
+        const target = event.target as any;
         const parent = target.parentElement as any;
         const grandParent = parent.parentElement as any;
 
@@ -221,17 +233,15 @@ export class OverzichtReizen extends LitElement {
     //     delimiter: ',',
     //     headers: ['IP', "Full Name", "IP Address"]
     // }
-    // tableToCSVDownloader() {
-    //
-    //
-    //     var dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(this.dataToConvert);
-    //     var downloadAnchorNode = document.createElement('a');
-    //     downloadAnchorNode.setAttribute("href",     dataStr);
-    //     downloadAnchorNode.setAttribute("download", exportName + ".json");
-    //     document.body.appendChild(downloadAnchorNode); // required for firefox
-    //     downloadAnchorNode.click();
-    //     downloadAnchorNode.remove();
-    // }
+    tableToCSVDownloader() {
+        var dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(this.dataToConvert);
+        var downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href",     dataStr);
+        downloadAnchorNode.setAttribute("download", exportName + ".json");
+        document.body.appendChild(downloadAnchorNode); // required for firefox
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+    }
 
     tableToJsonDownloader(exportObj: any, exportName: string){
         var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this._reizenData));

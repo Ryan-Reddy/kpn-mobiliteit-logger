@@ -34,117 +34,116 @@ export class reisDTO {
         this._klasse = klasse;
     }
 
-    set reisId(value: string) {
-        this._reisId = value;
-    }
-
-    set username(value: string) {
-        this._username = value;
-    }
-
-    set type(value: string) {
-        this._type = value;
-    }
-
-    set project(value: string) {
-        this._project = value;
-    }
-
-    set beginTijd(value: string) {
-        this._beginTijd = value;
-    }
-
-    set eindTijd(value: string) {
-        this._eindTijd = value;
-    }
-
-    set beginLocatie(value: string) {
-        this._beginLocatie = value;
-    }
-
-    set eindLocatie(value: string) {
-        this._eindLocatie = value;
-    }
-
-    set km(value: string) {
-        this._km = value;
-    }
-
-    set klasse(value: string) {
-        this._klasse = value;
-    }
-
-    set kosten(value: string) {
-        this._kosten = value;
-    }
-
-    set uitstoot(value: string) {
-        this._uitstoot = value;
-    }
-
-    set totaleUitstoot(value: string) {
-        this._totaleUitstoot = value;
-    }
-
-    set zakelijk(value: boolean) {
-        this._zakelijk = value;
-    }
-
-    get klasse(): string {
-        return this._klasse;
-    }
 
     get reisId(): string {
         return this._reisId;
+    }
+
+    set reisId(value: string) {
+        this._reisId = value;
     }
 
     get username(): string {
         return this._username;
     }
 
+    set username(value: string) {
+        this._username = value;
+    }
+
     get type(): string {
         return this._type;
+    }
+
+    set type(value: string) {
+        this._type = value;
     }
 
     get project(): string {
         return this._project;
     }
 
+    set project(value: string) {
+        this._project = value;
+    }
+
     get beginTijd(): string {
         return this._beginTijd;
+    }
+
+    set beginTijd(value: string) {
+        this._beginTijd = value;
     }
 
     get eindTijd(): string {
         return this._eindTijd;
     }
 
+    set eindTijd(value: string) {
+        this._eindTijd = value;
+    }
+
     get beginLocatie(): string {
         return this._beginLocatie;
+    }
+
+    set beginLocatie(value: string) {
+        this._beginLocatie = value;
     }
 
     get eindLocatie(): string {
         return this._eindLocatie;
     }
 
+    set eindLocatie(value: string) {
+        this._eindLocatie = value;
+    }
+
     get km(): string {
         return this._km;
+    }
+
+    set km(value: string) {
+        this._km = value;
+    }
+
+    get klasse(): string {
+        return this._klasse;
+    }
+
+    set klasse(value: string) {
+        this._klasse = value;
     }
 
     get kosten(): string {
         return this._kosten;
     }
 
+    set kosten(value: string) {
+        this._kosten = value;
+    }
+
     get uitstoot(): string {
         return this._uitstoot;
+    }
+
+    set uitstoot(value: string) {
+        this._uitstoot = value;
     }
 
     get totaleUitstoot(): string {
         return this._totaleUitstoot;
     }
 
+    set totaleUitstoot(value: string) {
+        this._totaleUitstoot = value;
+    }
+
     get zakelijk(): boolean {
         return this._zakelijk;
     }
 
-
+    set zakelijk(value: boolean) {
+        this._zakelijk = value;
+    }
 }

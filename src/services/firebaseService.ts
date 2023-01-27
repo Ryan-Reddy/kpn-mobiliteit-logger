@@ -2,6 +2,8 @@
 import {child, DataSnapshot, get, ref, set} from "@firebase/database";
 import {reisDTO} from "../domain/reisDTO";
 import StartFirebase from "./firebaseConfig/firebase-config";
+import {toArray} from "rxjs";
+import {isArray} from "chart.js/helpers";
 
 const _db = StartFirebase();
 
@@ -26,16 +28,26 @@ export class firebaseService {
             alert('datastore unsuccesfull, error: ' + error)
         })
     }
+
+
     static readReisDataAll() {
         console.log('readReisDataAll reached ')
 
         const _db_ref = ref(_db);
 
-        get(child(_db_ref,'reizen/')).then((snapshot)=>{
-            if(snapshot.exists()){
-                console.log('data retrieved succesfully');
-                console.log(snapshot.val())
-                return snapshot.val()
+        get(child(_db_ref,'reizen/ser2')).then((snapshot)=>{
+            if(snapshot.exists()) {
+                if (snapshot.hasChildren()) {
+                    console.log('data retrieved succesfully');
+                    console.log(snapshot)
+                    console.log(snapshot.val())
+                    console.log(snapshot.val().keys)
+                    const foo= snapshot.val()
+                    // const foo= "[\n" + snapshot.val() + "\n]";
+                    console.log(foo)
+                    console.log(foo['1,674,786,245,312'])
+
+                }
             }
             }).catch((error) => {
             alert('datastore unsuccesfull, error: ' + error)
@@ -46,13 +58,18 @@ export class firebaseService {
         get(ref(_db,
             "reizen/" +
             userName)).then((snapshot) => {    //TODO fix username properly
+            if(snapshot.exists()) {
+
                 console.log('data retrieved succesfully');
                 let data = snapshot.val();
                 console.log(snapshot.val())
-                // let newData = data.stream.foreach((line: { constructor: reisDTO; }) => line.constructor)
                 return data;
+            }
+
+            // let newData = data.stream.foreach((line: { constructor: reisDTO; }) => line.constructor)
             }).catch((error) => {
             alert('datastore unsuccesfull, error: ' + error)
         })
     }
+
 }
