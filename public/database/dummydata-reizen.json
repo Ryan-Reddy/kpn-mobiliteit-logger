@@ -1,272 +1,189 @@
-[
-  {
-    "project": "nobis",
-    "type": "vitae",
-    "begin": "1976-04-17 04:55:00",
-    "eind": "2021-04-28 16:54:28",
-    "km": 989676,
-    "uitstoot": 211222505,
-    "kosten": 506851.867472855
+{
+  "1,674,773,720,956": {
+    "reisOmOpTeSlaan": {
+      "_beginLocatie": "",
+      "_beginTijd": "2023-01-26T23:55:00.000",
+      "_eindLocatie": "",
+      "_eindTijd": "2023-01-27T00:55:00.000",
+      "_km": "",
+      "_kosten": "",
+      "_project": "null",
+      "_reisId": "1,674,773,720,956",
+      "_totaleUitstoot": "0",
+      "_type": "null",
+      "_uitstoot": "0",
+      "_username": "ryan",
+      "_zakelijk": false
+    }
   },
-  {
-    "project": "voluptatem",
-    "type": "ipsam",
-    "begin": "1971-07-05 00:22:02",
-    "eind": "1985-04-13 08:06:14",
-    "km": 9135,
-    "uitstoot": 0,
-    "kosten": 798909.9672917
+  "1,674,773,727,415": {
+    "reisOmOpTeSlaan": {
+      "_beginLocatie": "",
+      "_beginTijd": "2023-01-26T23:55:00.000",
+      "_eindLocatie": "",
+      "_eindTijd": "2023-01-27T00:55:00.000",
+      "_km": "",
+      "_kosten": "",
+      "_project": "null",
+      "_reisId": "1,674,773,727,415",
+      "_totaleUitstoot": "0",
+      "_type": "null",
+      "_uitstoot": "0",
+      "_username": "ryan",
+      "_zakelijk": false
+    }
   },
-  {
-    "project": "occaecati",
-    "type": "rerum",
-    "begin": "1981-02-22 17:42:07",
-    "eind": "2009-01-13 04:41:10",
-    "km": 6328767,
-    "uitstoot": 1545,
-    "kosten": 111030.0981527
+  "1,674,774,335,864": {
+    "reisOmOpTeSlaan": {
+      "_beginLocatie": "",
+      "_beginTijd": "2023-01-27T00:05:00.000",
+      "_eindLocatie": "",
+      "_eindTijd": "2023-01-27T01:05:00.000",
+      "_km": "",
+      "_kosten": "",
+      "_project": "null",
+      "_reisId": "1,674,774,335,864",
+      "_totaleUitstoot": "0",
+      "_type": "null",
+      "_uitstoot": "0",
+      "_username": "ryan",
+      "_zakelijk": false
+    }
   },
-  {
-    "project": "maiores",
-    "type": "aspernatur",
-    "begin": "2018-07-29 02:51:45",
-    "eind": "1982-12-04 22:29:38",
-    "km": 116452,
-    "uitstoot": 6851,
-    "kosten": 3.315151214
+  "1,674,774,366,357": {
+    "reisOmOpTeSlaan": {
+      "_beginLocatie": "",
+      "_beginTijd": "2023-01-27T00:05:00.000",
+      "_eindLocatie": "",
+      "_eindTijd": "2023-01-27T01:05:00.000",
+      "_km": "",
+      "_kosten": "",
+      "_project": "null",
+      "_reisId": "1,674,774,366,357",
+      "_totaleUitstoot": "0",
+      "_type": "null",
+      "_uitstoot": "0",
+      "_username": "ryan",
+      "_zakelijk": false
+    }
   },
-  {
-    "project": "excepturi",
-    "type": "tempore",
-    "begin": "1990-10-07 17:20:23",
-    "eind": "1982-04-11 01:21:19",
-    "km": 7166746,
-    "uitstoot": 32,
-    "kosten": 5345.9
+  "1,674,774,381,594": {
+    "reisOmOpTeSlaan": {
+      "_beginLocatie": "",
+      "_beginTijd": "2023-01-27T00:05:00.000",
+      "_eindLocatie": "",
+      "_eindTijd": "2023-01-27T01:05:00.000",
+      "_km": "",
+      "_kosten": "",
+      "_project": "null",
+      "_reisId": "1,674,774,381,594",
+      "_totaleUitstoot": "0",
+      "_type": "null",
+      "_uitstoot": "0",
+      "_username": "ryan",
+      "_zakelijk": false
+    }
   },
-  {
-    "project": "ullam",
-    "type": "ut",
-    "begin": "1986-12-11 00:53:23",
-    "eind": "1987-06-03 19:16:55",
-    "km": 38231746,
-    "uitstoot": 0,
-    "kosten": 6741560.79950585
+  "1,674,774,399,784": {
+    "reisOmOpTeSlaan": {
+      "_beginLocatie": "",
+      "_beginTijd": "2023-01-27T00:05:00.000",
+      "_eindLocatie": "",
+      "_eindTijd": "2023-01-27T01:05:00.000",
+      "_km": "",
+      "_kosten": "",
+      "_project": "null",
+      "_reisId": "1,674,774,399,784",
+      "_totaleUitstoot": "0",
+      "_type": "null",
+      "_uitstoot": "157.33333333333334",
+      "_username": "ryan",
+      "_zakelijk": false
+    }
   },
-  {
-    "project": "nulla",
-    "type": "voluptatem",
-    "begin": "1998-08-02 12:13:17",
-    "eind": "2008-04-03 03:01:18",
-    "km": 172042,
-    "uitstoot": 86873,
-    "kosten": 46.86451
+  "1,674,774,419,452": {
+    "reisOmOpTeSlaan": {
+      "_beginLocatie": "",
+      "_beginTijd": "2023-01-27T00:05:00.000",
+      "_eindLocatie": "",
+      "_eindTijd": "2023-01-27T01:05:00.000",
+      "_km": "",
+      "_kosten": "",
+      "_project": "null",
+      "_reisId": "1,674,774,419,452",
+      "_totaleUitstoot": "0",
+      "_type": "null",
+      "_uitstoot": "157.33333333333334",
+      "_username": "ryan",
+      "_zakelijk": false
+    }
   },
-  {
-    "project": "dolorem",
-    "type": "sit",
-    "begin": "2012-06-26 11:33:27",
-    "eind": "2010-10-27 19:31:51",
-    "km": 515668949,
-    "uitstoot": 360741982,
-    "kosten": 15760693.665
+  "1,674,774,885,255": {
+    "reisOmOpTeSlaan": {
+      "_beginLocatie": "",
+      "_beginTijd": "2023-01-27T00:14:00.000",
+      "_eindLocatie": "",
+      "_eindTijd": "2023-01-27T01:14:00.000",
+      "_km": "",
+      "_kosten": "",
+      "_project": "null",
+      "_reisId": "1,674,774,885,255",
+      "_totaleUitstoot": "0",
+      "_type": "null",
+      "_uitstoot": "0",
+      "_username": "ryan",
+      "_zakelijk": false
+    }
   },
-  {
-    "project": "beatae",
-    "type": "odit",
-    "begin": "2015-06-19 22:14:18",
-    "eind": "1989-01-14 23:33:44",
-    "km": 8987164,
-    "uitstoot": 94,
-    "kosten": 23929.51159345
+  "1,674,775,034,304": {
+    "reisOmOpTeSlaan": {
+      "_beginLocatie": "",
+      "_beginTijd": "2023-01-27T00:17:00.000",
+      "_eindLocatie": "",
+      "_eindTijd": "2023-01-27T01:17:00.000",
+      "_km": "",
+      "_kosten": "",
+      "_project": "null",
+      "_reisId": "1,674,775,034,304",
+      "_totaleUitstoot": "0",
+      "_type": "null",
+      "_uitstoot": "0",
+      "_username": "ryan",
+      "_zakelijk": false
+    }
   },
-  {
-    "project": "qui",
-    "type": "veniam",
-    "begin": "1983-08-06 13:22:13",
-    "eind": "1971-02-25 15:30:38",
-    "km": 1,
-    "uitstoot": 48241,
-    "kosten": 0.983
+  "1,674,777,775,427": {
+    "reisOmOpTeSlaan": {
+      "_beginLocatie": "",
+      "_beginTijd": "2023-01-27T01:02:00.000",
+      "_eindLocatie": "",
+      "_eindTijd": "2023-01-27T02:02:00.000",
+      "_km": "",
+      "_kosten": "",
+      "_project": "null",
+      "_reisId": "1,674,777,775,427",
+      "_totaleUitstoot": "0",
+      "_type": "null",
+      "_uitstoot": "0",
+      "_username": "ryan",
+      "_zakelijk": false
+    }
   },
-  {
-    "project": "quasi",
-    "type": "soluta",
-    "begin": "1997-01-21 21:32:50",
-    "eind": "1973-01-17 04:02:22",
-    "km": 642,
-    "uitstoot": 194871,
-    "kosten": 200.809
-  },
-  {
-    "project": "minus",
-    "type": "quisquam",
-    "begin": "1993-08-17 11:38:43",
-    "eind": "2008-05-29 06:44:27",
-    "km": 21934857,
-    "uitstoot": 35165,
-    "kosten": 1512608.634
-  },
-  {
-    "project": "qui",
-    "type": "quos",
-    "begin": "1970-08-02 17:02:06",
-    "eind": "2013-05-22 23:17:15",
-    "km": 3,
-    "uitstoot": 90012493,
-    "kosten": 2834166.343
-  },
-  {
-    "project": "accusantium",
-    "type": "qui",
-    "begin": "1992-04-24 16:01:03",
-    "eind": "2021-12-23 16:46:55",
-    "km": 5395,
-    "uitstoot": 322983,
-    "kosten": 2207338.57111
-  },
-  {
-    "project": "omnis",
-    "type": "dicta",
-    "begin": "2010-07-22 16:37:07",
-    "eind": "2001-09-15 12:56:19",
-    "km": 3883659,
-    "uitstoot": 616619120,
-    "kosten": 0.87155
-  },
-  {
-    "project": "beatae",
-    "type": "nam",
-    "begin": "1998-06-11 16:18:27",
-    "eind": "1971-05-26 21:14:04",
-    "km": 6,
-    "uitstoot": 24,
-    "kosten": 18761995.808899477
-  },
-  {
-    "project": "mollitia",
-    "type": "laboriosam",
-    "begin": "2005-07-25 20:32:18",
-    "eind": "1999-03-30 11:15:19",
-    "km": 7063,
-    "uitstoot": 5,
-    "kosten": 2.913660878
-  },
-  {
-    "project": "suscipit",
-    "type": "expedita",
-    "begin": "2015-06-10 09:03:30",
-    "eind": "2022-01-24 05:49:16",
-    "km": 803,
-    "uitstoot": 1702461,
-    "kosten": 220993784.26236
-  },
-  {
-    "project": "provident",
-    "type": "nam",
-    "begin": "1988-03-07 22:10:05",
-    "eind": "2003-02-05 11:31:42",
-    "km": 2,
-    "uitstoot": 5077088,
-    "kosten": 200.63941
-  },
-  {
-    "project": "cupiditate",
-    "type": "sint",
-    "begin": "1984-06-09 21:32:56",
-    "eind": "2006-12-08 06:26:18",
-    "km": 541,
-    "uitstoot": 80,
-    "kosten": 437460.927378587
-  },
-  {
-    "project": "voluptatem",
-    "type": "suscipit",
-    "begin": "1981-09-16 09:53:24",
-    "eind": "1994-10-01 10:09:29",
-    "km": 1,
-    "uitstoot": 76,
-    "kosten": 1283568.2863816
-  },
-  {
-    "project": "aut",
-    "type": "ut",
-    "begin": "2014-12-11 10:01:07",
-    "eind": "1990-07-14 00:52:55",
-    "km": 23,
-    "uitstoot": 0,
-    "kosten": 1.849078668
-  },
-  {
-    "project": "a",
-    "type": "et",
-    "begin": "2020-06-01 12:26:40",
-    "eind": "2004-05-11 10:37:57",
-    "km": 7,
-    "uitstoot": 17,
-    "kosten": 67.726527
-  },
-  {
-    "project": "qui",
-    "type": "est",
-    "begin": "2010-10-13 22:50:52",
-    "eind": "1996-06-30 21:54:39",
-    "km": 643,
-    "uitstoot": 274,
-    "kosten": 488659298.921
-  },
-  {
-    "project": "vitae",
-    "type": "qui",
-    "begin": "1993-09-19 14:25:22",
-    "eind": "2021-07-19 14:51:31",
-    "km": 181051,
-    "uitstoot": 951513,
-    "kosten": 32637.9
-  },
-  {
-    "project": "nihil",
-    "type": "veniam",
-    "begin": "2004-03-12 18:03:38",
-    "eind": "2018-10-13 08:57:58",
-    "km": 84639,
-    "uitstoot": 136475066,
-    "kosten": 16568286.7
-  },
-  {
-    "project": "quia",
-    "type": "voluptatum",
-    "begin": "2010-01-01 01:52:21",
-    "eind": "2004-02-05 15:47:01",
-    "km": 2551294,
-    "uitstoot": 1547149,
-    "kosten": 56805056.5049206
-  },
-  {
-    "project": "praesentium",
-    "type": "cum",
-    "begin": "2022-08-24 18:42:39",
-    "eind": "2015-10-20 19:13:35",
-    "km": 2587336,
-    "uitstoot": 51,
-    "kosten": 327496.0082
-  },
-  {
-    "project": "ab",
-    "type": "rerum",
-    "begin": "2012-08-10 14:37:14",
-    "eind": "1983-02-15 07:20:59",
-    "km": 7128071,
-    "uitstoot": 842264,
-    "kosten": 0
-  },
-  {
-    "project": "eos",
-    "type": "sed",
-    "begin": "1986-04-22 15:24:00",
-    "eind": "2018-06-28 20:47:57",
-    "km": 503,
-    "uitstoot": 7,
-    "kosten": 898760.7085871
+  "1,674,777,952,901": {
+    "reisOmOpTeSlaan": {
+      "_beginLocatie": "",
+      "_beginTijd": "2023-01-27T01:04:00.000",
+      "_eindLocatie": "",
+      "_eindTijd": "2023-01-27T02:04:00.000",
+      "_km": "",
+      "_kosten": "",
+      "_project": "null",
+      "_reisId": "1,674,777,952,901",
+      "_totaleUitstoot": "0",
+      "_type": "null",
+      "_uitstoot": "78.66666666666669",
+      "_username": "ryan",
+      "_zakelijk": false
+    }
   }
-]
+}

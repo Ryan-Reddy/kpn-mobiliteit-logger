@@ -3,22 +3,13 @@ import {customElement, property, state} from 'lit/decorators.js';
 
 import type { GridActiveItemChangedEvent } from '@vaadin/grid';
 import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, RouterLocation} from "@vaadin/router";
-import csvDownload from 'json-to-csv-export'
-import {ajax} from "rxjs/internal/ajax/ajax";
 
-// Your web app's Firebase configuration
-import { getDatabase, ref, get, set, child, update, remove } from "firebase/database";
-import { initializeApp } from "firebase/app";
+import {firebaseService} from "../../services/firebaseService";
+import {reisDTO} from "../../domain/reisDTO";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCk9m0DdvQ4IFB6kWtS9dMIgTZkc9J0-Vw",
-    authDomain: "kpn-mobility-ryan-van-lil.firebaseapp.com",
-    databaseURL: "https://kpn-mobility-ryan-van-lil-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "kpn-mobility-ryan-van-lil",
-    storageBucket: "kpn-mobility-ryan-van-lil.appspot.com",
-    messagingSenderId: "970585657860",
-    appId: "1:970585657860:web:34bfcae1f13222ec3d1b51"
-};
+// // Your web app's Firebase configuration
+// import { getDatabase, ref, get, set, child, update, remove } from "firebase/database";
+// import { initializeApp } from "firebase/app";
 
 /**
  * An example element.
@@ -32,38 +23,15 @@ export class OverzichtReizen extends LitElement {
     @property() _db: any;
     @property() _currentPageTitle = 'Overzicht Reizen';
     @property() _vervoerMiddelDummyData = [];
-    @property() _reizenDummyData: Array<reisDTO>[];
+    @property() _reizenData;
     private _unsavedData = false;
     @state()
     private selectedItems: unknown;
     private _thermometerInput: any;
     constructor() {
         super();
-        // Initialize Firebase
-        this._app = initializeApp(firebaseConfig);
-
-        this._db = getDatabase();
-
         sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
 
-        // fetch('/database/vervoermiddel-CO2.json')
-        //     .then((response) => response.json())
-        //     .then((json) => {
-        //         this._vervoerMiddelDummyData = Array.from(json);
-        //         console.log(this._vervoerMiddelDummyData);
-        //     });
-        // @ts-ignore
-        // console.log(localStorage.getItem('reizenData'));
-        // console.log(JSON.parse(localStorage.getItem('reizenData')));
-        // this._reizenDummyData = JSON.parse();
-        // console.log(this._reizenDummyData)
-
-        console.log(this.selectData())
-        //
-        // this._db.ref('posts/').once('value', function(snap){
-        //     console.log(JSON.stringify(snap.val()))
-        // })
-        // });
 
     }
 
@@ -156,13 +124,13 @@ export class OverzichtReizen extends LitElement {
         //         console.log(this._reizenDummyData);
         //     });
     }
-    async firstUpdated() {
-        this._reizenDummyData = await fetch('/database/MOCK-REIZEN.json')
-            .then((response) => response.json())
-            .then((json) => {
-                return Array.from(json);
-            });
-    }
+    // async firstUpdated() {
+    //     this._reizenData = await fetch('/database/MOCK-REIZEN.json')
+    //         .then((response) => response.json())
+    //         .then((json) => {
+    //             return Array.from(json);
+    //         });
+    // }
     /**
      * Called when an update was triggered, before rendering. Receives a Map of changed
      * properties, and their previous values. This can be used for modifying or setting
@@ -172,6 +140,16 @@ export class OverzichtReizen extends LitElement {
         super.update(changed);
         console.log('updated YAAY')
     }
+    async firstUpdated() {
+            this._reizenData = await fetch('/database/MOCK-REIZEN.json')
+                .then((response) => response.json())
+                .then((json) => {
+                    return Array.from(json);
+                });
+            console.log(this._reizenData)
+        this._reizenData = await firebaseService.readReisDataUser(sessionStorage.getItem('userID'));
+    }
+
     render() {
         return html`
             <header>
@@ -181,7 +159,7 @@ export class OverzichtReizen extends LitElement {
             <main>
             <hr/>
             <div class="tablecontainer">
-                <vaadin-grid .items="${this._reizenDummyData}"
+                <vaadin-grid .items="${this._reizenData}"
                              theme="row-stripes"
                              .selectedItems="${this.selectedItems}"
                              @active-item-changed="${(e: GridActiveItemChangedEvent<reisDTO>) => {
@@ -190,17 +168,18 @@ export class OverzichtReizen extends LitElement {
                                  console.log(this.selectedItems)
                              }}"
                 >
-                    <vaadin-grid-column header="Project" path="Project"></vaadin-grid-column>
-                    <vaadin-grid-column header="Vervoertype" path="type"></vaadin-grid-column>
-                    <vaadin-grid-column header="Begin" path="beginTijd"></vaadin-grid-column>
-                    <vaadin-grid-column header="Eind" path="eindTijd"></vaadin-grid-column>
-                    <vaadin-grid-column header="Vertrek"" path="vertrekLocatie"></vaadin-grid-column>
-                    <vaadin-grid-column header="Aankomst" path="aankomstLocatie"></vaadin-grid-column>
-                    <vaadin-grid-column header="Totale C02" path="C02"></vaadin-grid-column>
-                    <vaadin-grid-column header="Kosten" path="Kosten"></vaadin-grid-column>
-                    <vaadin-grid-column header="KM" path="km"></vaadin-grid-column>
-                    <vaadin-grid-column header="Klasse" path="klasse"></vaadin-grid-column>
-                    <vaadin-grid-column header="zakelijkOfPrive" path="zakelijkOfPrive"></vaadin-grid-column>
+                    <vaadin-grid-column header="Project" path="_project"></vaadin-grid-column>
+                    <vaadin-grid-column header="Vervoertype" path="_type"></vaadin-grid-column>
+                    <vaadin-grid-column header="Begin" path="_beginTijd"></vaadin-grid-column>
+                    <vaadin-grid-column header="Eind" path="_eindTijd"></vaadin-grid-column>
+                    <vaadin-grid-column header="Vertrek"" path="_eindLocatie"></vaadin-grid-column>
+                    <vaadin-grid-column header="Aankomst" path="_beginLocatie"></vaadin-grid-column>
+                    <vaadin-grid-column header="C02/km" path="_uitstoot"></vaadin-grid-column>
+                    <vaadin-grid-column header="Totale C02" path="_uitstoot"></vaadin-grid-column>
+                    <vaadin-grid-column header="Kosten" path="_kosten"></vaadin-grid-column>
+                    <vaadin-grid-column header="KM" path="_km"></vaadin-grid-column>
+                    <vaadin-grid-column header="Klasse" path="_klasse"></vaadin-grid-column>
+                    <vaadin-grid-column header="zakelijkOfPrive" path="_zakelijk"></vaadin-grid-column>
                 </vaadin-grid>
             </div>
                 <p>Selected row:
@@ -213,22 +192,11 @@ export class OverzichtReizen extends LitElement {
                 <button onclick="print()">Print...</button>
             </main>
             </body>
-            <span id="feedbackspan"> ${this._feedback} </span>
-            
         `;
     }
-
-    selectData(){
-        const dbRef = ref(this._db);
-        get(child(dbRef,"Test/id/")).then((snapshot)=>{
-            if(snapshot.exists()) {
-                snapshot.forEach(strng => console.log(strng))
-            } else {
-               alert('no data found');
-            }
-        })
-            .catch((error)=>alert('no data found: ' + error))
-    }
+    // selectData(){
+    //     this._reizenData = firebaseService.readReisDataAll();
+    // }
     wijzigDezeDataRij(event: Event) {
         // TODO collect data from the table #32
         //  Load invoeren-reizen with this data
@@ -266,7 +234,7 @@ export class OverzichtReizen extends LitElement {
     // }
 
     tableToJsonDownloader(exportObj: any, exportName: string){
-        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this._reizenDummyData));
+        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this._reizenData));
         var downloadAnchorNode = document.createElement('a');
         downloadAnchorNode.setAttribute("href",     dataStr);
         downloadAnchorNode.setAttribute("download", exportName + ".json");

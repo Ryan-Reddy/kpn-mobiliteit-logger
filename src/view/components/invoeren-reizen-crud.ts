@@ -1,7 +1,7 @@
 import {css, html, LitElement} from 'lit';
 import {customElement, property, query, eventOptions, queryAll} from 'lit/decorators.js';
 import {Thermometer} from "./global/thermometer";
-import {DataService} from "../../services/firebaseDBwriterService";
+import {firebaseService} from "../../services/firebaseService";
 import {reisDTO} from "../../domain/reisDTO";
 
 // import { reisDTO } from '../../domain/reisDTO';
@@ -49,7 +49,7 @@ class InvoerenReizen extends LitElement {
     @query('#eindTijd') _eindTijd!: HTMLElement;
     @query('#Kosten') _Kosten!: HTMLElement;
     @query('#km') _km!: HTMLElement;
-    @query('#Project') _Project!: HTMLElement;
+    @query('#Project') _project!: HTMLElement;
     @query('#insertButton') insBtn!: HTMLInputElement;
     @query('#selectButton') selBtn!: HTMLInputElement;
     @query('#updateButton') updBtn!: HTMLInputElement;
@@ -258,23 +258,11 @@ class InvoerenReizen extends LitElement {
                         <li>
                             <label class="label" for="zakelijkOfPrive">zakelijk of prive:</label>
                             <select name="Zakelijk" id="Zakelijk" class="${this.inputfield}" required>
-                                <option disabled
-                                        value="Zakelijke reis:"
-                                        hidden>
-
-                                </option>
-
+                                <option disabled  value="Zakelijke reis:" hidden> </option>
                                 <label class="label" class="label" class="label" for="prive" style="float:left" hidden>Prive</label>
-                                <option id="prive"
-                                        value=false
-                                        @click="${this._optionClickedZakelijkOfPrive}">
-                                    Prive
-                                </option>
-
+                                <option id="prive" value=false @click="${this._optionClickedZakelijkOfPrive}"> Prive </option>
                                 <label class="label" for="zakelijk" style="float:left" hidden>Zakelijk</label>
-                                <option id="zakelijk"
-                                        value=true
-                                        @click="${this._optionClickedZakelijkOfPrive}">
+                                <option id="zakelijk" value=true @click="${this._optionClickedZakelijkOfPrive}">
                                     Zakelijk
                                 </option>
 
@@ -358,12 +346,11 @@ class InvoerenReizen extends LitElement {
                                 <option disabled value=${this._demoProject} selected hidden>
                                     Project Keuze
                                 </option>
-
+                                
                                 <label class="label" for="Montage" style="float:left">Montage op locatie</label>
-                                <option id="Montage">Tweede klas</option>
-
+                                <option id="Montage" value="Montage">Montage</option>
                                 <label class="label" for="Klantgesprek" style="float:left">Klantgesprek</label>
-                                <option id="Klantgesprek">Klantgesprek</option>
+                                <option id="Klantgesprek" value="Klantgesprek">Klantgesprek</option>
                             </select>
                         </li>
                     </ul>
@@ -448,17 +435,16 @@ class InvoerenReizen extends LitElement {
      */
     persistDataToDb() {
         // @ts-ignore
-        const username = sessionStorage.getItem('userID').split("@")[0].slice(1) + "";
-        const reis = new reisDTO(Date.now().toLocaleString(), username, this._vervoerSelector.getAttribute('value') + "", this._Project.getAttribute('value') + "", this._beginTijd.getAttribute('value') + "", this._eindTijd.getAttribute('value') + "", this._beginLocatie.getAttribute('value') + "", this._eindLocatie.getAttribute('value') + "", this._km.getAttribute('value') + "", this._Kosten.getAttribute('value') + "", this._mercury.toString(), // @ts-ignore
-            (this._mercury * (this._km.getAttribute('value') + 0)).toString(), this._Zakelijk.getAttribute('value') == 'zakelijk'); //TODO fix the boolean
-
-        console.log(reis)
-        DataService.writeReisData(reis);
+        const username = sessionStorage.getItem('userID')+ "";
+        const reis = new reisDTO(Date.now().toLocaleString(), username, this._vervoerSelector.getAttribute('value') + "", this._project.getAttribute('value') + "", this._beginTijd.getAttribute('value') + "", this._eindTijd.getAttribute('value') + "", this._beginLocatie.getAttribute('value') + "", this._eindLocatie.getAttribute('value') + "", this._km.getAttribute('value') + "", this._Kosten.getAttribute('value') + "", this._mercury.toString(), // @ts-ignore
+            (this._mercury * (this._km.getAttribute('value') + 0)).toString(), this._Zakelijk.getAttribute('value') == 'zakelijk', this._reisKlasseKeuzeMenu.getAttribute('value')); //TODO fix the boolean
+        console.log("saving\n" + reis);
+        firebaseService.writeReisData(reis);
     }
 
     _getReizenData() {
-        DataService.readReisData('ryan');
-
+        firebaseService.readReisDataAll();
+        firebaseService.readReisDataUser('ryan');
     }
 
     connectedCallback() {
@@ -547,46 +533,6 @@ class InvoerenReizen extends LitElement {
                 break;
         }
     }
-
-    // get
-    customFormSend() {
-        // move to service layer
-        console.log('customFormSend reached')
-
-        const formData = new FormData(this._entireForm);    // formdata ophalen
-
-        const object = {};
-        // @ts-ignore
-        formData.forEach((value, key) => object[key] = value);
-        formData.append('userID', this._userName)           // username toevoegen
-
-        const nuTijd = Date.now().toLocaleString();
-        formData.append('tijdvanopslaan', nuTijd)           //datum van opslaan toevoegen
-        console.log(object)
-
-        const jsonFormData = JSON.stringify(object);
-        console.log(jsonFormData)
-
-        // if(this._reizenDummyData== null) {                      // if no curr data => add this form as first
-        //     console.log('null')
-        //     localStorage.setItem('reizenData',jsonFormData);
-        // } else {                                               // if there was data => .push() to it and then store this.
-        let arr = [];
-        try {
-            arr = this._getReizenData();
-        } catch (e) {
-            arr = [];
-        }
-        arr.push(object);
-        console.log(arr)
-        localStorage.setItem('reizenData', JSON.stringify(arr));
-
-        this._unsavedData = false; // remove unsaved data
-        alert('Uw data is opgeslagen :)')
-        this._getReizenData()
-
-    };
-
 
     public onBeforeEnter(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): Promise<unknown> | RedirectResult | undefined {
         console.log('onBeforeEnter');

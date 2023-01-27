@@ -10,13 +10,14 @@ export class reisDTO {
     private _beginLocatie!: string;
     private _eindLocatie!: string;
     private _km!: string;
+    private _klasse!: string;
     private _kosten!: string;
     private _uitstoot!: string;
     private _totaleUitstoot!: string;
     private _zakelijk!: boolean;
 
 
-    constructor(reisId: string, username: string, type: string, project: string, beginTijd: string, eindTijd: string, beginLocatie: string, eindLocatie: string, km: string, kosten: string, uitstoot: string, totaleUitstoot: string, zakelijk: boolean) {
+    constructor(reisId: string, username: string, type: string, project: string, beginTijd: string, eindTijd: string, beginLocatie: string, eindLocatie: string, km: string, kosten: string, uitstoot: string, totaleUitstoot: string, zakelijk: boolean, klasse: any) {
         this._reisId = reisId;
         this._username = username;
         this._type = type;
@@ -30,6 +31,67 @@ export class reisDTO {
         this._uitstoot = uitstoot;
         this._totaleUitstoot = totaleUitstoot;
         this._zakelijk = zakelijk;
+        this._klasse = klasse;
+    }
+
+    set reisId(value: string) {
+        this._reisId = value;
+    }
+
+    set username(value: string) {
+        this._username = value;
+    }
+
+    set type(value: string) {
+        this._type = value;
+    }
+
+    set project(value: string) {
+        this._project = value;
+    }
+
+    set beginTijd(value: string) {
+        this._beginTijd = value;
+    }
+
+    set eindTijd(value: string) {
+        this._eindTijd = value;
+    }
+
+    set beginLocatie(value: string) {
+        this._beginLocatie = value;
+    }
+
+    set eindLocatie(value: string) {
+        this._eindLocatie = value;
+    }
+
+    set km(value: string) {
+        this._km = value;
+    }
+
+    set klasse(value: string) {
+        this._klasse = value;
+    }
+
+    set kosten(value: string) {
+        this._kosten = value;
+    }
+
+    set uitstoot(value: string) {
+        this._uitstoot = value;
+    }
+
+    set totaleUitstoot(value: string) {
+        this._totaleUitstoot = value;
+    }
+
+    set zakelijk(value: boolean) {
+        this._zakelijk = value;
+    }
+
+    get klasse(): string {
+        return this._klasse;
     }
 
     get reisId(): string {
@@ -83,4 +145,6 @@ export class reisDTO {
     get zakelijk(): boolean {
         return this._zakelijk;
     }
+
+
 }
