@@ -1,5 +1,5 @@
 // Your web app's Firebase configuration
-import {child, get, push, ref} from "firebase/database";
+import {child, get, push, ref} from "@firebase/database";
 import {reisDTO} from "../domain/reisDTO";
 import StartFirebase from "./firebaseConfig/firebase-config";
 

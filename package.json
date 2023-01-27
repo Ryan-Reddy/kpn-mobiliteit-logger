@@ -33,6 +33,7 @@
     "@vaadin/vaadin-grid": "^5.7.14",
     "@vaadin/vertical-layout": "^23.3.5",
     "chart.js": "^4.2.0",
+    "firebase": "^9.16.0",
     "g": "^2.0.1",
     "install": "^0.13.0",
     "jquery-json": "^2.6.0",
