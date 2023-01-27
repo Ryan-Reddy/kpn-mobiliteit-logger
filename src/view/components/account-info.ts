@@ -16,7 +16,7 @@ export class Accountinfo extends LitElement {
 
     constructor() {
         super();
-        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
+        sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
     }
 
     static get styles() {
@@ -140,50 +140,51 @@ export class Accountinfo extends LitElement {
                 <h1 class="header">${this._currentPageTitle}</h1>
                 <p>Breng hier wijzigingen aan in uw gegevens.</p>
             </header>
-            
-        <body>
 
-        <form id="postaccount">
-            <div class="tablecontainer">
+            <body>
 
-            <table style="width:100%">
-            <tr>
-                <td></td>
-            <td>Huidige accountinfo:</td>
-        <td></td>
-        </tr>
-        <tr>
-        <td><label for="naam">Naam:</label></td>
-        <td><input class="inputfield" id="naam" name="naam" placeholder="naam" type="text" /></td>
-            <td></td>
-            </tr>
-            <!-- <tr>
-            <td><label for="achternaam">Achternaam:</label></td>
-        <td><input class="inputfield" id="achternaam" name="achternaam"
-        type="text" style="width:100%"/><br/></td>
-            <td><br/></td>
-            </tr> -->
-            <tr>
-            <td><label for="email">E-mail adres:</label></td>
-        <td><input class="inputfield" id="email" name="email" placeholder="email" type="text" style="width:100%" /></td>
-            <td></td>
-            </tr>
-            </table>
+            <form id="postaccount">
+                <div class="tablecontainer">
+
+                    <table style="width:100%">
+                        <tr>
+                            <td></td>
+                            <td>Huidige accountinfo:</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><label for="naam">Naam:</label></td>
+                            <td><input class="inputfield" id="naam" name="naam" placeholder="naam" type="text"/></td>
+                            <td></td>
+                        </tr>
+                        <!-- <tr>
+                        <td><label for="achternaam">Achternaam:</label></td>
+                    <td><input class="inputfield" id="achternaam" name="achternaam"
+                    type="text" style="width:100%"/><br/></td>
+                        <td><br/></td>
+                        </tr> -->
+                        <tr>
+                            <td><label for="email">E-mail adres:</label></td>
+                            <td><input class="inputfield" id="email" name="email" placeholder="email" type="text"
+                                       style="width:100%"/></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- <input id="send_json" onclick="sendJsonData()" type="button" value="send json"/>
+              <input id="send_formdata" onclick="sendFormData()" type="button" value="send formdata"/> -->
+                <input id="update_account_info" onclick="wijzigAccount()" type="button" value="Update Info"/>
+                <span id="feedbackspan"></span>
+            </form>
+            <hr/>
+            <br/>
+            <a href="../reset-password/index.html">
+                <button>Wachtwoord resetten</button>
+            </a>
+
             </div>
-            <!-- <input id="send_json" onclick="sendJsonData()" type="button" value="send json"/>
-          <input id="send_formdata" onclick="sendFormData()" type="button" value="send formdata"/> -->
-            <input id="update_account_info" onclick="wijzigAccount()" type="button" value="Update Info" />
-        <span id="feedbackspan"></span>
-        </form>
-        <hr />
-        <br />
-        <a href="../reset-password/index.html">
-            <button>Wachtwoord resetten</button>
-        </a>
-
-        </div>
-        </main>
-        <footer id="footer">
+            </main>
+            <footer id="footer">
             </footer>
             </div>
             </body>
@@ -197,9 +198,11 @@ export class Accountinfo extends LitElement {
         //notify parent:
         this.dispatchEvent(new Event('page-chosen'));
     }
+
     public onChange() {
         this._unsavedData = true;
     }
+
     public onBeforeEnter(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): Promise<unknown> | RedirectResult | undefined {
         console.log('onBeforeEnter');
         if (!this.isAuthorized()) {

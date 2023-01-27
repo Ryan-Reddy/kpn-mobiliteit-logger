@@ -1,9 +1,7 @@
 // Your web app's Firebase configuration
-import {child, DataSnapshot, get, push, ref, set} from "@firebase/database";
+import {child, get, push, ref} from "firebase/database";
 import {reisDTO} from "../domain/reisDTO";
 import StartFirebase from "./firebaseConfig/firebase-config";
-import {toArray} from "rxjs";
-import {isArray} from "chart.js/helpers";
 
 const _db = StartFirebase();
 
@@ -37,7 +35,7 @@ export class firebaseService {
 
         const _db_ref = ref(_db);
 
-        get(child(_db_ref,'reizen/ryan/')).then((snapshot)=>{
+        get(child(_db_ref, 'reizen/ryan/')).then((snapshot) => {
             if (snapshot.exists()) {
                 if (snapshot.hasChildren()) {
                     console.log('data retrieved succesfully');
@@ -52,22 +50,23 @@ export class firebaseService {
                         organization.set(prop, obj[prop])
                     }
                     console.log(obj)
-                    sessionStorage.setItem('retrievedReizen',obj)
+                    sessionStorage.setItem('retrievedReizen', obj)
                     let arr = Array.from(obj);
                     console.log(arr)
-                    return ;
+                    return;
                 }
             }
-            }).catch((error) => {
+        }).catch((error) => {
             alert('datastore unsuccesfull, error: ' + error)
         })
     }
+
     static readReisDataUser(userName: string) {
         console.log('readReisData reached username: ' + userName)
         get(ref(_db,
             "reizen/" +
             userName)).then((snapshot) => {    //TODO fix username properly
-            if(snapshot.exists()) {
+            if (snapshot.exists()) {
 
                 console.log('data retrieved succesfully');
                 let data = snapshot.val();
@@ -76,7 +75,7 @@ export class firebaseService {
             }
 
             // let newData = data.stream.foreach((line: { constructor: reisDTO; }) => line.constructor)
-            }).catch((error) => {
+        }).catch((error) => {
             alert('datastore unsuccesfull, error: ' + error)
         })
     }

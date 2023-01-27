@@ -14,7 +14,7 @@ export class HomePage extends LitElement {
 
     constructor() {
         super();
-        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
+        sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
     }
 
     static get styles() {

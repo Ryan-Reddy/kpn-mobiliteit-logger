@@ -22,8 +22,9 @@
     <script src="view/components/global/menu-footer.ts" type="module"></script>
     <title>KPN Mobiliteits App</title>
     <!--    needed for readme-->
-    <script defer src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script>
-    <script defer type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
+    <script defer
+            src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js" type="module"></script>
 
 </head>
 
@@ -38,14 +39,14 @@
     <footer-menu></footer-menu>
 </footer>
 <script>
-  // addEventListener('storage', (event) => { });
+    // addEventListener('storage', (event) => { });
 
-  window.onchange = (event) => {
+    window.onchange = (event) => {
 
-  let title = sessionStorage.getItem('currentpagetitle');
-    console.log(title);
-    document.title = title;
-  };
-  </script>
+        let title = sessionStorage.getItem('currentpagetitle');
+        console.log(title);
+        document.title = title;
+    };
+</script>
 
 </html>

@@ -1,13 +1,20 @@
-import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import {css, html, LitElement} from 'lit';
+import {customElement, property} from 'lit/decorators.js';
 import '@vaadin/icon';
 import '@vaadin/icons';
 import '@vaadin/vertical-layout';
 
 @customElement('example-indicator')
 export class Indicator extends LitElement {
-  static get styles() {
-    return css`
+    @property()
+    title = 'Unknown';
+    @property()
+    current = '0';
+    @property({type: Number})
+    change = 0;
+
+    static get styles() {
+        return css`
       .title {
         margin: 0;
         font-size: var(--lumo-font-size-xxs);
@@ -48,44 +55,28 @@ export class Indicator extends LitElement {
         }
       }
     `;
-  }
-
-  @property()
-  title = 'Unknown';
-
-  @property()
-  current = '0';
-
-  @property({ type: Number })
-  change = 0;
-
-  protected createRenderRoot() {
-    const root = super.createRenderRoot();
-    // Apply custom theme (only supported if your app uses one)
-    // applyTheme(root);
-    return root;
-  }
-
-  render() {
-    let theme;
-    let icon;
-    let sign;
-
-    if (this.change === 0) {
-      theme = '';
-      icon = 'circle-thin';
-      sign = '±';
-    } else if (this.change < 0) {
-      theme = 'error';
-      icon = 'arrow-down';
-      sign = '-';
-    } else {
-      theme = 'success';
-      icon = 'arrow-up';
-      sign = '+';
     }
 
-    return html`
+    render() {
+        let theme;
+        let icon;
+        let sign;
+
+        if (this.change === 0) {
+            theme = '';
+            icon = 'circle-thin';
+            sign = '±';
+        } else if (this.change < 0) {
+            theme = 'error';
+            icon = 'arrow-down';
+            sign = '-';
+        } else {
+            theme = 'success';
+            icon = 'arrow-up';
+            sign = '+';
+        }
+
+        return html`
       <vaadin-vertical-layout>
         <div class="title">${this.title}</div>
         <div class="current">${this.current}</div>
@@ -95,5 +86,12 @@ export class Indicator extends LitElement {
         </span>
       </vaadin-vertical-layout>
     `;
-  }
+    }
+
+    protected createRenderRoot() {
+        const root = super.createRenderRoot();
+        // Apply custom theme (only supported if your app uses one)
+        // applyTheme(root);
+        return root;
+    }
 }

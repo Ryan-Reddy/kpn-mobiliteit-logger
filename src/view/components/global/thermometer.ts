@@ -151,6 +151,7 @@ export class Thermometer extends LitElement {
             </html>
         `;
     }
+
     private _thermometerInput(e: { detail: { uitstoot: any; voertuigkeuze: any; }; }) {
         console.log('reached thermometer.ts._thermometerInput()')
         console.log(e.detail.uitstoot)

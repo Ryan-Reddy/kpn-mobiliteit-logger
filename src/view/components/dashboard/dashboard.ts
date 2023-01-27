@@ -1,4 +1,4 @@
-import {css, html, LitElement, PropertyValueMap, render} from 'lit';
+import {css, html, LitElement, PropertyValueMap} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
 import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, RouterLocation} from "@vaadin/router";
 
@@ -7,7 +7,7 @@ import '@vaadin/grid/vaadin-grid-selection-column.js';
 
 import './indicator';
 import './chart';
-import {catchError, map, Observable, of, switchMap} from "rxjs";
+import {catchError, Observable, of, switchMap} from "rxjs";
 import {fromFetch} from "rxjs/internal/observable/dom/fetch";
 
 
@@ -26,10 +26,10 @@ export class OverzichtReizen extends LitElement {
     @state() @property() data$: Observable<any> | undefined;
     // @state()
     @property() _unsavedData = false;
-    @property() _totaleC02= 500;
-    @property() _totaleKM= 34703;
-    @property() _persoonlijkeKM=200;
-    private _persoonlijkeC02= 20;
+    @property() _totaleC02 = 500;
+    @property() _totaleKM = 34703;
+    @property() _persoonlijkeKM = 200;
+    private _persoonlijkeC02 = 20;
 
     constructor() {
         super();

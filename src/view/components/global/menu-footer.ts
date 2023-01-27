@@ -12,26 +12,12 @@ import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, Route
 export class MenuFooter extends LitElement {
     @property() _root;
     @query('.whole') whole!: HTMLDivElement;
+
     constructor() {
         super();
         this._root = this.createRenderRoot();
     }
 
-    onload = () => {
-        if(sessionStorage.getItem('currentpagetitle') == 'Login') {
-            this.whole.setAttribute("hidden", "hidden")
-        }
-    };
-    connectedCallback() {
-        super.connectedCallback();
-        console.log('thermometer connectedCallback')
-        this._root = this.createRenderRoot();
-    }
-
-    disconnectedCallback() {
-        sessionStorage.removeItem('currentpagetitle')
-        super.disconnectedCallback();
-    }
     static get styles() {
         return css`
           * {
@@ -161,6 +147,23 @@ export class MenuFooter extends LitElement {
         `;
     }
 
+    onload = () => {
+        if (sessionStorage.getItem('currentpagetitle') == 'Login') {
+            this.whole.setAttribute("hidden", "hidden")
+        }
+    };
+
+    connectedCallback() {
+        super.connectedCallback();
+        console.log('thermometer connectedCallback')
+        this._root = this.createRenderRoot();
+    }
+
+    disconnectedCallback() {
+        sessionStorage.removeItem('currentpagetitle')
+        super.disconnectedCallback();
+    }
+
     render() {
         return html`
             <div class="whole">
@@ -186,9 +189,11 @@ export class MenuFooter extends LitElement {
             </div>
         `;
     }
+
     logOut() {
         !sessionStorage.removeItem('userID');
     }
+
     public onBeforeEnter(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): Promise<unknown> | RedirectResult | undefined {
         console.log('onBeforeEnter');
         if (!this.isAuthorized()) {
@@ -207,6 +212,7 @@ export class MenuFooter extends LitElement {
 
         console.log('You can see this page');
     }
+
     public onBeforeLeave(location: RouterLocation, commands: PreventAndRedirectCommands, router: Router): PreventResult | undefined {
         if (this._unsavedData) {
 
@@ -219,6 +225,7 @@ export class MenuFooter extends LitElement {
             }
         }
     }
+
     private isAuthorized() {
         return !!sessionStorage.getItem('userID');
     }

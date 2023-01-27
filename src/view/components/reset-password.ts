@@ -14,7 +14,7 @@ export class ResetPassword extends LitElement {
 
     constructor() {
         super();
-        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
+        sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
 
     }
 

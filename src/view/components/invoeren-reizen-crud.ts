@@ -1,6 +1,5 @@
 import {css, html, LitElement} from 'lit';
-import {customElement, property, query, eventOptions, queryAll} from 'lit/decorators.js';
-import {Thermometer} from "./global/thermometer";
+import {customElement, property, query, queryAll} from 'lit/decorators.js';
 import {firebaseService} from "../../services/firebaseService";
 import {reisDTO} from "../../domain/reisDTO";
 
@@ -258,9 +257,10 @@ class InvoerenReizen extends LitElement {
                         <li>
                             <label class="label" for="zakelijkOfPrive">zakelijk of prive:</label>
                             <select name="Zakelijk" id="Zakelijk" class="${this.inputfield}" required>
-                                <option disabled  value="Zakelijke reis:" hidden> </option>
+                                <option disabled value="Zakelijke reis:" hidden></option>
                                 <label class="label" class="label" class="label" for="prive" style="float:left" hidden>Prive</label>
-                                <option id="prive" value=false @click="${this._optionClickedZakelijkOfPrive}"> Prive </option>
+                                <option id="prive" value=false @click="${this._optionClickedZakelijkOfPrive}"> Prive
+                                </option>
                                 <label class="label" for="zakelijk" style="float:left" hidden>Zakelijk</label>
                                 <option id="zakelijk" value=true @click="${this._optionClickedZakelijkOfPrive}">
                                     Zakelijk
@@ -346,7 +346,7 @@ class InvoerenReizen extends LitElement {
                                 <option disabled value=${this._demoProject} selected hidden>
                                     Project Keuze
                                 </option>
-                                
+
                                 <label class="label" for="Montage" style="float:left">Montage op locatie</label>
                                 <option id="Montage" value="Montage">Montage</option>
                                 <label class="label" for="Klantgesprek" style="float:left">Klantgesprek</label>
@@ -360,7 +360,8 @@ class InvoerenReizen extends LitElement {
                     <div id="bottomButtonsBox">
                         <button class="bottomButtons" id="zenden" form="formulierReizen" aria-label="Verzend formulier"
                                 @click="${this.persistDataToDb}"
-                                value="Verzenden">Opslaan</button>
+                                value="Verzenden">Opslaan
+                        </button>
 
                         <input class="bottomButtons" id="resetButton" type="reset" value="Reset velden"
                                aria-label="reset formulier"
@@ -416,7 +417,8 @@ class InvoerenReizen extends LitElement {
                     <button id="selectButton"
                             @click="${this.persistDataToDb}"
 
-                    >SELECT</button>
+                    >SELECT
+                    </button>
                     <button id="updateButton">UPDATE</button>
                     <button id="deleteButton">DELETE</button>
                 </div>
@@ -435,7 +437,7 @@ class InvoerenReizen extends LitElement {
      */
     persistDataToDb() {
         // @ts-ignore
-        let username = sessionStorage.getItem('userID')+ "";
+        let username = sessionStorage.getItem('userID') + "";
         username = username.split('@')[0]
 
         const reis = new reisDTO(Date.now().toLocaleString(), username, this._vervoerSelector.getAttribute('value') + "", this._project.getAttribute('value') + "", this._beginTijd.getAttribute('value') + "", this._eindTijd.getAttribute('value') + "", this._beginLocatie.getAttribute('value') + "", this._eindLocatie.getAttribute('value') + "", this._km.getAttribute('value') + "", this._Kosten.getAttribute('value') + "", this._mercury.toString(), // @ts-ignore

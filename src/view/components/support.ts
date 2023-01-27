@@ -14,11 +14,8 @@ export class SupportElement extends LitElement {
 
     constructor() {
         super();
-        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
+        sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
 
-    }
-    connectedCallback() {
-        super.connectedCallback();
     }
 
     static get styles() {
@@ -42,6 +39,10 @@ export class SupportElement extends LitElement {
         height: 2em;
       }
     `;
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
     }
 
     render() {

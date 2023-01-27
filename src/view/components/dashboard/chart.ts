@@ -1,9 +1,9 @@
-import {css, html, LitElement, PropertyValueMap} from 'lit';
-import {customElement, property, query, state} from 'lit/decorators.js';
-import {repeat} from 'lit/directives/repeat.js';
+import {css, html, LitElement} from 'lit';
+import {customElement, property, query} from 'lit/decorators.js';
 import '@vaadin/charts';
 
-import { Chart, registerables } from 'chart.js';
+import {Chart, registerables} from 'chart.js';
+
 Chart.register(...registerables);
 
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',];
@@ -17,6 +17,11 @@ export class Example extends LitElement {
     @property() _root: Element | ShadowRoot;
     @query('#myChart') _myChart!: HTMLElement;
 
+    constructor() {
+        super();
+        this._root = this.createRenderRoot();
+
+    }
 
     static get styles() {
         return css`
@@ -31,12 +36,6 @@ export class Example extends LitElement {
           }
         `;
     }
-    constructor() {
-        super();
-        this._root =this.createRenderRoot();
-
-    }
-
 
     render() {
         return html`
@@ -48,38 +47,39 @@ export class Example extends LitElement {
             </script>
         `;
     }
-async updated() {
 
-    await this.updateComplete.then(() => {
+    async updated() {
 
-        const ctx = this.shadowRoot.getElementById('myChart');
+        await this.updateComplete.then(() => {
 
-        // @ts-ignore
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'],
-                datasets: [{
-                    label: 'Kilometers zonder uitstoot!',
-                    data: [355, 310, 189, 196, 254, 280],
-                    borderWidth: 1
+            const ctx = this.shadowRoot.getElementById('myChart');
+
+            // @ts-ignore
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag'],
+                    datasets: [{
+                        label: 'Kilometers zonder uitstoot!',
+                        data: [355, 310, 189, 196, 254, 280],
+                        borderWidth: 1
+                    },
+                        {
+                            label: 'Kilometers met uitstoot!',
+                            data: [245, 265, 421, 404, 346, 320],
+                            borderWidth: 1
+                        }]
                 },
-                {
-                    label: 'Kilometers met uitstoot!',
-                    data: [245, 265, 421, 404, 346, 320],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
-            }
-        });
-    })
-}
+            });
+        })
+    }
 
     async firstUpdated() {
     }

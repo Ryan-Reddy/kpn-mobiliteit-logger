@@ -12,11 +12,11 @@ import "https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcompone
 export class ReadmeElement extends LitElement {
     @property() _hiddenElement = 'hidden';
     @property() _currentPageTitle = 'Readme';
-    @property() _readmeFile= 'README.md';
+    @property() _readmeFile = 'README.md';
 
     constructor() {
         super();
-        sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
+        sessionStorage.setItem('currentpagetitle', this._currentPageTitle);
     }
 
     static get styles() {
@@ -50,18 +50,20 @@ export class ReadmeElement extends LitElement {
             <!-- Lightweight client-side loader that feature-detects and load polyfills only when necessary -->
 
 
-                <zero-md src="${this._readmeFile}">
-                    <template>
-                        
-                        <!-- Define your own styles inside a \`<style>\` tag -->
-                        <style>
-                            h1 { color: red; }
-                        </style>
-                    </template>
-                </zero-md>
+            <zero-md src="${this._readmeFile}">
+                <template>
+
+                    <!-- Define your own styles inside a \`<style>\` tag -->
+                    <style>
+                        h1 {
+                            color: red;
+                        }
+                    </style>
+                </template>
+            </zero-md>
 
 
-    `;
+        `;
     }
 
     _clickForSupport() {

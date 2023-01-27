@@ -1,22 +1,5 @@
 export class reisDTO {
     // DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-    // String nowEndTime = dtf.format(LocalTime.now());
-    private _reisId!: string;
-    private _username!: string;
-    private _type!: string;
-    private _project!: string;
-    private _beginTijd!: string;
-    private _eindTijd!: string;
-    private _beginLocatie!: string;
-    private _eindLocatie!: string;
-    private _km!: string;
-    private _klasse!: string;
-    private _kosten!: string;
-    private _uitstoot!: string;
-    private _totaleUitstoot!: string;
-    private _zakelijk!: boolean;
-
-
     constructor(reisId: string, username: string, type: string, project: string, beginTijd: string, eindTijd: string, beginLocatie: string, eindLocatie: string, km: string, kosten: string, uitstoot: string, totaleUitstoot: string, zakelijk: boolean, klasse: any) {
         this._reisId = reisId;
         this._username = username;
@@ -34,6 +17,8 @@ export class reisDTO {
         this._klasse = klasse;
     }
 
+    // String nowEndTime = dtf.format(LocalTime.now());
+    private _reisId!: string;
 
     get reisId(): string {
         return this._reisId;
@@ -43,6 +28,8 @@ export class reisDTO {
         this._reisId = value;
     }
 
+    private _username!: string;
+
     get username(): string {
         return this._username;
     }
@@ -50,6 +37,8 @@ export class reisDTO {
     set username(value: string) {
         this._username = value;
     }
+
+    private _type!: string;
 
     get type(): string {
         return this._type;
@@ -59,6 +48,8 @@ export class reisDTO {
         this._type = value;
     }
 
+    private _project!: string;
+
     get project(): string {
         return this._project;
     }
@@ -66,6 +57,8 @@ export class reisDTO {
     set project(value: string) {
         this._project = value;
     }
+
+    private _beginTijd!: string;
 
     get beginTijd(): string {
         return this._beginTijd;
@@ -75,6 +68,8 @@ export class reisDTO {
         this._beginTijd = value;
     }
 
+    private _eindTijd!: string;
+
     get eindTijd(): string {
         return this._eindTijd;
     }
@@ -82,6 +77,8 @@ export class reisDTO {
     set eindTijd(value: string) {
         this._eindTijd = value;
     }
+
+    private _beginLocatie!: string;
 
     get beginLocatie(): string {
         return this._beginLocatie;
@@ -91,6 +88,8 @@ export class reisDTO {
         this._beginLocatie = value;
     }
 
+    private _eindLocatie!: string;
+
     get eindLocatie(): string {
         return this._eindLocatie;
     }
@@ -98,6 +97,8 @@ export class reisDTO {
     set eindLocatie(value: string) {
         this._eindLocatie = value;
     }
+
+    private _km!: string;
 
     get km(): string {
         return this._km;
@@ -107,6 +108,8 @@ export class reisDTO {
         this._km = value;
     }
 
+    private _klasse!: string;
+
     get klasse(): string {
         return this._klasse;
     }
@@ -114,6 +117,8 @@ export class reisDTO {
     set klasse(value: string) {
         this._klasse = value;
     }
+
+    private _kosten!: string;
 
     get kosten(): string {
         return this._kosten;
@@ -123,6 +128,8 @@ export class reisDTO {
         this._kosten = value;
     }
 
+    private _uitstoot!: string;
+
     get uitstoot(): string {
         return this._uitstoot;
     }
@@ -131,6 +138,8 @@ export class reisDTO {
         this._uitstoot = value;
     }
 
+    private _totaleUitstoot!: string;
+
     get totaleUitstoot(): string {
         return this._totaleUitstoot;
     }
@@ -138,6 +147,8 @@ export class reisDTO {
     set totaleUitstoot(value: string) {
         this._totaleUitstoot = value;
     }
+
+    private _zakelijk!: boolean;
 
     get zakelijk(): boolean {
         return this._zakelijk;

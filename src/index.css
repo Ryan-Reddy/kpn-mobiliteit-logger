@@ -24,6 +24,7 @@
     --kpn-warning-red: red;
     --fullwidth: 100%;
 }
+
 @font-face {
     font-family: 'Corsica MX', sans-serif;
     src: local('Corsica MX Medium'),
@@ -48,6 +49,7 @@ body {
 
     /*background-position: top;*/
 }
+
 main {
     max-width: 95%;
     margin-left: auto;
@@ -55,6 +57,7 @@ main {
     margin-top: 1em;
     border: thin #00c300;
 }
+
 footer {
     /*position: absolute;*/
     left: 0;
@@ -82,6 +85,7 @@ footer {
         color: var(--kpn-wit);
         background: var(--kpn-zwart);
     }
+
     vaadin-grid {
         color: var(--kpn-wit);
         background: var(--kpn-zwart);
