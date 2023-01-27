@@ -12,7 +12,6 @@ import './view/components/readme';
 import './view/components/reset-password';
 import './view/components/support';
 import './view/components/overzicht-reizen';
-import './view/components/invoeren-reizen';
 import './view/components/dashboard/dashboard';
 import './view/components/dashboard/chart';
 

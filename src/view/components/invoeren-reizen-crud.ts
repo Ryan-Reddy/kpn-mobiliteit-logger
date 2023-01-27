@@ -2,6 +2,7 @@ import {css, html, LitElement} from 'lit';
 import {customElement, property, query, queryAll} from 'lit/decorators.js';
 import {firebaseService} from "../../services/firebaseService";
 import {reisDTO} from "../../domain/reisDTO";
+import {PreventAndRedirectCommands, PreventResult, RedirectResult, Router, RouterLocation} from "@vaadin/router";
 
 // import { reisDTO } from '../../domain/reisDTO';
 /**
@@ -85,7 +86,9 @@ class InvoerenReizen extends LitElement {
         now1.setMilliseconds(0);
         now1.setSeconds(0);
         this._aankomstTijd = now1.toISOString().slice(0, -1);
+        // @ts-ignore
         this.eindTijdMin = this._vertrekTijd;
+        // @ts-ignore
         this.beginTijdMax = this._aankomstTijd + 60;
     }
 
@@ -446,14 +449,8 @@ class InvoerenReizen extends LitElement {
         firebaseService.writeReisData(reis);
     }
 
-    _getReizenData() {
-        firebaseService.readReisDataAll();
-        firebaseService.readReisDataUser('ryan');
-    }
-
     connectedCallback() {
         super.connectedCallback();
-        this._getReizenData();
     }
 
     _optionClickedZakelijkOfPrive(option: {
@@ -585,7 +582,7 @@ class InvoerenReizen extends LitElement {
     }
 
     private _thermometerInput(e: CustomEvent) {
-        console.log('reached invoeren-reizen.ts._thermometerInput()')
+        console.log('reached invoeren-reizen-crud.ts._thermometerInput()')
         console.log(e.detail.uitstoot)
         console.log(e.detail.voertuigkeuze)
         //TODO remove hard coding (15) = max C02 in list voertuigdata
