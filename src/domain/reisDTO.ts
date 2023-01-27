@@ -146,4 +146,23 @@ export class reisDTO {
     set zakelijk(value: boolean) {
         this._zakelijk = value;
     }
+
+    toString() {
+        let s=
+            'reisId: ' + this._reisId +
+                'username' + this._username +
+                'type' + this._type
+        // this._project = project;
+        // this._beginTijd = beginTijd;
+        // this._eindTijd = eindTijd;
+        // this._beginLocatie = beginLocatie;
+        // this._eindLocatie = eindLocatie;
+        // this._km = km;
+        // this._kosten = kosten;
+        // this._uitstoot = uitstoot;
+        // this._totaleUitstoot = totaleUitstoot;
+        // this._zakelijk = zakelijk;
+        // this._klasse = klasse;
+        return s;
+    }
 }

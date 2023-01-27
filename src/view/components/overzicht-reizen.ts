@@ -32,6 +32,7 @@ export class OverzichtReizen extends LitElement {
         super();
         sessionStorage.setItem('currentpagetitle',this._currentPageTitle);
 
+        this._reizenData = this.selectAllData();
 
     }
 
@@ -147,7 +148,7 @@ export class OverzichtReizen extends LitElement {
                     return Array.from(json);
                 });
             console.log(this._reizenData)
-        this._reizenData = await this.selectAllData();
+        this._reizenData = this.selectAllData();
             console.log(this._reizenData)
     }
     updated(){
@@ -159,6 +160,8 @@ export class OverzichtReizen extends LitElement {
     }
     selectAllData(){
         this._reizenData = (firebaseService.readReisDataAll());
+        console.log(this._reizenData)
+        return this._reizenData;
     }
 
 

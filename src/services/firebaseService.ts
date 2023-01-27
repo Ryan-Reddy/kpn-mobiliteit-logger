@@ -10,7 +10,9 @@ const _db = StartFirebase();
 export class firebaseService {
     static writeReisData(reisOmOpTeSlaan: reisDTO) {
         set(ref(_db,
-            ("reizen/" +  reisOmOpTeSlaan.username + "/" + reisOmOpTeSlaan.reisId)), {
+            ("reizen/" +
+                "ryan/" + reisOmOpTeSlaan.reisId)
+        ), {
             reisId: reisOmOpTeSlaan.reisId,
             zakelijkOfPrive: reisOmOpTeSlaan.zakelijk,
             vertrekLocatie: reisOmOpTeSlaan.beginLocatie,
@@ -35,17 +37,28 @@ export class firebaseService {
 
         const _db_ref = ref(_db);
 
-        get(child(_db_ref,'reizen/ser2')).then((snapshot)=>{
-            if(snapshot.exists()) {
+        get(child(_db_ref,'reizen/ryan')).then((snapshot)=>{
+            if (snapshot.exists()) {
                 if (snapshot.hasChildren()) {
                     console.log('data retrieved succesfully');
-                    console.log(snapshot)
                     console.log(snapshot.val())
-                    console.log(snapshot.val().keys)
-                    const foo= snapshot.val()
-                    // const foo= "[\n" + snapshot.val() + "\n]";
-                    console.log(foo)
-                    console.log(foo['1,674,786,245,312'])
+                    console.log(snapshot.val()[0])
+                    console.log(snapshot.val()["1,674,799,022,126"])
+                    const obj = snapshot.val();
+
+                    const organization = new Map<string, reisDTO>()
+                    for (let prop in obj) {
+                        organization.set(prop, obj[prop])
+                    }
+                    console.log(organization)
+                    let organization2 = Array.from(organization)
+                    return organization2;
+                    // console.log(snapshot.val())
+                    // console.log(snapshot.val().keys)
+                    // const foo= snapshot.val()
+                    // // const foo= "[\n" + snapshot.val() + "\n]";
+                    // console.log(foo)
+                    // console.log(foo['1,674,786,245,312'])
 
                 }
             }
