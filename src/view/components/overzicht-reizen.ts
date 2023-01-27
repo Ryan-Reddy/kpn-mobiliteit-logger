@@ -23,7 +23,7 @@ export class OverzichtReizen extends LitElement {
     @property() _db: any;
     @property() _currentPageTitle = 'Overzicht Reizen';
     @property() _vervoerMiddelDummyData = [];
-    @property() _reizenData: unknown;
+    @property() _reizenData!: Array<reisDTO>[];
     private _unsavedData = false;
     @state()
     private selectedItems: unknown;
@@ -124,14 +124,9 @@ export class OverzichtReizen extends LitElement {
         //         this._reizenDummyData = Array.from(json);
         //         console.log(this._reizenDummyData);
         //     });
+        this._reizenData = this.selectAllData();
     }
-    // async firstUpdated() {
-    //     this._reizenData = await fetch('/database/MOCK-REIZEN.json')
-    //         .then((response) => response.json())
-    //         .then((json) => {
-    //             return Array.from(json);
-    //         });
-    // }
+
     /**
      * Called when an update was triggered, before rendering. Receives a Map of changed
      * properties, and their previous values. This can be used for modifying or setting
@@ -154,13 +149,10 @@ export class OverzichtReizen extends LitElement {
     updated(){
         console.log(this._reizenData)
     }
-
-    async getData() {
-        this._reizenData = (firebaseService.readReisDataUser("Test"));
-    }
     selectAllData(){
         this._reizenData = (firebaseService.readReisDataAll());
         console.log(this._reizenData)
+        const result = Array.from(this._reizenData.values());
         return this._reizenData;
     }
 
