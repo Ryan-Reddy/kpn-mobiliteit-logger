@@ -248,13 +248,13 @@ export class OverzichtReizen extends LitElement {
                 <div class="item05">
                     <example-indicator current="-123.45" title="Custom metric"></example-indicator>
                 </div>
-                <div class="item1">Header</div>
-                <div class="item2">Menu</div>
+                <div class="item1"></div>
+                <div class="item2"></div>
                 <div class="chart" style="background-color: transparent">
                     <chart-element></chart-element>
                 </div>
-                <div class="item4">Right</div>
-                <div class="item5">Footer</div>
+                <div class="item4"></div>
+                <div class="item5"></div>
             </div>
 
 

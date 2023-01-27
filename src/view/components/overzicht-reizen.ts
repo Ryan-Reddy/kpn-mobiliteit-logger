@@ -23,7 +23,7 @@ export class OverzichtReizen extends LitElement {
     @property() _db: any;
     @property() _currentPageTitle = 'Overzicht Reizen';
     @property() _vervoerMiddelDummyData = [];
-    @property() _reizenData!: Array<reisDTO>[];
+    @property() _reizenData!: Map<string, reisDTO>[];
     private _unsavedData = false;
     @state()
     private selectedItems: unknown;
@@ -118,12 +118,7 @@ export class OverzichtReizen extends LitElement {
         //         this._vervoerMiddelDummyData = Array.from(json);
         //         console.log(this._vervoerMiddelDummyData);
         //     });
-        // fetch('/dummydata-reizen.json')
-        //     .then((response) => response.json())
-        //     .then((json) => {
-        //         this._reizenDummyData = Array.from(json);
-        //         console.log(this._reizenDummyData);
-        //     });
+
         this._reizenData = this.selectAllData();
     }
 
@@ -136,24 +131,35 @@ export class OverzichtReizen extends LitElement {
         super.update(changed);
         console.log('updated YAAY')
     }
-    async firstUpdated() {
-            this._reizenData = await fetch('/database/MOCK-REIZEN.json')
+    // async firstUpdated() {
+    //         this._reizenData = await fetch('/database/MOCK-REIZEN.json')
+    //             .then((response) => response.json())
+    //             .then((json) => {
+    //                 return Array.from(json);
+    //             });
+    //         console.log(this._reizenData)
+    //     this._reizenData = this.selectAllData();
+    //         console.log(this._reizenData)
+    // }
+    async selectAllData() {
+        try {
+            let data = await firebaseService.readReisDataAll();
+            console.log(data)
+            console.log('selectAllData success;')
+            // @ts-ignore
+            this._reizenData = data;
+            this.selectedItems = data;
+
+            return this._reizenData;
+        } catch (e) {
+            console.log('selectAllData failed; loading json')
+            fetch('/dummydata-reizen.json')
                 .then((response) => response.json())
                 .then((json) => {
-                    return Array.from(json);
+                    this._reizenData = Array.from(json);
+                    console.log(this._reizenData);
                 });
-            console.log(this._reizenData)
-        this._reizenData = this.selectAllData();
-            console.log(this._reizenData)
-    }
-    updated(){
-        console.log(this._reizenData)
-    }
-    selectAllData(){
-        this._reizenData = (firebaseService.readReisDataAll());
-        console.log(this._reizenData)
-        const result = Array.from(this._reizenData.values());
-        return this._reizenData;
+        }
     }
 
 
@@ -176,23 +182,23 @@ export class OverzichtReizen extends LitElement {
                                  console.log(this.selectedItems)
                              }}"
                 >
-                    <vaadin-grid-column header="Project" path="_project"></vaadin-grid-column>
-                    <vaadin-grid-column header="Vervoertype" path="_type"></vaadin-grid-column>
-                    <vaadin-grid-column header="Begin" path="_beginTijd"></vaadin-grid-column>
-                    <vaadin-grid-column header="Eind" path="_eindTijd"></vaadin-grid-column>
-                    <vaadin-grid-column header="Vertrek"" path="_eindLocatie"></vaadin-grid-column>
-                    <vaadin-grid-column header="Aankomst" path="_beginLocatie"></vaadin-grid-column>
-                    <vaadin-grid-column header="C02/km" path="_uitstoot"></vaadin-grid-column>
-                    <vaadin-grid-column header="Totale C02" path="_uitstoot"></vaadin-grid-column>
-                    <vaadin-grid-column header="Kosten" path="_kosten"></vaadin-grid-column>
-                    <vaadin-grid-column header="KM" path="_km"></vaadin-grid-column>
-                    <vaadin-grid-column header="Klasse" path="_klasse"></vaadin-grid-column>
-                    <vaadin-grid-column header="zakelijkOfPrive" path="_zakelijk"></vaadin-grid-column>
+                    <vaadin-grid-column header="Project" path="project"></vaadin-grid-column>
+                    <vaadin-grid-column header="Vervoertype" path="type"></vaadin-grid-column>
+                    <vaadin-grid-column header="Begin" path="beginTijd"></vaadin-grid-column>
+                    <vaadin-grid-column header="Eind" path="eindTijd"></vaadin-grid-column>
+                    <vaadin-grid-column header="Vertrek" path="eindLocatie"></vaadin-grid-column>
+                    <vaadin-grid-column header="Aankomst" path="beginLocatie"></vaadin-grid-column>
+                    <vaadin-grid-column header="C02/km" path="uitstoot"></vaadin-grid-column>
+                    <vaadin-grid-column header="Totale C02" path="uitstoot"></vaadin-grid-column>
+                    <vaadin-grid-column header="Kosten" path="kosten"></vaadin-grid-column>
+                    <vaadin-grid-column header="KM" path="km"></vaadin-grid-column>
+                    <vaadin-grid-column header="Klasse" path="klasse"></vaadin-grid-column>
+                    <vaadin-grid-column header="zakelijkOfPrive" path="zakelijk"></vaadin-grid-column>
                 </vaadin-grid>
-                Grid<reisDTO> grid = new Grid<>();
             </div>
                 <p>Selected row:
-                    ${JSON.stringify(this.selectedItems)}</p>
+                    ${JSON.stringify(this.selectedItems)}
+                    ${this.selectedItems}</p>
                 <button>Edit geselecteerde rij</button>
                 <button>Exporteren als..</button>
 <!--              <button @click="${this.tableToCSVDownloader}">download CSV</button> -->

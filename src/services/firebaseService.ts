@@ -1,5 +1,5 @@
 // Your web app's Firebase configuration
-import {child, DataSnapshot, get, ref, set} from "@firebase/database";
+import {child, DataSnapshot, get, push, ref, set} from "@firebase/database";
 import {reisDTO} from "../domain/reisDTO";
 import StartFirebase from "./firebaseConfig/firebase-config";
 import {toArray} from "rxjs";
@@ -9,9 +9,9 @@ const _db = StartFirebase();
 
 export class firebaseService {
     static writeReisData(reisOmOpTeSlaan: reisDTO) {
-        set(ref(_db,
+        push(ref(_db,
             ("reizen/" +
-                "ryan/" + reisOmOpTeSlaan.reisId)
+                "ryan/")
         ), {
             reisId: reisOmOpTeSlaan.reisId,
             zakelijkOfPrive: reisOmOpTeSlaan.zakelijk,
@@ -32,12 +32,12 @@ export class firebaseService {
     }
 
 
-    static readReisDataAll() {
+    static async readReisDataAll() {
         console.log('readReisDataAll reached ')
 
         const _db_ref = ref(_db);
 
-        get(child(_db_ref,'reizen/ryan')).then((snapshot)=>{
+        get(child(_db_ref,'reizen/ryan/')).then((snapshot)=>{
             if (snapshot.exists()) {
                 if (snapshot.hasChildren()) {
                     console.log('data retrieved succesfully');
@@ -48,18 +48,14 @@ export class firebaseService {
 
                     const organization = new Map<string, reisDTO>()
                     for (let prop in obj) {
+                        console.log("prop:" + prop + " object: " + obj[prop]);
                         organization.set(prop, obj[prop])
                     }
-                    console.log(organization)
-                    let organization2 = Array.from(organization)
-                    return organization2;
-                    // console.log(snapshot.val())
-                    // console.log(snapshot.val().keys)
-                    // const foo= snapshot.val()
-                    // // const foo= "[\n" + snapshot.val() + "\n]";
-                    // console.log(foo)
-                    // console.log(foo['1,674,786,245,312'])
-
+                    console.log(obj)
+                    sessionStorage.setItem('retrievedReizen',obj)
+                    let arr = Array.from(obj.values());
+                    console.log(arr)
+                    return ;
                 }
             }
             }).catch((error) => {

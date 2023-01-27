@@ -360,7 +360,7 @@ class InvoerenReizen extends LitElement {
                     <div id="bottomButtonsBox">
                         <button class="bottomButtons" id="zenden" form="formulierReizen" aria-label="Verzend formulier"
                                 @click="${this.persistDataToDb}"
-                                value="Verzenden"></button>
+                                value="Verzenden">Opslaan</button>
 
                         <input class="bottomButtons" id="resetButton" type="reset" value="Reset velden"
                                aria-label="reset formulier"
@@ -435,7 +435,9 @@ class InvoerenReizen extends LitElement {
      */
     persistDataToDb() {
         // @ts-ignore
-        const username = sessionStorage.getItem('userID')+ "";
+        let username = sessionStorage.getItem('userID')+ "";
+        username = username.split('@')[0]
+
         const reis = new reisDTO(Date.now().toLocaleString(), username, this._vervoerSelector.getAttribute('value') + "", this._project.getAttribute('value') + "", this._beginTijd.getAttribute('value') + "", this._eindTijd.getAttribute('value') + "", this._beginLocatie.getAttribute('value') + "", this._eindLocatie.getAttribute('value') + "", this._km.getAttribute('value') + "", this._Kosten.getAttribute('value') + "", this._mercury.toString(), // @ts-ignore
             (this._mercury * (this._km.getAttribute('value') + 0)).toString(), this._Zakelijk.getAttribute('value') == 'zakelijk', this._reisKlasseKeuzeMenu.getAttribute('value')); //TODO fix the boolean
         console.log("saving\n" + reis);
